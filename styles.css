@@ -204,3 +204,22 @@ a{color:inherit}
   }
   .nav__links.is-open{display:flex}
 }
+
+
+/* Collapsible Projects (hidden when section has .is-collapsed) */
+#projects.is-collapsed .collapsible {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: max-height 400ms ease, opacity 250ms ease, transform 250ms ease;
+}
+
+/* Visible state */
+#projects .collapsible {
+  max-height: 2000px; /* large enough to fit all project cards */
+  overflow: hidden;
+  opacity: 1;
+  transform: translateY(0);
+  transition: max-height 450ms ease, opacity 250ms ease, transform 250ms ease;
+}
