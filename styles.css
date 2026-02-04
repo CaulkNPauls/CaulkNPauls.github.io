@@ -206,20 +206,30 @@ a{color:inherit}
 }
 
 
-/* Collapsible Projects (hidden when section has .is-collapsed) */
-#projects.is-collapsed .collapsible {
+/* === Hide ENTIRE Projects section when collapsed === */
+#projects.is-collapsed .container {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
   transform: translateY(-6px);
-  transition: max-height 400ms ease, opacity 250ms ease, transform 250ms ease;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 
+    max-height 450ms ease,
+    opacity 250ms ease,
+    transform 250ms ease,
+    padding 300ms ease;
 }
 
-/* Visible state */
-#projects .collapsible {
-  max-height: 2000px; /* large enough to fit all project cards */
+/* === Show everything when expanded === */
+#projects .container {
+  max-height: 2000px; /* big enough for your content */
   overflow: hidden;
   opacity: 1;
   transform: translateY(0);
-  transition: max-height 450ms ease, opacity 250ms ease, transform 250ms ease;
+  transition: 
+    max-height 450ms ease,
+    opacity 250ms ease,
+    transform 250ms ease,
+    padding 300ms ease;
 }
