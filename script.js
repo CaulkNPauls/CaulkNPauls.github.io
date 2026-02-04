@@ -19,3 +19,23 @@ if (toggle && links) {
 
 const year = document.getElementById("year");
 if (year) year.textContent = new Date().getFullYear();
+
+// added for collapsiable projects tab
+const projectsToggle = document.getElementById("projectsToggle");
+const projectsSection = document.getElementById("projects");
+
+if (projectsToggle && projectsSection) {
+  projectsToggle.addEventListener("click", () => {
+    const isCollapsed = projectsSection.classList.toggle("is-collapsed");
+
+    // Change button text
+    projectsToggle.textContent = isCollapsed
+      ? "View Projects"
+      : "Hide Projects";
+
+    // Scroll smoothly when opening
+    if (!isCollapsed) {
+      projectsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+}
