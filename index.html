@@ -1,1 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Student portfolio showcasing projects, experience, and skills." />
+    <title>Your Name | Portfolio</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="header">
+      <div class="container header__inner">
+        <div class="brand">
+          <div class="brand__mark" aria-hidden="true">YN</div>
+          <div>
+            <div class="brand__name">Your Name</div>
+            <div class="brand__tag">Industrial Engineering Student • Internship Candidate</div>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Primary">
+          <button class="nav__toggle" aria-expanded="false" aria-controls="navLinks">
+            Menu
+          </button>
+          <div id="navLinks" class="nav__links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="container hero__inner">
+          <div class="hero__text">
+            <h1>Hi, I’m <span class="accent">Your Name</span>.</h1>
+            <p class="lead">
+              I’m an Industrial Engineering student focused on process improvement, data-driven decision making,
+              and building systems that run better.
+            </p>
+
+            <div class="cta">
+              <a class="btn" href="#projects">View Projects</a>
+              <a class="btn btn--ghost" href="assets/resume.pdf" target="_blank" rel="noopener">
+                Download Resume
+              </a>
+            </div>
+
+            <div class="links">
+              <a href="https://www.linkedin.com/in/yourhandle" target="_blank" rel="noopener">LinkedIn</a>
+              <span aria-hidden="true">•</span>
+              <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+              <span aria-hidden="true">•</span>
+              <a href="mailto:you@email.com">you@email.com</a>
+            </div>
+          </div>
+
+          <div class="hero__card" role="region" aria-label="Quick facts">
+            <div class="card">
+              <div class="card__title">Quick Facts</div>
+              <ul class="card__list">
+                <li><strong>School:</strong> University at Buffalo</li>
+                <li><strong>Major:</strong> Industrial Engineering</li>
+                <li><strong>Interests:</strong> Lean, Ops, Analytics</li>
+                <li><strong>Seeking:</strong> Summer Internship</li>
+                <li><strong>Location:</strong> Buffalo, NY</li>
+              </ul>
+              <div class="card__note">
+                Tip: Keep this site updated with 2–4 strong projects and measurable results.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="container">
+          <h2>About</h2>
+          <p>
+            Write 3–5 sentences about who you are, what kinds of problems you like, and what roles you’re targeting.
+            Add 1 sentence with proof (numbers, outcomes, awards, leadership).
+          </p>
+
+          <div class="grid grid--2">
+            <div class="panel">
+              <h3>What I’m good at</h3>
+              <ul>
+                <li>Breaking messy processes into clear steps</li>
+                <li>Using data to find bottlenecks and waste</li>
+                <li>Communicating improvements to non-technical teams</li>
+              </ul>
+            </div>
+
+            <div class="panel">
+              <h3>What I’m looking for</h3>
+              <ul>
+                <li>Operations / Industrial Engineering Internship</li>
+                <li>Manufacturing, Supply Chain, Healthcare Ops, or Logistics</li>
+                <li>Projects with measurable impact</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section section--alt">
+        <div class="container">
+          <div class="section__head">
+            <h2>Projects</h2>
+            <p class="muted">Pick 2–4 projects. Each should show impact, tools, and your role.</p>
+          </div>
+
+          <div class="cards">
+            <article class="project">
+              <h3>Process Improvement: International Wire Transfer Flow</h3>
+              <p>
+                Documented a real-world workflow, identified delays and rework points, and proposed improvements.
+              </p>
+              <ul class="tags">
+                <li>Process Mapping</li>
+                <li>Lean</li>
+                <li>Root Cause</li>
+              </ul>
+              <div class="project__meta">
+                <a class="link" href="#" target="_blank" rel="noopener">Case Study</a>
+                <span aria-hidden="true">•</span>
+                <a class="link" href="#" target="_blank" rel="noopener">Slides</a>
+              </div>
+            </article>
+
+            <article class="project">
+              <h3>Excel Model: Cash Flow & NPV Tool</h3>
+              <p>
+                Built an Excel model for multi-year cash flows with sensitivity analysis and automated charts.
+              </p>
+              <ul class="tags">
+                <li>Excel</li>
+                <li>Finance</li>
+                <li>Modeling</li>
+              </ul>
+              <div class="project__meta">
+                <a class="link" href="#" target="_blank" rel="noopener">Workbook</a>
+                <span aria-hidden="true">•</span>
+                <a class="link" href="#" target="_blank" rel="noopener">Write-up</a>
+              </div>
+            </article>
+
+            <article class="project">
+              <h3>Warehouse Layout: Facilities Design Study</h3>
+              <p>
+                Evaluated layout alternatives and material handling options using quantitative methods.
+              </p>
+              <ul class="tags">
+                <li>Facilities</li>
+                <li>Layout</li>
+                <li>Material Handling</li>
+              </ul>
+              <div class="project__meta">
+                <a class="link" href="#" target="_blank" rel="noopener">Report</a>
+              </div>
+            </article>
+          </div>
+
+          <p class="muted small">
+            Replace the # links with real URLs (Google Drive public link, GitHub repo link, or a PDF in /assets).
+          </p>
+        </div>
+      </section>
+
+      <section id="experience" class="section">
+        <div class="container">
+          <h2>Experience</h2>
+
+          <div class="timeline">
+            <div class="role">
+              <div class="role__top">
+                <h3>Job Title — Company</h3>
+                <div class="muted">Month Year – Month Year • City, ST</div>
+              </div>
+              <ul>
+                <li>Improved ____ by __% by doing ____</li>
+                <li>Handled ____ volume / throughput and reduced errors by ____</li>
+                <li>Collaborated with ____ team to ____</li>
+              </ul>
+            </div>
+
+            <div class="role">
+              <div class="role__top">
+                <h3>Leadership / Club / Project Team</h3>
+                <div class="muted">Month Year – Present • University</div>
+              </div>
+              <ul>
+                <li>Led ____ people and delivered ____ outcome</li>
+                <li>Presented findings to ____ stakeholders</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section section--alt">
+        <div class="container">
+          <h2>Skills</h2>
+
+          <div class="grid grid--3">
+            <div class="panel">
+              <h3>Tools</h3>
+              <ul>
+                <li>Excel (PivotTables, XLOOKUP, Solver)</li>
+                <li>PowerPoint</li>
+                <li>Minitab (or JMP)</li>
+                <li>Python (optional)</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>Methods</h3>
+              <ul>
+                <li>Process Mapping</li>
+                <li>Lean / 5 Whys</li>
+                <li>Time Study</li>
+                <li>Basic Statistics</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>Strengths</h3>
+              <ul>
+                <li>Clear communication</li>
+                <li>Ownership + follow-through</li>
+                <li>Detail-oriented execution</li>
+                <li>Team collaboration</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="container">
+          <h2>Contact</h2>
+          <p>
+            If you want an easy “recruiter-friendly” contact section, keep it simple:
+          </p>
+
+          <div class="contact">
+            <a class="btn" href="mailto:you@email.com">Email me</a>
+            <a class="btn btn--ghost" href="https://www.linkedin.com/in/yourhandle" target="_blank" rel="noopener">
+              Message on LinkedIn
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div>© <span id="year"></span> Your Name</div>
+        <div class="muted small">Built with HTML/CSS • Hosted on GitHub Pages</div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
