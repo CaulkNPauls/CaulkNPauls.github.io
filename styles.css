@@ -533,3 +533,59 @@ a{color:inherit}
   margin-bottom: 18px;
 }
 
+/* ===== Fancy About page blocks + reveal animation ===== */
+
+.prose{
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.about-block{
+  margin: 22px 0;
+  padding: 26px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  box-shadow: var(--shadow);
+}
+
+.about-block h2{
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  color: var(--text);
+  opacity: 0.95;
+  letter-spacing: 0.01em;
+}
+
+.about-block p{
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+.about-lead{
+  color: var(--text);
+  font-size: 1.25rem;
+  line-height: 1.8;
+  font-weight: 600;
+}
+
+/* Reveal animation */
+.reveal{
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 550ms ease, transform 550ms ease;
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Make blocks feel more “premium” on hover */
+.about-block:hover{
+  transform: translateY(-2px);
+  transition: transform 180ms ease;
+}
