@@ -1026,3 +1026,9 @@ a{ color:inherit; }
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+.project__meta--secondary {
+  display: none !important;
+}
+<div class="project__meta">
+  <span class="link">View details →</span>
+</div>
