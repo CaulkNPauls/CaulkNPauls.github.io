@@ -338,3 +338,28 @@ a{color:inherit}
   outline-offset: 3px;
 }
 
+/* ===== FORCE HEADER LAYOUT (brand left, nav middle, icons right) ===== */
+.header__inner{
+  display:flex !important;
+  align-items:center !important;
+  gap:16px !important;
+  padding:14px 0 !important;
+}
+
+
+.brand{ order:1; }
+
+.nav{
+  order:2;
+  margin-left:auto !important;
+}
+
+.header-icons{
+  order:3;
+  display:flex !important;
+  align-items:center !important;
+  gap:12px !important;
+  margin-left:12px !important;
+  margin-right:0 !important;
+}
+
