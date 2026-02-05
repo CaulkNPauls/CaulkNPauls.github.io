@@ -404,3 +404,12 @@ a{color:inherit}
   }
 }
 
+/* fix sizing to screen on what size it is */
+/* Wider layout on large monitors */
+@media (min-width: 1200px){
+  :root{ --max: 1280px; }
+}
+
+@media (min-width: 1500px){
+  :root{ --max: 1400px; }
+}
