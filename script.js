@@ -195,3 +195,14 @@ document.addEventListener("DOMContentLoaded", () => {
     apply();
   })();
 </script>
+// Mobile nav toggle (failsafe)
+(() => {
+  const btn = document.querySelector(".nav__toggle");
+  const links = document.getElementById("navLinks");
+  if (!btn || !links) return;
+
+  btn.addEventListener("click", () => {
+    const isOpen = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!isOpen));
+  });
+})();
