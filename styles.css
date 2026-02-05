@@ -520,4 +520,12 @@ a{color:inherit}
   }
   .nav__links.is-open{ display:flex; }
 }
+/* ===== LOGO SIZE FIX (keeps your big logo) ===== */
+.brand__logo{
+  width: 290px;      /* your chosen width */
+  height: 147px;     /* your chosen height */
+  max-height: none;  /* <--- this is the KEY fix */
+  object-fit: contain;
+  display: block;
+}
 
