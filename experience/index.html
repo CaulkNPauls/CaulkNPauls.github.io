@@ -8,95 +8,155 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- IMPORTANT: go UP one level to get styles.css -->
     <link rel="stylesheet" href="../styles.css" />
   </head>
 
   <body>
-   <header class="header">
-  <div class="container header__inner">
-    <!-- top left header image -->
-    <div class="brand">
-      <a href="/" class="brand__home" aria-label="Go to homepage">
-        <img
-          src="/assets/logo.website.png"
-          alt="Paul Poleon Logo"
-          class="brand__logo"
-          width="290"
-          height="147"
-        />
-      </a>
-    </div>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <nav class="nav" aria-label="Primary">
-      <button class="nav__toggle" aria-expanded="false" aria-controls="navLinks">
-        Menu
-      </button>
+    <header class="header">
+      <div class="container header__inner">
+        <div class="brand">
+          <a href="/" class="brand__home" aria-label="Go to homepage">
+            <img
+              src="/assets/logo.website.png"
+              alt="Paul Poleon Logo"
+              class="brand__logo"
+              width="290"
+              height="147"
+            />
+          </a>
+        </div>
 
-      <div id="navLinks" class="nav__links">
-        <a href="/about/">About</a>
-        <a href="/projects/">Projects</a>
-        <a href="/experience/">Experience</a>
-        <a href="/skills/">Skills</a>
+        <nav class="nav" aria-label="Primary">
+          <button class="nav__toggle" aria-expanded="false" aria-controls="navLinks">
+            Menu
+          </button>
+
+          <div id="navLinks" class="nav__links">
+            <a href="/about/">About</a>
+            <a href="/projects/">Projects</a>
+            <a href="/experience/">Experience</a>
+            <a href="/skills/">Skills</a>
+          </div>
+
+          <div class="header-icons" aria-label="Profile links">
+            <a href="mailto:ppoleonjr@gmail.com" aria-label="Email">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="m22 8-10 7L2 8" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </a>
+
+            <a href="https://www.linkedin.com/in/paul-poleon-jr-3155b0287/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 3h4v18H4V3Z" fill="currentColor"/>
+                <path d="M10 9h4v2.2c.6-1.2 2-2.4 4.2-2.4 3.2 0 4.8 2 4.8 5.8V21h-4v-6c0-1.8-.4-3.2-2.2-3.2-1.4 0-2.4 1-2.8 2-.1.3-.2.8-.2 1.3V21h-4V9Z" fill="currentColor"/>
+              </svg>
+            </a>
+
+            <a href="https://github.com/CaulkNPauls" target="_blank" rel="noopener" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C17.5 5.3 18.5 5.6 18.5 5.6c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.3.8 1 .8 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/>
+              </svg>
+            </a>
+          </div>
+        </nav>
       </div>
-
-      <div class="header-icons" aria-label="Profile links">
-        <a href="mailto:ppoleonjr@gmail.com" aria-label="Email">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 6h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2"/>
-            <path d="m22 8-10 7L2 8" fill="none" stroke="currentColor" stroke-width="2"/>
-          </svg>
-        </a>
-
-        <a href="https://www.linkedin.com/in/paul-poleon-jr-3155b0287/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 3h4v18H4V3Z" fill="currentColor"/>
-            <path d="M10 9h4v2.2c.6-1.2 2-2.4 4.2-2.4 3.2 0 4.8 2 4.8 5.8V21h-4v-6c0-1.8-.4-3.2-2.2-3.2-1.4 0-2.4 1-2.8 2-.1.3-.2.8-.2 1.3V21h-4V9Z" fill="currentColor"/>
-          </svg>
-        </a>
-
-        <a href="https://github.com/CaulkNPauls" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C17.5 5.3 18.5 5.6 18.5 5.6c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.3.8 1 .8 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/>
-          </svg>
-        </a>
-      </div>
-    </nav>
-  </div>
-</header>
-
+    </header>
 
     <main id="main">
       <section class="section">
         <div class="container">
           <p class="muted small"><a class="link" href="/">← Back home</a></p>
-          <h1>Experience</h1>
 
-          <div class="timeline">
-            <div class="role">
-              <div class="role__top">
-                <h3>Job Title — Company</h3>
-                <div class="muted">Month Year – Month Year • City, ST</div>
-              </div>
-              <ul>
-                <li>Improved ____ by __% by doing ____</li>
-                <li>Handled ____ volume / throughput and reduced errors by ____</li>
-                <li>Collaborated with ____ team to ____</li>
-              </ul>
+          <div class="page-head">
+            <h1 class="page-title">Experience</h1>
+            <p class="page-subtitle muted">
+              Roles that built my ability to solve problems, work with people, and execute under pressure.
+            </p>
+            <div class="page-actions">
+              <a class="btn btn--ghost" href="/assets/resume.pdf" target="_blank" rel="noopener">Download Resume</a>
             </div>
+          </div>
 
-            <div class="role">
+          <div class="timeline timeline--pro">
+            <!-- Geek Squad -->
+            <article class="role role--pro">
               <div class="role__top">
-                <h3>Leadership / Club / Project Team</h3>
-                <div class="muted">Month Year – Present • University</div>
+                <div class="role__title">
+                  <h3>Advanced Repair Agent</h3>
+                  <div class="muted">Best Buy — Geek Squad • Buffalo, NY</div>
+                </div>
+                <div class="role__meta muted">Sep 2023 – Current</div>
               </div>
-              <ul>
-                <li>Led ____ people and delivered ____ outcome</li>
-                <li>Presented findings to ____ stakeholders</li>
+
+              <ul class="role__bullets">
+                <li>Developed and maintained positive customer relationships to encourage repeat business.</li>
+                <li>Installed new systems and components according to service orders and manufacturer instructions.</li>
+                <li>Conducted routine maintenance on machinery/equipment to support reliable performance.</li>
               </ul>
-            </div>
+
+              <ul class="tags tags--mini" aria-label="Skills used">
+                <li>Customer Service</li>
+                <li>Troubleshooting</li>
+                <li>Process Discipline</li>
+                <li>Time Management</li>
+              </ul>
+            </article>
+
+            <!-- Kohl's -->
+            <article class="role role--pro">
+              <div class="role__top">
+                <div class="role__title">
+                  <h3>Retail Sales Associate</h3>
+                  <div class="muted">Kohl’s • Buffalo, NY</div>
+                </div>
+                <div class="role__meta muted">Jun 2023 – Sep 2023</div>
+              </div>
+
+              <ul class="role__bullets">
+                <li>Assisted customers with purchases and returns while maintaining a positive, professional checkout experience.</li>
+                <li>Processed transactions quickly and accurately, handling cash/credit and store promotions.</li>
+                <li>Supported daily operations by restocking merchandise, maintaining clean displays, and providing product guidance.</li>
+              </ul>
+
+              <ul class="tags tags--mini" aria-label="Skills used">
+                <li>Queue Management</li>
+                <li>Accuracy</li>
+                <li>Communication</li>
+                <li>Operations Support</li>
+              </ul>
+            </article>
+
+            <!-- Common Council -->
+            <article class="role role--pro">
+              <div class="role__top">
+                <div class="role__title">
+                  <h3>Intern</h3>
+                  <div class="muted">Buffalo Common Council • Buffalo, NY</div>
+                </div>
+                <div class="role__meta muted">May 2023 – Jun 2023</div>
+              </div>
+
+              <ul class="role__bullets">
+                <li>Drafted and edited official proclamations and documents recognizing community leaders and events.</li>
+                <li>Assisted in organizing and setting up Council meetings to support smooth, on-time proceedings.</li>
+                <li>Conducted research and provided administrative support to aid legislative and community initiatives.</li>
+              </ul>
+
+              <ul class="tags tags--mini" aria-label="Skills used">
+                <li>Writing</li>
+                <li>Research</li>
+                <li>Organization</li>
+                <li>Stakeholder Support</li>
+              </ul>
+            </article>
           </div>
         </div>
       </section>
