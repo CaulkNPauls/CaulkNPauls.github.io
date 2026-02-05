@@ -14,32 +14,58 @@
   </head>
 
   <body>
-    <header class="header">
-      <div class="container header__inner">
-<!-- top left header image (clickable to homepage) -->
-<div class="brand">
-  <a href="/" class="brand__home">
-    <img
-      src="/assets/logo.website.png"
-      alt="Paul Poleon Logo"
-      class="brand__logo"
-      width="290"
-      height="147"
-    />
-  </a>
-</div>
+   <header class="header">
+  <div class="container header__inner">
+    <!-- top left header image -->
+    <div class="brand">
+      <a href="/" class="brand__home" aria-label="Go to homepage">
+        <img
+          src="/assets/logo.website.png"
+          alt="Paul Poleon Logo"
+          class="brand__logo"
+          width="290"
+          height="147"
+        />
+      </a>
+    </div>
 
-        <nav class="nav" aria-label="Primary">
-          <div class="nav__links">
-            <a href="/">Home</a>
-            <a href="/about/">About</a>
-            <a href="/projects/">Projects</a>
-            <a href="/experience/">Experience</a>
-            <a href="/skills/">Skills</a>
-          </div>
-        </nav>
+    <nav class="nav" aria-label="Primary">
+      <button class="nav__toggle" aria-expanded="false" aria-controls="navLinks">
+        Menu
+      </button>
+
+      <div id="navLinks" class="nav__links">
+        <a href="/about/">About</a>
+        <a href="/projects/">Projects</a>
+        <a href="/experience/">Experience</a>
+        <a href="/skills/">Skills</a>
       </div>
-    </header>
+
+      <div class="header-icons" aria-label="Profile links">
+        <a href="mailto:ppoleonjr@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 6h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="m22 8-10 7L2 8" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </a>
+
+        <a href="https://www.linkedin.com/in/paul-poleon-jr-3155b0287/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 3h4v18H4V3Z" fill="currentColor"/>
+            <path d="M10 9h4v2.2c.6-1.2 2-2.4 4.2-2.4 3.2 0 4.8 2 4.8 5.8V21h-4v-6c0-1.8-.4-3.2-2.2-3.2-1.4 0-2.4 1-2.8 2-.1.3-.2.8-.2 1.3V21h-4V9Z" fill="currentColor"/>
+          </svg>
+        </a>
+
+        <a href="https://github.com/CaulkNPauls" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C17.5 5.3 18.5 5.6 18.5 5.6c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.3.8 1 .8 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/>
+          </svg>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
 
     <main id="main">
       <section class="section section--alt">
