@@ -514,3 +514,30 @@ a{ color:inherit; }
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
+
+/* ======== FINAL CLEAN HEADER LOCK ======== */
+
+/* Main header row */
+.header__inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important; /* <-- IMPORTANT */
+}
+
+/* Logo stays on the left */
+.brand {
+  margin-right: auto;
+}
+
+/* NAV takes the space and moves to the right */
+.nav {
+  margin-left: auto !important;
+  margin-right: 16px !important; /* gap before icons */
+}
+
+/* ICONS MUST NOT take auto space */
+.header-icons {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
