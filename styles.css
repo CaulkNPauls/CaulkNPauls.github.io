@@ -238,3 +238,47 @@ a{color:inherit}
     transform 250ms ease,
     padding 300ms ease;
 }
+
+/* shows the items as icon-links */
+.icon-links{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+.icon-link{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border:1px solid var(--border);
+  background: var(--panel-2);
+  border-radius: 999px;
+  color: var(--text);
+  text-decoration:none;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.icon-link svg{
+  width:18px;
+  height:18px;
+  flex: 0 0 18px;
+}
+
+.icon-link span{
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.icon-link:hover{
+  transform: translateY(-2px);
+  background: var(--panel);
+  border-color: rgba(255,255,255,0.22);
+}
+
+.icon-link:focus-visible{
+  outline: 2px solid rgba(255,255,255,0.35);
+  outline-offset: 3px;
+}
+
