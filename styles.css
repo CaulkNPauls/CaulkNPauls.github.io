@@ -46,15 +46,17 @@ a{color:inherit}
   border-bottom:1px solid var(--border);
 }
 .header__inner{
-  display:flex; align-items:center; justify-content:space-between;
-  padding:14px 0;
+ display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .brand{display:flex; align-items:center; gap:12px}
 .brand__mark{
   width:44px; height:44px; border-radius:14px;
   display:grid; place-items:center;
-  background:linear-gradient(135deg, rgba(122,162,255,.25), rgba(255,255,255,.08));
+ background:linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
   border:1px solid var(--border);
   font-weight:800;
 }
@@ -79,19 +81,15 @@ a{color:inherit}
   border-radius:12px;
 }
 .nav__links a:hover{color:var(--text); background:rgba(255,255,255,.06)}
-/*does icons in the top right */
-.header__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
 
 /* Icon links in the top right */
 .header-icons {
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-left: auto;  /* pushes icons to the right */
+  margin-right: 12px; /* spacing before the nav */
+}
 }
 
 /* Make them small, clean, and monochrome */
