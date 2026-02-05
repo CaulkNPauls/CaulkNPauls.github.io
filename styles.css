@@ -466,4 +466,58 @@ a{color:inherit}
   transition: transform 160ms ease;
 }
 
+/* ===== HARD LOCK HEADER LAYOUT (same on every page) ===== */
+.header__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 0;
+}
+
+.brand{ display:flex; align-items:center; flex:0 0 auto; }
+
+.brand__home{ display:inline-flex; align-items:center; text-decoration:none; }
+
+.brand__logo{
+  width:290px;
+  height:147px;
+  max-height:60px;   /* keep header height consistent */
+  object-fit:contain;
+  display:block;
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-left:auto; /* pushes nav+icons to right */
+}
+
+.nav__links{ display:flex; gap:14px; align-items:center; }
+
+.header-icons{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+/* Mobile menu behavior (if you use the toggle in script.js) */
+@media (max-width: 900px){
+  .nav{ gap:10px; }
+  .nav__toggle{ display:inline-flex; }
+  .nav__links{
+    display:none;
+    position:absolute;
+    right:18px;
+    top:66px;
+    background:rgba(11,13,18,.95);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:10px;
+    flex-direction:column;
+    min-width:180px;
+  }
+  .nav__links.is-open{ display:flex; }
+}
 
