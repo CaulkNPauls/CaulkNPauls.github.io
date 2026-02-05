@@ -696,3 +696,50 @@ a{ color:inherit; }
   z-index: 9999 !important;
 }
 
+/* ===== RESPONSIVE, SCALING PROGRESSION DOTS ===== */
+
+.page-dots{
+  position: fixed !important;
+  right: clamp(18px, 3vw, 36px);   /* moves in/out with screen size */
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+
+  /* THIS MAKES THE VERTICAL SPACING SCALE */
+  gap: clamp(16px, 3.2vh, 36px);   /* min → preferred → max */
+
+  z-index: 9999 !important;
+}
+
+/* SCALING DOT SIZE */
+.page-dots .dot{
+  width: clamp(8px, 1vw, 12px);   /* scales with viewport width */
+  height: clamp(8px, 1vw, 12px);
+  border-radius: 50%;
+  background: rgba(255,255,255,0.28);
+  border: 1px solid var(--border);
+  padding: 0;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+/* ACTIVE DOT (also scales) */
+.page-dots .dot.is-active{
+  background: var(--text);
+  transform: scale(clamp(1.3, 1.5vw, 1.6));
+}
+
+/* HOVER FEEL (scales too) */
+.page-dots .dot:hover{
+  transform: scale(clamp(1.15, 1.3vw, 1.3));
+}
+
+/* Hide on small screens */
+@media (max-width: 900px){
+  .page-dots{
+    display: none;
+  }
+}
