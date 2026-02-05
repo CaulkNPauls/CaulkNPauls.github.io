@@ -1,17 +1,22 @@
 :root{
-  --bg:#0b0d12;
-  --panel:#111522;
-  --alt:#0f1320;
-  --text:#e9eefc;
-  --muted:#aab3cf;
-  --border:rgba(255,255,255,.10);
-  --accent:#7aa2ff;
-  --shadow:0 10px 30px rgba(0,0,0,.35);
-  --radius:18px;
-  --max:1100px;
-  --pad:22px;
-  --font:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  /* Monochrome (charcoal → off-white) */
+  --bg: #0b0d12;
+  --panel: rgba(255,255,255,0.06);
+  --alt: rgba(255,255,255,0.04);
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.68);
+  --border: rgba(255,255,255,0.12);
+
+  /* subtle accent (still basically monochrome) */
+  --accent: rgba(255,255,255,0.92);
+
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --radius: 18px;
+  --max: 1100px;
+  --pad: 22px;
+  --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
+
 
 *{box-sizing:border-box}
 html,body{height:100%}
