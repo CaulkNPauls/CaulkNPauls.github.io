@@ -491,3 +491,26 @@ a{ color:inherit; }
     margin-right:18px;
   }
 }
+/* ===== FINAL HARD LOCK: ICONS TO FAR RIGHT ===== */
+.header__inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+/* Brand stays left */
+.brand {
+  margin-right: auto;
+}
+
+/* Nav sits in the middle */
+.nav {
+  margin-left: auto !important;
+  margin-right: 12px !important;
+}
+
+/* Icons are LAST = FAR RIGHT */
+.header-icons {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
