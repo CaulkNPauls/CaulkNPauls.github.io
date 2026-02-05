@@ -366,3 +366,51 @@ a{color:inherit}
   margin-right:0 !important;
 }
 
+/* Force the Quick Facts to "float" a bit */
+.hero__card{
+  position: relative;
+  transform: translateY(10px);
+}
+
+.hero__card .card{
+  transition: transform 200ms ease;
+}
+.hero__card:hover{
+  transform: translateY(6px);
+}
+
+.hero__inner{
+  grid-template-columns: 1.4fr 0.9fr !important; 
+}
+
+/* Make sure the card column actually sits on the right */
+.hero__card{
+  justify-self: end;   
+  align-self: center;     
+  max-width: 420px;       
+}
+
+.hero__card .card{
+  backdrop-filter: blur(4px);
+}
+
+/* Fix any issues on mobile */
+@media (max-width: 900px){
+  .hero__inner{
+    grid-template-columns: 1fr !important; /* stack on mobile */
+  }
+
+  .hero__card{
+    justify-self: stretch; /* center-ish on mobile */
+    max-width: 100%;
+  }
+}
+.hero__card{
+  transform: translateY(6px);
+  transition: transform 200ms ease;
+}
+
+.hero__card:hover{
+  transform: translateY(2px);
+}
+
