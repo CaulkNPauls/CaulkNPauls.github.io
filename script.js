@@ -56,3 +56,34 @@ if (revealEls.length) {
 
   revealEls.forEach((el) => obs.observe(el));
 }
+
+// ===== PROGRESSION DOTS FOR ABOUT PAGE =====
+document.addEventListener("DOMContentLoaded", () => {
+  const dots = document.querySelectorAll(".page-dots .dot");
+  const sections = document.querySelectorAll(".snap__section");
+
+  if (!dots.length || !sections.length) return;
+
+  // Click a dot → scroll to that section
+  dots.forEach(dot => {
+    dot.addEventListener("click", () => {
+      const target = document.getElementById(dot.dataset.target);
+      if (target) target.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  // Highlight active dot while scrolling
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        dots.forEach(d => d.classList.remove("is-active"));
+        const active = document.querySelector(
+          `.page-dots .dot[data-target="${entry.target.id}"]`
+        );
+        if (active) active.classList.add("is-active");
+      }
+    });
+  }, { threshold: 0.6 });
+
+  sections.forEach(section => observer.observe(section));
+});
