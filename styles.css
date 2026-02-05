@@ -1256,3 +1256,46 @@ a{ color:inherit; }
   .explore-head { flex-direction: column; align-items: stretch; }
   .modal__cols { grid-template-columns: 1fr; }
 }
+/* ===== Mobile nav fix ===== */
+@media (max-width: 860px) {
+  .header {
+    position: relative;
+    z-index: 1000; /* keep header above page content */
+  }
+
+  .nav {
+    position: relative;
+  }
+
+  /* show the Menu button on small screens */
+  .nav__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1001;
+  }
+
+  /* hide links by default on small screens */
+  .nav__links {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    min-width: 220px;
+    padding: 10px;
+    border-radius: 12px;
+    z-index: 1001;
+
+    background: rgba(18, 18, 22, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* IMPORTANT: this makes it appear when aria-expanded flips to true */
+  .nav__toggle[aria-expanded="true"] + .nav__links {
+    display: flex;
+  }
+}
