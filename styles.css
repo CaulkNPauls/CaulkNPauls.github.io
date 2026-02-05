@@ -529,3 +529,7 @@ a{color:inherit}
   display: block;
 }
 
+.section p {
+  margin-bottom: 18px;
+}
+
