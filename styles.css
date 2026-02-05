@@ -371,4 +371,36 @@ a{color:inherit}
   margin-right:0 !important;
 }
 
+/* ======== HARD FORCE: QUICK FACTS TO TOP RIGHT ======== */
+
+.hero__inner {
+  display: grid !important;
+  grid-template-columns: 1.6fr 0.8fr !important; /* text | card */
+  align-items: start !important;
+}
+
+.hero__card {
+  justify-self: end !important;   /* push to right */
+  align-self: start !important;   /* push to top */
+  max-width: 420px !important;    /* keeps it from getting too wide */
+  width: 100% !important;
+  margin-top: 0 !important;       /* align with top of text */
+}
+
+/* Make sure the card itself doesn’t stretch weirdly */
+.hero__card .card {
+  width: 100% !important;
+}
+
+/* ======== MOBILE: STACK AGAIN ======== */
+@media (max-width: 900px){
+  .hero__inner{
+    grid-template-columns: 1fr !important; /* stack on mobile */
+  }
+
+  .hero__card{
+    justify-self: stretch !important;
+    max-width: 100% !important;
+  }
+}
 
