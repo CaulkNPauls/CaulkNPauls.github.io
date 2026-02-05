@@ -1299,3 +1299,37 @@ a{ color:inherit; }
     display: flex;
   }
 }
+/* ===== Marquee fixes: no loop gap + slower on mobile ===== */
+
+/* Remove the gap between the two copies (this causes the big blank space) */
+.cards-track {
+  gap: 0 !important; /* IMPORTANT: prevents blank gap between copy 1 and copy 2 */
+}
+
+/* Keep spacing between cards inside each row */
+.cards--row {
+  gap: 24px;
+  padding-right: 24px; /* keeps spacing at the seam */
+}
+
+/* Slow it down on smaller screens + reduce card width */
+@media (max-width: 860px) {
+  .cards-track {
+    animation-duration: 55s !important; /* slower */
+  }
+
+  .cards--row .project {
+    flex: 0 0 320px !important; /* smaller cards = smoother on mobile */
+  }
+}
+
+/* Optional: even slower on very small screens */
+@media (max-width: 420px) {
+  .cards-track {
+    animation-duration: 70s !important;
+  }
+
+  .cards--row .project {
+    flex: 0 0 280px !important;
+  }
+}
