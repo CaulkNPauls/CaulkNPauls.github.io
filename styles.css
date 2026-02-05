@@ -743,3 +743,123 @@ a{ color:inherit; }
     display: none;
   }
 }
+
+/* =========================================================
+   FULL-SCREEN Q → A SCROLL (ABOUT PAGE)
+   — text + dots scale with screen size
+========================================================= */
+
+.snap--qa{
+  height: calc(100vh - var(--headerH));
+  overflow-y:auto;
+  scroll-snap-type:y mandatory;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+}
+.snap--qa::-webkit-scrollbar{ width:0; height:0; }
+
+.snap--qa .snap__section{
+  min-height: calc(100vh - var(--headerH));
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  display:flex;
+  align-items:center;
+  padding: clamp(40px, 6vh, 80px) 0; /* scales with screen height */
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.snap--qa .snap__section:last-child{ border-bottom:none; }
+
+.snap--qa .snap__copy{
+  width:min(980px, 92vw);
+  margin-left:clamp(24px, 12vw, 190px); /* slightly right of center */
+  margin-right:auto;
+}
+
+/* ===== QUESTION SLIDES (responsive) ===== */
+.snap--qa .snap__section--q .snap__kicker{
+  margin: 0 0 10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-size: clamp(0.75rem, 1vw, 0.95rem); /* scales with screen */
+  color:rgba(255,255,255,0.55);
+}
+
+.snap--qa .snap__section--q h1{
+  margin:0;
+  font-size: clamp(2.2rem, 4.2vw, 4.4rem); /* fluid headline */
+  line-height:1.05;
+  font-weight:800;
+}
+
+/* ===== ANSWER SLIDES (responsive) ===== */
+.snap--qa .snap__section--a p{
+  margin:0;
+  font-size: clamp(1.05rem, 1.6vw, 1.65rem); /* fluid body text */
+  line-height:1.9;
+  color:rgba(255,255,255,0.78);
+  max-width:70ch;
+}
+
+/* subtle visual difference between Q and A (no bubbles) */
+.snap--qa .snap__section--q{
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.00));
+}
+.snap--qa .snap__section--a{
+  background:linear-gradient(180deg, rgba(255,255,255,0.00), rgba(255,255,255,0.02));
+}
+
+/* mobile adjustment */
+@media (max-width:700px){
+  .snap--qa .snap__copy{
+    margin-left:18px;
+    margin-right:18px;
+  }
+}
+
+/* =========================================================
+   PROGRESSION DOTS — CENTER-RIGHT (SCALING)
+========================================================= */
+
+.page-dots{
+  position: fixed !important;
+  right: clamp(18px, 3vw, 32px);   /* scales horizontally */
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+
+  gap: clamp(16px, 3vh, 32px) !important; /* dots spread with screen height */
+  z-index: 9999 !important;
+}
+
+/* individual dots (responsive size) */
+.page-dots .dot{
+  width: clamp(8px, 0.8vw, 11px);
+  height: clamp(8px, 0.8vw, 11px);
+  border-radius: 50%;
+  background: rgba(255,255,255,0.28);
+  border: 1px solid var(--border);
+  padding: 0;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+/* active (current slide) */
+.page-dots .dot.is-active{
+  background: var(--text);
+  transform: scale(clamp(1.25, 1.4, 1.55)); /* scales too */
+}
+
+/* hover feel */
+.page-dots .dot:hover{
+  transform: scale(clamp(1.15, 1.25, 1.35));
+}
+
+/* hide on small screens so it doesn’t clutter */
+@media (max-width: 900px){
+  .page-dots{
+    display: none;
+  }
+}
