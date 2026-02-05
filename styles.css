@@ -863,3 +863,63 @@ a{ color:inherit; }
     display: none;
   }
 }
+/* ===== EXPERIENCE PAGE POLISH ===== */
+.page-head{
+  display:grid;
+  gap:10px;
+  margin-bottom:18px;
+}
+.page-title{
+  margin:0;
+  font-size:2.2rem;
+  line-height:1.15;
+}
+.page-subtitle{
+  margin:0;
+  max-width:70ch;
+}
+.page-actions{
+  margin-top:6px;
+}
+
+.timeline--pro{
+  margin-top:18px;
+}
+
+.role--pro{
+  position:relative;
+  overflow:hidden;
+}
+
+.role--pro::before{
+  content:"";
+  position:absolute;
+  inset:-1px auto -1px -1px;
+  width:4px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.18);
+}
+
+.role__title h3{
+  margin:0 0 6px;
+}
+
+.role__meta{
+  white-space:nowrap;
+}
+
+.role__bullets{
+  margin:14px 0 0;
+  padding-left:18px;
+  color:var(--muted);
+}
+
+.tags--mini{
+  margin-top:14px;
+}
+
+.tags--mini li{
+  font-size:.82rem;
+  padding:6px 10px;
+  opacity:.95;
+}
