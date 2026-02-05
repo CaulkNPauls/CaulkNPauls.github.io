@@ -582,4 +582,45 @@ a{ color:inherit; }
     display: none;
   }
 }
+/* ===== PROGRESSION DOTS (CENTER-RIGHT OF SCREEN) ===== */
+
+.page-dots{
+  position: fixed;
+  right: 32px;              /* slightly inset from edge */
+  top: 50%;                 /* move to vertical center */
+  transform: translateY(-50%); /* perfectly center vertically */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;                /* <--- MORE SPACING BETWEEN DOTS */
+  z-index: 200;
+}
+
+.page-dots .dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  border: 1px solid var(--border);
+  padding: 0;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+/* active dot */
+.page-dots .dot.is-active{
+  background: var(--text);
+  transform: scale(1.45);   /* slightly bigger when active */
+}
+
+/* hover */
+.page-dots .dot:hover{
+  transform: scale(1.25);
+}
+
+/* hide on small screens */
+@media (max-width: 900px){
+  .page-dots{
+    display: none;
+  }
+}
 
