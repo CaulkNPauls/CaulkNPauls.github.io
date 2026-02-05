@@ -623,4 +623,46 @@ a{ color:inherit; }
     display: none;
   }
 }
+/* ===== PROGRESSION DOTS — CENTER RIGHT OF SCREEN ===== */
+
+.page-dots{
+  position: fixed;
+  right: 28px;              /* slightly inset from edge */
+  top: 50%;                 /* move to vertical center */
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;                /* more breathing room between dots */
+  z-index: 200;
+}
+
+/* individual dots */
+.page-dots .dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.28);
+  border: 1px solid var(--border);
+  padding: 0;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+/* active (current slide) */
+.page-dots .dot.is-active{
+  background: var(--text);
+  transform: scale(1.55);
+}
+
+/* hover feel */
+.page-dots .dot:hover{
+  transform: scale(1.25);
+}
+
+/* hide on small screens so it doesn’t clutter */
+@media (max-width: 900px){
+  .page-dots{
+    display: none;
+  }
+}
 
