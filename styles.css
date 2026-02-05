@@ -23,10 +23,10 @@ html,body{height:100%}
 body{
   margin:0;
   font-family:var(--font);
-  background:radial-gradient(1000px 500px at 20% 0%, rgba(122,162,255,.18), transparent 60%),
-             radial-gradient(800px 500px at 90% 10%, rgba(255,255,255,.08), transparent 60%),
-             var(--bg);
-  color:var(--text);
+ background: radial-gradient(900px 500px at 15% 0%, rgba(255,255,255,.06), transparent 60%),
+              radial-gradient(700px 450px at 85% 10%, rgba(255,255,255,.04), transparent 60%),
+              linear-gradient(180deg, var(--bg) 0%, #07080d 100%);
+  color: var(--text);
   line-height:1.6;
 }
 
