@@ -665,4 +665,18 @@ a{ color:inherit; }
     display: none;
   }
 }
+/* ===== HARD FORCE: DOTS CENTER-RIGHT + VERTICAL + SPREAD OUT ===== */
+.page-dots{
+  position: fixed !important;
+  right: 28px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+
+  gap: 26px !important;          /* spacing between dots (increase if you want) */
+  z-index: 9999 !important;
+}
 
