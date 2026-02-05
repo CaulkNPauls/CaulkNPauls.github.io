@@ -6,6 +6,7 @@
   --text: rgba(255,255,255,0.92);
   --muted: rgba(255,255,255,0.68);
   --border: rgba(255,255,255,0.12);
+--panel-2: rgba(255,255,255,0.04);
 
   /* subtle accent (still basically monochrome) */
   --accent: rgba(255,255,255,0.92);
