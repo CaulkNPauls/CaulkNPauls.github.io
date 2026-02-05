@@ -1010,3 +1010,19 @@ a{ color:inherit; }
 .project__meta--secondary .link {
   cursor: pointer;
 }
+.project {
+  display: flex;
+  flex-direction: column;
+}
+
+.project__meta--secondary {
+  margin-top: auto;             /* push to bottom */
+  padding-top: 10px;
+  opacity: 1;                   /* make it not faded */
+}
+
+.project__meta--secondary .link {
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
