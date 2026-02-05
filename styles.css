@@ -973,3 +973,40 @@ a{ color:inherit; }
     transform: translateX(-50%);
   }
 }
+/* ===== Clickable project cards ===== */
+
+.project--clickable {
+  position: relative;
+}
+
+/* Make the whole card clickable */
+.project__hit {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+}
+
+/* Keep spacing natural (avoid link styling) */
+.project__hit h3,
+.project__hit p,
+.project__hit ul,
+.project__hit .project__meta {
+  color: inherit;
+}
+
+/* Secondary meta row (PDF link) sits under the main clickable area */
+.project__meta--secondary {
+  margin-top: 10px;
+}
+
+/* If you already have a hover transform on .project, keep it.
+   Otherwise this adds a nice pointer hint. */
+.project--clickable {
+  cursor: pointer;
+}
+
+/* Make sure inner links still look like links */
+.project__meta--secondary .link {
+  cursor: pointer;
+}
