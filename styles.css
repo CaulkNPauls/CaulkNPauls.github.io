@@ -47,10 +47,25 @@ a{color:inherit}
   border-bottom:1px solid var(--border);
 }
 .header__inner{
- display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:14px 0;
+}
+
+/* Push nav + icons to the right side of header */
+.nav{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-left:auto;
+}
+
+/* Icons are last = far right */
+.header-icons{
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
 
 .brand{display:flex; align-items:center; gap:12px}
@@ -91,7 +106,7 @@ a{color:inherit}
   margin-left: auto;  /* pushes icons to the right */
   margin-right: 12px; /* spacing before the nav */
 }
-}
+
 
 /* Make them small, clean, and monochrome */
 .header-icons a {
