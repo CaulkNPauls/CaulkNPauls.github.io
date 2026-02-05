@@ -39,3 +39,20 @@ if (projectsToggle && projectsSection) {
     }
   });
 }
+
+
+// ===== Reveal on scroll (About page + any .reveal elements) =====
+const revealEls = document.querySelectorAll(".reveal");
+
+if (revealEls.length) {
+  const obs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("is-visible");
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  revealEls.forEach((el) => obs.observe(el));
+}
