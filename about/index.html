@@ -1,122 +1,208 @@
-<!-- Pair 1 -->
-<section id="q1" class="snap__section snap__section--q">
-  <div class="snap__copy">
-    <p class="snap__kicker">About</p>
-    <h1>Who am I?</h1>
-  </div>
-</section>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="About Paul Poleon Jr" />
+    <title>About | Paul Poleon Jr</title>
 
-<section id="a1" class="snap__section snap__section--a">
-  <div class="snap__copy">
-    <p>
-      Hi! I’m Paul Poleon Jr — an Industrial Engineering student at the University at Buffalo with an interest in solving problems,
-      improving systems, and making things work better in the real world.
-    </p>
-    <p>
-      I’m naturally curious about how things operate — whether that’s a workflow, a team dynamic, or a real-world process — and I love
-      turning that curiosity into practical improvements.
-    </p>
-  </div>
-</section>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-<!-- Pair 2 -->
-<section id="q2" class="snap__section snap__section--q">
-  <div class="snap__copy">
-    <p class="snap__kicker">Background</p>
-    <h1>How did I get into Industrial Engineering?</h1>
-  </div>
-</section>
+    <!-- IMPORTANT: go up one level to find styles.css -->
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
 
-<section id="a2" class="snap__section snap__section--a">
-  <div class="snap__copy">
-    <p>
-      I didn’t start in Industrial Engineering — I originally began in Mechanical Engineering. I enjoyed the technical side,
-      especially 3D modeling, but a big shift happened when I worked as an Advanced Repair Agent with Geek Squad.
-    </p>
-    <p>
-      In that role, I wasn’t just fixing devices. I was diagnosing real problems, communicating clearly with customers, managing time,
-      and finding practical solutions under pressure.
-    </p>
-    <p>
-      That experience made something click: I was most interested in how systems and people work together — not just the mechanics.
-      Switching to Industrial Engineering ended up being one of the best decisions I’ve made, and I’ve been more engaged and motivated ever since.
-    </p>
-  </div>
-</section>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- Pair 3 -->
-<section id="q3" class="snap__section snap__section--q">
-  <div class="snap__copy">
-    <p class="snap__kicker">Motivation</p>
-    <h1>What do I like working on?</h1>
-  </div>
-</section>
+    <header class="header">
+      <div class="container header__inner">
+        <!-- top left header image -->
+        <div class="brand">
+          <a href="/" class="brand__home" aria-label="Go to homepage">
+            <img
+              src="/assets/logo.website.png"
+              alt="Paul Poleon Logo"
+              class="brand__logo"
+              width="290"
+              height="147"
+            />
+          </a>
+        </div>
 
-<section id="a3" class="snap__section snap__section--a">
-  <div class="snap__copy">
-    <p>
-      I enjoy breaking down complex problems, analyzing data, and building improvements that make a real difference.
-      I’m especially drawn to work where the solution has to be both technically sound and realistic for the people using it.
-    </p>
-    <p>
-      Through coursework and projects, I’ve built skills in process mapping, data analysis, and continuous improvement —
-      and I’m excited to apply those skills in internships and real-world settings.
-    </p>
-  </div>
-</section>
+        <nav class="nav" aria-label="Primary">
+          <button class="nav__toggle" aria-expanded="false" aria-controls="navLinks">
+            Menu
+          </button>
 
-<!-- Pair 4 -->
-<section id="q4" class="snap__section snap__section--q">
-  <div class="snap__copy">
-    <p class="snap__kicker">Leadership</p>
-    <h1>Where did I learn leadership and teamwork?</h1>
-  </div>
-</section>
+          <div id="navLinks" class="nav__links">
+            <a href="/about/">About</a>
+            <a href="/projects/">Projects</a>
+            <a href="/experience/">Experience</a>
+            <a href="/skills/">Skills</a>
+          </div>
 
-<section id="a4" class="snap__section snap__section--a">
-  <div class="snap__copy">
-    <p>
-      Outside of academics, I really value leadership, teamwork, and connection with others. I earned my Eagle Scout rank after years of
-      dedication and service, and I served as Senior Patrol Leader for many years.
-    </p>
-    <p>
-      Leading my troop meant organizing activities, working closely with both scouts and adult leaders, and learning how to bring different
-      personalities together toward a shared goal. Those experiences strengthened my communication, responsibility, and ability to collaborate —
-      and they’ve translated directly into how I work in engineering teams.
-    </p>
-  </div>
-</section>
+          <div class="header-icons" aria-label="Profile links">
+            <a href="mailto:ppoleonjr@gmail.com" aria-label="Email">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M4 6h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="m22 8-10 7L2 8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </a>
 
-<!-- Pair 5 -->
-<section id="q5" class="snap__section snap__section--q">
-  <div class="snap__copy">
-    <p class="snap__kicker">Life</p>
-    <h1>What am I like outside of class?</h1>
-  </div>
-</section>
+            <a
+              href="https://www.linkedin.com/in/paul-poleon-jr-3155b0287/"
+              target="_blank"
+              rel="noopener"
+              aria-label="LinkedIn"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 3h4v18H4V3Z" fill="currentColor" />
+                <path
+                  d="M10 9h4v2.2c.6-1.2 2-2.4 4.2-2.4 3.2 0 4.8 2 4.8 5.8V21h-4v-6c0-1.8-.4-3.2-2.2-3.2-1.4 0-2.4 1-2.8 2-.1.3-.2.8-.2 1.3V21h-4V9Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </a>
 
-<section id="a5" class="snap__section snap__section--a">
-  <div class="snap__copy">
-    <p>
-      Sports have played a big role in my life — I played football as a lineman and lacrosse as a goalie.
-      Those positions taught me to see the bigger picture, anticipate problems before they happen, and stay calm under pressure.
-    </p>
-    <p>
-      After high school, I came back to help coach, and I loved mentoring players, building teamwork, and helping others grow both on and off the field.
-      I’m still a huge football fan — I love watching games, debating plays, and keeping up with stats and highlights.
-      Come Sunday, you’ll probably find me at a tailgate or glued to a TV screen.
-    </p>
-    <p>
-      When I’m not studying or watching football, I’m usually hanging out with friends or playing video games. I enjoy the strategy and competition,
-      and I think they’ve helped sharpen my ability to think critically and adapt quickly.
-    </p>
-    <p>
-      Above all, I’m a very social person who thrives in team environments with open communication. Technical skills matter —
-      but I believe the ability to work well with others is what really separates a good engineer from a great one.
-    </p>
-    <p class="muted">
-      Thanks for taking the time to learn a little about me. Feel free to explore my projects, experience, and resume —
-      I’m always open to new opportunities and conversations.
-    </p>
-  </div>
-</section>
+            <a
+              href="https://github.com/CaulkNPauls"
+              target="_blank"
+              rel="noopener"
+              aria-label="GitHub"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C17.5 5.3 18.5 5.6 18.5 5.6c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.3.8 1 .8 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"
+                />
+              </svg>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- === Scroll Progress Dots (About Page) === -->
+    <nav class="page-dots" aria-label="Section progress">
+      <button class="dot" data-target="q1" aria-label="Go to section 1"></button>
+      <button class="dot" data-target="a1" aria-label="Go to section 2"></button>
+      <button class="dot" data-target="q2" aria-label="Go to section 3"></button>
+      <button class="dot" data-target="a2" aria-label="Go to section 4"></button>
+      <button class="dot" data-target="q3" aria-label="Go to section 5"></button>
+      <button class="dot" data-target="a3" aria-label="Go to section 6"></button>
+      <button class="dot" data-target="q4" aria-label="Go to section 7"></button>
+      <button class="dot" data-target="a4" aria-label="Go to section 8"></button>
+      <button class="dot" data-target="q5" aria-label="Go to section 9"></button>
+      <button class="dot" data-target="a5" aria-label="Go to section 10"></button>
+    </nav>
+
+    <main id="main">
+      <div class="snap snap--qa">
+        <!-- Pair 1 -->
+        <section id="q1" class="snap__section snap__section--q">
+          <div class="snap__copy">
+            <p class="snap__kicker">About</p>
+            <h1>Who am I?</h1>
+          </div>
+        </section>
+
+        <section id="a1" class="snap__section snap__section--a">
+          <div class="snap__copy">
+            <p>
+              Hi! I’m Paul Poleon Jr — an Industrial Engineering student at the University at Buffalo focused on improving systems and making work run better.
+            </p>
+          </div>
+        </section>
+
+        <!-- Pair 2 -->
+        <section id="q2" class="snap__section snap__section--q">
+          <div class="snap__copy">
+            <p class="snap__kicker">Background</p>
+            <h1>How did I get here?</h1>
+          </div>
+        </section>
+
+        <section id="a2" class="snap__section snap__section--a">
+          <div class="snap__copy">
+            <p>
+              I didn’t always start out in Industrial Engineering — I originally began in Mechanical Engineering. I enjoyed the technical side, especially 3D modeling, but my time as an Advanced Repair Agent with Geek Squad reshaped my perspective. In that role, I was diagnosing real problems, communicating with customers, managing time, and finding practical solutions under pressure. That experience helped me realize I was more drawn to how systems and people work together than just the mechanics of things.
+            </p>
+          </div>
+        </section>
+
+        <!-- Pair 3 -->
+        <section id="q3" class="snap__section snap__section--q">
+          <div class="snap__copy">
+            <p class="snap__kicker">Motivation</p>
+            <h1>What drives me?</h1>
+          </div>
+        </section>
+
+        <section id="a3" class="snap__section snap__section--a">
+          <div class="snap__copy">
+            <p>
+              I’ve always been curious about how things operate — workflows, team dynamics, and real-world processes. I enjoy breaking down complex problems, analyzing data, and building practical improvements that stick. Through coursework and projects, I’ve developed skills in process mapping, analysis, and continuous improvement, and I’m excited to apply them in internships and real-world settings.
+            </p>
+          </div>
+        </section>
+
+        <!-- Pair 4 -->
+        <section id="q4" class="snap__section snap__section--q">
+          <div class="snap__copy">
+            <p class="snap__kicker">Leadership</p>
+            <h1>Where did I learn to lead?</h1>
+          </div>
+        </section>
+
+        <section id="a4" class="snap__section snap__section--a">
+          <div class="snap__copy">
+            <p>
+              I earned my Eagle Scout rank and served as Senior Patrol Leader for years. Leading my troop taught me responsibility, communication, and how to work with different personalities — skills that translate directly to collaborative engineering work.
+            </p>
+          </div>
+        </section>
+
+        <!-- Pair 5 -->
+        <section id="q5" class="snap__section snap__section--q">
+          <div class="snap__copy">
+            <p class="snap__kicker">Life</p>
+            <h1>What am I like outside of class?</h1>
+          </div>
+        </section>
+
+        <section id="a5" class="snap__section snap__section--a">
+          <div class="snap__copy">
+            <p>
+              Sports shaped how I think about teamwork and pressure — I played football (lineman) and lacrosse (goalie). Those roles trained me to see the bigger picture, anticipate problems early, and communicate quickly. I also coached after high school, which I loved because it let me mentor others and build team culture.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div>© <span id="year"></span> Paul Poleon Jr</div>
+        <div class="muted small">Built with HTML/CSS • Hosted on GitHub Pages</div>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
