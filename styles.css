@@ -447,4 +447,23 @@ a{color:inherit}
     width: 220px;    
   }
 }
+/* ===== CLICKABLE LOGO HOME BUTTON ===== */
+
+/* Make the link behave nicely */
+.brand__home {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Optional subtle hover effect */
+.brand__home:hover .brand__logo {
+  transform: translateY(-1px);
+}
+
+/* Smooth transition */
+.brand__logo {
+  transition: transform 160ms ease;
+}
+
 
