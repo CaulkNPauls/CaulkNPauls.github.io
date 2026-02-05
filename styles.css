@@ -79,7 +79,49 @@ a{color:inherit}
   border-radius:12px;
 }
 .nav__links a:hover{color:var(--text); background:rgba(255,255,255,.06)}
+/*does icons in the top right */
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
 
+/* Icon links in the top right */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Make them small, clean, and monochrome */
+.header-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.header-icons svg {
+  width: 16px;
+  height: 16px;
+}
+
+/*Hover effect */
+.header-icons a:hover {
+  transform: translateY(-2px);
+  background: var(--alt);
+  border-color: rgba(255,255,255,0.22);
+}
+
+/* hero (big thing talking about me)*/
 .hero{padding:56px 0 22px}
 .hero__inner{
   display:grid;
