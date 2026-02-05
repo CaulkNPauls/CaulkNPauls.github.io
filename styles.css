@@ -404,3 +404,19 @@ a{color:inherit}
 @media (min-width: 1500px){
   :root{ --max: 1400px; }
 }
+/*logo at top left */
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand__logo-link {
+  display: inline-flex;
+}
+
+.brand__logo {
+  height: 48px;      
+  width: auto;
+  display: block;
+}
