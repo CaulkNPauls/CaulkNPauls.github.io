@@ -420,3 +420,31 @@ a{color:inherit}
   width: 290px;
   display: block;
 }
+/* ================================ */
+/* ===== TOP LEFT HEADER IMAGE ===== */
+/* ================================ */
+
+.brand__logo {
+  height: 147px;   /* top left header image */
+  width: 290px;    /* top left header image */
+  object-fit: contain;
+  display: block;
+}
+
+/* Keep it aligned nicely with the rest of the header */
+.brand {
+  align-items: center;
+}
+
+.brand__logo {
+  max-height: 147px; /* top left header image */
+}
+
+/* Make sure it scales nicely on smaller screens */
+@media (max-width: 900px) {
+  .brand__logo {
+    height: 110px;   
+    width: 220px;    
+  }
+}
+
