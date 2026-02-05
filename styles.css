@@ -923,3 +923,53 @@ a{ color:inherit; }
   padding:6px 10px;
   opacity:.95;
 }
+
+/* ===== Projects conveyor belt ===== */
+
+.cards-marquee {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  /* optional fade edges like your screenshot */
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.cards-track {
+  display: flex;
+  width: max-content;
+  gap: 24px;
+  animation: cards-scroll 28s linear infinite;
+}
+
+.cards--row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: nowrap;
+}
+
+/* Make each card a fixed width so the conveyor looks smooth */
+.cards--row .project {
+  flex: 0 0 420px; /* tweak: 360-480 depending on your preference */
+}
+
+/* Pause on hover (optional but feels nice) */
+.cards-marquee:hover .cards-track {
+  animation-play-state: paused;
+}
+
+/* Respect reduced motion settings */
+@media (prefers-reduced-motion: reduce) {
+  .cards-track {
+    animation: none;
+  }
+}
+
+@keyframes cards-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
