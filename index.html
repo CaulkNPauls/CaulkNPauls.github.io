@@ -3,16 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Paul Poleon Jr — Industrial Engineering student at the University at Buffalo. Portfolio of engineering projects, CAD work, and experience." />
+    <meta
+      name="description"
+      content="Paul Poleon Jr — Industrial Engineering student at the University at Buffalo. Portfolio of engineering projects, CAD work, and experience."
+    />
     <title>Paul Poleon Jr | Portfolio</title>
 
-    
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo.website.png">
-
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo.website.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -20,100 +24,174 @@
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="header">
-  <div class="container header__inner">
+    <header class="header">
+      <div class="container header__inner">
+        <div class="brand">
+          <a href="/" class="brand__logo-link" aria-label="Go to homepage">
+            <img src="assets/logo.website.png" alt="Paul Poleon Logo" class="brand__logo" />
+          </a>
+        </div>
 
-    <div class="brand">
-      <a href="/" class="brand__logo-link" aria-label="Go to homepage">
-        <img src="assets/logo.website.png" alt="Paul Poleon Logo" class="brand__logo" />
-      </a>
-    </div>
+        <nav class="nav" aria-label="Primary">
+          <button class="nav__toggle" aria-expanded="false" aria-controls="navLinks">
+            Menu
+          </button>
 
-    <nav class="nav" aria-label="Primary">
-      <button class="nav__toggle" aria-expanded="false" aria-controls="navLinks">
-        Menu
-      </button>
+          <div id="navLinks" class="nav__links">
+            <a href="/about/">About</a>
+            <a href="/projects/">Projects</a>
+            <a href="/experience/">Experience</a>
+            <a href="/skills/">Skills</a>
+          </div>
 
-      <div id="navLinks" class="nav__links">
-        <a href="/about/">About</a>
-        <a href="/projects/">Projects</a>
-        <a href="/experience/">Experience</a>
-        <a href="/skills/">Skills</a>
+          <div class="header-icons" aria-label="Profile links">
+            <a href="mailto:ppoleonjr@gmail.com" aria-label="Email">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M4 6h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path d="m22 8-10 7L2 8" fill="none" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/paul-poleon-jr-3155b0287/"
+              target="_blank"
+              rel="noopener"
+              aria-label="LinkedIn"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 3h4v18H4V3Z" fill="currentColor" />
+                <path
+                  d="M10 9h4v2.2c.6-1.2 2-2.4 4.2-2.4 3.2 0 4.8 2 4.8 5.8V21h-4v-6c0-1.8-.4-3.2-2.2-3.2-1.4 0-2.4 1-2.8 2-.1.3-.2.8-.2 1.3V21h-4V9Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </a>
+
+            <a
+              href="https://github.com/CaulkNPauls"
+              target="_blank"
+              rel="noopener"
+              aria-label="GitHub"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C17.5 5.3 18.5 5.6 18.5 5.6c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.3.8 1 .8 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"
+                />
+              </svg>
+            </a>
+          </div>
+        </nav>
       </div>
-
-      <!-- ICONS MUST BE AFTER THE LINKS -->
-      <div class="header-icons" aria-label="Profile links">
-        <a href="mailto:ppoleonjr@gmail.com" aria-label="Email">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 6h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2"/>
-            <path d="m22 8-10 7L2 8" fill="none" stroke="currentColor" stroke-width="2"/>
-          </svg>
-        </a>
-
-        <a href="https://www.linkedin.com/in/paul-poleon-jr-3155b0287/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 3h4v18H4V3Z" fill="currentColor"/>
-            <path d="M10 9h4v2.2c.6-1.2 2-2.4 4.2-2.4 3.2 0 4.8 2 4.8 5.8V21h-4v-6c0-1.8-.4-3.2-2.2-3.2-1.4 0-2.4 1-2.8 2-.1.3-.2.8-.2 1.3V21h-4V9Z" fill="currentColor"/>
-          </svg>
-        </a>
-
-        <a href="https://github.com/CaulkNPauls" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C17.5 5.3 18.5 5.6 18.5 5.6c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.3.8 1 .8 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/>
-          </svg>
-        </a>
-      </div>
-    </nav>
-
-  </div>
-</header>
+    </header>
 
     <main id="main">
-     <section class="hero">
-  <div class="container hero__inner">
-    <div class="hero__text">
-      <h1>Hi, I’m <span class="accent">Paul Poleon Jr</span>.</h1>
-      <p class="lead">
-        I’m an Industrial Engineering student at the University at Buffalo.
-        I'm looking for an Internship where I can apply Lean thinking, analytics, and strong execution to real operations and their problems.
-      </p>
+      <!-- =========================
+           PREMIUM HERO
+      ========================== -->
+      <section class="hero hero--premium">
+        <div class="hero__bg" aria-hidden="true">
+          <div class="hero__grid"></div>
+          <div class="hero__glow hero__glow--a"></div>
+          <div class="hero__glow hero__glow--b"></div>
+        </div>
 
-      <div class="cta">
-        <a class="btn" href="/projects/">View Projects</a>
-        <a class="btn btn--ghost" href="assets/resume.pdf" target="_blank" rel="noopener">
-          Download Resume
-        </a>
-      </div>
-    </div>
+        <div class="container hero__inner hero__inner--premium">
+          <div class="hero__text hero__text--premium">
+            <p class="hero__kicker">Industrial Engineering • Lean • Analytics</p>
 
-    <!-- ✅ NOW it's a sibling, so it goes in the right column -->
-    <div class="hero__card" role="region" aria-label="Quick facts">
-      <div class="card">
-        <div class="card__title">Quick Facts</div>
-        <ul class="card__list">
-          <li><strong>School:</strong> University at Buffalo</li>
-          <li><strong>Major:</strong> Industrial Engineering</li>
-          <li><strong>Interests:</strong> Lean, Ops, Analytics</li>
-          <li><strong>Seeking:</strong> Summer Internship</li>
-          <li><strong>Location:</strong> Buffalo, NY</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+            <h1 class="hero__headline">
+              Hi, I’m <span class="accent accent--shine">Paul Poleon Jr</span>.
+            </h1>
 
+            <p class="lead lead--premium">
+              I help turn messy processes into clean, measurable improvements — using Lean thinking, data, and strong execution.
+            </p>
 
+            <div class="hero__chips" aria-label="Core focus areas">
+              <span class="chip-pill">Lean / Continuous Improvement</span>
+              <span class="chip-pill">Data Analysis</span>
+              <span class="chip-pill">Operations & Systems</span>
+            </div>
 
+            <div class="cta cta--premium">
+              <a class="btn btn--primary" href="/projects/">Explore my work →</a>
+              <a class="btn btn--ghost" href="assets/resume.pdf" target="_blank" rel="noopener">
+                Download resume (PDF)
+              </a>
+            </div>
+
+            <div class="hero__cred">
+              <span class="cred-badge">Eagle Scout</span>
+              <span class="cred-dot">•</span>
+              <span class="cred-badge">Geek Squad Advanced Repair Agent</span>
+              <span class="cred-dot">•</span>
+              <span class="cred-badge">Seeking Summer Internship</span>
+            </div>
+          </div>
+
+          <aside class="hero__stack" aria-label="Highlights">
+            <div class="stack-card stack-card--top">
+              <div class="stack-card__title">Quick Facts</div>
+              <ul class="stack-list">
+                <li><span>School</span><strong>University at Buffalo</strong></li>
+                <li><span>Major</span><strong>Industrial Engineering</strong></li>
+                <li><span>Location</span><strong>Buffalo, NY</strong></li>
+                <li><span>Interests</span><strong>Lean, Ops, Analytics</strong></li>
+              </ul>
+            </div>
+
+            <div class="stack-card stack-card--mid">
+              <div class="stack-card__title">Currently</div>
+              <p class="stack-card__text">
+                Building a portfolio of projects with measurable results and clean writeups.
+              </p>
+              <div class="stack-mini">
+                <span class="mini-pill">Open to internships</span>
+                <span class="mini-pill">Process mapping</span>
+                <span class="mini-pill">Modeling</span>
+              </div>
+            </div>
+
+            <div class="stack-card stack-card--bot">
+              <div class="stack-card__title">Tools</div>
+              <div class="tools-row">
+                <span class="tool">Excel</span>
+                <span class="tool">R</span>
+                <span class="tool">SolidWorks</span>
+                <span class="tool">Stats</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="hero__scroll" aria-hidden="true">
+          <span class="scroll-dot"></span>
+          <span class="scroll-text">Scroll</span>
+        </div>
+      </section>
+
+      <!-- =========================
+           CONTACT
+      ========================== -->
       <section id="contact" class="section">
         <div class="container">
           <h2>Contact</h2>
-          <p>
-            Let's connect and discuss opportunities 
-          </p>
+          <p>Let’s connect and discuss opportunities.</p>
 
           <div class="contact">
-            <a class="btn" href="mailto:you@email.com">Email me</a>
-            <a class="btn btn--ghost" href="https://www.linkedin.com/in/yourhandle" target="_blank" rel="noopener">
+            <a class="btn" href="mailto:ppoleonjr@gmail.com">Email me</a>
+            <a
+              class="btn btn--ghost"
+              href="https://www.linkedin.com/in/paul-poleon-jr-3155b0287/"
+              target="_blank"
+              rel="noopener"
+            >
               Message on LinkedIn
             </a>
           </div>
