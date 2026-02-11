@@ -304,3 +304,68 @@ document.addEventListener("DOMContentLoaded", () => {
     { passive: false }
   );
 })();
+/* ================================
+   ABOUT PAGE: Arrow-key snapping + dots
+   Paste at END of script.js
+================================ */
+(function () {
+  const snap = document.querySelector(".snap--qa");
+  const dotsNav = document.querySelector(".page-dots");
+
+  if (!snap || !dotsNav) return;
+
+  const sections = Array.from(snap.querySelectorAll(".snap__section"));
+  const dots = Array.from(dotsNav.querySelectorAll(".dot"));
+
+  function setActiveDot(index) {
+    dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
+  }
+
+  function scrollToIndex(index) {
+    const clamped = Math.max(0, Math.min(sections.length - 1, index));
+    sections[clamped].scrollIntoView({ behavior: "smooth", block: "start" });
+    setActiveDot(clamped);
+  }
+
+  // Dot clicks
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const targetId = dot.dataset.target;
+      const idx = sections.findIndex((s) => s.id === targetId);
+      if (idx !== -1) scrollToIndex(idx);
+    });
+  });
+
+  // Track which section is visible (updates active dot)
+  const io = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+
+      const idx = sections.indexOf(visible.target);
+      if (idx !== -1) setActiveDot(idx);
+    },
+    { root: snap, threshold: 0.55 }
+  );
+
+  sections.forEach((s) => io.observe(s));
+  setActiveDot(0);
+
+  // Arrow keys: step through slides
+  window.addEventListener(
+    "keydown",
+    (e) => {
+      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+
+      // only intercept if user is on About page container
+      e.preventDefault();
+
+      const current = dots.findIndex((d) => d.classList.contains("is-active"));
+      if (e.key === "ArrowDown") scrollToIndex(current + 1);
+      if (e.key === "ArrowUp") scrollToIndex(current - 1);
+    },
+    { passive: false }
+  );
+})();
