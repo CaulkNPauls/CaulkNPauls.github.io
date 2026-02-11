@@ -1896,3 +1896,96 @@ body:has(.snap--qa){
 @media (max-width: 900px){
   .page-dots{ display: none; }
 }
+
+/* ================================
+   ABOUT PAGE — PERFECT CENTERING
+   (Paste at VERY END of styles.css)
+================================ */
+
+/* Lock the document so only the snap container scrolls */
+body:has(.snap--qa){
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Make the snap container fill only the space UNDER the header */
+.snap--qa{
+  height: calc(100vh - var(--headerH)); /* KEY FIX */
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+.snap--qa::-webkit-scrollbar{ width:0; height:0; }
+
+/* EACH SLIDE: center inside (viewport - header) */
+.snap--qa .snap__section{
+  min-height: calc(100vh - var(--headerH)); /* KEY FIX */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+
+  display: grid;                /* better centering than flex */
+  place-items: center;          /* PERFECT vertical + horizontal center */
+  padding: clamp(24px, 5vh, 70px) 0;
+}
+
+/* Center text container cleanly */
+.snap--qa .snap__copy{
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  padding: 0 18px;
+  text-align: left;             /* keeps professional alignment */
+}
+
+/* Responsive titles */
+.snap--qa .snap__section--q h1{
+  margin: 0;
+  font-size: clamp(2.1rem, 4.2vw, 4.1rem);
+  line-height: 1.05;
+}
+
+/* Responsive paragraphs (prevents overflow + awkward wrap) */
+.snap--qa .snap__section--a p{
+  margin: 0;
+  font-size: clamp(1.05rem, 1.5vw, 1.5rem);
+  line-height: 1.85;
+  max-width: 68ch; /* slightly tighter = more centered feel */
+}
+
+/* Keep your dots but scale nicely */
+.page-dots{
+  position: fixed;
+  right: clamp(14px, 2.5vw, 28px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(10px, 2.1vh, 26px);
+  z-index: 9999;
+}
+
+.page-dots .dot{
+  width: clamp(8px, 0.9vw, 12px);
+  height: clamp(8px, 0.9vw, 12px);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.28);
+  border: 1px solid var(--border);
+  padding: 0;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.page-dots .dot.is-active{
+  background: var(--text);
+  transform: scale(1.55);
+}
+
+.page-dots .dot:hover{
+  transform: scale(1.25);
+}
+
+@media (max-width: 900px){
+  .page-dots{ display: none; }
+}
