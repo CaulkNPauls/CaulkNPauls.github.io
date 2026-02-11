@@ -2078,3 +2078,28 @@ body:has(.snap--qa){
   width: 17px !important;
   height: 17px !important;
 }
+/* ===== ABOUT PAGE: prevent page scroll (fix header disappearing) ===== */
+.page-about{
+  height: 100vh;
+  overflow: hidden; /* IMPORTANT: stops the document from scrolling */
+}
+
+/* keep header always visible */
+.page-about .header{
+  position: sticky;
+  top: 0;
+  z-index: 500;
+}
+
+/* ONLY the snap container scrolls */
+.page-about .snap--qa{
+  height: calc(100vh - var(--headerH));
+  overflow-y: auto;
+  overscroll-behavior: contain; /* prevents scroll chaining to body */
+}
+
+/* arrow keys sometimes nudge the page on some browsers; this helps */
+.page-about main{
+  height: calc(100vh - var(--headerH));
+  overflow: hidden;
+}
