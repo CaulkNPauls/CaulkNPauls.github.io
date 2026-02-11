@@ -2126,3 +2126,8 @@ body:has(.snap--qa){
 .header__inner {
   align-items: center !important;
 }
+
+/* ===== REMOVE FOOTER ONLY ON ABOUT PAGE ===== */
+.page-about .footer {
+  display: none !important;
+}
