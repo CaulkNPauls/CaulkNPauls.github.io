@@ -243,3 +243,64 @@ document.addEventListener("DOMContentLoaded", () => {
     apply();
   }
 });
+
+// === About page: arrow keys move slide-by-slide (snap sections) ===
+(function () {
+  const snap = document.querySelector(".snap--qa");
+  if (!snap) return; // only run on About page
+
+  const sections = Array.from(snap.querySelectorAll(".snap__section"));
+  if (sections.length === 0) return;
+
+  // Find the section whose top is closest to the container top
+  function getCurrentIndex() {
+    const snapTop = snap.getBoundingClientRect().top;
+    let bestIdx = 0;
+    let bestDist = Infinity;
+
+    sections.forEach((sec, i) => {
+      const dist = Math.abs(sec.getBoundingClientRect().top - snapTop);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestIdx = i;
+      }
+    });
+
+    return bestIdx;
+  }
+
+  function goToIndex(i) {
+    const clamped = Math.max(0, Math.min(sections.length - 1, i));
+    sections[clamped].scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  window.addEventListener(
+    "keydown",
+    (e) => {
+      // Don’t hijack keys when typing in inputs/textareas
+      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+      if (tag === "input" || tag === "textarea") return;
+
+      if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
+        e.preventDefault();
+        goToIndex(getCurrentIndex() + 1);
+      }
+
+      if (e.key === "ArrowUp" || e.key === "PageUp") {
+        e.preventDefault();
+        goToIndex(getCurrentIndex() - 1);
+      }
+
+      if (e.key === "Home") {
+        e.preventDefault();
+        goToIndex(0);
+      }
+
+      if (e.key === "End") {
+        e.preventDefault();
+        goToIndex(sections.length - 1);
+      }
+    },
+    { passive: false }
+  );
+})();
