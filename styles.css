@@ -1796,3 +1796,103 @@ html, body { overflow-x: hidden; }
   .meta-pill{ min-width: 0; width: 100%; border-radius: 16px; }
   .cards--featured{ grid-template-columns: 1fr; }
 }
+/* ================================
+   ABOUT PAGE: HARD LOCK + CENTER
+   Paste at END of styles.css
+================================ */
+
+/* Stop the *document* from scrolling on About page */
+body:has(.snap--qa){
+  height: 100vh;
+  overflow: hidden;            /* no page scroll */
+}
+
+/* Make the snap container the ONLY scroll area */
+.snap--qa{
+  height: calc(100vh - var(--headerH));
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+
+  /* make scroll feel clean */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+
+  /* hide scrollbar */
+  scrollbar-width: none;
+}
+.snap--qa::-webkit-scrollbar{ width:0; height:0; }
+
+/* Each section fills the viewport (minus header) */
+.snap--qa .snap__section{
+  min-height: calc(100vh - var(--headerH));
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+
+  display: flex;
+  align-items: center;         /* vertical center */
+  padding: clamp(28px, 6vh, 70px) 0;
+}
+
+/* Keep text centered and readable on all screens */
+.snap--qa .snap__copy{
+  width: min(980px, 92vw);
+  margin: 0 auto;              /* centered */
+  padding: 0 18px;
+}
+
+/* Titles scale smoothly */
+.snap--qa .snap__section--q h1{
+  margin: 0;
+  font-size: clamp(2.1rem, 4.2vw, 4.1rem);
+  line-height: 1.06;
+}
+
+/* Paragraphs scale + keep line length nice */
+.snap--qa .snap__section--a p{
+  margin: 0;
+  font-size: clamp(1.05rem, 1.5vw, 1.5rem);
+  line-height: 1.85;
+  max-width: 70ch;
+  color: rgba(255,255,255,0.78);
+}
+
+/* Dots: scale with screen (size + spacing) */
+.page-dots{
+  position: fixed;
+  right: clamp(14px, 2.5vw, 28px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: clamp(10px, 2.1vh, 26px);       /* spacing scales */
+  z-index: 9999;
+}
+
+/* Dot size scales */
+.page-dots .dot{
+  width: clamp(8px, 0.9vw, 12px);
+  height: clamp(8px, 0.9vw, 12px);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.28);
+  border: 1px solid var(--border);
+  padding: 0;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.page-dots .dot.is-active{
+  background: var(--text);
+  transform: scale(1.55);
+}
+
+.page-dots .dot:hover{
+  transform: scale(1.25);
+}
+
+/* Hide dots on smaller screens */
+@media (max-width: 900px){
+  .page-dots{ display: none; }
+}
