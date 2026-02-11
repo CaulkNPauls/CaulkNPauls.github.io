@@ -353,6 +353,43 @@ document.addEventListener("DOMContentLoaded", () => {
   sections.forEach((s) => io.observe(s));
   setActiveDot(0);
 
+
+
+
+
+
+
+  // ================================
+// About page: lock scroll + correct centering
+// ================================
+(function () {
+  const isAbout = document.body.classList.contains("about-page");
+  if (!isAbout) return;
+
+  const root = document.documentElement;
+  const header = document.querySelector(".header");
+  const snap = document.querySelector(".snap--qa");
+  if (!header || !snap) return;
+
+  function setHeaderH() {
+    // Get actual rendered header height (accounts for logo size, wrap, etc.)
+    const h = Math.ceil(header.getBoundingClientRect().height);
+    root.style.setProperty("--headerH", `${h}px`);
+  }
+
+  // Run now + on resize
+  setHeaderH();
+  window.addEventListener("resize", setHeaderH);
+
+  // Run again after fonts load (fonts can change header height)
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(setHeaderH).catch(() => {});
+  }
+
+  // Optional: prevent the body from scrolling even if browser tries
+  document.body.style.overflow = "hidden";
+})();
+
   // Arrow keys: step through slides
   window.addEventListener(
     "keydown",
