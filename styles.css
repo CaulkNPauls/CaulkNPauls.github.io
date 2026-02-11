@@ -2103,3 +2103,9 @@ body:has(.snap--qa){
   height: calc(100vh - var(--headerH));
   overflow: hidden;
 }
+
+
+.brand__logo {
+  height: clamp(64px, 5vw, 80px); 
+}
+
