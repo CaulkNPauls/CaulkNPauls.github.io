@@ -406,36 +406,3 @@ document.addEventListener("DOMContentLoaded", () => {
     { passive: false }
   );
 })();
-
-/* ================================
-   HEADER SIZE: smaller + responsive
-   (paste near end of styles.css)
-================================ */
-
-/* Make the header feel tighter */
-.header__inner{
-  padding: clamp(8px, 1.2vh, 12px) 0;
-}
-
-/* Shrink logo responsively */
-.brand__logo{
-  width: clamp(160px, 16vw, 240px);
-  height: auto;               /* keep aspect ratio */
-  max-height: clamp(54px, 8vh, 92px);
-}
-
-/* Tighter nav + icons */
-.nav__links a{
-  padding: 8px 10px;
-  font-size: clamp(.95rem, 1.1vw, 1rem);
-}
-
-.header-icons a{
-  width: clamp(30px, 3.2vw, 34px);
-  height: clamp(30px, 3.2vw, 34px);
-}
-
-.header-icons svg{
-  width: clamp(14px, 1.7vw, 16px);
-  height: clamp(14px, 1.7vw, 16px);
-}
