@@ -2013,3 +2013,37 @@ body:has(.snap--qa){
   line-height: clamp(1.65, 1.2vw + 1.4, 1.95);
   max-width: 68ch;
 }
+/* ================================
+   HEADER — MIDDLE GROUND SIZE
+   (paste at very END of styles.css)
+================================ */
+
+/* Give a bit more breathing room than now, less than before */
+.header__inner {
+  padding: clamp(10px, 1.6vh, 16px) 0;
+}
+
+/* Logo: slightly bigger than now, still controlled */
+.brand__logo {
+  width: clamp(190px, 18vw, 270px);
+  height: auto;
+  max-height: clamp(60px, 9vh, 105px);
+}
+
+/* Nav links — professional spacing, not cramped */
+.nav__links a {
+  padding: 10px 12px;
+  font-size: clamp(0.97rem, 1.15vw, 1.05rem);
+  letter-spacing: 0.01em;
+}
+
+/* Icons: a touch larger than now, still sleek */
+.header-icons a {
+  width: clamp(32px, 3.4vw, 38px);
+  height: clamp(32px, 3.4vw, 38px);
+}
+
+.header-icons svg {
+  width: clamp(15px, 1.8vw, 17px);
+  height: clamp(15px, 1.8vw, 17px);
+}
