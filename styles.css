@@ -1949,3 +1949,67 @@ body:has(.snap--qa){
   max-width: 68ch;
   margin: 0;
 }
+/* ================================
+   HEADER SIZE: smaller + responsive
+   (paste near end of styles.css)
+================================ */
+
+/* Make the header feel tighter */
+.header__inner{
+  padding: clamp(8px, 1.2vh, 12px) 0;
+}
+
+/* Shrink logo responsively */
+.brand__logo{
+  width: clamp(160px, 16vw, 240px);
+  height: auto;               /* keep aspect ratio */
+  max-height: clamp(54px, 8vh, 92px);
+}
+
+/* Tighter nav + icons */
+.nav__links a{
+  padding: 8px 10px;
+  font-size: clamp(.95rem, 1.1vw, 1rem);
+}
+
+.header-icons a{
+  width: clamp(30px, 3.2vw, 34px);
+  height: clamp(30px, 3.2vw, 34px);
+}
+
+.header-icons svg{
+  width: clamp(14px, 1.7vw, 16px);
+  height: clamp(14px, 1.7vw, 16px);
+}
+/* ================================
+   ABOUT PAGE: responsive typography + spacing
+================================ */
+
+/* spacing between slides gets smaller on small screens, bigger on large */
+.about-page .snap--qa .snap__section{
+  padding: clamp(18px, 4vh, 70px) 0;
+}
+
+/* content block width adjusts smoothly */
+.about-page .snap--qa .snap__copy{
+  width: min(980px, 92vw);
+  padding: 0 clamp(16px, 2vw, 24px);
+}
+
+/* Question slide */
+.about-page .snap--qa .snap__section--q .snap__kicker{
+  font-size: clamp(.75rem, 1vw, .95rem);
+  letter-spacing: .14em;
+}
+
+.about-page .snap--qa .snap__section--q h1{
+  font-size: clamp(2.1rem, 4.5vw, 4.4rem);
+  line-height: 1.05;
+}
+
+/* Answer slide */
+.about-page .snap--qa .snap__section--a p{
+  font-size: clamp(1.05rem, 1.45vw, 1.55rem);
+  line-height: clamp(1.65, 1.2vw + 1.4, 1.95);
+  max-width: 68ch;
+}
