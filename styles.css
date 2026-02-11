@@ -2354,3 +2354,124 @@ body:has(.snap--qa){
   .page-hero__title{ max-width: none; }
 }
 
+/* =========================================================
+   SKILLS PAGE — PREMIUM REWORK (paste at end)
+========================================================= */
+
+.page-skills .nav__links a[aria-current="page"]{
+  color: var(--text);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+}
+
+/* Skills grid */
+.skills-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Card */
+.skills-card{
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  box-shadow: var(--shadow);
+  padding: 18px;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.skills-card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.22);
+  box-shadow: 0 16px 45px rgba(0,0,0,.38);
+}
+
+/* Left accent stripe */
+.skills-card::before{
+  content:"";
+  position:absolute;
+  inset:-1px auto -1px -1px;
+  width:5px;
+  border-radius:999px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.28), rgba(255,255,255,0.08));
+}
+
+/* Head row */
+.skills-card__head{
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.skills-card__title{
+  margin: 0 0 6px;
+}
+
+.skills-card__sub{
+  margin: 0;
+  max-width: 50ch;
+}
+
+/* Icon */
+.skills-card__icon{
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  flex: 0 0 auto;
+}
+
+.skills-card__icon svg{
+  width: 20px;
+  height: 20px;
+}
+
+/* Chips */
+.skills-chips{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.skill-chip{
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.78);
+  padding: 8px 10px;
+  border-radius: 999px;
+  font-size: .92rem;
+  backdrop-filter: blur(6px);
+}
+
+/* CTA */
+.skills-cta{
+  margin-top: 18px;
+}
+
+.skills-cta__card{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.skills-cta__actions{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .skills-grid{ grid-template-columns: 1fr; }
+}
