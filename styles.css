@@ -2109,3 +2109,20 @@ body:has(.snap--qa){
   height: clamp(75px, 8vw, 124px); 
 }
 
+/* ===== FORCE LOGO BIGGER (COPY–PASTE AT BOTTOM OF FILE) ===== */
+
+.brand__logo {
+  height: clamp(90px, 7vw, 120px) !important;
+  max-height: none !important;
+  width: auto !important;
+}
+
+/* Make sure the header has enough space for the bigger logo */
+.header {
+  min-height: clamp(80px, 9vw, 120px) !important;
+}
+
+/* Keep header content vertically centered */
+.header__inner {
+  align-items: center !important;
+}
