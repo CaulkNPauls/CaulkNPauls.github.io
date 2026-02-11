@@ -8,102 +8,280 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="../styles.css" />
   </head>
 
-  <body>
-   <header class="header">
-  <div class="container header__inner">
-    <!-- top left header image -->
-    <div class="brand">
-      <a href="/" class="brand__home" aria-label="Go to homepage">
-        <img
-          src="/assets/logo.website.png"
-          alt="Paul Poleon Logo"
-          class="brand__logo"
-          width="290"
-          height="147"
-        />
-      </a>
-    </div>
+  <body class="page-skills">
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <nav class="nav" aria-label="Primary">
-      <button class="nav__toggle" aria-expanded="false" aria-controls="navLinks">
-        Menu
-      </button>
+    <header class="header">
+      <div class="container header__inner">
+        <div class="brand">
+          <a href="/" class="brand__home" aria-label="Go to homepage">
+            <img
+              src="/assets/logo.website.png"
+              alt="Paul Poleon Logo"
+              class="brand__logo"
+              width="290"
+              height="147"
+            />
+          </a>
+        </div>
 
-      <div id="navLinks" class="nav__links">
-        <a href="/about/">About</a>
-        <a href="/projects/">Projects</a>
-        <a href="/experience/">Experience</a>
-        <a href="/skills/">Skills</a>
+        <nav class="nav" aria-label="Primary">
+          <button class="nav__toggle" aria-expanded="false" aria-controls="navLinks">
+            Menu
+          </button>
+
+          <div id="navLinks" class="nav__links">
+            <a href="/about/">About</a>
+            <a href="/projects/">Projects</a>
+            <a href="/experience/">Experience</a>
+            <a href="/skills/" aria-current="page">Skills</a>
+          </div>
+
+          <div class="header-icons" aria-label="Profile links">
+            <a href="mailto:ppoleonjr@gmail.com" aria-label="Email">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M4 6h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path d="m22 8-10 7L2 8" fill="none" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/paul-poleon-jr-3155b0287/"
+              target="_blank"
+              rel="noopener"
+              aria-label="LinkedIn"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 3h4v18H4V3Z" fill="currentColor" />
+                <path
+                  d="M10 9h4v2.2c.6-1.2 2-2.4 4.2-2.4 3.2 0 4.8 2 4.8 5.8V21h-4v-6c0-1.8-.4-3.2-2.2-3.2-1.4 0-2.4 1-2.8 2-.1.3-.2.8-.2 1.3V21h-4V9Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </a>
+
+            <a
+              href="https://github.com/CaulkNPauls"
+              target="_blank"
+              rel="noopener"
+              aria-label="GitHub"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.3 11 0 0 1 6 0C17.5 5.3 18.5 5.6 18.5 5.6c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.3.8 1 .8 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"
+                />
+              </svg>
+            </a>
+          </div>
+        </nav>
       </div>
-
-      <div class="header-icons" aria-label="Profile links">
-        <a href="mailto:ppoleonjr@gmail.com" aria-label="Email">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 6h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2"/>
-            <path d="m22 8-10 7L2 8" fill="none" stroke="currentColor" stroke-width="2"/>
-          </svg>
-        </a>
-
-        <a href="https://www.linkedin.com/in/paul-poleon-jr-3155b0287/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 3h4v18H4V3Z" fill="currentColor"/>
-            <path d="M10 9h4v2.2c.6-1.2 2-2.4 4.2-2.4 3.2 0 4.8 2 4.8 5.8V21h-4v-6c0-1.8-.4-3.2-2.2-3.2-1.4 0-2.4 1-2.8 2-.1.3-.2.8-.2 1.3V21h-4V9Z" fill="currentColor"/>
-          </svg>
-        </a>
-
-        <a href="https://github.com/CaulkNPauls" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C17.5 5.3 18.5 5.6 18.5 5.6c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.3.8 1 .8 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/>
-          </svg>
-        </a>
-      </div>
-    </nav>
-  </div>
-</header>
-
+    </header>
 
     <main id="main">
-      <section class="section section--alt">
-        <div class="container">
+      <!-- PAGE HERO -->
+      <section class="page-hero page-hero--skills">
+        <div class="container page-hero__inner">
           <p class="muted small"><a class="link" href="/">← Back home</a></p>
-          <h1>Skills</h1>
 
-          <div class="grid grid--3">
-            <div class="panel">
-              <h3>Tools</h3>
-              <ul>
-                <li>SolidWorks CAD</li>
-                <li>Engineering Drawings</li>
-                <li>MATLAB</li>
-                <li>Microsoft Excel, Word, PowerPoint</li>
-              </ul>
+          <div class="page-hero__grid">
+            <div class="page-hero__copy">
+              <p class="page-hero__eyebrow">Skills</p>
+              <h1 class="page-hero__title">
+                Tools, methods, and strengths I use to <span class="accent">improve systems</span>.
+              </h1>
+              <p class="page-hero__subtitle muted">
+                I’m strongest where process + people + data meet — mapping workflows, analyzing outcomes, and executing
+                improvements cleanly.
+              </p>
+
+              <div class="cta page-hero__cta">
+                <a class="btn" href="/projects/">See projects</a>
+                <a class="btn btn--ghost" href="/assets/resume.pdf" target="_blank" rel="noopener">Download resume</a>
+              </div>
+
+              <div class="page-hero__meta">
+                <div class="meta-pill">
+                  <div class="meta-pill__k">Focus</div>
+                  <div class="meta-pill__v">Lean • Ops • Analytics</div>
+                </div>
+                <div class="meta-pill">
+                  <div class="meta-pill__k">Core tools</div>
+                  <div class="meta-pill__v">Excel • R • CAD</div>
+                </div>
+                <div class="meta-pill">
+                  <div class="meta-pill__k">Style</div>
+                  <div class="meta-pill__v">Clear + detail-oriented</div>
+                </div>
+              </div>
             </div>
 
-            <div class="panel">
-              <h3>Methods</h3>
-              <ul>
-                <li>Process Mapping</li>
-                <li>Lean / 5 Whys</li>
-                <li>Time Study</li>
-                <li>Basic Statistics</li>
-              </ul>
-            </div>
+            <aside class="page-hero__card" aria-label="Quick summary">
+              <div class="card card--v2">
+                <div class="card__title">Quick summary</div>
 
-            <div class="panel">
-              <h3>Strengths</h3>
-              <ul>
-                <li>Clear communication</li>
-                <li>Ownership + follow-through</li>
-                <li>Detail-oriented execution</li>
-                <li>Team collaboration</li>
-              </ul>
+                <div class="stats">
+                  <div class="stat">
+                    <div class="stat__k">Best at</div>
+                    <div class="stat__v">Process breakdown + execution</div>
+                  </div>
+                  <div class="stat">
+                    <div class="stat__k">Comfortable with</div>
+                    <div class="stat__v">Customer-facing + team work</div>
+                  </div>
+                  <div class="stat">
+                    <div class="stat__k">Currently building</div>
+                    <div class="stat__v">Analytics depth + portfolio work</div>
+                  </div>
+                </div>
+
+                <p class="card__note muted">
+                  Want examples? Projects shows the “proof.”
+                </p>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <div class="page-hero__bg" aria-hidden="true">
+          <div class="page-hero__gridlines"></div>
+          <div class="page-hero__glow page-hero__glow--a"></div>
+          <div class="page-hero__glow page-hero__glow--b"></div>
+        </div>
+      </section>
+
+      <!-- SKILLS GRID -->
+      <section class="section section--tight">
+        <div class="container">
+          <div class="section__head">
+            <div>
+              <h2>Core skill areas</h2>
+              <p class="muted">A clean breakdown of what I use most often.</p>
             </div>
           </div>
+
+          <div class="skills-grid">
+            <!-- Tools -->
+            <article class="skills-card">
+              <div class="skills-card__head">
+                <div class="skills-card__icon" aria-hidden="true">
+                  <!-- Wrench -->
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M14.7 6.3a5 5 0 0 0-6.9 6.9L3 18v3h3l4.8-4.8a5 5 0 0 0 6.9-6.9l-2.3 2.3-3-3 2.3-2.3Z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="skills-card__title">Tools</h3>
+                  <p class="muted skills-card__sub">Software and platforms I’m comfortable using.</p>
+                </div>
+              </div>
+
+              <div class="skills-chips" aria-label="Tools list">
+                <span class="skill-chip">SolidWorks CAD</span>
+                <span class="skill-chip">Engineering Drawings</span>
+                <span class="skill-chip">MATLAB</span>
+                <span class="skill-chip">Microsoft Excel</span>
+                <span class="skill-chip">Word</span>
+                <span class="skill-chip">PowerPoint</span>
+              </div>
+            </article>
+
+            <!-- Methods -->
+            <article class="skills-card">
+              <div class="skills-card__head">
+                <div class="skills-card__icon" aria-hidden="true">
+                  <!-- Nodes / flow -->
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M7 7h4v4H7V7Zm6 6h4v4h-4v-4ZM11 9h6M9 11v6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="skills-card__title">Methods</h3>
+                  <p class="muted skills-card__sub">How I break down problems and improve processes.</p>
+                </div>
+              </div>
+
+              <div class="skills-chips" aria-label="Methods list">
+                <span class="skill-chip">Process Mapping</span>
+                <span class="skill-chip">Lean / 5 Whys</span>
+                <span class="skill-chip">Time Study</span>
+                <span class="skill-chip">Basic Statistics</span>
+              </div>
+            </article>
+
+            <!-- Strengths -->
+            <article class="skills-card">
+              <div class="skills-card__head">
+                <div class="skills-card__icon" aria-hidden="true">
+                  <!-- Spark / star -->
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2Z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="skills-card__title">Strengths</h3>
+                  <p class="muted skills-card__sub">How I show up on a team.</p>
+                </div>
+              </div>
+
+              <div class="skills-chips" aria-label="Strengths list">
+                <span class="skill-chip">Clear communication</span>
+                <span class="skill-chip">Ownership + follow-through</span>
+                <span class="skill-chip">Detail-oriented execution</span>
+                <span class="skill-chip">Team collaboration</span>
+              </div>
+            </article>
+          </div>
+
+          <!-- Bottom CTA -->
+          <div class="skills-cta">
+            <div class="card skills-cta__card">
+              <div>
+                <div class="card__title">Want to see these skills in action?</div>
+                <p class="muted" style="margin:0;">
+                  Check out Projects — that’s where the real outcomes and deliverables live.
+                </p>
+              </div>
+              <div class="skills-cta__actions">
+                <a class="btn" href="/projects/">View Projects</a>
+                <a class="btn btn--ghost" href="/experience/">Experience</a>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
     </main>
