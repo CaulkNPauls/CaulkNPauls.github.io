@@ -2047,3 +2047,34 @@ body:has(.snap--qa){
   width: clamp(15px, 1.8vw, 17px);
   height: clamp(15px, 1.8vw, 17px);
 }
+/* ===== HEADER SIZE (slightly bigger again) ===== */
+:root{
+  --headerH: 84px; /* was 70; adjust 80–90 if you want */
+}
+
+/* give the header row a bit more height */
+.header__inner{
+  padding: 16px 0 !important;
+}
+
+/* logo: a touch bigger, but not huge */
+.brand__logo{
+  width: clamp(220px, 18vw, 290px) !important;
+  height: auto !important;
+}
+
+/* nav links a bit bigger */
+.nav__links a{
+  padding: 12px 12px !important;
+  font-size: 0.98rem !important;
+}
+
+/* icon bubbles slightly bigger */
+.header-icons a{
+  width: 38px !important;
+  height: 38px !important;
+}
+.header-icons svg{
+  width: 17px !important;
+  height: 17px !important;
+}
