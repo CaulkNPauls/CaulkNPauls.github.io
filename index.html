@@ -27,7 +27,7 @@
     <header class="header">
       <div class="container header__inner">
         <div class="brand">
-          <a href="/" class="brand__logo-link" aria-label="Go to homepage">
+          <a href="/" class="brand__home" aria-label="Go to homepage">
             <img src="assets/logo.website.png" alt="Paul Poleon Logo" class="brand__logo" />
           </a>
         </div>
@@ -91,98 +91,161 @@
     </header>
 
     <main id="main">
-      <!-- =========================
-           PREMIUM HERO
-      ========================== -->
-      <section class="hero hero--premium">
-        <div class="hero__bg" aria-hidden="true">
-          <div class="hero__grid"></div>
-          <div class="hero__glow hero__glow--a"></div>
-          <div class="hero__glow hero__glow--b"></div>
-        </div>
+      <!-- HERO -->
+      <section class="hero hero--v2">
+        <div class="container hero__inner hero__inner--v2">
+          <div class="hero__text hero__text--v2">
+            <p class="hero__eyebrow">Industrial Engineering • University at Buffalo</p>
 
-        <div class="container hero__inner hero__inner--premium">
-          <div class="hero__text hero__text--premium">
-            <p class="hero__kicker">Industrial Engineering • Lean • Analytics</p>
-
-            <h1 class="hero__headline">
-              Hi, I’m <span class="accent accent--shine">Paul Poleon Jr</span>.
+            <h1 class="hero__title">
+              Paul <span class="accent">Poleon Jr</span>
             </h1>
 
-            <p class="lead lead--premium">
-              I help turn messy processes into clean, measurable improvements — using Lean thinking, data, and strong execution.
+            <p class="hero__subtitle">
+              I’m an Industrial Engineering student focused on <strong>Lean improvement</strong>,
+              <strong>operations</strong>, and <strong>analytics</strong>—turning messy processes into clear,
+              measurable results.
             </p>
 
-            <div class="hero__chips" aria-label="Core focus areas">
-              <span class="chip-pill">Lean / Continuous Improvement</span>
-              <span class="chip-pill">Data Analysis</span>
-              <span class="chip-pill">Operations & Systems</span>
-            </div>
-
-            <div class="cta cta--premium">
-              <a class="btn btn--primary" href="/projects/">Explore my work →</a>
+            <div class="cta cta--v2">
+              <a class="btn" href="/projects/">View Projects</a>
               <a class="btn btn--ghost" href="assets/resume.pdf" target="_blank" rel="noopener">
-                Download resume (PDF)
+                Download Resume
               </a>
             </div>
 
-            <div class="hero__cred">
-              <span class="cred-badge">Eagle Scout</span>
-              <span class="cred-dot">•</span>
-              <span class="cred-badge">Geek Squad Advanced Repair Agent</span>
-              <span class="cred-dot">•</span>
-              <span class="cred-badge">Seeking Summer Internship</span>
+            <div class="hero__meta">
+              <div class="meta-pill">
+                <div class="meta-pill__k">Location</div>
+                <div class="meta-pill__v">Buffalo, NY</div>
+              </div>
+              <div class="meta-pill">
+                <div class="meta-pill__k">Seeking</div>
+                <div class="meta-pill__v">Summer Internship</div>
+              </div>
+              <div class="meta-pill">
+                <div class="meta-pill__k">Focus</div>
+                <div class="meta-pill__v">Lean • Ops • Analytics</div>
+              </div>
             </div>
           </div>
 
-          <aside class="hero__stack" aria-label="Highlights">
-            <div class="stack-card stack-card--top">
-              <div class="stack-card__title">Quick Facts</div>
-              <ul class="stack-list">
-                <li><span>School</span><strong>University at Buffalo</strong></li>
-                <li><span>Major</span><strong>Industrial Engineering</strong></li>
-                <li><span>Location</span><strong>Buffalo, NY</strong></li>
-                <li><span>Interests</span><strong>Lean, Ops, Analytics</strong></li>
-              </ul>
-            </div>
+          <!-- Right card (clean + compact) -->
+          <aside class="hero__card hero__card--v2" aria-label="Quick facts">
+            <div class="card card--v2">
+              <div class="card__title">At a glance</div>
 
-            <div class="stack-card stack-card--mid">
-              <div class="stack-card__title">Currently</div>
-              <p class="stack-card__text">
-                Building a portfolio of projects with measurable results and clean writeups.
-              </p>
-              <div class="stack-mini">
-                <span class="mini-pill">Open to internships</span>
-                <span class="mini-pill">Process mapping</span>
-                <span class="mini-pill">Modeling</span>
+              <div class="stats">
+                <div class="stat">
+                  <div class="stat__k">Major</div>
+                  <div class="stat__v">Industrial Engineering</div>
+                </div>
+                <div class="stat">
+                  <div class="stat__k">School</div>
+                  <div class="stat__v">University at Buffalo</div>
+                </div>
+                <div class="stat">
+                  <div class="stat__k">Strengths</div>
+                  <div class="stat__v">Process + People + Data</div>
+                </div>
               </div>
-            </div>
 
-            <div class="stack-card stack-card--bot">
-              <div class="stack-card__title">Tools</div>
-              <div class="tools-row">
-                <span class="tool">Excel</span>
-                <span class="tool">R</span>
-                <span class="tool">SolidWorks</span>
-                <span class="tool">Stats</span>
+              <div class="card__note muted">
+                Fastest way to see my work: start with Projects.
               </div>
             </div>
           </aside>
         </div>
+      </section>
 
-        <div class="hero__scroll" aria-hidden="true">
-          <span class="scroll-dot"></span>
-          <span class="scroll-text">Scroll</span>
+      <!-- WHAT I DO -->
+      <section class="section section--tight">
+        <div class="container">
+          <div class="section__head">
+            <div>
+              <h2>What I do</h2>
+              <p class="muted">The areas I like working in (and what my projects reflect).</p>
+            </div>
+          </div>
+
+          <div class="grid grid--3">
+            <div class="panel panel--v2">
+              <h3>Lean & Operations</h3>
+              <p class="muted">
+                Process mapping, identifying waste, improving flow, and creating systems teams can actually run.
+              </p>
+            </div>
+
+            <div class="panel panel--v2">
+              <h3>Analytics</h3>
+              <p class="muted">
+                Cleaning data, finding drivers, building models, and explaining results clearly (Excel / R).
+              </p>
+            </div>
+
+            <div class="panel panel--v2">
+              <h3>Design & Execution</h3>
+              <p class="muted">
+                CAD + engineering communication—turning ideas into clear drawings, prototypes, and deliverables.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- =========================
-           CONTACT
-      ========================== -->
-      <section id="contact" class="section">
+      <!-- FEATURED PROJECTS -->
+      <section class="section section--alt section--tight">
+        <div class="container">
+          <div class="section__head">
+            <div>
+              <h2>Featured work</h2>
+              <p class="muted">A quick preview — the Projects page has the full library.</p>
+            </div>
+            <a class="btn btn--ghost" href="/projects/">See all →</a>
+          </div>
+
+          <div class="cards cards--featured">
+            <article class="project project--featured">
+              <h3>Predicting Smartphone Prices</h3>
+              <p class="muted">
+                Built a regression model in R to identify price drivers and predict listings from specs + ratings.
+              </p>
+              <ul class="tags">
+                <li>R</li><li>EDA</li><li>Regression</li>
+              </ul>
+              <a class="link" href="/projects/" aria-label="Go to Projects">View in Projects →</a>
+            </article>
+
+            <article class="project project--featured">
+              <h3>PS5 DualSense Ergonomic Evaluation</h3>
+              <p class="muted">
+                Human factors study with task performance + comfort/fatigue surveys across hand sizes.
+              </p>
+              <ul class="tags">
+                <li>Human Factors</li><li>Study Design</li><li>Analysis</li>
+              </ul>
+              <a class="link" href="/projects/" aria-label="Go to Projects">View in Projects →</a>
+            </article>
+
+            <article class="project project--featured">
+              <h3>ADA Pool Lift Design</h3>
+              <p class="muted">
+                Engineering design work focused on safety, constraints, and practical usability.
+              </p>
+              <ul class="tags">
+                <li>Design</li><li>Statics</li><li>CAD</li>
+              </ul>
+              <a class="link" href="/projects/" aria-label="Go to Projects">View in Projects →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="section section--tight">
         <div class="container">
           <h2>Contact</h2>
-          <p>Let’s connect and discuss opportunities.</p>
+          <p class="muted">Best way to reach me is email. I reply quickly.</p>
 
           <div class="contact">
             <a class="btn" href="mailto:ppoleonjr@gmail.com">Email me</a>
