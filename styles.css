@@ -1369,3 +1369,103 @@ html, body { overflow-x: hidden; }
   .skills-grid{ grid-template-columns: 1fr; }
   .coursework-grid{ grid-template-columns: 1fr; }
 }
+
+/* =========================================================
+   CASE STUDY TEMPLATE (project detail pages)
+========================================================= */
+
+.case-study-nav{ margin: 0 0 8px; }
+
+.case-study-section{ padding: 40px 0; }
+.case-study-section:first-of-type{ padding-top: 0; }
+.case-study-section h2{
+  font-size: 1.5rem;
+  margin: 0 0 14px;
+}
+
+.case-study-body p{
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 72ch;
+  margin: 0 0 12px;
+}
+.case-study-body p:last-child{ margin-bottom: 0; }
+
+.case-study-body ul{
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  display: grid;
+  gap: 8px;
+  max-width: 72ch;
+}
+
+/* Quantified-result callout */
+.result-callout{
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+  box-shadow: var(--shadow);
+  padding: 20px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.result-callout__stat{
+  display: grid;
+  gap: 4px;
+}
+.result-callout__value{
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--text);
+}
+.result-callout__label{
+  color: var(--muted);
+  font-size: .92rem;
+}
+.result-callout__note{
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: .85rem;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+
+/* Visual evidence placeholders */
+.evidence-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.evidence-placeholder{
+  border: 1px dashed rgba(255,255,255,0.22);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.02);
+  padding: 22px 16px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  color: var(--muted);
+}
+.evidence-placeholder__icon{
+  font-size: 1.6rem;
+  opacity: .6;
+}
+.evidence-placeholder__label{
+  font-weight: 700;
+  color: rgba(255,255,255,0.82);
+  font-size: .92rem;
+}
+.evidence-placeholder__note{
+  font-size: .82rem;
+}
+
+.case-study-footer-cta{
+  margin-top: 8px;
+}
