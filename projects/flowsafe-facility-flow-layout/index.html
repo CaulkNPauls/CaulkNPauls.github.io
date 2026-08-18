@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Case study: a connected digital pressure-testing and reporting system built for FlowSafe / Dresser Utility Solutions by Paul Poleon Jr."
+      content="Case study: a facility material-flow and layout analysis for FlowSafe / Dresser Utility Solutions by Paul Poleon Jr."
     />
-    <title>Digital Pressure-Testing System | Paul Poleon Jr</title>
+    <title>Facility Material Flow &amp; Layout Analysis | Paul Poleon Jr</title>
 
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Digital Pressure-Testing System | Paul Poleon Jr" />
+    <meta property="og:title" content="Facility Material Flow & Layout Analysis | Paul Poleon Jr" />
     <meta
       property="og:description"
-      content="Case study: a connected digital pressure-testing and reporting system built for FlowSafe / Dresser Utility Solutions by Paul Poleon Jr."
+      content="Case study: a facility material-flow and layout analysis for FlowSafe / Dresser Utility Solutions by Paul Poleon Jr."
     />
-    <meta property="og:url" content="https://paulpoleon.com/projects/flowsafe-pressure-testing-system/" />
+    <meta property="og:url" content="https://paulpoleon.com/projects/flowsafe-facility-flow-layout/" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -113,12 +113,12 @@
             <div class="page-hero__copy">
               <p class="page-hero__eyebrow">FlowSafe / Dresser Utility Solutions</p>
               <h1 class="page-hero__title">
-                Digital Pressure-Testing System
+                Facility Material Flow &amp; Layout Analysis
               </h1>
               <p class="page-hero__subtitle muted">
-                A connected digital pressure-testing and reporting ecosystem — from operator
-                station to manager dashboard — built to replace paper-based valve testing with
-                a guided, centrally recorded digital workflow.
+                Two years of operational data and a scaled AutoCAD facility model, turned into a
+                quantified case for how FlowSafe's production, cleaning, testing, and storage
+                areas should be arranged.
               </p>
 
               <div class="cta page-hero__cta">
@@ -143,12 +143,12 @@
         <div class="container case-study-body">
           <h2>Problem</h2>
           <p>
-            Valve pressure testing at FlowSafe relied on physical dial gauges and manual,
-            paper-based recordkeeping. Test results — including the three-pop and bubble-test
-            procedures used to verify a valve — existed only as handwritten records tied to a
-            single physical location, with no centralized digital record, no stored pressure
-            trace, and no live visibility into what was happening on the test stands from
-            outside the test area.
+            FlowSafe's facility layout — how production, cleaning, testing, and point-of-use
+            storage areas sit relative to one another — had developed over time without a
+            data-driven relayout. No one had a quantified picture of how much material and
+            people movement the existing layout actually required, so there was no basis for
+            saying which layout changes would meaningfully help versus which would just move
+            the problem around.
           </p>
         </div>
       </section>
@@ -158,12 +158,11 @@
         <div class="container case-study-body">
           <h2>Why it mattered</h2>
           <p>
-            Every test still required a technician to run the procedure, then separately
-            transcribe results into paperwork that fed the Functional Test Report (FTR) and
-            other downstream documentation. That duplication — testing, then documenting the
-            test — consumed real technician and administrative time on every valve that shipped,
-            and gave managers no way to see test-stand status without physically walking the
-            floor.
+            Every job that moves through the facility pays a travel cost between areas —
+            production to cleaning, cleaning to testing, testing to storage, and back — and that
+            cost repeats on every job, every day. Without a quantified baseline, layout decisions
+            were effectively guesses. Establishing a real, data-backed measure of transportation
+            effort was the precondition for making a defensible case for any layout change at all.
           </p>
         </div>
       </section>
@@ -173,10 +172,10 @@
         <div class="container case-study-body">
           <h2>Constraints</h2>
           <ul>
-            <li>Had to work on the shop floor, integrated with existing physical digital pressure gauges rather than replacing them.</li>
-            <li>Had to preserve FlowSafe's existing test procedures (three-pop testing, bubble-test workflows) rather than change the underlying engineering process.</li>
-            <li>Had to support the existing Functional Test Report (FTR) output that downstream documentation depends on.</li>
-            <li>Full ERP integration was out of scope — the system needed to lay a read-only foundation for a future Epicor integration, not replace or write into Epicor.</li>
+            <li>Had to work within FlowSafe's existing building footprint — this is a relayout study, not new construction.</li>
+            <li>Had to preserve required adjacencies between production, cleaning, and testing rather than optimize travel distance in isolation.</li>
+            <li>Recommendations needed to be justified by a quantified model, not intuition, to be actionable for management.</li>
+            <li>Needed to hold up against two years of real operational variation, not a single snapshot in time.</li>
           </ul>
         </div>
       </section>
@@ -186,9 +185,9 @@
         <div class="container case-study-body">
           <h2>My role</h2>
           <p>
-            I developed the system as my project during my Industrial Engineering internship at
-            FlowSafe / Dresser Utility Solutions — from the operator-station hardware and guided
-            testing workflow through the centralized data model and the manager-facing dashboard.
+            I analyzed the operational data, built the scaled AutoCAD facility model, and
+            developed the transportation-effort analysis independently as my project during my
+            Industrial Engineering internship at FlowSafe / Dresser Utility Solutions.
           </p>
         </div>
       </section>
@@ -198,10 +197,10 @@
         <div class="container case-study-body">
           <h2>Data &amp; engineering approach</h2>
           <ul>
-            <li>Raspberry Pi operator stations at the test stands, connected to the physical digital pressure gauges for live pressure capture during a test.</li>
-            <li>Guided, on-screen operator workflows that walk a technician through the correct testing sequence — including the three-pop and bubble-test procedures — instead of relying on memory or a paper checklist.</li>
-            <li>Every test tagged with operator, job, and valve identification, and its full pressure trace stored against a centralized test record rather than a handwritten sheet.</li>
-            <li>A manager-facing dashboard giving live visibility into test-stand status, independent of walking the floor.</li>
+            <li>Built a scaled AutoCAD model of the facility covering 104 distinct activity locations.</li>
+            <li>Constructed the full set of origin-destination travel paths between those locations from two years of production/operational data — 10,816 paths in total.</li>
+            <li>Applied a distance × movement-frequency transportation-effort model to quantify how much effort the current layout requires, giving a current-state baseline to test future layouts against.</li>
+            <li>Used the Valve Decoder database to close data gaps in the historical valve-shipment records feeding this analysis.</li>
           </ul>
         </div>
       </section>
@@ -211,13 +210,12 @@
         <div class="container case-study-body">
           <h2>Development process</h2>
           <p>
-            I built the system incrementally on the shop floor: standing up an operator station
-            and gauge integration first, then layering in the guided workflow, the centralized
-            test-record database and pressure-trace storage, and the manager dashboard on top of
-            that same data. Functional Test Report support and the read-only Epicor integration
-            foundation were built to sit on the same central record, so the live test data,
-            the FTR, and the future ERP link all trace back to one source instead of three
-            separate, disconnected records.
+            I built the current-state model first — mapping all 104 activity locations and
+            calculating baseline transportation effort from the historical travel-path data —
+            then iterated on layout scenarios, testing changes to production-area placement,
+            cleaning-area placement, testing-capacity allocation, and point-of-use storage
+            locations, recalculating modeled transportation effort for each scenario until
+            arriving at a recommended future-state layout.
           </p>
         </div>
       </section>
@@ -227,12 +225,11 @@
         <div class="container case-study-body">
           <h2>Solution</h2>
           <p>
-            The result is a connected pressure-testing ecosystem: operators run guided tests at
-            Raspberry Pi stations wired to the physical digital gauges, every test is captured
-            with its full pressure trace and operator/job/valve identification, and that record
-            is centralized rather than sitting on paper. Managers get live visibility into
-            test-stand activity, the Functional Test Report draws from the same recorded data,
-            and the system has a read-only foundation in place for a future Epicor connection.
+            A recommended future-state facility layout with specific changes to production-area
+            organization, cleaning-area placement, testing-capacity allocation, and point-of-use
+            storage locations — every recommendation justified by the same distance × frequency
+            effort model used to establish the current-state baseline, so the comparison between
+            current and future state is apples-to-apples.
           </p>
         </div>
       </section>
@@ -243,12 +240,17 @@
           <h2>Quantified result</h2>
           <div class="result-callout">
             <div class="result-callout__stat">
-              <div class="result-callout__value">~1,453 hrs/yr</div>
-              <div class="result-callout__label">Projected labor-hours recoverable across testing, documentation, and admin work</div>
+              <div class="result-callout__value">18.75%</div>
+              <div class="result-callout__label">Reduction in modeled transportation effort, current state vs. recommended future state</div>
+            </div>
+            <div class="result-callout__stat">
+              <div class="result-callout__value">~1 year</div>
+              <div class="result-callout__label">Planning-level payback for the recommended changes</div>
             </div>
             <p class="result-callout__note">
-              This is a planning-level estimate presented internally at FlowSafe, not an
-              audited or realized figure. No internal dollar-value estimates are published here.
+              18.75% is a reduction in modeled <strong>transportation effort</strong> (distance ×
+              movement frequency) — not a direct cost or dollar-value reduction. Payback is a
+              planning-level estimate, not an audited figure.
             </p>
           </div>
         </div>
@@ -259,18 +261,41 @@
         <div class="container">
           <h2>Visual evidence</h2>
           <p class="muted" style="margin: 0 0 16px; max-width: 72ch;">
-            Placeholders below — sanitized screenshots and photos to be added.
+            Placeholders below — sanitized AutoCAD exports and diagrams to be added.
           </p>
           <div class="evidence-grid">
             <div class="evidence-placeholder">
               <div class="evidence-placeholder__icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="4" width="18" height="13" rx="2" />
-                  <path d="M8 20h8M12 17v3" />
+                  <rect x="3" y="3" width="18" height="18" rx="1" />
+                  <path d="M3 9h18M9 21V9" />
                 </svg>
               </div>
-              <div class="evidence-placeholder__label">Operator station UI</div>
-              <div class="evidence-placeholder__note">Guided test workflow screenshot</div>
+              <div class="evidence-placeholder__label">Current-state layout</div>
+              <div class="evidence-placeholder__note">AutoCAD facility model, sanitized</div>
+            </div>
+            <div class="evidence-placeholder">
+              <div class="evidence-placeholder__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="1" />
+                  <path d="M3 9h18M15 21V9" />
+                </svg>
+              </div>
+              <div class="evidence-placeholder__label">Recommended future-state layout</div>
+              <div class="evidence-placeholder__note">AutoCAD facility model, sanitized</div>
+            </div>
+            <div class="evidence-placeholder">
+              <div class="evidence-placeholder__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="6" cy="6" r="2" />
+                  <circle cx="18" cy="8" r="2" />
+                  <circle cx="9" cy="18" r="2" />
+                  <circle cx="18" cy="18" r="2" />
+                  <path d="M7.7 7.1 16.3 8M10.5 16.8 16.5 9.5M10.5 17.5l6-.4" />
+                </svg>
+              </div>
+              <div class="evidence-placeholder__label">Travel-path / flow diagram</div>
+              <div class="evidence-placeholder__note">Origin-destination flow visualization</div>
             </div>
             <div class="evidence-placeholder">
               <div class="evidence-placeholder__icon" aria-hidden="true">
@@ -278,28 +303,8 @@
                   <path d="M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6" />
                 </svg>
               </div>
-              <div class="evidence-placeholder__label">Manager dashboard</div>
-              <div class="evidence-placeholder__note">Live test-stand visibility view</div>
-            </div>
-            <div class="evidence-placeholder">
-              <div class="evidence-placeholder__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 17l4-7 3 4 4-9 3 6 4-3" />
-                </svg>
-              </div>
-              <div class="evidence-placeholder__label">Pressure trace</div>
-              <div class="evidence-placeholder__note">Example recorded test trace</div>
-            </div>
-            <div class="evidence-placeholder">
-              <div class="evidence-placeholder__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="7" width="18" height="13" rx="2" />
-                  <path d="M8 7l1.4-2h5.2L16 7" />
-                  <circle cx="12" cy="13.5" r="3.3" />
-                </svg>
-              </div>
-              <div class="evidence-placeholder__label">Test-stand photo</div>
-              <div class="evidence-placeholder__note">Raspberry Pi station in place, sanitized</div>
+              <div class="evidence-placeholder__label">Effort comparison chart</div>
+              <div class="evidence-placeholder__note">Current vs. future modeled effort</div>
             </div>
           </div>
         </div>
@@ -310,15 +315,13 @@
         <div class="container">
           <h2>Technologies &amp; tools</h2>
           <ul class="tags">
-            <li>Raspberry Pi</li>
-            <li>Digital pressure gauge integration</li>
-            <li>Centralized test-record database</li>
-            <li>Live manager dashboard</li>
-            <li>Functional Test Report (FTR) support</li>
-            <li>Read-only Epicor integration foundation</li>
+            <li>AutoCAD</li>
+            <li>Facility layout modeling</li>
+            <li>Distance &times; frequency effort analysis</li>
+            <li>Two years of operational data</li>
           </ul>
           <p class="muted small" style="margin-top: 12px;">
-            [Placeholder — add the specific programming language, framework, and database used.]
+            [Placeholder — add the specific data-analysis tools/software used to process the two years of operational data (e.g. Excel, a specific script/language).]
           </p>
         </div>
       </section>
@@ -329,9 +332,9 @@
           <h2>What I learned</h2>
           <p>
             [Placeholder — your own engineering takeaway from this project: what you'd tell a
-            recruiter about what building this taught you, e.g. about designing for how
-            operators actually work, or about connecting shop-floor data to management
-            visibility.]
+            recruiter about what this analysis taught you, e.g. about quantifying a problem
+            before proposing a solution, or about balancing a pure optimization model against
+            real operational constraints.]
           </p>
         </div>
       </section>
@@ -341,8 +344,8 @@
           <div>
             <div class="card__title">More FlowSafe work</div>
             <p class="muted" style="margin:0;">
-              This is one of three FlowSafe projects — see the Facility Material Flow &amp;
-              Layout Analysis and the Valve Decoder too.
+              This is one of three FlowSafe projects — see the Digital Pressure-Testing System
+              and the Valve Decoder too.
             </p>
           </div>
           <div class="experience-cta__actions">

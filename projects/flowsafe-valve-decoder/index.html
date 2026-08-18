@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Case study: a connected digital pressure-testing and reporting system built for FlowSafe / Dresser Utility Solutions by Paul Poleon Jr."
+      content="Case study: the Valve Decoder, a Python application built for FlowSafe / Dresser Utility Solutions by Paul Poleon Jr."
     />
-    <title>Digital Pressure-Testing System | Paul Poleon Jr</title>
+    <title>Valve Decoder | Paul Poleon Jr</title>
 
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Digital Pressure-Testing System | Paul Poleon Jr" />
+    <meta property="og:title" content="Valve Decoder | Paul Poleon Jr" />
     <meta
       property="og:description"
-      content="Case study: a connected digital pressure-testing and reporting system built for FlowSafe / Dresser Utility Solutions by Paul Poleon Jr."
+      content="Case study: the Valve Decoder, a Python application built for FlowSafe / Dresser Utility Solutions by Paul Poleon Jr."
     />
-    <meta property="og:url" content="https://paulpoleon.com/projects/flowsafe-pressure-testing-system/" />
+    <meta property="og:url" content="https://paulpoleon.com/projects/flowsafe-valve-decoder/" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -113,12 +113,11 @@
             <div class="page-hero__copy">
               <p class="page-hero__eyebrow">FlowSafe / Dresser Utility Solutions</p>
               <h1 class="page-hero__title">
-                Digital Pressure-Testing System
+                Valve Decoder
               </h1>
               <p class="page-hero__subtitle muted">
-                A connected digital pressure-testing and reporting ecosystem — from operator
-                station to manager dashboard — built to replace paper-based valve testing with
-                a guided, centrally recorded digital workflow.
+                A Python application that turns FlowSafe's historical PDF pick-sheets into a
+                structured, searchable engineering database.
               </p>
 
               <div class="cta page-hero__cta">
@@ -143,12 +142,9 @@
         <div class="container case-study-body">
           <h2>Problem</h2>
           <p>
-            Valve pressure testing at FlowSafe relied on physical dial gauges and manual,
-            paper-based recordkeeping. Test results — including the three-pop and bubble-test
-            procedures used to verify a valve — existed only as handwritten records tied to a
-            single physical location, with no centralized digital record, no stored pressure
-            trace, and no live visibility into what was happening on the test stands from
-            outside the test area.
+            FlowSafe's historical shipped-valve records existed only as PDF pick-sheets — a
+            format that's fine for a single job, but effectively unusable as a data source once
+            you need to search, aggregate, or analyze across thousands of them.
           </p>
         </div>
       </section>
@@ -158,12 +154,11 @@
         <div class="container case-study-body">
           <h2>Why it mattered</h2>
           <p>
-            Every test still required a technician to run the procedure, then separately
-            transcribe results into paperwork that fed the Functional Test Report (FTR) and
-            other downstream documentation. That duplication — testing, then documenting the
-            test — consumed real technician and administrative time on every valve that shipped,
-            and gave managers no way to see test-stand status without physically walking the
-            floor.
+            The facility material-flow analysis needed reliable historical valve-shipment data
+            to calculate accurate travel-path frequencies between facility locations. That data
+            existed, but it was locked inside thousands of individual PDF documents with no
+            structured or searchable form — directly blocking the facility study until a real
+            dataset existed.
           </p>
         </div>
       </section>
@@ -173,10 +168,9 @@
         <div class="container case-study-body">
           <h2>Constraints</h2>
           <ul>
-            <li>Had to work on the shop floor, integrated with existing physical digital pressure gauges rather than replacing them.</li>
-            <li>Had to preserve FlowSafe's existing test procedures (three-pop testing, bubble-test workflows) rather than change the underlying engineering process.</li>
-            <li>Had to support the existing Functional Test Report (FTR) output that downstream documentation depends on.</li>
-            <li>Full ERP integration was out of scope — the system needed to lay a read-only foundation for a future Epicor integration, not replace or write into Epicor.</li>
+            <li>No clean structured export of the historical pick-sheet data existed — only the original PDFs.</li>
+            <li>The extracted data needed to be accurate enough to support a real quantitative analysis, not just a rough approximation.</li>
+            <li>Needed to be general enough to stay useful as a reference tool after the immediate need (the facility study) was done.</li>
           </ul>
         </div>
       </section>
@@ -186,9 +180,8 @@
         <div class="container case-study-body">
           <h2>My role</h2>
           <p>
-            I developed the system as my project during my Industrial Engineering internship at
-            FlowSafe / Dresser Utility Solutions — from the operator-station hardware and guided
-            testing workflow through the centralized data model and the manager-facing dashboard.
+            I built the Valve Decoder independently as my project during my Industrial
+            Engineering internship at FlowSafe / Dresser Utility Solutions.
           </p>
         </div>
       </section>
@@ -198,10 +191,9 @@
         <div class="container case-study-body">
           <h2>Data &amp; engineering approach</h2>
           <ul>
-            <li>Raspberry Pi operator stations at the test stands, connected to the physical digital pressure gauges for live pressure capture during a test.</li>
-            <li>Guided, on-screen operator workflows that walk a technician through the correct testing sequence — including the three-pop and bubble-test procedures — instead of relying on memory or a paper checklist.</li>
-            <li>Every test tagged with operator, job, and valve identification, and its full pressure trace stored against a centralized test record rather than a handwritten sheet.</li>
-            <li>A manager-facing dashboard giving live visibility into test-stand status, independent of walking the floor.</li>
+            <li>Built a Python application to parse historical PDF pick-sheets and extract structured records.</li>
+            <li>Processed 19,567 shipped-valve records covering 1,951 unique valve models.</li>
+            <li>Structured the extracted data into a searchable database, rather than a one-off export.</li>
           </ul>
         </div>
       </section>
@@ -211,13 +203,10 @@
         <div class="container case-study-body">
           <h2>Development process</h2>
           <p>
-            I built the system incrementally on the shop floor: standing up an operator station
-            and gauge integration first, then layering in the guided workflow, the centralized
-            test-record database and pressure-trace storage, and the manager dashboard on top of
-            that same data. Functional Test Report support and the read-only Epicor integration
-            foundation were built to sit on the same central record, so the live test data,
-            the FTR, and the future ERP link all trace back to one source instead of three
-            separate, disconnected records.
+            I built the PDF-parsing and data-extraction pipeline first, validated the extracted
+            records for accuracy against the source documents, then structured the output into a
+            searchable database — usable both for the immediate facility material-flow analysis
+            and as a standalone engineering reference tool afterward.
           </p>
         </div>
       </section>
@@ -227,12 +216,10 @@
         <div class="container case-study-body">
           <h2>Solution</h2>
           <p>
-            The result is a connected pressure-testing ecosystem: operators run guided tests at
-            Raspberry Pi stations wired to the physical digital gauges, every test is captured
-            with its full pressure trace and operator/job/valve identification, and that record
-            is centralized rather than sitting on paper. Managers get live visibility into
-            test-stand activity, the Functional Test Report draws from the same recorded data,
-            and the system has a read-only foundation in place for a future Epicor connection.
+            A Python application that converts FlowSafe's historical PDF pick-sheets into a
+            structured, searchable database of shipped-valve records — closing the data gap that
+            was blocking the facility material-flow study, and outliving that original purpose as
+            a reusable production/engineering reference tool.
           </p>
         </div>
       </section>
@@ -243,12 +230,16 @@
           <h2>Quantified result</h2>
           <div class="result-callout">
             <div class="result-callout__stat">
-              <div class="result-callout__value">~1,453 hrs/yr</div>
-              <div class="result-callout__label">Projected labor-hours recoverable across testing, documentation, and admin work</div>
+              <div class="result-callout__value">19,567</div>
+              <div class="result-callout__label">Shipped-valve records structured from historical PDF pick-sheets</div>
+            </div>
+            <div class="result-callout__stat">
+              <div class="result-callout__value">1,951</div>
+              <div class="result-callout__label">Unique valve models covered</div>
             </div>
             <p class="result-callout__note">
-              This is a planning-level estimate presented internally at FlowSafe, not an
-              audited or realized figure. No internal dollar-value estimates are published here.
+              This dataset directly closed the data gap that was blocking the Facility Material
+              Flow &amp; Layout Analysis, and has since been used as a standalone reference tool.
             </p>
           </div>
         </div>
@@ -259,9 +250,19 @@
         <div class="container">
           <h2>Visual evidence</h2>
           <p class="muted" style="margin: 0 0 16px; max-width: 72ch;">
-            Placeholders below — sanitized screenshots and photos to be added.
+            Placeholders below — sanitized screenshots to be added.
           </p>
           <div class="evidence-grid">
+            <div class="evidence-placeholder">
+              <div class="evidence-placeholder__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="3" width="12" height="16" rx="1" />
+                  <path d="M8 8h4M8 11h4M8 14h2" />
+                </svg>
+              </div>
+              <div class="evidence-placeholder__label">Source pick-sheet</div>
+              <div class="evidence-placeholder__note">Example historical PDF, sanitized</div>
+            </div>
             <div class="evidence-placeholder">
               <div class="evidence-placeholder__icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -269,37 +270,18 @@
                   <path d="M8 20h8M12 17v3" />
                 </svg>
               </div>
-              <div class="evidence-placeholder__label">Operator station UI</div>
-              <div class="evidence-placeholder__note">Guided test workflow screenshot</div>
+              <div class="evidence-placeholder__label">Application interface</div>
+              <div class="evidence-placeholder__note">Valve Decoder UI screenshot</div>
             </div>
             <div class="evidence-placeholder">
               <div class="evidence-placeholder__icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6" />
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m21 21-4.3-4.3" />
                 </svg>
               </div>
-              <div class="evidence-placeholder__label">Manager dashboard</div>
-              <div class="evidence-placeholder__note">Live test-stand visibility view</div>
-            </div>
-            <div class="evidence-placeholder">
-              <div class="evidence-placeholder__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 17l4-7 3 4 4-9 3 6 4-3" />
-                </svg>
-              </div>
-              <div class="evidence-placeholder__label">Pressure trace</div>
-              <div class="evidence-placeholder__note">Example recorded test trace</div>
-            </div>
-            <div class="evidence-placeholder">
-              <div class="evidence-placeholder__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="7" width="18" height="13" rx="2" />
-                  <path d="M8 7l1.4-2h5.2L16 7" />
-                  <circle cx="12" cy="13.5" r="3.3" />
-                </svg>
-              </div>
-              <div class="evidence-placeholder__label">Test-stand photo</div>
-              <div class="evidence-placeholder__note">Raspberry Pi station in place, sanitized</div>
+              <div class="evidence-placeholder__label">Search / database view</div>
+              <div class="evidence-placeholder__note">Structured, searchable record view</div>
             </div>
           </div>
         </div>
@@ -310,15 +292,12 @@
         <div class="container">
           <h2>Technologies &amp; tools</h2>
           <ul class="tags">
-            <li>Raspberry Pi</li>
-            <li>Digital pressure gauge integration</li>
-            <li>Centralized test-record database</li>
-            <li>Live manager dashboard</li>
-            <li>Functional Test Report (FTR) support</li>
-            <li>Read-only Epicor integration foundation</li>
+            <li>Python</li>
+            <li>PDF data extraction</li>
+            <li>Structured / searchable database</li>
           </ul>
           <p class="muted small" style="margin-top: 12px;">
-            [Placeholder — add the specific programming language, framework, and database used.]
+            [Placeholder — add the specific PDF-parsing library and database technology used.]
           </p>
         </div>
       </section>
@@ -329,9 +308,8 @@
           <h2>What I learned</h2>
           <p>
             [Placeholder — your own engineering takeaway from this project: what you'd tell a
-            recruiter about what building this taught you, e.g. about designing for how
-            operators actually work, or about connecting shop-floor data to management
-            visibility.]
+            recruiter about what building this taught you, e.g. about unlocking legacy data
+            sources, or about building a tool that outlives its original one-off purpose.]
           </p>
         </div>
       </section>
@@ -341,8 +319,8 @@
           <div>
             <div class="card__title">More FlowSafe work</div>
             <p class="muted" style="margin:0;">
-              This is one of three FlowSafe projects — see the Facility Material Flow &amp;
-              Layout Analysis and the Valve Decoder too.
+              This is one of three FlowSafe projects — see the Digital Pressure-Testing System
+              and the Facility Material Flow &amp; Layout Analysis too.
             </p>
           </div>
           <div class="experience-cta__actions">
