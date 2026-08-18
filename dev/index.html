@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Site Admin | Paul Poleon Jr</title>
+  <link rel="icon" href="../assets/logo.website.png">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="page-admin">
+<div class="admin-shell">
+
+  <header class="admin-header">
+    <div>
+      <div class="admin-header__title">Site admin</div>
+      <div class="admin-header__sub">Edit Projects, Experience, Skills, and Photos — changes commit straight to the live site.</div>
+    </div>
+    <button class="btn btn--ghost admin-signout" id="signOutBtn" type="button" hidden>Sign out</button>
+  </header>
+
+  <!-- ===== Token gate ===== -->
+  <section class="card admin-gate" id="gateView">
+    <div class="card__title">Connect your GitHub account</div>
+    <p class="muted">
+      This page can only save changes if you provide a GitHub personal access token scoped to
+      <strong>just this repository</strong> (<code>CaulkNPauls/CaulkNPauls.github.io</code>), with
+      <strong>Contents: Read and write</strong> permission and nothing else. It's stored only in this
+      browser (never sent anywhere but <code>api.github.com</code>) and never committed to the site.
+    </p>
+    <ol class="admin-gate__steps muted">
+      <li>GitHub → Settings → Developer settings → <strong>Fine-grained tokens</strong> → Generate new token</li>
+      <li>Resource owner: <strong>CaulkNPauls</strong> · Repository access: <strong>Only select repositories</strong> → this repo</li>
+      <li>Permissions → Repository permissions → <strong>Contents: Read and write</strong></li>
+      <li>Generate, copy the token, and paste it below</li>
+    </ol>
+    <div class="admin-gate__row">
+      <input id="tokenInput" class="input" type="password" placeholder="github_pat_…" autocomplete="off">
+      <button class="btn" id="connectBtn" type="button">Connect</button>
+    </div>
+    <p class="admin-gate__status muted" id="gateStatus"></p>
+  </section>
+
+  <!-- ===== Admin app (shown once connected) ===== -->
+  <div id="appView" hidden>
+
+    <nav class="admin-tabs" aria-label="Admin sections">
+      <button class="admin-tab is-active" data-tab="projects" type="button">Projects</button>
+      <button class="admin-tab" data-tab="experience" type="button">Experience</button>
+      <button class="admin-tab" data-tab="skills" type="button">Skills</button>
+      <button class="admin-tab" data-tab="photos" type="button">Photos</button>
+    </nav>
+
+    <p class="admin-savebar muted" id="saveStatus"></p>
+
+    <!-- Projects -->
+    <section class="admin-panel is-active" id="panel-projects">
+      <div class="admin-panel__head">
+        <h2>Featured projects</h2>
+        <button class="btn" data-add="projects-featured" type="button">+ Add featured project</button>
+      </div>
+      <p class="muted small">Bigger, hand-linked case-study projects (need their own already-built case-study page).</p>
+      <div class="admin-list" id="list-projects-featured"></div>
+
+      <div class="admin-panel__head" style="margin-top:34px;">
+        <h2>Quick-view projects</h2>
+        <button class="btn" data-add="projects-quickview" type="button">+ Add project</button>
+      </div>
+      <p class="muted small">Self-contained cards with a filter/search modal — the easy way to add a new project.</p>
+      <div class="admin-list" id="list-projects-quickview"></div>
+    </section>
+
+    <!-- Experience -->
+    <section class="admin-panel" id="panel-experience">
+      <div class="admin-panel__head">
+        <h2>Experience timeline</h2>
+        <button class="btn" data-add="experience" type="button">+ Add role</button>
+      </div>
+      <p class="muted small">Shown on the homepage and on the Experience page, in this order.</p>
+      <div class="admin-list" id="list-experience"></div>
+    </section>
+
+    <!-- Skills -->
+    <section class="admin-panel" id="panel-skills">
+      <div class="admin-panel__head">
+        <h2>Core skills</h2>
+        <button class="btn" data-add="skills-core" type="button">+ Add card</button>
+      </div>
+      <div class="admin-list" id="list-skills-core"></div>
+
+      <div class="admin-panel__head" style="margin-top:34px;">
+        <h2>Coursework</h2>
+        <button class="btn" data-add="skills-coursework" type="button">+ Add card</button>
+      </div>
+      <div class="admin-list" id="list-skills-coursework"></div>
+    </section>
+
+    <!-- Photos -->
+    <section class="admin-panel" id="panel-photos">
+      <div class="admin-panel__head">
+        <h2>Photos</h2>
+      </div>
+      <p class="muted small">Upload a photo, then copy its path into an Image field on the Projects or Experience tab.</p>
+      <div class="admin-gate__row">
+        <input id="photoFile" class="input" type="file" accept="image/*">
+        <button class="btn" id="uploadPhotoBtn" type="button">Upload</button>
+      </div>
+      <p class="admin-gate__status muted" id="photoStatus"></p>
+      <div class="admin-photo-grid" id="photoGrid"></div>
+    </section>
+
+  </div>
+
+  <!-- ===== Edit/Add form modal ===== -->
+  <div class="modal" id="formModal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="true"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="formModalTitle">
+      <button class="modal__close" type="button" data-close="true" aria-label="Close">✕</button>
+      <h3 id="formModalTitle">Edit entry</h3>
+      <div id="formModalBody"></div>
+      <div class="admin-form__actions">
+        <button class="btn btn--ghost" id="formDeleteBtn" type="button" hidden>Delete</button>
+        <button class="btn" id="formSaveBtn" type="button">Save</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script src="admin.js"></script>
+</body>
+</html>
