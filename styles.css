@@ -12,11 +12,13 @@
   --muted: rgba(255,255,255,0.62);
   --border: rgba(255,255,255,0.12);
 
-  /* Accent — sampled from the logo mark (#ed2d02). Used sparingly:
+  /* Accent — a refined, desaturated rust/burnt-orange in the same family
+     as the logo mark (which is a much brighter, more saturated red-orange,
+     #ed2d02 — too "hazard sign" for sustained UI use). Used sparingly:
      emphasis, active states, data readouts — not large surfaces. */
-  --accent: #ed2d02;
-  --accent-soft: rgba(237,45,2,0.14);
-  --accent-border: rgba(237,45,2,0.45);
+  --accent: #d9491f;
+  --accent-soft: rgba(217,73,31,0.14);
+  --accent-border: rgba(217,73,31,0.45);
 
   --shadow: 0 10px 30px rgba(0,0,0,0.35);
   --radius: 12px;
@@ -1150,26 +1152,14 @@ html, body { overflow-x: hidden; }
 
 .page-hero__gridlines{
   position:absolute;
-  inset:-25%;
-  opacity:.18;
+  inset:0;
   background-image:
-    linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
-  background-size: 64px 64px;
-  transform: rotate(-7deg);
+    linear-gradient(to right, rgba(255,255,255,.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.09) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(180deg, black, transparent 90%);
+  -webkit-mask-image: linear-gradient(180deg, black, transparent 90%);
 }
-
-.page-hero__glow{
-  position:absolute;
-  width: 620px;
-  height: 620px;
-  border-radius: 999px;
-  filter: blur(60px);
-  opacity: .50;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.14), transparent 60%);
-}
-.page-hero__glow--a{ left:-220px; top:-260px; }
-.page-hero__glow--b{ right:-260px; bottom:-320px; opacity:.40; }
 
 /* Timeline v2 */
 .timeline--v2{
@@ -1519,8 +1509,14 @@ html, body { overflow-x: hidden; }
   color: var(--muted);
 }
 .evidence-placeholder__icon{
-  font-size: 1.6rem;
-  opacity: .6;
+  width: 26px;
+  height: 26px;
+  color: var(--muted);
+  opacity: .7;
+}
+.evidence-placeholder__icon svg{
+  width: 100%;
+  height: 100%;
 }
 .evidence-placeholder__label{
   font-weight: 700;
