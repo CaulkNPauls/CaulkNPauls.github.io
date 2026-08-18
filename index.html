@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -107,6 +107,7 @@
     <main id="main">
       <!-- HERO -->
       <section class="hero hero--v2">
+        <div class="hero-grid-bg" aria-hidden="true"></div>
         <div class="container hero__inner hero__inner--v2">
           <div class="hero__text hero__text--v2">
             <p class="hero__eyebrow">Industrial Engineering • University at Buffalo</p>
@@ -146,7 +147,7 @@
 
           <!-- Right card (clean + compact) -->
           <aside class="hero__card hero__card--v2" aria-label="Quick facts">
-            <div class="card card--v2">
+            <div class="card card--v2 corner-marks">
               <div class="card__title">At a glance</div>
 
               <div class="stats">
@@ -177,7 +178,7 @@
         <div class="container">
           <div class="section__head">
             <div>
-              <h2>What I do</h2>
+              <h2><span class="section-index">01</span> What I do</h2>
               <p class="muted">The areas I like working in (and what my projects reflect).</p>
             </div>
           </div>
@@ -212,14 +213,14 @@
         <div class="container">
           <div class="section__head">
             <div>
-              <h2>Featured work</h2>
+              <h2><span class="section-index">02</span> Featured work</h2>
               <p class="muted">A quick preview — the Projects page has the full library.</p>
             </div>
             <a class="btn btn--ghost" href="/projects/">See all →</a>
           </div>
 
           <div class="cards cards--featured">
-            <article class="project project--featured">
+            <article class="project project--featured corner-marks">
               <h3>Predicting Smartphone Prices</h3>
               <p class="muted">
                 Built a regression model in R to identify price drivers and predict listings from specs + ratings.
@@ -230,7 +231,7 @@
               <a class="link" href="/projects/" aria-label="Go to Projects">View in Projects →</a>
             </article>
 
-            <article class="project project--featured">
+            <article class="project project--featured corner-marks">
               <h3>PS5 DualSense Ergonomic Evaluation</h3>
               <p class="muted">
                 Human factors study with task performance + comfort/fatigue surveys across hand sizes.
@@ -241,7 +242,7 @@
               <a class="link" href="/projects/" aria-label="Go to Projects">View in Projects →</a>
             </article>
 
-            <article class="project project--featured">
+            <article class="project project--featured corner-marks">
               <h3>ADA Pool Lift Design</h3>
               <p class="muted">
                 Engineering design work focused on safety, constraints, and practical usability.
@@ -258,7 +259,7 @@
       <!-- CONTACT -->
       <section id="contact" class="section section--tight">
         <div class="container">
-          <h2>Contact</h2>
+          <h2><span class="section-index">03</span> Contact</h2>
           <p class="muted">Best way to reach me is email. I reply quickly.</p>
 
           <div class="contact">
