@@ -25,7 +25,7 @@
   --font:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
 
   /* header height (used by snap pages) */
-  --headerH: 70px;
+  --headerH: 84px;
 }
 
 /* Wider layout on large monitors */
@@ -83,6 +83,7 @@ a{ color:inherit; }
   position:sticky;
   top:0;
   z-index:50;
+  min-height:clamp(80px, 9vw, 120px);
   backdrop-filter:blur(10px);
   background:rgba(11,13,18,.65);
   border-bottom:1px solid var(--border);
@@ -91,8 +92,9 @@ a{ color:inherit; }
 .header__inner{
   display:flex;
   align-items:center;
+  justify-content:flex-start;
   gap:16px;
-  padding:14px 0;
+  padding:16px 0;
 }
 
 /* Brand (logo area) */
@@ -100,6 +102,7 @@ a{ color:inherit; }
   display:flex;
   align-items:center;
   flex:0 0 auto;
+  margin-right:auto;
 }
 
 .brand__home{
@@ -110,9 +113,9 @@ a{ color:inherit; }
 
 /* Logo (your top-left image) */
 .brand__logo{
-  width:290px;
-  height:147px;
-  max-height:none;        /* keep your big logo */
+  width:auto;
+  height:clamp(90px, 7vw, 120px);
+  max-height:none;
   object-fit:contain;
   display:block;
   transition:transform 160ms ease;
@@ -127,6 +130,7 @@ a{ color:inherit; }
   align-items:center;
   gap:16px;
   margin-left:auto; /* pushes nav + icons to the right */
+  margin-right:16px;
 }
 
 .nav__toggle{
@@ -148,8 +152,10 @@ a{ color:inherit; }
 .nav__links a{
   text-decoration:none;
   color:var(--muted);
-  padding:10px 10px;
+  padding:12px 12px;
   border-radius:12px;
+  font-size:0.98rem;
+  letter-spacing:0.01em;
 }
 .nav__links a:hover{
   color:var(--text);
@@ -160,14 +166,16 @@ a{ color:inherit; }
   display:flex;
   align-items:center;
   gap:12px;
+  margin-left:0;
+  margin-right:0;
 }
 
 .header-icons a{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:34px;
-  height:34px;
+  width:38px;
+  height:38px;
   border-radius:999px;
   color:var(--text);
   background:var(--panel);
@@ -176,8 +184,8 @@ a{ color:inherit; }
   transition:transform 160ms ease, background 160ms ease, border-color 160ms ease;
 }
 .header-icons svg{
-  width:16px;
-  height:16px;
+  width:17px;
+  height:17px;
 }
 .header-icons a:hover{
   transform:translateY(-2px);
@@ -185,28 +193,54 @@ a{ color:inherit; }
   border-color:rgba(255,255,255,0.22);
 }
 
-/* Mobile nav dropdown */
+/* Mobile nav dropdown (breakpoint aligned to 900px so the toggle and its
+   dropdown/overflow/z-index fixes always activate together) */
 @media (max-width:900px){
-  .brand__logo{
-    width:220px;
-    height:110px;
+  .header,
+  .header__inner,
+  .container,
+  .nav{
+    overflow:visible;
   }
 
-  .nav__toggle{ display:inline-flex; }
+  .header{
+    position:relative;
+    z-index:9999;
+  }
+
+  .nav{ position:relative; }
+
+  .nav__toggle{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    position:relative;
+    z-index:10000;
+    pointer-events:auto;
+  }
 
   .nav__links{
     display:none;
     position:absolute;
-    right:18px;
-    top:66px;
-    background:rgba(11,13,18,.95);
-    border:1px solid var(--border);
-    border-radius:16px;
+    right:0;
+    top:calc(100% + 10px);
+    z-index:10000;
+
+    min-width:220px;
     padding:10px;
+    border-radius:12px;
+
+    background:rgba(18, 18, 22, 0.98);
+    border:1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:0 18px 60px rgba(0, 0, 0, 0.55);
+
     flex-direction:column;
-    min-width:180px;
+    gap:8px;
   }
-  .nav__links.is-open{ display:flex; }
+
+  .nav.is-open .nav__links{
+    display:flex;
+  }
 }
 
 /* ================================
@@ -433,6 +467,8 @@ a{ color:inherit; }
   overflow-y:auto;
   scroll-snap-type:y mandatory;
   scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
   scrollbar-width:none;
 }
 .snap--qa::-webkit-scrollbar{ width:0; height:0; }
@@ -443,15 +479,15 @@ a{ color:inherit; }
   scroll-snap-stop:always;
   display:flex;
   align-items:center;
-  padding:60px 0;
+  padding: clamp(28px, 6vh, 70px) 0;
   border-bottom:1px solid rgba(255,255,255,0.06);
 }
 .snap--qa .snap__section:last-child{ border-bottom:none; }
 
 .snap--qa .snap__copy{
   width:min(980px, 92vw);
-  margin-left:clamp(24px, 12vw, 190px); /* slightly right */
-  margin-right:auto;
+  margin:0 auto;
+  padding:0 18px;
 }
 
 /* QUESTION slide */
@@ -459,20 +495,20 @@ a{ color:inherit; }
   margin:0 0 10px;
   letter-spacing:.14em;
   text-transform:uppercase;
-  font-size:.9rem;
+  font-size: clamp(0.75rem, 1vw, 0.95rem);
   color:rgba(255,255,255,0.55);
 }
 .snap--qa .snap__section--q h1{
   margin:0;
-  font-size:clamp(2.6rem, 4.8vw, 4.4rem);
-  line-height:1.05;
+  font-size: clamp(2.1rem, 4.2vw, 4.1rem);
+  line-height:1.06;
 }
 
 /* ANSWER slide */
 .snap--qa .snap__section--a p{
   margin:0;
-  font-size:clamp(1.2rem, 1.7vw, 1.65rem);
-  line-height:1.9;
+  font-size: clamp(1.05rem, 1.5vw, 1.5rem);
+  line-height:1.85;
   color:rgba(255,255,255,0.78);
   max-width:70ch;
 }
@@ -489,429 +525,11 @@ a{ color:inherit; }
   .snap--qa .snap__copy{
     margin-left:18px;
     margin-right:18px;
-  }
-}
-/* ===== FINAL HARD LOCK: ICONS TO FAR RIGHT ===== */
-.header__inner {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-}
-
-/* Brand stays left */
-.brand {
-  margin-right: auto;
-}
-
-/* Nav sits in the middle */
-.nav {
-  margin-left: auto !important;
-  margin-right: 12px !important;
-}
-
-/* Icons are LAST = FAR RIGHT */
-.header-icons {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-/* ======== FINAL CLEAN HEADER LOCK ======== */
-
-/* Main header row */
-.header__inner {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important; /* <-- IMPORTANT */
-}
-
-/* Logo stays on the left */
-.brand {
-  margin-right: auto;
-}
-
-/* NAV takes the space and moves to the right */
-.nav {
-  margin-left: auto !important;
-  margin-right: 16px !important; /* gap before icons */
-}
-
-/* ICONS MUST NOT take auto space */
-.header-icons {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-/* ===== PROGRESSION DOTS (RIGHT SIDE) ===== */
-
-.page-dots{
-  position: fixed;
-  right: 28px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 200;
-}
-
-.page-dots .dot{
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.35);
-  border: 1px solid var(--border);
-  padding: 0;
-  cursor: pointer;
-  transition: transform 160ms ease, background 160ms ease;
-}
-
-/* active dot */
-.page-dots .dot.is-active{
-  background: var(--text);
-  transform: scale(1.35);
-}
-
-/* hover */
-.page-dots .dot:hover{
-  transform: scale(1.2);
-}
-
-/* hide on small screens */
-@media (max-width: 900px){
-  .page-dots{
-    display: none;
-  }
-}
-/* ===== PROGRESSION DOTS (CENTER-RIGHT OF SCREEN) ===== */
-
-.page-dots{
-  position: fixed;
-  right: 32px;              /* slightly inset from edge */
-  top: 50%;                 /* move to vertical center */
-  transform: translateY(-50%); /* perfectly center vertically */
-  display: flex;
-  flex-direction: column;
-  gap: 20px;                /* <--- MORE SPACING BETWEEN DOTS */
-  z-index: 200;
-}
-
-.page-dots .dot{
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.35);
-  border: 1px solid var(--border);
-  padding: 0;
-  cursor: pointer;
-  transition: transform 160ms ease, background 160ms ease;
-}
-
-/* active dot */
-.page-dots .dot.is-active{
-  background: var(--text);
-  transform: scale(1.45);   /* slightly bigger when active */
-}
-
-/* hover */
-.page-dots .dot:hover{
-  transform: scale(1.25);
-}
-
-/* hide on small screens */
-@media (max-width: 900px){
-  .page-dots{
-    display: none;
-  }
-}
-/* ===== PROGRESSION DOTS — CENTER RIGHT OF SCREEN ===== */
-
-.page-dots{
-  position: fixed;
-  right: 28px;              /* slightly inset from edge */
-  top: 50%;                 /* move to vertical center */
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 28px;                /* more breathing room between dots */
-  z-index: 200;
-}
-
-/* individual dots */
-.page-dots .dot{
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.28);
-  border: 1px solid var(--border);
-  padding: 0;
-  cursor: pointer;
-  transition: transform 180ms ease, background 180ms ease;
-}
-
-/* active (current slide) */
-.page-dots .dot.is-active{
-  background: var(--text);
-  transform: scale(1.55);
-}
-
-/* hover feel */
-.page-dots .dot:hover{
-  transform: scale(1.25);
-}
-
-/* hide on small screens so it doesn’t clutter */
-@media (max-width: 900px){
-  .page-dots{
-    display: none;
-  }
-}
-/* ===== HARD FORCE: DOTS CENTER-RIGHT + VERTICAL + SPREAD OUT ===== */
-.page-dots{
-  position: fixed !important;
-  right: 28px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-
-  gap: 26px !important;          /* spacing between dots (increase if you want) */
-  z-index: 9999 !important;
-}
-/* ===== HARD FORCE DOTS (works even if class name changed) ===== */
-.page-dots,
-.progress-dots,
-.dots,
-.nav-dots,
-#pageDots,
-#progressDots {
-  position: fixed !important;
-  right: 28px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 28px !important;
-  z-index: 9999 !important;
-}
-
-/* ===== RESPONSIVE, SCALING PROGRESSION DOTS ===== */
-
-.page-dots{
-  position: fixed !important;
-  right: clamp(18px, 3vw, 36px);   /* moves in/out with screen size */
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-
-  /* THIS MAKES THE VERTICAL SPACING SCALE */
-  gap: clamp(16px, 3.2vh, 36px);   /* min → preferred → max */
-
-  z-index: 9999 !important;
-}
-
-/* SCALING DOT SIZE */
-.page-dots .dot{
-  width: clamp(8px, 1vw, 12px);   /* scales with viewport width */
-  height: clamp(8px, 1vw, 12px);
-  border-radius: 50%;
-  background: rgba(255,255,255,0.28);
-  border: 1px solid var(--border);
-  padding: 0;
-  cursor: pointer;
-  transition: transform 180ms ease, background 180ms ease;
-}
-
-/* ACTIVE DOT (also scales) */
-.page-dots .dot.is-active{
-  background: var(--text);
-  transform: scale(clamp(1.3, 1.5vw, 1.6));
-}
-
-/* HOVER FEEL (scales too) */
-.page-dots .dot:hover{
-  transform: scale(clamp(1.15, 1.3vw, 1.3));
-}
-
-/* Hide on small screens */
-@media (max-width: 900px){
-  .page-dots{
-    display: none;
-  }
-}
-
-/* =========================================================
-   FULL-SCREEN Q → A SCROLL (ABOUT PAGE)
-   — text + dots scale with screen size
-========================================================= */
-
-.snap--qa{
-  height: calc(100vh - var(--headerH));
-  overflow-y:auto;
-  scroll-snap-type:y mandatory;
-  scroll-behavior:smooth;
-  scrollbar-width:none;
-}
-.snap--qa::-webkit-scrollbar{ width:0; height:0; }
-
-.snap--qa .snap__section{
-  min-height: calc(100vh - var(--headerH));
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
-  display:flex;
-  align-items:center;
-  padding: clamp(40px, 6vh, 80px) 0; /* scales with screen height */
-  border-bottom:1px solid rgba(255,255,255,0.06);
-}
-.snap--qa .snap__section:last-child{ border-bottom:none; }
-
-.snap--qa .snap__copy{
-  width:min(980px, 92vw);
-  margin-left:clamp(24px, 12vw, 190px); /* slightly right of center */
-  margin-right:auto;
-}
-
-/* ===== QUESTION SLIDES (responsive) ===== */
-.snap--qa .snap__section--q .snap__kicker{
-  margin: 0 0 10px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  font-size: clamp(0.75rem, 1vw, 0.95rem); /* scales with screen */
-  color:rgba(255,255,255,0.55);
-}
-
-.snap--qa .snap__section--q h1{
-  margin:0;
-  font-size: clamp(2.2rem, 4.2vw, 4.4rem); /* fluid headline */
-  line-height:1.05;
-  font-weight:800;
-}
-
-/* ===== ANSWER SLIDES (responsive) ===== */
-.snap--qa .snap__section--a p{
-  margin:0;
-  font-size: clamp(1.05rem, 1.6vw, 1.65rem); /* fluid body text */
-  line-height:1.9;
-  color:rgba(255,255,255,0.78);
-  max-width:70ch;
-}
-
-/* subtle visual difference between Q and A (no bubbles) */
-.snap--qa .snap__section--q{
-  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.00));
-}
-.snap--qa .snap__section--a{
-  background:linear-gradient(180deg, rgba(255,255,255,0.00), rgba(255,255,255,0.02));
-}
-
-/* mobile adjustment */
-@media (max-width:700px){
-  .snap--qa .snap__copy{
-    margin-left:18px;
-    margin-right:18px;
-  }
-}
-
-/* =========================================================
-   PROGRESSION DOTS — CENTER-RIGHT (SCALING)
-========================================================= */
-
-.page-dots{
-  position: fixed !important;
-  right: clamp(18px, 3vw, 32px);   /* scales horizontally */
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-
-  gap: clamp(16px, 3vh, 32px) !important; /* dots spread with screen height */
-  z-index: 9999 !important;
-}
-
-/* individual dots (responsive size) */
-.page-dots .dot{
-  width: clamp(8px, 0.8vw, 11px);
-  height: clamp(8px, 0.8vw, 11px);
-  border-radius: 50%;
-  background: rgba(255,255,255,0.28);
-  border: 1px solid var(--border);
-  padding: 0;
-  cursor: pointer;
-  transition: transform 180ms ease, background 180ms ease;
-}
-
-/* active (current slide) */
-.page-dots .dot.is-active{
-  background: var(--text);
-  transform: scale(clamp(1.25, 1.4, 1.55)); /* scales too */
-}
-
-/* hover feel */
-.page-dots .dot:hover{
-  transform: scale(clamp(1.15, 1.25, 1.35));
-}
-
-/* hide on small screens so it doesn’t clutter */
-@media (max-width: 900px){
-  .page-dots{
-    display: none;
   }
 }
 /* ===== EXPERIENCE PAGE POLISH ===== */
-.page-head{
-  display:grid;
-  gap:10px;
-  margin-bottom:18px;
-}
-.page-title{
-  margin:0;
-  font-size:2.2rem;
-  line-height:1.15;
-}
-.page-subtitle{
-  margin:0;
-  max-width:70ch;
-}
-.page-actions{
-  margin-top:6px;
-}
-
-.timeline--pro{
-  margin-top:18px;
-}
-
-.role--pro{
-  position:relative;
-  overflow:hidden;
-}
-
-.role--pro::before{
-  content:"";
-  position:absolute;
-  inset:-1px auto -1px -1px;
-  width:4px;
-  border-radius:999px;
-  background:rgba(255,255,255,0.18);
-}
-
 .role__title h3{
   margin:0 0 6px;
-}
-
-.role__meta{
-  white-space:nowrap;
-}
-
-.role__bullets{
-  margin:14px 0 0;
-  padding-left:18px;
-  color:var(--muted);
 }
 
 .tags--mini{
@@ -975,8 +593,14 @@ a{ color:inherit; }
 }
 /* ===== Clickable project cards ===== */
 
+.project {
+  display: flex;
+  flex-direction: column;
+}
+
 .project--clickable {
   position: relative;
+  cursor: pointer;
 }
 
 /* Make the whole card clickable */
@@ -997,160 +621,7 @@ a{ color:inherit; }
 
 /* Secondary meta row (PDF link) sits under the main clickable area */
 .project__meta--secondary {
-  margin-top: 10px;
-}
-
-/* If you already have a hover transform on .project, keep it.
-   Otherwise this adds a nice pointer hint. */
-.project--clickable {
-  cursor: pointer;
-}
-
-/* Make sure inner links still look like links */
-.project__meta--secondary .link {
-  cursor: pointer;
-}
-.project {
-  display: flex;
-  flex-direction: column;
-}
-
-.project__meta--secondary {
-  margin-top: auto;             /* push to bottom */
-  padding-top: 10px;
-  opacity: 1;                   /* make it not faded */
-}
-
-.project__meta--secondary .link {
-  font-size: 14px;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.project__meta--secondary {
-  display: none !important;
-}
-<div class="project__meta">
-  <span class="link">View details →</span>
-</div>
-/* ===== Interactive Explore section ===== */
-
-.projects-explore { margin-top: 46px; }
-
-.explore-head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 14px;
-}
-
-.input {
-  width: min(420px, 100%);
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.04);
-  color: inherit;
-}
-
-.chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 18px; }
-
-.chip {
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.04);
-  color: inherit;
-  padding: 7px 12px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: transform .15s ease, background .15s ease;
-}
-
-.chip:hover { transform: translateY(-1px); background: rgba(255,255,255,0.06); }
-.chip.is-active { background: rgba(138,180,255,0.14); border-color: rgba(138,180,255,0.35); }
-
-.cards--static {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 18px;
-}
-
-.link-btn {
-  background: transparent;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-}
-
-/* ===== Modal ===== */
-
-.modal { position: fixed; inset: 0; display: none; z-index: 50; }
-.modal.is-open { display: block; }
-
-.modal__backdrop {
-  position: absolute; inset: 0;
-  background: rgba(0,0,0,0.55);
-}
-
-.modal__panel {
-  position: relative;
-  width: min(920px, calc(100% - 24px));
-  margin: 70px auto;
-  padding: 18px;
-  border-radius: 14px;
-  background: rgba(18,18,22,0.98);
-  border: 1px solid rgba(255,255,255,0.10);
-  box-shadow: 0 18px 60px rgba(0,0,0,0.55);
-}
-
-.modal__close {
-  position: absolute;
-  top: 12px; right: 12px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.06);
-  color: inherit;
-  width: 34px; height: 34px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.modal__cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 14px;
-}
-
-.panel {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 14px;
-}
-
-.panel h4 { margin: 0 0 8px; }
-.bullets { margin: 0; padding-left: 18px; }
-
-@media (max-width: 850px) {
-  .explore-head { flex-direction: column; align-items: stretch; }
-  .modal__cols { grid-template-columns: 1fr; }
-}
-/* ===== Clickable project cards ===== */
-
-.project--clickable {
-  position: relative;
-  cursor: pointer;
-}
-
-.project__hit {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-  height: 100%;
-}
-
-.project__meta--secondary {
-  margin-top: 10px;
+  display: none;
 }
 
 /* ===== Interactive Explore section ===== */
@@ -1256,54 +727,12 @@ a{ color:inherit; }
   .explore-head { flex-direction: column; align-items: stretch; }
   .modal__cols { grid-template-columns: 1fr; }
 }
-/* ===== Mobile nav fix ===== */
-@media (max-width: 860px) {
-  .header {
-    position: relative;
-    z-index: 1000; /* keep header above page content */
-  }
 
-  .nav {
-    position: relative;
-  }
-
-  /* show the Menu button on small screens */
-  .nav__toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    z-index: 1001;
-  }
-
-  /* hide links by default on small screens */
-  .nav__links {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: calc(100% + 10px);
-    min-width: 220px;
-    padding: 10px;
-    border-radius: 12px;
-    z-index: 1001;
-
-    background: rgba(18, 18, 22, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
-
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  /* IMPORTANT: this makes it appear when aria-expanded flips to true */
-  .nav__toggle[aria-expanded="true"] + .nav__links {
-    display: flex;
-  }
-}
 /* ===== Marquee fixes: no loop gap + slower on mobile ===== */
 
 /* Remove the gap between the two copies (this causes the big blank space) */
 .cards-track {
-  gap: 0 !important; /* IMPORTANT: prevents blank gap between copy 1 and copy 2 */
+  gap: 0; /* prevents blank gap between copy 1 and copy 2 */
 }
 
 /* Keep spacing between cards inside each row */
@@ -1315,362 +744,56 @@ a{ color:inherit; }
 /* Slow it down on smaller screens + reduce card width */
 @media (max-width: 860px) {
   .cards-track {
-    animation-duration: 55s !important; /* slower */
+    animation-duration: 55s; /* slower */
   }
 
   .cards--row .project {
-    flex: 0 0 320px !important; /* smaller cards = smoother on mobile */
+    flex: 0 0 320px; /* smaller cards = smoother on mobile */
   }
 }
 
 /* Optional: even slower on very small screens */
 @media (max-width: 420px) {
   .cards-track {
-    animation-duration: 70s !important;
+    animation-duration: 70s;
   }
 
   .cards--row .project {
-    flex: 0 0 280px !important;
+    flex: 0 0 280px;
   }
 }
-/* ===== Mobile menu: force it to appear above everything ===== */
-@media (max-width: 860px) {
-  /* prevent clipping */
+
+/* Mobile nav dropdown + stacking-context fixes (aligned to the same 900px
+   breakpoint as the toggle trigger above) */
+@media (max-width: 900px) {
   .header,
   .header__inner,
   .container,
   .nav {
-    overflow: visible !important;
+    overflow: visible;
   }
 
-  /* keep header on top */
   .header {
-    position: relative !important;
-    z-index: 9999 !important;
+    position: relative;
+    z-index: 9999;
   }
 
-  /* make sure the button can be clicked */
+  .nav {
+    position: relative;
+  }
+
   .nav__toggle {
-    position: relative !important;
-    z-index: 10000 !important;
-    pointer-events: auto !important;
-    display: inline-flex !important; /* ensure it's visible on mobile */
+    position: relative;
+    z-index: 10000;
+    pointer-events: auto;
   }
 
-  /* dropdown hidden by default */
   .nav__links {
-    display: none !important;
-    position: absolute !important;
-    right: 0 !important;
-    top: calc(100% + 10px) !important;
-    z-index: 10000 !important;
-
-    min-width: 220px;
-    padding: 10px;
-    border-radius: 12px;
-
-    background: rgba(18, 18, 22, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
-
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  /* show dropdown when JS adds .is-open to .nav */
-  .nav.is-open .nav__links {
-    display: flex !important;
+    z-index: 10000;
   }
 }
 /* ================================
-   HOME HERO — PREMIUM UPGRADE
-================================ */
-
-.hero--premium{
-  position: relative;
-  padding: 72px 0 70px;
-  overflow: hidden;
-}
-
-.hero__inner--premium{
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: 1.25fr 0.9fr;
-  gap: clamp(18px, 3vw, 40px);
-  align-items: start;
-}
-
-.hero__bg{
-  position:absolute;
-  inset:0;
-  z-index: 0;
-  pointer-events:none;
-}
-
-.hero__grid{
-  position:absolute;
-  inset:-20%;
-  opacity: .22;
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
-  background-size: 64px 64px;
-  transform: rotate(-8deg);
-  filter: blur(.2px);
-}
-
-.hero__glow{
-  position:absolute;
-  width: 680px;
-  height: 680px;
-  border-radius: 999px;
-  filter: blur(60px);
-  opacity: .55;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.14), transparent 60%);
-  animation: floatGlow 10s ease-in-out infinite;
-}
-
-.hero__glow--a{ left: -220px; top: -260px; }
-.hero__glow--b{
-  right: -260px;
-  bottom: -320px;
-  opacity: .45;
-  animation-duration: 12s;
-}
-
-@keyframes floatGlow{
-  0%,100%{ transform: translate3d(0,0,0) scale(1); }
-  50%{ transform: translate3d(18px, -14px, 0) scale(1.03); }
-}
-
-.hero__text--premium{
-  padding-top: 10px;
-  max-width: 62ch;
-}
-
-.hero__kicker{
-  margin: 0 0 10px;
-  font-size: .9rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.58);
-}
-
-.hero__headline{
-  margin: 0 0 12px;
-  font-size: clamp(2.4rem, 4.3vw, 4rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-}
-
-.lead--premium{
-  font-size: clamp(1.05rem, 1.25vw, 1.22rem);
-  line-height: 1.8;
-  color: rgba(255,255,255,.74);
-}
-
-.accent--shine{
-  position: relative;
-  display: inline-block;
-}
-
-.accent--shine::after{
-  content:"";
-  position:absolute;
-  left: -6px;
-  right: -6px;
-  bottom: .08em;
-  height: .42em;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.02));
-  filter: blur(0.2px);
-  z-index: -1;
-}
-
-.hero__chips{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 18px 0 20px;
-}
-
-.chip-pill{
-  padding: 9px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.04);
-  color: rgba(255,255,255,.78);
-  font-size: .95rem;
-  backdrop-filter: blur(8px);
-}
-
-.cta--premium{
-  margin-top: 14px;
-}
-
-.btn--primary{
-  background: linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.05));
-  border: 1px solid rgba(255,255,255,.18);
-}
-
-.hero__cred{
-  margin-top: 18px;
-  display:flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  color: rgba(255,255,255,.62);
-  font-size: .95rem;
-}
-
-.cred-badge{
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.03);
-}
-
-.cred-dot{
-  opacity: .5;
-}
-
-.hero__stack{
-  position: relative;
-  z-index: 2;
-  display: grid;
-  gap: 14px;
-  align-content: start;
-}
-
-.stack-card{
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-  box-shadow: 0 18px 40px rgba(0,0,0,.35);
-  padding: 18px;
-  backdrop-filter: blur(10px);
-  transform: translateZ(0);
-  transition: transform 180ms ease, border-color 180ms ease;
-}
-
-.stack-card:hover{
-  transform: translateY(-2px);
-  border-color: rgba(255,255,255,.22);
-}
-
-.stack-card__title{
-  font-weight: 800;
-  letter-spacing: .01em;
-  margin-bottom: 10px;
-}
-
-.stack-list{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 10px;
-}
-
-.stack-list li{
-  display:flex;
-  justify-content: space-between;
-  gap: 14px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-
-.stack-list li:last-child{
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.stack-list span{
-  color: rgba(255,255,255,.62);
-}
-
-.stack-list strong{
-  font-weight: 700;
-  color: rgba(255,255,255,.9);
-}
-
-.stack-card__text{
-  margin: 0 0 12px;
-  color: rgba(255,255,255,.72);
-  line-height: 1.7;
-}
-
-.stack-mini{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.mini-pill{
-  font-size: .9rem;
-  padding: 7px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.03);
-  color: rgba(255,255,255,.72);
-}
-
-.tools-row{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.tool{
-  padding: 8px 10px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.03);
-  color: rgba(255,255,255,.76);
-  font-size: .95rem;
-}
-
-.hero__scroll{
-  position: absolute;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  display:flex;
-  align-items:center;
-  gap: 10px;
-  z-index: 2;
-  opacity: .7;
-}
-
-.scroll-dot{
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.75);
-  animation: scrollPulse 1.2s ease-in-out infinite;
-}
-
-@keyframes scrollPulse{
-  0%,100%{ transform: translateY(0); opacity: .6; }
-  50%{ transform: translateY(6px); opacity: 1; }
-}
-
-.scroll-text{
-  font-size: .9rem;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.58);
-}
-
-/* Responsive */
-@media (max-width: 900px){
-  .hero--premium{ padding: 56px 0 56px; }
-  .hero__inner--premium{ grid-template-columns: 1fr; }
-  .hero__scroll{ display:none; }
-}
-/* ================================
-   HOMEPAGE V2 OVERRIDES (paste at end)
+   HOMEPAGE V2 OVERRIDES
 ================================ */
 
 /* Fix “bottom scroll bar” / horizontal overflow */
@@ -1679,7 +802,6 @@ html, body { overflow-x: hidden; }
 /* Make logo responsive so it can’t force width overflow */
 .brand__logo{
   max-width: 100%;
-  height: auto;
 }
 
 /* Tighter sections on home */
@@ -1797,81 +919,20 @@ html, body { overflow-x: hidden; }
   .cards--featured{ grid-template-columns: 1fr; }
 }
 /* ================================
-   ABOUT PAGE: HARD LOCK + CENTER
-   Paste at END of styles.css
+   ABOUT PAGE: progression dots
 ================================ */
-
-/* Stop the *document* from scrolling on About page */
-body:has(.snap--qa){
-  height: 100vh;
-  overflow: hidden;            /* no page scroll */
-}
-
-/* Make the snap container the ONLY scroll area */
-.snap--qa{
-  height: calc(100vh - var(--headerH));
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-
-  /* make scroll feel clean */
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
-
-  /* hide scrollbar */
-  scrollbar-width: none;
-}
-.snap--qa::-webkit-scrollbar{ width:0; height:0; }
-
-/* Each section fills the viewport (minus header) */
-.snap--qa .snap__section{
-  min-height: calc(100vh - var(--headerH));
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-
-  display: flex;
-  align-items: center;         /* vertical center */
-  padding: clamp(28px, 6vh, 70px) 0;
-}
-
-/* Keep text centered and readable on all screens */
-.snap--qa .snap__copy{
-  width: min(980px, 92vw);
-  margin: 0 auto;              /* centered */
-  padding: 0 18px;
-}
-
-/* Titles scale smoothly */
-.snap--qa .snap__section--q h1{
-  margin: 0;
-  font-size: clamp(2.1rem, 4.2vw, 4.1rem);
-  line-height: 1.06;
-}
-
-/* Paragraphs scale + keep line length nice */
-.snap--qa .snap__section--a p{
-  margin: 0;
-  font-size: clamp(1.05rem, 1.5vw, 1.5rem);
-  line-height: 1.85;
-  max-width: 70ch;
-  color: rgba(255,255,255,0.78);
-}
-
-/* Dots: scale with screen (size + spacing) */
 .page-dots{
   position: fixed;
-  right: clamp(14px, 2.5vw, 28px);
+  right: 28px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  gap: clamp(10px, 2.1vh, 26px);       /* spacing scales */
+  gap: clamp(16px, 3vh, 32px);
   z-index: 9999;
 }
 
-/* Dot size scales */
 .page-dots .dot{
   width: clamp(8px, 0.9vw, 12px);
   height: clamp(8px, 0.9vw, 12px);
@@ -1892,191 +953,8 @@ body:has(.snap--qa){
   transform: scale(1.25);
 }
 
-/* Hide dots on smaller screens */
 @media (max-width: 900px){
   .page-dots{ display: none; }
-}
-
-/* =========================================
-   ABOUT PAGE — HARD FIX (NO :has)
-   Paste at VERY END of styles.css
-========================================= */
-
-.about-page{
-  height: 100dvh;
-  overflow: hidden;          /* page itself cannot scroll */
-}
-
-/* snap container is the ONLY scroll area */
-.about-page .snap--qa{
-  height: calc(100dvh - var(--headerH, 0px)); /* uses real header height from JS */
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  overscroll-behavior: contain;
-  scrollbar-width: none;
-}
-.about-page .snap--qa::-webkit-scrollbar{ width:0; height:0; }
-
-/* each slide fills the space UNDER the header */
-.about-page .snap--qa .snap__section{
-  min-height: calc(100dvh - var(--headerH, 0px));
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-
-  display: grid;
-  place-items: center;
-  padding: clamp(22px, 4.5vh, 64px) 0;
-}
-
-/* center the text block properly */
-.about-page .snap--qa .snap__copy{
-  width: min(980px, 92vw);
-  margin: 0 auto;
-  padding: 0 18px;
-}
-
-/* responsive text so it never “overflows” vertically */
-.about-page .snap--qa .snap__section--q h1{
-  font-size: clamp(2.1rem, 4.2vw, 4.1rem);
-  line-height: 1.05;
-  margin: 0;
-}
-
-.about-page .snap--qa .snap__section--a p{
-  font-size: clamp(1.05rem, 1.45vw, 1.5rem);
-  line-height: 1.85;
-  max-width: 68ch;
-  margin: 0;
-}
-/* ================================
-   HEADER SIZE: smaller + responsive
-   (paste near end of styles.css)
-================================ */
-
-/* Make the header feel tighter */
-.header__inner{
-  padding: clamp(8px, 1.2vh, 12px) 0;
-}
-
-/* Shrink logo responsively */
-.brand__logo{
-  width: clamp(160px, 16vw, 240px);
-  height: auto;               /* keep aspect ratio */
-  max-height: clamp(54px, 8vh, 92px);
-}
-
-/* Tighter nav + icons */
-.nav__links a{
-  padding: 8px 10px;
-  font-size: clamp(.95rem, 1.1vw, 1rem);
-}
-
-.header-icons a{
-  width: clamp(30px, 3.2vw, 34px);
-  height: clamp(30px, 3.2vw, 34px);
-}
-
-.header-icons svg{
-  width: clamp(14px, 1.7vw, 16px);
-  height: clamp(14px, 1.7vw, 16px);
-}
-/* ================================
-   ABOUT PAGE: responsive typography + spacing
-================================ */
-
-/* spacing between slides gets smaller on small screens, bigger on large */
-.about-page .snap--qa .snap__section{
-  padding: clamp(18px, 4vh, 70px) 0;
-}
-
-/* content block width adjusts smoothly */
-.about-page .snap--qa .snap__copy{
-  width: min(980px, 92vw);
-  padding: 0 clamp(16px, 2vw, 24px);
-}
-
-/* Question slide */
-.about-page .snap--qa .snap__section--q .snap__kicker{
-  font-size: clamp(.75rem, 1vw, .95rem);
-  letter-spacing: .14em;
-}
-
-.about-page .snap--qa .snap__section--q h1{
-  font-size: clamp(2.1rem, 4.5vw, 4.4rem);
-  line-height: 1.05;
-}
-
-/* Answer slide */
-.about-page .snap--qa .snap__section--a p{
-  font-size: clamp(1.05rem, 1.45vw, 1.55rem);
-  line-height: clamp(1.65, 1.2vw + 1.4, 1.95);
-  max-width: 68ch;
-}
-/* ================================
-   HEADER — MIDDLE GROUND SIZE
-   (paste at very END of styles.css)
-================================ */
-
-/* Give a bit more breathing room than now, less than before */
-.header__inner {
-  padding: clamp(10px, 1.6vh, 16px) 0;
-}
-
-/* Logo: slightly bigger than now, still controlled */
-.brand__logo {
-  width: clamp(190px, 18vw, 270px);
-  height: auto;
-  max-height: clamp(60px, 9vh, 105px);
-}
-
-/* Nav links — professional spacing, not cramped */
-.nav__links a {
-  padding: 10px 12px;
-  font-size: clamp(0.97rem, 1.15vw, 1.05rem);
-  letter-spacing: 0.01em;
-}
-
-/* Icons: a touch larger than now, still sleek */
-.header-icons a {
-  width: clamp(32px, 3.4vw, 38px);
-  height: clamp(32px, 3.4vw, 38px);
-}
-
-.header-icons svg {
-  width: clamp(15px, 1.8vw, 17px);
-  height: clamp(15px, 1.8vw, 17px);
-}
-/* ===== HEADER SIZE (slightly bigger again) ===== */
-:root{
-  --headerH: 84px; /* was 70; adjust 80–90 if you want */
-}
-
-/* give the header row a bit more height */
-.header__inner{
-  padding: 16px 0 !important;
-}
-
-/* logo: a touch bigger, but not huge */
-.brand__logo{
-  width: clamp(220px, 18vw, 290px) !important;
-  height: auto !important;
-}
-
-/* nav links a bit bigger */
-.nav__links a{
-  padding: 12px 12px !important;
-  font-size: 0.98rem !important;
-}
-
-/* icon bubbles slightly bigger */
-.header-icons a{
-  width: 38px !important;
-  height: 38px !important;
-}
-.header-icons svg{
-  width: 17px !important;
-  height: 17px !important;
 }
 /* ===== ABOUT PAGE: prevent page scroll (fix header disappearing) ===== */
 .page-about{
@@ -2104,28 +982,6 @@ body:has(.snap--qa){
   overflow: hidden;
 }
 
-
-.brand__logo {
-  height: clamp(75px, 8vw, 124px); 
-}
-
-/* ===== FORCE LOGO BIGGER (COPY–PASTE AT BOTTOM OF FILE) ===== */
-
-.brand__logo {
-  height: clamp(90px, 7vw, 120px) !important;
-  max-height: none !important;
-  width: auto !important;
-}
-
-/* Make sure the header has enough space for the bigger logo */
-.header {
-  min-height: clamp(80px, 9vw, 120px) !important;
-}
-
-/* Keep header content vertically centered */
-.header__inner {
-  align-items: center !important;
-}
 
 /* ===== REMOVE FOOTER ONLY ON ABOUT PAGE ===== */
 .page-about .footer {
@@ -2355,129 +1211,7 @@ body:has(.snap--qa){
 }
 
 /* =========================================================
-   SKILLS PAGE — PREMIUM REWORK (paste at end)
-========================================================= */
-
-.page-skills .nav__links a[aria-current="page"]{
-  color: var(--text);
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.14);
-}
-
-/* Skills grid */
-.skills-grid{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 16px;
-}
-
-/* Card */
-.skills-card{
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,0.12);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  box-shadow: var(--shadow);
-  padding: 18px;
-  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-}
-
-.skills-card:hover{
-  transform: translateY(-2px);
-  border-color: rgba(255,255,255,0.22);
-  box-shadow: 0 16px 45px rgba(0,0,0,.38);
-}
-
-/* Left accent stripe */
-.skills-card::before{
-  content:"";
-  position:absolute;
-  inset:-1px auto -1px -1px;
-  width:5px;
-  border-radius:999px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.28), rgba(255,255,255,0.08));
-}
-
-/* Head row */
-.skills-card__head{
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  margin-bottom: 12px;
-}
-
-.skills-card__title{
-  margin: 0 0 6px;
-}
-
-.skills-card__sub{
-  margin: 0;
-  max-width: 50ch;
-}
-
-/* Icon */
-.skills-card__icon{
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.04);
-  flex: 0 0 auto;
-}
-
-.skills-card__icon svg{
-  width: 20px;
-  height: 20px;
-}
-
-/* Chips */
-.skills-chips{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.skill-chip{
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.04);
-  color: rgba(255,255,255,0.78);
-  padding: 8px 10px;
-  border-radius: 999px;
-  font-size: .92rem;
-  backdrop-filter: blur(6px);
-}
-
-/* CTA */
-.skills-cta{
-  margin-top: 18px;
-}
-
-.skills-cta__card{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.skills-cta__actions{
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* Responsive */
-@media (max-width: 900px){
-  .skills-grid{ grid-template-columns: 1fr; }
-}
-
-/* =========================================================
-   SKILLS PAGE — COURSEWORK ADD-ON (paste at end)
+   SKILLS PAGE
 ========================================================= */
 
 .page-skills .nav__links a[aria-current="page"]{
@@ -2611,7 +1345,11 @@ body:has(.snap--qa){
   gap: 8px;
 }
 
-/* CTA actions reuse */
+/* CTA */
+.skills-cta{
+  margin-top: 18px;
+}
+
 .skills-cta__card{
   display: flex;
   align-items: center;

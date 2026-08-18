@@ -82,36 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
     revealEls.forEach((el) => obs.observe(el));
   }
 
-  // ===== About page progression dots (only if present) =====
-  const dots = document.querySelectorAll(".page-dots .dot");
-  const sections = document.querySelectorAll(".snap__section");
-
-  if (dots.length && sections.length) {
-    dots.forEach((dot) => {
-      dot.addEventListener("click", () => {
-        const target = document.getElementById(dot.dataset.target);
-        if (target) target.scrollIntoView({ behavior: "smooth" });
-      });
-    });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            dots.forEach((d) => d.classList.remove("is-active"));
-            const active = document.querySelector(
-              `.page-dots .dot[data-target="${entry.target.id}"]`
-            );
-            if (active) active.classList.add("is-active");
-          }
-        });
-      },
-      { threshold: 0.6 }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-  }
-
   // ===== Projects page: Explore filter/search + modal (only if projectGrid exists) =====
   const projectGrid = document.getElementById("projectGrid");
   if (projectGrid) {
@@ -244,36 +214,58 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// === About page: arrow keys move slide-by-slide (snap sections) ===
+// === About page: dot navigation + keyboard slide-by-slide (snap sections) ===
 (function () {
   const snap = document.querySelector(".snap--qa");
-  if (!snap) return; // only run on About page
+  const dotsNav = document.querySelector(".page-dots");
+  if (!snap || !dotsNav) return; // only run on About page
 
   const sections = Array.from(snap.querySelectorAll(".snap__section"));
-  if (sections.length === 0) return;
+  const dots = Array.from(dotsNav.querySelectorAll(".dot"));
+  if (!sections.length) return;
 
-  // Find the section whose top is closest to the container top
-  function getCurrentIndex() {
-    const snapTop = snap.getBoundingClientRect().top;
-    let bestIdx = 0;
-    let bestDist = Infinity;
+  let currentIndex = 0;
 
-    sections.forEach((sec, i) => {
-      const dist = Math.abs(sec.getBoundingClientRect().top - snapTop);
-      if (dist < bestDist) {
-        bestDist = dist;
-        bestIdx = i;
-      }
-    });
-
-    return bestIdx;
+  function setActiveDot(index) {
+    dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
   }
 
-  function goToIndex(i) {
-    const clamped = Math.max(0, Math.min(sections.length - 1, i));
+  function scrollToIndex(index) {
+    const clamped = Math.max(0, Math.min(sections.length - 1, index));
+    currentIndex = clamped;
     sections[clamped].scrollIntoView({ behavior: "smooth", block: "start" });
+    setActiveDot(clamped);
   }
 
+  // Dot clicks
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const idx = sections.findIndex((s) => s.id === dot.dataset.target);
+      if (idx !== -1) scrollToIndex(idx);
+    });
+  });
+
+  // Track which section is visible (updates active dot + currentIndex)
+  const io = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+
+      const idx = sections.indexOf(visible.target);
+      if (idx !== -1) {
+        currentIndex = idx;
+        setActiveDot(idx);
+      }
+    },
+    { root: snap, threshold: 0.55 }
+  );
+
+  sections.forEach((s) => io.observe(s));
+  setActiveDot(0);
+
+  // Keyboard navigation
   window.addEventListener(
     "keydown",
     (e) => {
@@ -283,125 +275,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
         e.preventDefault();
-        goToIndex(getCurrentIndex() + 1);
-      }
-
-      if (e.key === "ArrowUp" || e.key === "PageUp") {
+        scrollToIndex(currentIndex + 1);
+      } else if (e.key === "ArrowUp" || e.key === "PageUp") {
         e.preventDefault();
-        goToIndex(getCurrentIndex() - 1);
-      }
-
-      if (e.key === "Home") {
+        scrollToIndex(currentIndex - 1);
+      } else if (e.key === "Home") {
         e.preventDefault();
-        goToIndex(0);
-      }
-
-      if (e.key === "End") {
+        scrollToIndex(0);
+      } else if (e.key === "End") {
         e.preventDefault();
-        goToIndex(sections.length - 1);
+        scrollToIndex(sections.length - 1);
       }
-    },
-    { passive: false }
-  );
-})();
-/* ================================
-   ABOUT PAGE: Arrow-key snapping + dots
-   Paste at END of script.js
-================================ */
-(function () {
-  const snap = document.querySelector(".snap--qa");
-  const dotsNav = document.querySelector(".page-dots");
-
-  if (!snap || !dotsNav) return;
-
-  const sections = Array.from(snap.querySelectorAll(".snap__section"));
-  const dots = Array.from(dotsNav.querySelectorAll(".dot"));
-
-  function setActiveDot(index) {
-    dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
-  }
-
-  function scrollToIndex(index) {
-    const clamped = Math.max(0, Math.min(sections.length - 1, index));
-    sections[clamped].scrollIntoView({ behavior: "smooth", block: "start" });
-    setActiveDot(clamped);
-  }
-
-  // Dot clicks
-  dots.forEach((dot) => {
-    dot.addEventListener("click", () => {
-      const targetId = dot.dataset.target;
-      const idx = sections.findIndex((s) => s.id === targetId);
-      if (idx !== -1) scrollToIndex(idx);
-    });
-  });
-
-  // Track which section is visible (updates active dot)
-  const io = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((e) => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible) return;
-
-      const idx = sections.indexOf(visible.target);
-      if (idx !== -1) setActiveDot(idx);
-    },
-    { root: snap, threshold: 0.55 }
-  );
-
-  sections.forEach((s) => io.observe(s));
-  setActiveDot(0);
-
-
-
-
-
-
-
-  // ================================
-// About page: lock scroll + correct centering
-// ================================
-(function () {
-  const isAbout = document.body.classList.contains("about-page");
-  if (!isAbout) return;
-
-  const root = document.documentElement;
-  const header = document.querySelector(".header");
-  const snap = document.querySelector(".snap--qa");
-  if (!header || !snap) return;
-
-  function setHeaderH() {
-    // Get actual rendered header height (accounts for logo size, wrap, etc.)
-    const h = Math.ceil(header.getBoundingClientRect().height);
-    root.style.setProperty("--headerH", `${h}px`);
-  }
-
-  // Run now + on resize
-  setHeaderH();
-  window.addEventListener("resize", setHeaderH);
-
-  // Run again after fonts load (fonts can change header height)
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(setHeaderH).catch(() => {});
-  }
-
-  // Optional: prevent the body from scrolling even if browser tries
-  document.body.style.overflow = "hidden";
-})();
-
-  // Arrow keys: step through slides
-  window.addEventListener(
-    "keydown",
-    (e) => {
-      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
-
-      // only intercept if user is on About page container
-      e.preventDefault();
-
-      const current = dots.findIndex((d) => d.classList.contains("is-active"));
-      if (e.key === "ArrowDown") scrollToIndex(current + 1);
-      if (e.key === "ArrowUp") scrollToIndex(current - 1);
     },
     { passive: false }
   );

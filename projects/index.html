@@ -6,64 +6,19 @@
     <meta name="description" content="Projects by Paul Poleon Jr — industrial engineering and design work." />
     <title>Projects | Paul Poleon Jr</title>
 
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Projects | Paul Poleon Jr" />
+    <meta
+      property="og:description"
+      content="Projects by Paul Poleon Jr — industrial engineering and design work."
+    />
+    <meta property="og:url" content="https://paulpoleon.com/projects/" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css" />
 
-    <style>
-
-
-
-
-
-      
-      /* ===== PROJECT CARDS CONVEYOR BELT ===== */
-
-      .cards-marquee {
-        overflow: hidden;
-        width: 100%;
-        position: relative;
-        -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-        mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-      }
-
-      .cards-track {
-        display: flex;
-        width: max-content;
-        gap: 24px;
-        animation: cards-scroll 28s linear infinite;
-      }
-
-      .cards--row {
-        display: flex !important; /* override any grid */
-        gap: 24px;
-        flex-wrap: nowrap;
-      }
-
-      .cards--row .project {
-        flex: 0 0 420px; /* fixed card width for smooth scrolling */
-      }
-
-      .cards-marquee:hover .cards-track {
-        animation-play-state: paused;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .cards-track {
-          animation: none;
-        }
-      }
-
-      @keyframes cards-scroll {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-50%);
-        }
-      }
-    </style>
   </head>
 
   <body>
@@ -468,7 +423,7 @@
 <article class="project project--open"
   data-title="Portfolio Website using AI-Assisted Front-End Development"
   data-tags="HTML, CSS, JavaScript, UX, AI-Assisted Workflow, System Design"
-  data-filter="design"
+  data-filter="cad"
   data-summary="Designed and built a responsive multi-page portfolio website using an AI-assisted development workflow, focusing on UX structure, modular components, and scalable layout architecture."
   data-tools="HTML, CSS, JavaScript, GitHub Pages, Responsive Design, AI-Assisted Iteration"
   data-results="Built fully responsive multi-page site; Implemented reusable card + modal component system; Integrated dynamic filtering and UX refinements; Deployed via GitHub Pages with custom domain."
@@ -758,118 +713,5 @@
     </footer>
 
     <script src="../script.js"></script>
-
-    <script>
-      (function () {
-        const chips = document.querySelectorAll(".chip");
-        const search = document.getElementById("projectSearch");
-        const grid = document.getElementById("projectGrid");
-        const cards = Array.from(grid.querySelectorAll(".project--open"));
-
-        let activeFilter = "all";
-
-        function matches(card) {
-          const filter = card.getAttribute("data-filter") || "";
-          const title = (card.getAttribute("data-title") || "").toLowerCase();
-          const tags  = (card.getAttribute("data-tags") || "").toLowerCase();
-          const q = (search.value || "").trim().toLowerCase();
-
-          const filterOk = activeFilter === "all" || filter === activeFilter;
-          const searchOk = !q || title.includes(q) || tags.includes(q);
-          return filterOk && searchOk;
-        }
-
-        function apply() {
-          cards.forEach(card => {
-            card.style.display = matches(card) ? "" : "none";
-          });
-        }
-
-        chips.forEach(btn => {
-          btn.addEventListener("click", () => {
-            chips.forEach(b => b.classList.remove("is-active"));
-            btn.classList.add("is-active");
-            activeFilter = btn.dataset.filter;
-            apply();
-          });
-        });
-
-        search.addEventListener("input", apply);
-
-        // Modal
-        const modal = document.getElementById("projectModal");
-        const modalTitle = document.getElementById("modalTitle");
-        const modalSummary = document.getElementById("modalSummary");
-        const modalTools = document.getElementById("modalTools");
-        const modalResults = document.getElementById("modalResults");
-        const modalLinks = document.getElementById("modalLinks");
-
-        function openModal(card) {
-          modal.classList.add("is-open");
-          modal.setAttribute("aria-hidden", "false");
-
-          modalTitle.textContent = card.dataset.title || "";
-          modalSummary.textContent = card.dataset.summary || "";
-
-          modalTools.innerHTML = "";
-          (card.dataset.tools || "").split(",").map(s => s.trim()).filter(Boolean).forEach(t => {
-            const li = document.createElement("li");
-            li.textContent = t;
-            modalTools.appendChild(li);
-          });
-
-          modalResults.innerHTML = "";
-          (card.dataset.results || "")
-            .split(";")
-            .map(s => s.trim())
-            .filter(Boolean)
-            .forEach(r => {
-              const li = document.createElement("li");
-              li.textContent = r;
-              modalResults.appendChild(li);
-            });
-
-          modalLinks.innerHTML = "";
-          try {
-            const links = JSON.parse(card.dataset.links || "[]");
-            links.forEach(l => {
-              const a = document.createElement("a");
-              a.className = "link";
-              a.href = l.href;
-              a.target = "_blank";
-              a.rel = "noopener";
-              a.textContent = l.label;
-              modalLinks.appendChild(a);
-              modalLinks.appendChild(document.createElement("br"));
-            });
-          } catch (_) {}
-
-          document.body.style.overflow = "hidden";
-        }
-
-        function closeModal() {
-          modal.classList.remove("is-open");
-          modal.setAttribute("aria-hidden", "true");
-          document.body.style.overflow = "";
-        }
-
-        grid.addEventListener("click", (e) => {
-          const btn = e.target.closest(".link-btn");
-          const card = e.target.closest(".project--open");
-          if (!card || !btn) return;
-          openModal(card);
-        });
-
-        modal.addEventListener("click", (e) => {
-          if (e.target.dataset.close === "true") closeModal();
-        });
-
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
-        });
-
-        apply();
-      })();
-    </script>
   </body>
 </html>
