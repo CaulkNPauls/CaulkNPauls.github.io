@@ -8,6 +8,9 @@
 // - Projects page Explore + modal (only runs if #projectGrid exists)
 // ===============================
 
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const smoothOrAuto = prefersReducedMotion ? "auto" : "smooth";
+
 document.addEventListener("DOMContentLoaded", () => {
   // ===== Mobile nav toggle (works with CSS: .nav.is-open .nav__links { display:flex; } ) =====
   const nav = document.querySelector(".nav");
@@ -62,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
       projectsToggle.textContent = isCollapsed ? "View Projects" : "Hide Projects";
 
       if (!isCollapsed) {
-        projectsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        projectsSection.scrollIntoView({ behavior: smoothOrAuto, block: "start" });
       }
     });
   }
@@ -233,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function scrollToIndex(index) {
     const clamped = Math.max(0, Math.min(sections.length - 1, index));
     currentIndex = clamped;
-    sections[clamped].scrollIntoView({ behavior: "smooth", block: "start" });
+    sections[clamped].scrollIntoView({ behavior: smoothOrAuto, block: "start" });
     setActiveDot(clamped);
   }
 

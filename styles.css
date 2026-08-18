@@ -1492,3 +1492,79 @@ html, body { overflow-x: hidden; }
   max-width: 30ch;
 }
 
+/* =========================================================
+   MOTION: scroll reveal, staggered entrances, hover lift,
+   hero load-in. All gated behind prefers-reduced-motion —
+   content is fully visible/static by default with no JS/motion.
+========================================================= */
+html{ scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: no-preference){
+
+  /* ---- Scroll reveal (.reveal, toggled to .is-visible by script.js) ---- */
+  .reveal{
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 600ms ease, transform 600ms ease;
+  }
+  .reveal.is-visible{
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger children in common card/list containers */
+  .grid--3 > .reveal:nth-child(2),
+  .cards > .reveal:nth-child(2),
+  .cards--static > .reveal:nth-child(2),
+  .timeline--v2 > .reveal:nth-child(2),
+  .skills-grid > .reveal:nth-child(2),
+  .coursework-grid > .reveal:nth-child(2),
+  .evidence-grid > .reveal:nth-child(2){ transition-delay: 90ms; }
+
+  .grid--3 > .reveal:nth-child(3),
+  .cards > .reveal:nth-child(3),
+  .cards--static > .reveal:nth-child(3),
+  .timeline--v2 > .reveal:nth-child(3),
+  .skills-grid > .reveal:nth-child(3),
+  .evidence-grid > .reveal:nth-child(3){ transition-delay: 180ms; }
+
+  .cards--static > .reveal:nth-child(4),
+  .timeline--v2 > .reveal:nth-child(4),
+  .evidence-grid > .reveal:nth-child(4){ transition-delay: 270ms; }
+
+  .cards--static > .reveal:nth-child(5){ transition-delay: 360ms; }
+  .cards--static > .reveal:nth-child(6){ transition-delay: 450ms; }
+  .cards--static > .reveal:nth-child(7){ transition-delay: 540ms; }
+  .cards--static > .reveal:nth-child(8){ transition-delay: 630ms; }
+
+  /* ---- Hover lift on interactive cards ---- */
+  .project,
+  .role--v2,
+  .skills-card{
+    transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  }
+  .project:hover,
+  .role--v2:hover,
+  .skills-card:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.07);
+  }
+
+  /* ---- Hero load-in (above the fold, so animate on load not scroll) ---- */
+  .hero__eyebrow, .page-hero__eyebrow{ animation: heroUp 650ms ease both; }
+  .hero__title, .page-hero__title{ animation: heroUp 650ms ease both 80ms; }
+  .hero__subtitle, .page-hero__subtitle{ animation: heroUp 650ms ease both 160ms; }
+  .cta--v2, .page-hero__cta{ animation: heroUp 650ms ease both 240ms; }
+  .hero__factline, .page-hero__factline{ animation: heroUp 650ms ease both 320ms; }
+  .hero__photo{ animation: heroFade 900ms ease both 200ms; }
+}
+
+@keyframes heroUp{
+  from{ opacity: 0; transform: translateY(14px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFade{
+  from{ opacity: 0; }
+  to{ opacity: 1; }
+}
+
