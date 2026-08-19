@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Edit mode | Paul Poleon Jr</title>
+  <link rel="icon" href="/assets/logo.website.png?v=2">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="page-admin">
+<div class="admin-shell">
+
+  <header class="admin-header">
+    <div>
+      <div class="admin-header__title">Edit mode</div>
+      <div class="admin-header__sub">Connect once, then edit Projects, Experience, Skills, and Photos right on the live pages — click things where they actually appear.</div>
+    </div>
+  </header>
+
+  <section class="card admin-gate" id="loginView">
+    <div class="card__title">Sign in</div>
+    <p class="muted">This area is locked. Enter the admin username and password to continue.</p>
+    <label class="admin-field">
+      <span class="admin-field__label">Username</span>
+      <input id="loginUser" class="input" type="text" autocomplete="username" autocapitalize="off" spellcheck="false">
+    </label>
+    <label class="admin-field">
+      <span class="admin-field__label">Password</span>
+      <input id="loginPass" class="input" type="password" autocomplete="current-password">
+    </label>
+    <div class="admin-gate__row">
+      <button class="btn" id="loginBtn" type="button">Unlock</button>
+    </div>
+    <p class="admin-gate__status muted" id="loginStatus"></p>
+  </section>
+
+  <section class="card admin-gate" id="gateView" hidden>
+    <div class="card__title">Connect your GitHub account</div>
+    <p class="muted">
+      This can only save changes if you provide a GitHub personal access token scoped to
+      <strong>just this repository</strong> (<code>CaulkNPauls/CaulkNPauls.github.io</code>), with
+      <strong>Contents: Read and write</strong> permission and nothing else. It's stored only in this
+      browser (never sent anywhere but <code>api.github.com</code>) and never committed to the site.
+    </p>
+    <ol class="admin-gate__steps muted">
+      <li>GitHub → Settings → Developer settings → <strong>Fine-grained tokens</strong> → Generate new token</li>
+      <li>Resource owner: <strong>CaulkNPauls</strong> · Repository access: <strong>Only select repositories</strong> → this repo</li>
+      <li>Permissions → Repository permissions → <strong>Contents: Read and write</strong></li>
+      <li>Generate, copy the token, and paste it below</li>
+    </ol>
+    <label class="admin-field admin-field--inline">
+      <span class="admin-field__label">Branch (defaults to main — the live site)</span>
+      <input id="branchInput" class="input" type="text" placeholder="main" autocomplete="off">
+    </label>
+    <div class="admin-gate__row">
+      <input id="tokenInput" class="input" type="password" placeholder="github_pat_…" autocomplete="off">
+      <button class="btn" id="connectBtn" type="button">Connect &amp; start editing</button>
+    </div>
+    <p class="admin-gate__status muted" id="gateStatus"></p>
+  </section>
+
+</div>
+<script src="editor.js"></script>
+</body>
+</html>

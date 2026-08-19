@@ -2,10 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://paulpoleon.com/</loc>
-    <lastmod>2026-02-04</lastmod>
+    <lastmod>2026-08-18</lastmod>
+  </url>
+  <url>
+    <loc>https://paulpoleon.com/about/</loc>
+    <lastmod>2026-08-18</lastmod>
+  </url>
+  <url>
+    <loc>https://paulpoleon.com/experience/</loc>
+    <lastmod>2026-08-18</lastmod>
   </url>
   <url>
     <loc>https://paulpoleon.com/projects/</loc>
-    <lastmod>2026-02-04</lastmod>
+    <lastmod>2026-08-18</lastmod>
+  </url>
+  <url>
+    <loc>https://paulpoleon.com/projects/flowsafe-pressure-testing-system/</loc>
+    <lastmod>2026-08-18</lastmod>
+  </url>
+  <url>
+    <loc>https://paulpoleon.com/projects/flowsafe-facility-flow-layout/</loc>
+    <lastmod>2026-08-18</lastmod>
+  </url>
+  <url>
+    <loc>https://paulpoleon.com/projects/flowsafe-valve-decoder/</loc>
+    <lastmod>2026-08-18</lastmod>
+  </url>
+  <url>
+    <loc>https://paulpoleon.com/projects/smartphone-prices/</loc>
+    <lastmod>2026-08-18</lastmod>
+  </url>
+  <url>
+    <loc>https://paulpoleon.com/projects/dualsense-ergonomics/</loc>
+    <lastmod>2026-08-18</lastmod>
+  </url>
+  <url>
+    <loc>https://paulpoleon.com/projects/ada-pool-lift/</loc>
+    <lastmod>2026-08-18</lastmod>
+  </url>
+  <url>
+    <loc>https://paulpoleon.com/projects/solidworks-ps5-model/</loc>
+    <lastmod>2026-08-18</lastmod>
+  </url>
+  <url>
+    <loc>https://paulpoleon.com/projects/wind-boat-prototype/</loc>
+    <lastmod>2026-08-18</lastmod>
+  </url>
+  <url>
+    <loc>https://paulpoleon.com/skills/</loc>
+    <lastmod>2026-08-18</lastmod>
   </url>
 </urlset>

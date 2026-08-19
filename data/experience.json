@@ -1,0 +1,75 @@
+[
+  {
+    "id": "flowsafe-intern",
+    "featured": true,
+    "icon": "briefcase",
+    "date": "2026 – Present",
+    "location": "Buffalo, NY",
+    "company": "FlowSafe / Dresser Utility Solutions",
+    "title": "Industrial Engineering Intern",
+    "summary": "I work across the factory floor and the data behind it—building tools that make manufacturing information visible, useful, and actionable.",
+    "bullets": [
+      "Developed a connected digital pressure-testing and reporting system — Raspberry Pi operator stations, live pressure capture, guided three-pop/bubble-test workflows, centralized test records, and a manager dashboard — with a planning-level estimate of ~1,453 labor-hours/year recoverable across testing, documentation, and administrative work.",
+      "Analyzed two years of production data and modeled the facility in AutoCAD (104 activity locations, 10,816 origin-destination travel paths) to identify material-flow improvements, producing a recommended future state with an estimated 18.75% reduction in modeled transportation effort and roughly a one-year planning-level payback.",
+      "Built a Python application (the Valve Decoder) that converted 19,567 historical shipped-valve records and 1,951 unique valve models from hard-to-use PDF pick-sheets into a structured, searchable database — used to close data gaps in the facility flow study and since expanded into a reusable engineering reference tool."
+    ],
+    "tags": ["Process Improvement", "Data Analysis", "Facility Layout", "Python", "Manufacturing Systems"],
+    "photo": null,
+    "photoNote": "Paul at a FlowSafe test station or reviewing a facility layout; remove confidential information from view.",
+    "link": { "label": "View the Digital Pressure-Testing System case study →", "href": "/projects/flowsafe-pressure-testing-system/" }
+  },
+  {
+    "id": "geek-squad-repair-agent",
+    "featured": false,
+    "icon": "wrench",
+    "date": "Sep 2023 – Present",
+    "location": "Buffalo, NY",
+    "company": "Best Buy — Geek Squad",
+    "title": "Advanced Repair Agent",
+    "summary": "Diagnosis, repair, communication, and disciplined execution under pressure.",
+    "bullets": [
+      "Developed and maintained positive customer relationships to encourage repeat business.",
+      "Installed new systems and components according to service orders and manufacturer instructions.",
+      "Conducted routine maintenance on machinery/equipment to support reliable performance."
+    ],
+    "tags": ["Customer Service", "Troubleshooting", "Process Discipline", "Time Management"],
+    "photo": null,
+    "link": null
+  },
+  {
+    "id": "kohls-retail-associate",
+    "featured": false,
+    "icon": "tag",
+    "date": "Jun 2023 – Sep 2023",
+    "location": "Buffalo, NY",
+    "company": "Kohl’s",
+    "title": "Retail Sales Associate",
+    "summary": "Customer service, operational accuracy, and team support.",
+    "bullets": [
+      "Assisted customers with purchases and returns while maintaining a positive, professional checkout experience.",
+      "Processed transactions quickly and accurately, handling cash/credit and store promotions.",
+      "Supported daily operations by restocking merchandise, maintaining clean displays, and providing product guidance."
+    ],
+    "tags": ["Queue Management", "Accuracy", "Communication", "Operations Support"],
+    "photo": null,
+    "link": null
+  },
+  {
+    "id": "common-council-intern",
+    "featured": false,
+    "icon": "landmark",
+    "date": "May 2023 – Jun 2023",
+    "location": "Buffalo, NY",
+    "company": "Buffalo Common Council",
+    "title": "Intern",
+    "summary": "Research, public-service writing, and meeting support.",
+    "bullets": [
+      "Drafted and edited official proclamations and documents recognizing community leaders and events.",
+      "Assisted in organizing and setting up Council meetings to support smooth, on-time proceedings.",
+      "Conducted research and provided administrative support to aid legislative and community initiatives."
+    ],
+    "tags": ["Writing", "Research", "Organization", "Stakeholder Support"],
+    "photo": null,
+    "link": null
+  }
+]

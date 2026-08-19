@@ -1,0 +1,77 @@
+{
+  "core": [
+    {
+      "id": "tools",
+      "icon": "wrench-plug",
+      "title": "Tools",
+      "description": "Software and platforms I’m comfortable using.",
+      "chips": ["SolidWorks CAD", "Engineering Drawings", "MATLAB", "Microsoft Excel", "Word", "PowerPoint"]
+    },
+    {
+      "id": "methods",
+      "icon": "flow",
+      "title": "Methods",
+      "description": "How I break down problems and improve processes.",
+      "chips": ["Process Mapping", "Lean", "Time Study", "Basic Statistics"]
+    },
+    {
+      "id": "strengths",
+      "icon": "star",
+      "title": "Strengths",
+      "description": "How I show up on a team.",
+      "chips": ["Clear communication", "Ownership & follow-through", "Detail-oriented execution", "Team collaboration"]
+    }
+  ],
+  "coursework": [
+    {
+      "id": "analytics-statistics",
+      "icon": "bars",
+      "title": "Analytics & Statistics",
+      "description": "Interpreting data and drawing conclusions.",
+      "chips": [
+        { "label": "IE 322 — Analytics & Computing for IE", "inProgress": false },
+        { "label": "EAS 305 — Applied Probability & Statistics", "inProgress": false },
+        { "label": "IE 306 — Statistics for Engineers", "inProgress": false }
+      ]
+    },
+    {
+      "id": "optimization-modeling",
+      "icon": "trend",
+      "title": "Optimization & Modeling",
+      "description": "Structured problem solving and decision-making.",
+      "chips": [
+        { "label": "IE 373 — Optimization (Deterministic)", "inProgress": false },
+        { "label": "IE 374 — Modeling of Stochastic Systems", "inProgress": false },
+        { "label": "MTH 306 — Differential Equations", "inProgress": false },
+        { "label": "IE 477 — Simulation Modeling & Analysis", "inProgress": true }
+      ]
+    },
+    {
+      "id": "operations-ie-core",
+      "icon": "building",
+      "title": "Operations & IE Core",
+      "description": "Planning, layout, and operational thinking.",
+      "chips": [
+        { "label": "IE 326 — Planning Production & Service Enterprises", "inProgress": false },
+        { "label": "IE 327 — Facility Design & Material Handling", "inProgress": false },
+        { "label": "IE 320 — Engineering Economy", "inProgress": false },
+        { "label": "IE 420 — Systems Engineering Practicum", "inProgress": true },
+        { "label": "IE 421 — Sustainable Manufacturing", "inProgress": true }
+      ]
+    },
+    {
+      "id": "human-factors-quality-comms",
+      "icon": "heart",
+      "title": "Human Factors & Quality & Communication",
+      "description": "Designing for people, consistency, and clear writing.",
+      "chips": [
+        { "label": "IE 323 — Human Factors in System Design", "inProgress": false },
+        { "label": "IE 408 — Quality Assurance", "inProgress": false },
+        { "label": "EAS 360 — STEM Communications", "inProgress": false },
+        { "label": "ENG 105 — Writing & Rhetoric", "inProgress": false },
+        { "label": "IE 409 — Six Sigma Quality", "inProgress": true },
+        { "label": "IE 435 — Human Centered Design for Interactive Systems", "inProgress": true }
+      ]
+    }
+  ]
+}

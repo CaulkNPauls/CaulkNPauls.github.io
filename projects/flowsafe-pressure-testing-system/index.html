@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Case study: a connected digital pressure-testing and reporting system built for FlowSafe / Dresser Utility Solutions by Paul Poleon Jr."
+    />
+    <title>Digital Pressure-Testing System | Paul Poleon Jr</title>
+
+  <link rel="icon" href="/assets/logo.website.png?v=2">
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Digital Pressure-Testing System | Paul Poleon Jr" />
+    <meta
+      property="og:description"
+      content="Case study: a connected digital pressure-testing and reporting system built for FlowSafe / Dresser Utility Solutions by Paul Poleon Jr."
+    />
+    <meta property="og:url" content="https://paulpoleon.com/projects/flowsafe-pressure-testing-system/" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+
+  <body class="editorial-theme">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="portfolio-nav">
+      <a class="portfolio-nav__mark" href="/" aria-label="Home"><img src="/assets/logo.website.png" alt="Paul Poleon logo" class="portfolio-nav__logo"></a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <nav id="navLinks" class="portfolio-nav__links" aria-label="Primary">
+        <a href="/about/">About</a>
+        <a href="/projects/" aria-current="page">Projects</a>
+        <a href="/experience/">Experience</a>
+        <a href="/skills/">Skills</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- PAGE HERO -->
+      <section class="page-hero">
+        <div class="container page-hero__inner">
+          <p class="muted small case-study-nav">
+            <a class="link" href="/projects/">← Back to Projects</a>
+          </p>
+
+          <div class="page-hero__grid">
+            <div class="page-hero__copy">
+              <p class="page-hero__eyebrow">FlowSafe / Dresser Utility Solutions</p>
+              <h1 class="page-hero__title">
+                Digital Pressure-Testing System
+              </h1>
+              <p class="page-hero__subtitle muted">
+                A connected digital pressure-testing and reporting ecosystem — from operator
+                station to manager dashboard — built to replace paper-based valve testing with
+                a guided, centrally recorded digital workflow.
+              </p>
+
+              <div class="cta page-hero__cta">
+                <a class="btn" href="/experience/">See Experience</a>
+                <a class="btn btn--ghost" href="/assets/resume.pdf" target="_blank" rel="noopener">
+                  Download resume
+                </a>
+              </div>
+
+              <p class="page-hero__factline">
+                Role: Industrial Engineering Intern &nbsp;·&nbsp; FlowSafe / Dresser Utility Solutions
+                &nbsp;·&nbsp; Continuing during the academic semester
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- PROBLEM -->
+      <section class="section case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Problem</h2>
+          <p>
+            Valve pressure testing at FlowSafe relied on physical dial gauges and manual,
+            paper-based recordkeeping. Test results — including the three-pop and bubble-test
+            procedures used to verify a valve — existed only as handwritten records tied to a
+            single physical location, with no centralized digital record, no stored pressure
+            trace, and no live visibility into what was happening on the test stands from
+            outside the test area.
+          </p>
+        </div>
+      </section>
+
+      <!-- WHY IT MATTERED -->
+      <section class="section section--alt case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Why it mattered</h2>
+          <p>
+            Every test still required a technician to run the procedure, then separately
+            transcribe results into paperwork that fed the Functional Test Report (FTR) and
+            other downstream documentation. That duplication — testing, then documenting the
+            test — consumed real technician and administrative time on every valve that shipped,
+            and gave managers no way to see test-stand status without physically walking the
+            floor.
+          </p>
+        </div>
+      </section>
+
+      <!-- CONSTRAINTS -->
+      <section class="section case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Constraints</h2>
+          <ul>
+            <li>Had to work on the shop floor, integrated with existing physical digital pressure gauges rather than replacing them.</li>
+            <li>Had to preserve FlowSafe's existing test procedures (three-pop testing, bubble-test workflows) rather than change the underlying engineering process.</li>
+            <li>Had to support the existing Functional Test Report (FTR) output that downstream documentation depends on.</li>
+            <li>Full ERP integration was out of scope — the system needed to lay a read-only foundation for a future Epicor integration, not replace or write into Epicor.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- MY ROLE -->
+      <section class="section section--alt case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>My role</h2>
+          <p>
+            I developed the system as my project during my Industrial Engineering internship at
+            FlowSafe / Dresser Utility Solutions — from the operator-station hardware and guided
+            testing workflow through the centralized data model and the manager-facing dashboard.
+          </p>
+        </div>
+      </section>
+
+      <!-- DATA / ENGINEERING APPROACH -->
+      <section class="section case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Data &amp; engineering approach</h2>
+          <ul>
+            <li>Raspberry Pi operator stations at the test stands, connected to the physical digital pressure gauges for live pressure capture during a test.</li>
+            <li>Guided, on-screen operator workflows that walk a technician through the correct testing sequence — including the three-pop and bubble-test procedures — instead of relying on memory or a paper checklist.</li>
+            <li>Every test tagged with operator, job, and valve identification, and its full pressure trace stored against a centralized test record rather than a handwritten sheet.</li>
+            <li>A manager-facing dashboard giving live visibility into test-stand status, independent of walking the floor.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- DEVELOPMENT PROCESS -->
+      <section class="section section--alt case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Development process</h2>
+          <p>
+            I built the system incrementally on the shop floor: standing up an operator station
+            and gauge integration first, then layering in the guided workflow, the centralized
+            test-record database and pressure-trace storage, and the manager dashboard on top of
+            that same data. Functional Test Report support and the read-only Epicor integration
+            foundation were built to sit on the same central record, so the live test data,
+            the FTR, and the future ERP link all trace back to one source instead of three
+            separate, disconnected records.
+          </p>
+        </div>
+      </section>
+
+      <!-- SOLUTION -->
+      <section class="section case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Solution</h2>
+          <p>
+            The result is a connected pressure-testing ecosystem: operators run guided tests at
+            Raspberry Pi stations wired to the physical digital gauges, every test is captured
+            with its full pressure trace and operator/job/valve identification, and that record
+            is centralized rather than sitting on paper. Managers get live visibility into
+            test-stand activity, the Functional Test Report draws from the same recorded data,
+            and the system has a read-only foundation in place for a future Epicor connection.
+          </p>
+        </div>
+      </section>
+
+      <!-- QUANTIFIED RESULT -->
+      <section class="section section--alt case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Quantified result</h2>
+          <div class="result-callout">
+            <div class="result-callout__stat">
+              <div class="result-callout__value">~1,453 hrs/yr</div>
+              <div class="result-callout__label">Projected labor-hours recoverable across testing, documentation, and admin work</div>
+            </div>
+            <p class="result-callout__note">
+              This is a planning-level estimate presented internally at FlowSafe, not an
+              audited or realized figure. No internal dollar-value estimates are published here.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- VISUAL EVIDENCE -->
+      <section class="section case-study-section reveal">
+        <div class="container">
+          <h2>Visual evidence</h2>
+          <p class="muted" style="margin: 0 0 16px; max-width: 72ch;">
+            Placeholders below — sanitized screenshots and photos to be added.
+          </p>
+          <div class="evidence-grid">
+            <div class="evidence-placeholder reveal">
+              <div class="evidence-placeholder__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="13" rx="2" />
+                  <path d="M8 20h8M12 17v3" />
+                </svg>
+              </div>
+              <div class="evidence-placeholder__label">Operator station UI</div>
+              <div class="evidence-placeholder__note">Guided test workflow screenshot</div>
+            </div>
+            <div class="evidence-placeholder reveal">
+              <div class="evidence-placeholder__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6" />
+                </svg>
+              </div>
+              <div class="evidence-placeholder__label">Manager dashboard</div>
+              <div class="evidence-placeholder__note">Live test-stand visibility view</div>
+            </div>
+            <div class="evidence-placeholder reveal">
+              <div class="evidence-placeholder__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 17l4-7 3 4 4-9 3 6 4-3" />
+                </svg>
+              </div>
+              <div class="evidence-placeholder__label">Pressure trace</div>
+              <div class="evidence-placeholder__note">Example recorded test trace</div>
+            </div>
+            <div class="evidence-placeholder reveal">
+              <div class="evidence-placeholder__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="7" width="18" height="13" rx="2" />
+                  <path d="M8 7l1.4-2h5.2L16 7" />
+                  <circle cx="12" cy="13.5" r="3.3" />
+                </svg>
+              </div>
+              <div class="evidence-placeholder__label">Test-stand photo</div>
+              <div class="evidence-placeholder__note">Raspberry Pi station in place, sanitized</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TECHNOLOGIES & TOOLS -->
+      <section class="section section--alt case-study-section reveal">
+        <div class="container">
+          <h2>Technologies &amp; tools</h2>
+          <ul class="tags">
+            <li>Raspberry Pi</li>
+            <li>Digital pressure gauge integration</li>
+            <li>Centralized test-record database</li>
+            <li>Live manager dashboard</li>
+            <li>Functional Test Report (FTR) support</li>
+            <li>Read-only Epicor integration foundation</li>
+          </ul>
+          <p class="muted small" style="margin-top: 12px;">
+            [Placeholder — add the specific programming language, framework, and database used.]
+          </p>
+        </div>
+      </section>
+
+      <!-- TAKEAWAY -->
+      <section class="section case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>What I learned</h2>
+          <p>
+            [Placeholder — your own engineering takeaway from this project: what you'd tell a
+            recruiter about what building this taught you, e.g. about designing for how
+            operators actually work, or about connecting shop-floor data to management
+            visibility.]
+          </p>
+        </div>
+      </section>
+
+      <div class="container case-study-footer-cta">
+        <div class="card experience-cta__card">
+          <div>
+            <div class="card__title">More FlowSafe work</div>
+            <p class="muted" style="margin:0;">
+              This is one of three FlowSafe projects — see the Facility Material Flow &amp;
+              Layout Analysis and the Valve Decoder too.
+            </p>
+          </div>
+          <div class="experience-cta__actions">
+            <a class="btn" href="/projects/">View all projects</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="editorial-footer"><span>© <span id="year"></span> Paul Poleon Jr</span><span>Industrial engineer · problem solver · teammate</span><a href="#main">Back to top ↑</a></footer>
+
+    <script src="../../script.js"></script>
+  </body>
+</html>

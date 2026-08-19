@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Case study: the Valve Decoder, a Python application built for FlowSafe / Dresser Utility Solutions by Paul Poleon Jr."
+    />
+    <title>Valve Decoder | Paul Poleon Jr</title>
+
+  <link rel="icon" href="/assets/logo.website.png?v=2">
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Valve Decoder | Paul Poleon Jr" />
+    <meta
+      property="og:description"
+      content="Case study: the Valve Decoder, a Python application built for FlowSafe / Dresser Utility Solutions by Paul Poleon Jr."
+    />
+    <meta property="og:url" content="https://paulpoleon.com/projects/flowsafe-valve-decoder/" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+
+  <body class="editorial-theme">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="portfolio-nav">
+      <a class="portfolio-nav__mark" href="/" aria-label="Home"><img src="/assets/logo.website.png" alt="Paul Poleon logo" class="portfolio-nav__logo"></a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <nav id="navLinks" class="portfolio-nav__links" aria-label="Primary">
+        <a href="/about/">About</a>
+        <a href="/projects/" aria-current="page">Projects</a>
+        <a href="/experience/">Experience</a>
+        <a href="/skills/">Skills</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- PAGE HERO -->
+      <section class="page-hero">
+        <div class="container page-hero__inner">
+          <p class="muted small case-study-nav">
+            <a class="link" href="/projects/">← Back to Projects</a>
+          </p>
+
+          <div class="page-hero__grid">
+            <div class="page-hero__copy">
+              <p class="page-hero__eyebrow">FlowSafe / Dresser Utility Solutions</p>
+              <h1 class="page-hero__title">
+                Valve Decoder
+              </h1>
+              <p class="page-hero__subtitle muted">
+                A Python application that turns FlowSafe's historical PDF pick-sheets into a
+                structured, searchable engineering database.
+              </p>
+
+              <div class="cta page-hero__cta">
+                <a class="btn" href="/experience/">See Experience</a>
+                <a class="btn btn--ghost" href="/assets/resume.pdf" target="_blank" rel="noopener">
+                  Download resume
+                </a>
+              </div>
+
+              <p class="page-hero__factline">
+                Role: Industrial Engineering Intern &nbsp;·&nbsp; FlowSafe / Dresser Utility Solutions
+                &nbsp;·&nbsp; Continuing during the academic semester
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- PROBLEM -->
+      <section class="section case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Problem</h2>
+          <p>
+            FlowSafe's historical shipped-valve records existed only as PDF pick-sheets — a
+            format that's fine for a single job, but effectively unusable as a data source once
+            you need to search, aggregate, or analyze across thousands of them.
+          </p>
+        </div>
+      </section>
+
+      <!-- WHY IT MATTERED -->
+      <section class="section section--alt case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Why it mattered</h2>
+          <p>
+            The facility material-flow analysis needed reliable historical valve-shipment data
+            to calculate accurate travel-path frequencies between facility locations. That data
+            existed, but it was locked inside thousands of individual PDF documents with no
+            structured or searchable form — directly blocking the facility study until a real
+            dataset existed.
+          </p>
+        </div>
+      </section>
+
+      <!-- CONSTRAINTS -->
+      <section class="section case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Constraints</h2>
+          <ul>
+            <li>No clean structured export of the historical pick-sheet data existed — only the original PDFs.</li>
+            <li>The extracted data needed to be accurate enough to support a real quantitative analysis, not just a rough approximation.</li>
+            <li>Needed to be general enough to stay useful as a reference tool after the immediate need (the facility study) was done.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- MY ROLE -->
+      <section class="section section--alt case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>My role</h2>
+          <p>
+            I built the Valve Decoder independently as my project during my Industrial
+            Engineering internship at FlowSafe / Dresser Utility Solutions.
+          </p>
+        </div>
+      </section>
+
+      <!-- DATA / ENGINEERING APPROACH -->
+      <section class="section case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Data &amp; engineering approach</h2>
+          <ul>
+            <li>Built a Python application to parse historical PDF pick-sheets and extract structured records.</li>
+            <li>Processed 19,567 shipped-valve records covering 1,951 unique valve models.</li>
+            <li>Structured the extracted data into a searchable database, rather than a one-off export.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- DEVELOPMENT PROCESS -->
+      <section class="section section--alt case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Development process</h2>
+          <p>
+            I built the PDF-parsing and data-extraction pipeline first, validated the extracted
+            records for accuracy against the source documents, then structured the output into a
+            searchable database — usable both for the immediate facility material-flow analysis
+            and as a standalone engineering reference tool afterward.
+          </p>
+        </div>
+      </section>
+
+      <!-- SOLUTION -->
+      <section class="section case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Solution</h2>
+          <p>
+            A Python application that converts FlowSafe's historical PDF pick-sheets into a
+            structured, searchable database of shipped-valve records — closing the data gap that
+            was blocking the facility material-flow study, and outliving that original purpose as
+            a reusable production/engineering reference tool.
+          </p>
+        </div>
+      </section>
+
+      <!-- QUANTIFIED RESULT -->
+      <section class="section section--alt case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>Quantified result</h2>
+          <div class="result-callout">
+            <div class="result-callout__stat">
+              <div class="result-callout__value">19,567</div>
+              <div class="result-callout__label">Shipped-valve records structured from historical PDF pick-sheets</div>
+            </div>
+            <div class="result-callout__stat">
+              <div class="result-callout__value">1,951</div>
+              <div class="result-callout__label">Unique valve models covered</div>
+            </div>
+            <p class="result-callout__note">
+              This dataset directly closed the data gap that was blocking the Facility Material
+              Flow &amp; Layout Analysis, and has since been used as a standalone reference tool.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- VISUAL EVIDENCE -->
+      <section class="section case-study-section reveal">
+        <div class="container">
+          <h2>Visual evidence</h2>
+          <p class="muted" style="margin: 0 0 16px; max-width: 72ch;">
+            Placeholders below — sanitized screenshots to be added.
+          </p>
+          <div class="evidence-grid">
+            <div class="evidence-placeholder reveal">
+              <div class="evidence-placeholder__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="3" width="12" height="16" rx="1" />
+                  <path d="M8 8h4M8 11h4M8 14h2" />
+                </svg>
+              </div>
+              <div class="evidence-placeholder__label">Source pick-sheet</div>
+              <div class="evidence-placeholder__note">Example historical PDF, sanitized</div>
+            </div>
+            <div class="evidence-placeholder reveal">
+              <div class="evidence-placeholder__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="13" rx="2" />
+                  <path d="M8 20h8M12 17v3" />
+                </svg>
+              </div>
+              <div class="evidence-placeholder__label">Application interface</div>
+              <div class="evidence-placeholder__note">Valve Decoder UI screenshot</div>
+            </div>
+            <div class="evidence-placeholder reveal">
+              <div class="evidence-placeholder__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m21 21-4.3-4.3" />
+                </svg>
+              </div>
+              <div class="evidence-placeholder__label">Search / database view</div>
+              <div class="evidence-placeholder__note">Structured, searchable record view</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TECHNOLOGIES & TOOLS -->
+      <section class="section section--alt case-study-section reveal">
+        <div class="container">
+          <h2>Technologies &amp; tools</h2>
+          <ul class="tags">
+            <li>Python</li>
+            <li>PDF data extraction</li>
+            <li>Structured / searchable database</li>
+          </ul>
+          <p class="muted small" style="margin-top: 12px;">
+            [Placeholder — add the specific PDF-parsing library and database technology used.]
+          </p>
+        </div>
+      </section>
+
+      <!-- TAKEAWAY -->
+      <section class="section case-study-section reveal">
+        <div class="container case-study-body">
+          <h2>What I learned</h2>
+          <p>
+            [Placeholder — your own engineering takeaway from this project: what you'd tell a
+            recruiter about what building this taught you, e.g. about unlocking legacy data
+            sources, or about building a tool that outlives its original one-off purpose.]
+          </p>
+        </div>
+      </section>
+
+      <div class="container case-study-footer-cta">
+        <div class="card experience-cta__card">
+          <div>
+            <div class="card__title">More FlowSafe work</div>
+            <p class="muted" style="margin:0;">
+              This is one of three FlowSafe projects — see the Digital Pressure-Testing System
+              and the Facility Material Flow &amp; Layout Analysis too.
+            </p>
+          </div>
+          <div class="experience-cta__actions">
+            <a class="btn" href="/projects/">View all projects</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="editorial-footer"><span>© <span id="year"></span> Paul Poleon Jr</span><span>Industrial engineer · problem solver · teammate</span><a href="#main">Back to top ↑</a></footer>
+
+    <script src="../../script.js"></script>
+  </body>
+</html>
