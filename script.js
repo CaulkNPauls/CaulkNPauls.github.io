@@ -460,11 +460,20 @@ function showFlashcard(index) {
   if (prevBtn) prevBtn.disabled = flashcardIndex === 0;
   if (nextBtn) nextBtn.disabled = flashcardIndex === cards.length - 1;
 
-  // Field Notes theme only: swaps the margin doodle to match the current
-  // question. No-op everywhere else — .flashcards-doodle only exists on
-  // the About page.
+  // Field Notes theme only: swaps the margin doodle(s) to match the
+  // current question. No-op everywhere else — .flashcards-doodle only
+  // exists on the About page. A doodle that's actually being swapped
+  // away from (was active, isn't anymore) gets a one-shot .is-erasing
+  // class so the eraser-sweep keyframe animation (styles.css) plays —
+  // gated this way, rather than off :not(.is-active) directly, so it
+  // never fires on first paint, only on a real question change.
   document.querySelectorAll(".flashcards-doodle").forEach((d) => {
-    d.classList.toggle("is-active", Number(d.dataset.doodleIndex) === flashcardIndex);
+    const shouldBeActive = Number(d.dataset.doodleIndex) === flashcardIndex;
+    if (!shouldBeActive && d.classList.contains("is-active")) {
+      d.classList.add("is-erasing");
+      d.addEventListener("animationend", () => d.classList.remove("is-erasing"), { once: true });
+    }
+    d.classList.toggle("is-active", shouldBeActive);
   });
 }
 

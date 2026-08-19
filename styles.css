@@ -2168,17 +2168,47 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
   filter: url(#sketchy) blur(0px);
   opacity: 1;
   transform: translate(0, 0) rotate(0deg) scale(1);
-  transition: filter 550ms ease, opacity 550ms ease, transform 550ms ease;
+  transition: filter 750ms ease, opacity 750ms ease, transform 750ms ease;
 }
-/* Eraser smudge: on deactivate, the whole doodle blurs, fades, drifts
-   sideways and tilts — like a hand rubbing it out — while its lines
-   simultaneously retract (below). Plain bidirectional transition, so
-   activating plays the same motion in reverse: blur clears, it drifts
-   back into place, then draws in. */
+/* Eraser smudge: on deactivate, the whole doodle blurs hard, fades
+   almost fully out, drifts, tilts, and shrinks — like a hand rubbing it
+   out — while its lines simultaneously retract (below). Deliberately
+   heavy-handed (15px blur, near-zero opacity) so it reads as distinct
+   from a plain fade. Plain bidirectional transition, so activating
+   plays the same motion in reverse: blur clears, it drifts back into
+   place at full size, then draws in. */
 .fieldnotes-theme .flashcards-doodle:not(.is-active){
-  filter: url(#sketchy) blur(7px);
-  opacity: .1;
-  transform: translate(5px, -3px) rotate(-4deg) scale(.94);
+  filter: url(#sketchy) blur(15px);
+  opacity: .04;
+  transform: translate(12px, -8px) rotate(-9deg) scale(.82);
+}
+/* A literal eraser dragging across, on top of the smudge above — a
+   small pink-rubber shape that sweeps left-to-right over the doodle.
+   Only plays once per actual question change: showFlashcard() in
+   script.js adds .is-erasing to a doodle for exactly one animation
+   cycle when it's swapped away from, then removes it — never on first
+   paint, since nothing was previously showing to erase. */
+.fieldnotes-theme .flashcards-doodle::after{
+  content: "";
+  position: absolute;
+  top: 50%; left: -40%;
+  width: 38%; height: 20px;
+  margin-top: -10px;
+  background: linear-gradient(135deg, #f6ddc9, #dfa87e);
+  border: 1px solid rgba(28, 28, 26, .3);
+  border-radius: 5px;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, .28);
+  opacity: 0;
+  transform: rotate(-10deg);
+}
+.fieldnotes-theme .flashcards-doodle.is-erasing::after{
+  animation: eraserSweep 700ms ease-in-out;
+}
+@keyframes eraserSweep{
+  0%{ opacity: 0; left: -40%; }
+  12%{ opacity: 1; }
+  88%{ opacity: 1; }
+  100%{ opacity: 0; left: 100%; }
 }
 /* Hand-drawn reveal: pathLength="1" on every shape (set in the markup)
    normalizes its length to 1 regardless of actual size, so a single
@@ -2207,6 +2237,7 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
   .fieldnotes-theme .flashcards-doodle circle,
   .fieldnotes-theme .flashcards-doodle rect,
   .fieldnotes-theme .flashcards-doodle ellipse{ transition: none; }
+  .fieldnotes-theme .flashcards-doodle.is-erasing::after{ animation: none; }
 }
 .fieldnotes-theme .fd--tl{ top: 6px; left: 0; }
 .fieldnotes-theme .fd--tr{ top: 6px; right: 0; }
