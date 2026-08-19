@@ -1,0 +1,59 @@
+{
+  "hero": {
+    "kicker": "Industrial Engineering Portfolio",
+    "nameMain": "Paul",
+    "nameAccent": "Poleon Jr.",
+    "lede": "I look at how people, data, and technology move through a system—then I build a better way for them to work together.",
+    "ctaPrimaryLabel": "Explore my work",
+    "ctaSecondaryLabel": "View résumé",
+    "status": ["Based in Buffalo, NY", "University at Buffalo", "Open to engineering opportunities"],
+    "placeholderNote": "A candid vertical photo of Paul in a manufacturing or engineering environment—beside a test station, CAD workstation, or physical prototype."
+  },
+  "summary": {
+    "label": "01 / Summary",
+    "headingLead": "I’m an engineer who likes the space between how things work and",
+    "headingAccent": "how they could work better.",
+    "paragraphs": [
+      "I started in mechanical engineering because I loved modeling, building, and understanding physical things. Working as an Advanced Repair Agent at Geek Squad widened that view: the real challenge was rarely just the device. It was diagnosis, communication, time, process, and people.",
+      "That realization led me to Industrial Engineering at the University at Buffalo. Today I use process mapping, analysis, CAD, and software to turn messy real-world problems into systems that are easier to understand, use, and improve."
+    ],
+    "linkText": "The longer version of my story →"
+  },
+  "brief": {
+    "label": "02 / In brief",
+    "strengths": {
+      "title": "Strengths",
+      "items": [
+        "Seeing the whole system, not just one part.",
+        "Staying calm when the problem is not obvious.",
+        "Turning technical work into something people can use."
+      ]
+    },
+    "curious": {
+      "title": "Always curious about",
+      "items": [
+        "Why a process works the way it does.",
+        "The play, workflow, or system behind the result.",
+        "Whether I can model it, fix it, or make it faster."
+      ]
+    }
+  },
+  "origin": {
+    "label": "05 / Beyond engineering",
+    "placeholderNote": "Paul coaching football, at an Eagle Scout event, or with teammates—something candid that shows leadership and community.",
+    "kicker": "The person behind the projects",
+    "heading": "Team-first, by experience.",
+    "paragraphs": [
+      "Earning Eagle Scout and serving as Senior Patrol Leader taught me responsibility before engineering ever gave it a name. Football and lacrosse taught me to read the entire field, communicate early, and stay composed. Returning to coach taught me that leadership is not about having every answer—it is about helping a group find its best one.",
+      "I bring that mindset to technical teams: listen closely, make the problem visible, and build a solution people believe in enough to use."
+    ]
+  },
+  "contact": {
+    "kicker": "Have a problem worth improving?",
+    "headingLine1": "Let’s build the",
+    "headingLine2": "better version."
+  },
+  "footer": {
+    "tagline": "Industrial engineer · problem solver · teammate"
+  }
+}

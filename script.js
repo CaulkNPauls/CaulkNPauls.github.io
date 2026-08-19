@@ -11,6 +11,14 @@
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const smoothOrAuto = prefersReducedMotion ? "auto" : "smooth";
 
+// ===== Edit mode: load the in-page admin editor only when ?edit=1 is present =====
+if (new URLSearchParams(location.search).get("edit") === "1" && !document.getElementById("gateView")) {
+  const editorScript = document.createElement("script");
+  editorScript.src = "/dev/editor.js";
+  editorScript.defer = true;
+  document.head.appendChild(editorScript);
+}
+
 // ===============================
 // Data-driven content (Experience / Projects / Skills)
 // Reads data/*.json and renders it into empty mount elements, so those
@@ -67,6 +75,7 @@ function renderExperience(list, mount) {
     const isLast = i === list.length - 1;
     const article = mkEl("article", {
       className: "timeline-node reveal" + (role.featured ? " timeline-node--featured" : ""),
+      attrs: { "data-edit-entity": "experience", "data-edit-index": i, "data-edit-photo-field": "photo" },
     });
 
     const rail = mkEl("div", { className: "timeline-node__rail" });
@@ -81,7 +90,11 @@ function renderExperience(list, mount) {
     article.appendChild(rail);
 
     const card = mkEl("div", { className: "timeline-node__card" });
-    card.appendChild(mkEl("span", { className: "timeline-node__date", text: `${role.date} · ${role.location}` }));
+    const dateLine = mkEl("p", { className: "timeline-node__dateline" });
+    dateLine.appendChild(mkEl("span", { className: "timeline-node__date", text: role.date }));
+    dateLine.appendChild(document.createTextNode(" · "));
+    dateLine.appendChild(mkEl("span", { className: "timeline-node__location", text: role.location }));
+    card.appendChild(dateLine);
     card.appendChild(mkEl("p", { className: "timeline-node__company", text: role.company }));
     card.appendChild(mkEl("h3", { text: role.title }));
     if (role.summary) card.appendChild(mkEl("p", { text: role.summary }));
@@ -134,7 +147,28 @@ function renderFeaturedProjects(list, mount, variant) {
 
   list.forEach((p, i) => {
     if (variant === "hub") {
-      const article = mkEl("article", { className: "project reveal" });
+      const article = mkEl("article", {
+        className: "project reveal",
+        attrs: { "data-edit-entity": "projects-featured", "data-edit-index": i, "data-edit-photo-field": "image" },
+      });
+
+      if (p.image && p.image.src) {
+        article.appendChild(mkEl("img", {
+          className: "project__thumb",
+          attrs: { src: p.image.src, alt: p.image.alt || p.title, loading: "lazy" },
+        }));
+      } else {
+        const ph = mkEl("div", {
+          className: "editorial-placeholder editorial-placeholder--project project__thumb project__thumb--placeholder",
+          attrs: { role: "img", "aria-label": "Photo placeholder" },
+        });
+        const wrap = document.createElement("div");
+        wrap.appendChild(mkEl("strong", { text: "Add a photo" }));
+        wrap.appendChild(mkEl("p", { text: p.placeholderNote || "Add a project photo or screenshot." }));
+        ph.appendChild(wrap);
+        article.appendChild(ph);
+      }
+
       const h3 = document.createElement("h3");
       h3.appendChild(mkEl("a", { className: "project__title-link", text: p.title, attrs: { href: p.href } }));
       article.appendChild(h3);
@@ -155,7 +189,12 @@ function renderFeaturedProjects(list, mount, variant) {
     // "home" variant
     const a = mkEl("a", {
       className: "editorial-project reveal" + (i === 0 ? " editorial-project--large" : ""),
-      attrs: { href: p.href },
+      attrs: {
+        href: p.href,
+        "data-edit-entity": "projects-featured",
+        "data-edit-index": i,
+        "data-edit-photo-field": "image",
+      },
     });
 
     let visual;
@@ -190,10 +229,12 @@ function renderQuickviewProjects(list, mount) {
   if (!mount) return;
   mount.innerHTML = "";
 
-  list.forEach((p) => {
+  list.forEach((p, i) => {
     const article = mkEl("article", {
       className: "project project--open reveal",
       attrs: {
+        "data-edit-entity": "projects-quickview",
+        "data-edit-index": i,
         "data-title": p.title,
         "data-tags": (p.tags || []).join(", "),
         "data-filter": p.filter || "",
@@ -204,6 +245,7 @@ function renderQuickviewProjects(list, mount) {
       },
     });
 
+    article.appendChild(mkEl("span", { className: "project__filter-badge", text: p.filter || "uncategorized" }));
     article.appendChild(mkEl("h3", { text: p.title }));
     article.appendChild(mkEl("p", { text: p.cardText || p.summary || "" }));
 
@@ -219,8 +261,11 @@ function renderQuickviewProjects(list, mount) {
   });
 }
 
-function renderSkillCard(card, mount, isCourse) {
-  const article = mkEl("article", { className: "skills-card reveal" + (isCourse ? " skills-card--course" : "") });
+function renderSkillCard(card, mount, isCourse, index) {
+  const article = mkEl("article", {
+    className: "skills-card reveal" + (isCourse ? " skills-card--course" : ""),
+    attrs: { "data-edit-entity": isCourse ? "skills-coursework" : "skills-core", "data-edit-index": index },
+  });
 
   const head = mkEl("div", { className: "skills-card__head" });
   const iconWrap = mkEl("div", { className: "skills-card__icon", attrs: { "aria-hidden": "true" } });
@@ -251,12 +296,123 @@ function renderSkillCard(card, mount, isCourse) {
 function renderSkills(data, coreMount, courseworkMount) {
   if (coreMount) {
     coreMount.innerHTML = "";
-    (data.core || []).forEach((c) => renderSkillCard(c, coreMount, false));
+    (data.core || []).forEach((c, i) => renderSkillCard(c, coreMount, false, i));
   }
   if (courseworkMount) {
     courseworkMount.innerHTML = "";
-    (data.coursework || []).forEach((c) => renderSkillCard(c, courseworkMount, true));
+    (data.coursework || []).forEach((c, i) => renderSkillCard(c, courseworkMount, true, i));
   }
+}
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value || "";
+}
+
+// Homepage hero / summary / "In brief" / origin / contact / footer copy —
+// a singleton object (not a list) rendered into the static elements already
+// in index.html, so edit mode can wire them as click-and-type just like the
+// list-backed sections, via dev/editor.js's ENTITIES.home-*.
+function renderHome(data) {
+  if (!data) return;
+  const hero = data.hero || {};
+  setText("heroKicker", hero.kicker);
+  setText("heroNameMain", hero.nameMain);
+  setText("heroNameAccent", hero.nameAccent);
+  setText("heroLede", hero.lede);
+  setText("heroCtaPrimary", hero.ctaPrimaryLabel);
+  setText("heroCtaSecondary", hero.ctaSecondaryLabel);
+  setText("heroPlaceholderNote", hero.placeholderNote);
+
+  const statusMount = document.getElementById("heroStatus");
+  if (statusMount) {
+    statusMount.innerHTML = "";
+    (hero.status || []).forEach((s) => statusMount.appendChild(mkEl("span", { text: s })));
+  }
+
+  const summary = data.summary || {};
+  setText("summaryLabel", summary.label);
+  setText("summaryHeadingLead", summary.headingLead);
+  setText("summaryHeadingAccent", summary.headingAccent);
+  setText("summaryLinkText", summary.linkText);
+  const summaryParas = document.getElementById("summaryParagraphs");
+  if (summaryParas) {
+    summaryParas.innerHTML = "";
+    (summary.paragraphs || []).forEach((p) => summaryParas.appendChild(mkEl("p", { text: p })));
+  }
+
+  const brief = data.brief || {};
+  setText("briefLabel", brief.label);
+  const strengths = brief.strengths || {};
+  const curious = brief.curious || {};
+  setText("briefStrengthsTitle", strengths.title);
+  setText("briefCuriousTitle", curious.title);
+  const buildBriefList = (mountId, items) => {
+    const mount = document.getElementById(mountId);
+    if (!mount) return;
+    mount.innerHTML = "";
+    (items || []).forEach((text, i) => {
+      const li = document.createElement("li");
+      li.appendChild(mkEl("span", { className: "editorial-list-block__num", text: String(i + 1).padStart(2, "0") }));
+      li.appendChild(mkEl("span", { className: "editorial-list-block__text", text }));
+      mount.appendChild(li);
+    });
+  };
+  buildBriefList("briefStrengthsList", strengths.items);
+  buildBriefList("briefCuriousList", curious.items);
+
+  const origin = data.origin || {};
+  setText("originLabel", origin.label);
+  setText("originPlaceholderNote", origin.placeholderNote);
+  setText("originKicker", origin.kicker);
+  setText("originHeading", origin.heading);
+  const originParas = document.getElementById("originParagraphs");
+  if (originParas) {
+    originParas.innerHTML = "";
+    (origin.paragraphs || []).forEach((p) => originParas.appendChild(mkEl("p", { text: p })));
+  }
+
+  const contact = data.contact || {};
+  setText("contactKicker", contact.kicker);
+  setText("contactHeadingLine1", contact.headingLine1);
+  setText("contactHeadingLine2", contact.headingLine2);
+
+  setText("footerTagline", (data.footer || {}).tagline);
+}
+
+function renderAbout(list, slidesMount, dotsMount) {
+  if (!slidesMount) return;
+  slidesMount.innerHTML = "";
+  if (dotsMount) dotsMount.innerHTML = "";
+
+  list.forEach((item, i) => {
+    const qId = `q${i + 1}`;
+    const aId = `a${i + 1}`;
+
+    const qSection = mkEl("section", {
+      className: "snap__section snap__section--q",
+      attrs: { id: qId, "data-edit-entity": "about", "data-edit-index": i },
+    });
+    const qCopy = mkEl("div", { className: "snap__copy" });
+    qCopy.appendChild(mkEl("p", { className: "snap__kicker", text: item.kicker }));
+    qCopy.appendChild(mkEl("h1", { text: item.question }));
+    qSection.appendChild(qCopy);
+    slidesMount.appendChild(qSection);
+
+    const aSection = mkEl("section", {
+      className: "snap__section snap__section--a",
+      attrs: { id: aId, "data-edit-entity": "about", "data-edit-index": i },
+    });
+    const aCopy = mkEl("div", { className: "snap__copy" });
+    (item.answer || []).forEach((para) => aCopy.appendChild(mkEl("p", { text: para })));
+    aSection.appendChild(aCopy);
+    slidesMount.appendChild(aSection);
+
+    if (dotsMount) {
+      dotsMount.appendChild(mkEl("button", { className: "dot", attrs: { "data-target": qId, "aria-label": `Go to section ${i * 2 + 1}` } }));
+      dotsMount.appendChild(mkEl("button", { className: "dot", attrs: { "data-target": aId, "aria-label": `Go to section ${i * 2 + 2}` } }));
+    }
+  });
 }
 
 // Re-queries the DOM each call, so it's safe to call again after dynamic
@@ -273,6 +429,147 @@ function initReveal() {
     { threshold: 0.15 }
   );
   revealEls.forEach((el) => obs.observe(el));
+}
+
+// ===== Projects page: Explore filter/search + modal (only if projectGrid exists) =====
+// Wrapped in a function so it can be (re)run once the grid has been
+// populated from data/projects.json (see the fetch block below).
+function initProjectGrid() {
+  const projectGrid = document.getElementById("projectGrid");
+  if (!projectGrid) return;
+
+  const chips = document.querySelectorAll(".chip");
+  const search = document.getElementById("projectSearch");
+  const cards = Array.from(projectGrid.querySelectorAll(".project--open"));
+
+  let activeFilter = "all";
+
+  function matches(card) {
+    const filter = card.getAttribute("data-filter") || "";
+    const title = (card.getAttribute("data-title") || "").toLowerCase();
+    const tags = (card.getAttribute("data-tags") || "").toLowerCase();
+    const q = (search?.value || "").trim().toLowerCase();
+
+    const filterOk = activeFilter === "all" || filter === activeFilter;
+    const searchOk = !q || title.includes(q) || tags.includes(q);
+    return filterOk && searchOk;
+  }
+
+  function apply() {
+    cards.forEach((card) => {
+      card.style.display = matches(card) ? "" : "none";
+    });
+  }
+
+  if (chips.length) {
+    chips.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        chips.forEach((b) => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        activeFilter = btn.dataset.filter || "all";
+        apply();
+      });
+    });
+  }
+
+  if (search) search.addEventListener("input", apply);
+
+  // Modal wiring
+  const modal = document.getElementById("projectModal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalSummary = document.getElementById("modalSummary");
+  const modalTools = document.getElementById("modalTools");
+  const modalResults = document.getElementById("modalResults");
+  const modalLinks = document.getElementById("modalLinks");
+
+  function openModal(card) {
+    if (!modal) return;
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+
+    if (modalTitle) modalTitle.textContent = card.dataset.title || "";
+    if (modalSummary) modalSummary.textContent = card.dataset.summary || "";
+
+    if (modalTools) {
+      modalTools.innerHTML = "";
+      (card.dataset.tools || "")
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .forEach((t) => {
+          const li = document.createElement("li");
+          li.textContent = t;
+          modalTools.appendChild(li);
+        });
+    }
+
+    if (modalResults) {
+      modalResults.innerHTML = "";
+      (card.dataset.results || "")
+        .split(";")
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .forEach((r) => {
+          const li = document.createElement("li");
+          li.textContent = r;
+          modalResults.appendChild(li);
+        });
+    }
+
+    if (modalLinks) {
+      modalLinks.innerHTML = "";
+      try {
+        const links = JSON.parse(card.dataset.links || "[]");
+        links.forEach((l) => {
+          const a = document.createElement("a");
+          a.className = "link";
+          a.href = l.href;
+          a.target = "_blank";
+          a.rel = "noopener";
+          a.textContent = l.label;
+          modalLinks.appendChild(a);
+          modalLinks.appendChild(document.createElement("br"));
+        });
+      } catch (_) {}
+    }
+
+    // In edit mode, dev/editor.js wires this popup's content as
+    // click-and-type too (it's the only place tools/results/links appear).
+    if (typeof window.__wireQuickViewEdit === "function") {
+      window.__wireQuickViewEdit(card, { modalSummary, modalTools, modalResults, modalLinks });
+    }
+
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  // Open modal only when clicking "Quick view" button
+  projectGrid.addEventListener("click", (e) => {
+    const btn = e.target.closest(".link-btn");
+    const card = e.target.closest(".project--open");
+    if (!card || !btn) return;
+    openModal(card);
+  });
+
+  // Close modal on backdrop/close button
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target.dataset.close === "true") closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+    });
+  }
+
+  apply();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -314,9 +611,57 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // ===== Portfolio-nav mobile toggle (editorial header, all main pages) =====
+  const portfolioNav = document.querySelector(".portfolio-nav");
+  if (portfolioNav) {
+    const pToggle = portfolioNav.querySelector(".nav__toggle");
+    const pLinks = portfolioNav.querySelector(".portfolio-nav__links");
+
+    if (pToggle && pLinks) {
+      pToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const open = pLinks.classList.toggle("open");
+        pToggle.setAttribute("aria-expanded", String(open));
+      });
+
+      pLinks.addEventListener("click", (e) => {
+        if (e.target.tagName === "A") pLinks.classList.remove("open");
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!portfolioNav.contains(e.target)) pLinks.classList.remove("open");
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") pLinks.classList.remove("open");
+      });
+    }
+  }
+
   // ===== Footer year =====
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
+
+  // ===== Secret entry point into edit mode =====
+  // No visible link to /dev/ anywhere in the UI (it's also excluded from
+  // search indexing) — this adds one more "a visitor wouldn't stumble into
+  // it" layer: 5 quick clicks on the footer's copyright mark opens the
+  // (locked, username+password gated) sign-in screen.
+  const copyrightMark = document.querySelector(".editorial-footer > span:first-child");
+  if (copyrightMark) {
+    let secretClicks = 0;
+    let secretResetTimer = null;
+    copyrightMark.addEventListener("click", () => {
+      secretClicks += 1;
+      clearTimeout(secretResetTimer);
+      secretResetTimer = setTimeout(() => { secretClicks = 0; }, 3000);
+      if (secretClicks >= 5) {
+        secretClicks = 0;
+        location.href = `/dev/?return=${encodeURIComponent(location.pathname)}`;
+      }
+    });
+  }
 
   // ===== Optional: Collapsible Projects section (only if those IDs exist) =====
   const projectsToggle = document.getElementById("projectsToggle");
@@ -381,141 +726,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===== Reveal on scroll (any .reveal elements already in the DOM) =====
   initReveal();
 
-  // ===== Projects page: Explore filter/search + modal (only if projectGrid exists) =====
-  // Wrapped in a function so it can be (re)run once the grid has been
-  // populated from data/projects.json (see the fetch block below).
-  function initProjectGrid() {
-    const projectGrid = document.getElementById("projectGrid");
-    if (!projectGrid) return;
-
-    const chips = document.querySelectorAll(".chip");
-    const search = document.getElementById("projectSearch");
-    const cards = Array.from(projectGrid.querySelectorAll(".project--open"));
-
-    let activeFilter = "all";
-
-    function matches(card) {
-      const filter = card.getAttribute("data-filter") || "";
-      const title = (card.getAttribute("data-title") || "").toLowerCase();
-      const tags = (card.getAttribute("data-tags") || "").toLowerCase();
-      const q = (search?.value || "").trim().toLowerCase();
-
-      const filterOk = activeFilter === "all" || filter === activeFilter;
-      const searchOk = !q || title.includes(q) || tags.includes(q);
-      return filterOk && searchOk;
-    }
-
-    function apply() {
-      cards.forEach((card) => {
-        card.style.display = matches(card) ? "" : "none";
-      });
-    }
-
-    if (chips.length) {
-      chips.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          chips.forEach((b) => b.classList.remove("is-active"));
-          btn.classList.add("is-active");
-          activeFilter = btn.dataset.filter || "all";
-          apply();
-        });
-      });
-    }
-
-    if (search) search.addEventListener("input", apply);
-
-    // Modal wiring
-    const modal = document.getElementById("projectModal");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalSummary = document.getElementById("modalSummary");
-    const modalTools = document.getElementById("modalTools");
-    const modalResults = document.getElementById("modalResults");
-    const modalLinks = document.getElementById("modalLinks");
-
-    function openModal(card) {
-      if (!modal) return;
-
-      modal.classList.add("is-open");
-      modal.setAttribute("aria-hidden", "false");
-
-      if (modalTitle) modalTitle.textContent = card.dataset.title || "";
-      if (modalSummary) modalSummary.textContent = card.dataset.summary || "";
-
-      if (modalTools) {
-        modalTools.innerHTML = "";
-        (card.dataset.tools || "")
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean)
-          .forEach((t) => {
-            const li = document.createElement("li");
-            li.textContent = t;
-            modalTools.appendChild(li);
-          });
-      }
-
-      if (modalResults) {
-        modalResults.innerHTML = "";
-        (card.dataset.results || "")
-          .split(";")
-          .map((s) => s.trim())
-          .filter(Boolean)
-          .forEach((r) => {
-            const li = document.createElement("li");
-            li.textContent = r;
-            modalResults.appendChild(li);
-          });
-      }
-
-      if (modalLinks) {
-        modalLinks.innerHTML = "";
-        try {
-          const links = JSON.parse(card.dataset.links || "[]");
-          links.forEach((l) => {
-            const a = document.createElement("a");
-            a.className = "link";
-            a.href = l.href;
-            a.target = "_blank";
-            a.rel = "noopener";
-            a.textContent = l.label;
-            modalLinks.appendChild(a);
-            modalLinks.appendChild(document.createElement("br"));
-          });
-        } catch (_) {}
-      }
-
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeModal() {
-      if (!modal) return;
-      modal.classList.remove("is-open");
-      modal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-    }
-
-    // Open modal only when clicking "Quick view" button
-    projectGrid.addEventListener("click", (e) => {
-      const btn = e.target.closest(".link-btn");
-      const card = e.target.closest(".project--open");
-      if (!card || !btn) return;
-      openModal(card);
-    });
-
-    // Close modal on backdrop/close button
-    if (modal) {
-      modal.addEventListener("click", (e) => {
-        if (e.target.dataset.close === "true") closeModal();
-      });
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
-      });
-    }
-
-    apply();
-  }
-
   // ===== Data-driven content bootstrap =====
   // Each page only has the mount(s) relevant to it; everything else here
   // is a no-op guard, same pattern as the optional blocks above.
@@ -559,10 +769,36 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch((err) => console.error("Failed to load skills data", err));
   }
+
+  const heroKicker = document.getElementById("heroKicker");
+  if (heroKicker) {
+    fetch("/data/home.json")
+      .then((r) => r.json())
+      .then((data) => {
+        renderHome(data);
+        initReveal();
+      })
+      .catch((err) => console.error("Failed to load home data", err));
+  }
+
+  const aboutMount = document.getElementById("aboutMount");
+  if (aboutMount) {
+    fetch("/data/about.json")
+      .then((r) => r.json())
+      .then((list) => {
+        renderAbout(list, aboutMount, document.getElementById("aboutDots"));
+        initAboutNav();
+        initReveal();
+      })
+      .catch((err) => console.error("Failed to load about data", err));
+  }
 });
 
 // === About page: dot navigation + keyboard slide-by-slide (snap sections) ===
-(function () {
+// Called once the slides/dots have been rendered from data/about.json (see
+// the fetch-bootstrap block above) — content arrives async now, so this
+// can no longer just run unconditionally at parse time.
+function initAboutNav() {
   const snap = document.querySelector(".snap--qa");
   const dotsNav = document.querySelector(".page-dots");
   if (!snap || !dotsNav) return; // only run on About page
@@ -616,9 +852,10 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener(
     "keydown",
     (e) => {
-      // Don’t hijack keys when typing in inputs/textareas
+      // Don’t hijack keys when typing in inputs/textareas/contenteditable
+      // fields (edit mode makes the questions/answers directly editable).
       const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
-      if (tag === "input" || tag === "textarea") return;
+      if (tag === "input" || tag === "textarea" || (e.target && e.target.isContentEditable)) return;
 
       if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
         e.preventDefault();
@@ -636,4 +873,4 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     { passive: false }
   );
-})();
+}
