@@ -58,6 +58,26 @@ body{
 
 a{ color:inherit; }
 
+/* ================================
+   CROSS-PAGE VIEW TRANSITIONS
+   Every page here is still a real, separate HTML document (good for
+   sharing/SEO/deep-linking to a case study) — this just makes navigating
+   between them *feel* like staying inside one app instead of a hard reload
+   to a different site. Browsers that don't support it (navigation:auto)
+   just fall back to a normal instant navigation — nothing breaks.
+   The header/footer get their own view-transition-name below so they
+   visually persist across the swap instead of crossfading with the rest
+   of the page.
+================================ */
+@view-transition{ navigation: auto; }
+
+::view-transition-group(*){ animation-duration:220ms; }
+::view-transition-old(root),
+::view-transition-new(root){ animation-duration:180ms; }
+
+.portfolio-nav{ view-transition-name: site-header; }
+.editorial-footer{ view-transition-name: site-footer; }
+
 .container{
   max-width:var(--max);
   margin:0 auto;
