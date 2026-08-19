@@ -597,6 +597,7 @@ function refreshMountsFor(entityKey) {
   } else if (entityKey === "about") {
     const mount = document.getElementById("aboutMount");
     if (mount && typeof renderAbout === "function") renderAbout(data, mount);
+    if (typeof initFlashcards === "function") initFlashcards();
   } else if (entityKey.startsWith("home-")) {
     if (typeof renderHome === "function") renderHome(data);
   }
@@ -814,9 +815,9 @@ function wireInlineFields(entityKey, card, idx) {
       });
     }
   } else if (entityKey === "about") {
-    wireInline(card.querySelector(".about-qa__kicker"), "kicker");
-    wireInline(card.querySelector("h3"), "question");
-    wireInlineList(card.querySelector(".about-qa__answer"), "answer");
+    wireInline(card.querySelector(".flashcard__kicker"), "kicker");
+    wireInline(card.querySelector(".flashcard__question"), "question");
+    wireInlineList(card.querySelector(".flashcard__answer"), "answer");
   }
 }
 

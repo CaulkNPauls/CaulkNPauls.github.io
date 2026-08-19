@@ -846,12 +846,25 @@ html, body { overflow-x: hidden; }
   .cards--featured{ grid-template-columns: 1fr; }
 }
 /* ================================
-   ABOUT PAGE: Q&A list (normal document flow — same page-hero + section
-   pattern as Experience/Skills, not a separate scroll app)
+   ABOUT PAGE: flashcard Q&A — a normal-flow widget inside the standard
+   page-hero + section shell (same as Experience/Skills), not a separate
+   scroll app. One question at a time, stepped through with prev/next;
+   reveals its answer in place rather than navigating anywhere.
 ================================ */
-.about-qa__item{ padding: 38px 0; border-top: 1px solid var(--border); }
-.about-qa__item:last-child{ padding-bottom: 0; }
-.about-qa__kicker{
+.flashcards{ max-width: 720px; margin: 0 auto; position: relative; min-height: 260px; }
+.flashcard{
+  display: none;
+  position: relative;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(28px, 5vw, 56px);
+  box-shadow: var(--shadow);
+}
+.flashcard.is-active{ display: block; animation: flashcardIn 320ms ease; }
+@keyframes flashcardIn{ from{ opacity: 0; transform: translateY(6px); } to{ opacity: 1; transform: translateY(0); } }
+
+.flashcard__kicker{
   text-transform: uppercase;
   letter-spacing: .12em;
   font-size: .75rem;
@@ -859,9 +872,49 @@ html, body { overflow-x: hidden; }
   color: var(--accent);
   margin: 0 0 10px;
 }
-.about-qa__item h3{ margin: 0 0 14px; font-size: clamp(1.5rem, 3vw, 2.3rem); line-height: 1.15; }
-.about-qa__answer p{ margin: 0 0 14px; color: var(--muted); font-size: 1.05rem; line-height: 1.75; max-width: 68ch; }
-.about-qa__answer p:last-child{ margin-bottom: 0; }
+.flashcard__question{ margin: 0; font-size: clamp(1.6rem, 3.4vw, 2.6rem); line-height: 1.2; font-weight: 600; }
+
+.flashcard__answer{
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  transition: max-height 420ms ease, opacity 320ms ease, margin-top 420ms ease;
+}
+.flashcard.is-flipped .flashcard__answer{ max-height: 900px; opacity: 1; margin-top: 22px; }
+.flashcard__answer p{ margin: 0 0 14px; color: var(--muted); font-size: 1.05rem; line-height: 1.75; }
+.flashcard__answer p:last-child{ margin-bottom: 0; }
+
+.flashcard__reveal{
+  margin-top: 24px;
+  background: none;
+  border: 1px solid var(--accent-border);
+  color: var(--accent);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: .9rem;
+  cursor: pointer;
+}
+.flashcard__reveal:hover{ background: var(--accent-soft); }
+
+.flashcards-nav{ display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 24px; }
+.flashcards-nav button{
+  width: 40px; height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+.flashcards-nav button:disabled{ opacity: .35; cursor: default; }
+.flashcards-nav button:not(:disabled):hover{ background: var(--accent-soft); border-color: var(--accent-border); }
+.flashcards-progress{ font-size: .85rem; color: var(--muted); min-width: 52px; text-align: center; }
+
+@media (prefers-reduced-motion: reduce){
+  .flashcard.is-active{ animation: none; }
+  .flashcard__answer{ transition: none; }
+}
 
 
 
@@ -1910,7 +1963,7 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
   font-weight:600;
   letter-spacing:-.02em;
 }
-.editorial-theme .about-qa__item h3{
+.editorial-theme .flashcard__question{
   font-family:"Manrope",sans-serif;
   font-weight:600;
   letter-spacing:-.02em;

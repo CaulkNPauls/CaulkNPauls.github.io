@@ -416,24 +416,85 @@ function renderHome(data) {
   setText("footerTagline", (data.footer || {}).tagline);
 }
 
+// About page: one flashcard per Q&A pair, all rendered into the DOM at
+// once (so edit mode's per-card data-edit-index wiring works exactly like
+// every other entity list) — only the "is-active" card is shown at a time,
+// stepped through via initFlashcards()/showFlashcard() below.
 function renderAbout(list, mount) {
   if (!mount) return;
   mount.innerHTML = "";
 
   list.forEach((item, i) => {
-    const article = mkEl("article", {
-      className: "about-qa__item reveal",
+    const card = mkEl("article", {
+      className: "flashcard" + (i === 0 ? " is-active" : ""),
       attrs: { "data-edit-entity": "about", "data-edit-index": i },
     });
-    article.appendChild(mkEl("p", { className: "about-qa__kicker", text: item.kicker }));
-    article.appendChild(mkEl("h3", { text: item.question }));
+    card.appendChild(mkEl("p", { className: "flashcard__kicker", text: item.kicker }));
+    card.appendChild(mkEl("h3", { className: "flashcard__question", text: item.question }));
 
-    const answer = mkEl("div", { className: "about-qa__answer" });
+    const answer = mkEl("div", { className: "flashcard__answer" });
     (item.answer || []).forEach((para) => answer.appendChild(mkEl("p", { text: para })));
-    article.appendChild(answer);
+    card.appendChild(answer);
 
-    mount.appendChild(article);
+    card.appendChild(mkEl("button", { className: "flashcard__reveal", text: "Reveal answer", attrs: { type: "button" } }));
+
+    mount.appendChild(card);
   });
+}
+
+let flashcardIndex = 0;
+
+function showFlashcard(index) {
+  const mount = document.getElementById("aboutMount");
+  if (!mount) return;
+  const cards = Array.from(mount.querySelectorAll(".flashcard"));
+  if (!cards.length) return;
+
+  flashcardIndex = Math.max(0, Math.min(cards.length - 1, index));
+  cards.forEach((c, i) => c.classList.toggle("is-active", i === flashcardIndex));
+
+  const progress = document.getElementById("flashcardProgress");
+  if (progress) progress.textContent = `${flashcardIndex + 1} / ${cards.length}`;
+  const prevBtn = document.getElementById("flashcardPrev");
+  const nextBtn = document.getElementById("flashcardNext");
+  if (prevBtn) prevBtn.disabled = flashcardIndex === 0;
+  if (nextBtn) nextBtn.disabled = flashcardIndex === cards.length - 1;
+}
+
+// Wires the reveal button (event-delegated on the mount, so it still works
+// after renderAbout() rebuilds the cards) and the prev/next controls. Safe
+// to call more than once — the click listeners are only attached the first
+// time; later calls (after an edit-mode add/delete) just reset to card 0.
+function initFlashcards() {
+  const mount = document.getElementById("aboutMount");
+  if (!mount) return;
+
+  if (mount.dataset.flashcardsInit !== "1") {
+    mount.dataset.flashcardsInit = "1";
+
+    mount.addEventListener("click", (e) => {
+      const btn = e.target.closest(".flashcard__reveal");
+      if (!btn) return;
+      const card = btn.closest(".flashcard");
+      const revealed = card.classList.toggle("is-flipped");
+      btn.textContent = revealed ? "Show question" : "Reveal answer";
+    });
+
+    const prevBtn = document.getElementById("flashcardPrev");
+    const nextBtn = document.getElementById("flashcardNext");
+    if (prevBtn) prevBtn.addEventListener("click", () => showFlashcard(flashcardIndex - 1));
+    if (nextBtn) nextBtn.addEventListener("click", () => showFlashcard(flashcardIndex + 1));
+
+    document.addEventListener("keydown", (e) => {
+      if (!document.getElementById("aboutMount")) return;
+      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+      if (tag === "input" || tag === "textarea" || (e.target && e.target.isContentEditable)) return;
+      if (e.key === "ArrowRight") showFlashcard(flashcardIndex + 1);
+      else if (e.key === "ArrowLeft") showFlashcard(flashcardIndex - 1);
+    });
+  }
+
+  showFlashcard(0);
 }
 
 // Re-queries the DOM each call, so it's safe to call again after dynamic
@@ -808,6 +869,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((r) => r.json())
       .then((list) => {
         renderAbout(list, aboutMount);
+        initFlashcards();
         initReveal();
       })
       .catch((err) => console.error("Failed to load about data", err));
