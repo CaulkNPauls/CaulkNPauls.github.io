@@ -2158,11 +2158,35 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
   position: absolute;
   width: clamp(64px, 7vw, 110px);
   height: clamp(64px, 7vw, 110px);
-  opacity: 0;
-  transition: opacity 400ms ease;
   pointer-events: none;
 }
-.fieldnotes-theme .flashcards-doodle.is-active{ opacity: .85; }
+/* Hand-drawn reveal: pathLength="1" on every shape (set in the markup)
+   normalizes its length to 1 regardless of actual size, so a single
+   dasharray/dashoffset pair animates the whole doodle "drawing itself"
+   in — and, since it's a plain class-toggled CSS transition, animates
+   the same stroke back out again when a doodle deactivates, which reads
+   as the previous drawing being erased. No JS beyond the existing
+   .is-active class toggle in showFlashcard(). */
+.fieldnotes-theme .flashcards-doodle path,
+.fieldnotes-theme .flashcards-doodle circle,
+.fieldnotes-theme .flashcards-doodle rect,
+.fieldnotes-theme .flashcards-doodle ellipse{
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 650ms ease;
+}
+.fieldnotes-theme .flashcards-doodle.is-active path,
+.fieldnotes-theme .flashcards-doodle.is-active circle,
+.fieldnotes-theme .flashcards-doodle.is-active rect,
+.fieldnotes-theme .flashcards-doodle.is-active ellipse{
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce){
+  .fieldnotes-theme .flashcards-doodle path,
+  .fieldnotes-theme .flashcards-doodle circle,
+  .fieldnotes-theme .flashcards-doodle rect,
+  .fieldnotes-theme .flashcards-doodle ellipse{ transition: none; }
+}
 .fieldnotes-theme .fd--tl{ top: 6px; left: 0; }
 .fieldnotes-theme .fd--tr{ top: 6px; right: 0; }
 .fieldnotes-theme .fd--bl{ bottom: 6px; left: 0; }
