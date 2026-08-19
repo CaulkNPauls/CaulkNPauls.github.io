@@ -2092,7 +2092,10 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
 /* Index-card stack behind the active flashcard, plus a spiral-binding
    strip down its left edge — pure CSS pseudo-elements, no extra DOM,
    so script.js's renderAbout()/showFlashcard() need no changes. */
-.fieldnotes-theme .flashcards{ padding-top: 10px; }
+.fieldnotes-theme .flashcards{ max-width: 900px; min-height: 340px; padding-top: 10px; }
+.fieldnotes-theme .flashcard{ padding: clamp(36px, 6vw, 72px); }
+.fieldnotes-theme .flashcard__question{ font-size: clamp(1.9rem, 4.2vw, 3.1rem); }
+.fieldnotes-theme .flashcard__answer p{ font-size: 1.12rem; }
 .fieldnotes-theme .flashcards::before,
 .fieldnotes-theme .flashcards::after{
   content: "";
@@ -2129,5 +2132,45 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
      multi-column hero; on a single-column mobile layout that corner is
      occupied by the back-link/eyebrow, so hide rather than overlap. */
   .fieldnotes-theme .page-hero__doodle{ display: none; }
+}
+
+/* Hand-written note + arrow, About page only, pointing at the CTA row */
+.fieldnotes-theme .hero-note{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 12px;
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  color: var(--pen-strong);
+  transform: rotate(-1.5deg);
+}
+.fieldnotes-theme .hero-note__arrow{ flex-shrink: 0; }
+
+/* Margin doodles around the About flashcard stack, swapped per question
+   by showFlashcard() in script.js (toggles .is-active by data-doodle-index
+   — plain querySelectorAll, a no-op on every other page). Positioned at
+   the corners of the wider .flashcards-stage wrapper, which is left at
+   the section's full container width so the (narrower) card has visible
+   graph-paper margin on either side for them to sit in. */
+.fieldnotes-theme .flashcards-stage{ position: relative; }
+.fieldnotes-theme .flashcards-doodle{
+  position: absolute;
+  width: clamp(64px, 7vw, 110px);
+  height: clamp(64px, 7vw, 110px);
+  opacity: 0;
+  transition: opacity 400ms ease;
+  pointer-events: none;
+}
+.fieldnotes-theme .flashcards-doodle.is-active{ opacity: .85; }
+.fieldnotes-theme .fd--tl{ top: 6px; left: 0; }
+.fieldnotes-theme .fd--tr{ top: 6px; right: 0; }
+.fieldnotes-theme .fd--bl{ bottom: 6px; left: 0; }
+.fieldnotes-theme .fd--br{ bottom: 6px; right: 0; }
+
+@media (max-width: 1100px){
+  /* Below this width the container's own margin is too narrow for a
+     card this size plus a doodle beside it without collision. */
+  .fieldnotes-theme .flashcards-doodle{ display: none; }
 }
 

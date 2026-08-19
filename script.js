@@ -459,6 +459,13 @@ function showFlashcard(index) {
   const nextBtn = document.getElementById("flashcardNext");
   if (prevBtn) prevBtn.disabled = flashcardIndex === 0;
   if (nextBtn) nextBtn.disabled = flashcardIndex === cards.length - 1;
+
+  // Field Notes theme only: swaps the margin doodle to match the current
+  // question. No-op everywhere else — .flashcards-doodle only exists on
+  // the About page.
+  document.querySelectorAll(".flashcards-doodle").forEach((d) => {
+    d.classList.toggle("is-active", Number(d.dataset.doodleIndex) === flashcardIndex);
+  });
 }
 
 // Wires the reveal button (event-delegated on the mount, so it still works
