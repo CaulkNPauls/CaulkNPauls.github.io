@@ -3,10 +3,14 @@
     "kicker": "Industrial Engineering Portfolio",
     "nameMain": "Paul",
     "nameAccent": "Poleon Jr.",
-    "lede": "I look at how people, data, and technology move through a system—then I build a better way for them to work together.",
+    "lede": "I look at how people, data, and technology move through a system, then I build a better way for them to work together.",
     "ctaPrimaryLabel": "Explore my work",
     "ctaSecondaryLabel": "View résumé",
-    "status": ["Based in Buffalo, NY", "University at Buffalo", "Open to engineering opportunities"],
+    "status": [
+      "Based in Buffalo, NY",
+      "University at Buffalo",
+      "Open to engineering opportunities"
+    ],
     "placeholderNote": "A candid vertical photo of Paul in a manufacturing or engineering environment—beside a test station, CAD workstation, or physical prototype."
   },
   "summary": {
