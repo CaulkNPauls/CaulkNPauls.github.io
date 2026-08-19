@@ -594,6 +594,9 @@ function refreshMountsFor(entityKey) {
     if (typeof renderSkills === "function") {
       renderSkills(data, document.getElementById("skillsCoreMount"), document.getElementById("skillsCourseworkMount"));
     }
+  } else if (entityKey === "about") {
+    const mount = document.getElementById("aboutMount");
+    if (mount && typeof renderAbout === "function") renderAbout(data, mount);
   } else if (entityKey.startsWith("home-")) {
     if (typeof renderHome === "function") renderHome(data);
   }
@@ -811,13 +814,9 @@ function wireInlineFields(entityKey, card, idx) {
       });
     }
   } else if (entityKey === "about") {
-    // each Q&A pair renders as two sibling sections sharing one index
-    if (card.classList.contains("snap__section--q")) {
-      wireInline(card.querySelector(".snap__kicker"), "kicker");
-      wireInline(card.querySelector("h1"), "question");
-    } else if (card.classList.contains("snap__section--a")) {
-      wireInlineList(card.querySelector(".snap__copy"), "answer");
-    }
+    wireInline(card.querySelector(".about-qa__kicker"), "kicker");
+    wireInline(card.querySelector("h3"), "question");
+    wireInlineList(card.querySelector(".about-qa__answer"), "answer");
   }
 }
 
@@ -1308,21 +1307,6 @@ function wireCycle(el, entityKey, idx, field, options, hint) {
 function ensureAddTile(root) {
   const entityKey = ADD_TILE_MAP[root.id];
   if (!entityKey) return;
-
-  // About's mount is a full-viewport scroll-snap container locked inside an
-  // overflow:hidden page — a sibling placed after it would be unreachable,
-  // so the tile has to live *inside* the scrollable area instead.
-  if (root.id === "aboutMount") {
-    if (root.querySelector(":scope > .edit-add-tile")) return;
-    const tile = mkEl("button", {
-      className: "edit-add-tile",
-      text: `+ Add ${ADD_TILE_LABEL[entityKey]}`,
-      attrs: { type: "button" },
-    });
-    tile.addEventListener("click", () => openForm(entityKey, null));
-    root.appendChild(tile);
-    return;
-  }
 
   if (!root.parentNode) return;
   if (root.parentNode.querySelector(`.edit-add-tile[data-for="${root.id}"]`)) return;

@@ -28,9 +28,6 @@
 
   --pad: 22px;
   --font:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-
-  /* header height (used by snap pages) */
-  --headerH: 84px;
 }
 
 /* Wider layout on large monitors */
@@ -498,74 +495,6 @@ a{ color:inherit; }
     padding 300ms ease;
 }
 
-/* ================================
-   ABOUT PAGE: FULL-SCREEN Q → A SNAP
-================================ */
-.snap--qa{
-  height: calc(100vh - var(--headerH));
-  overflow-y:auto;
-  scroll-snap-type:y mandatory;
-  scroll-behavior:smooth;
-  -webkit-overflow-scrolling:touch;
-  overscroll-behavior:contain;
-  scrollbar-width:none;
-}
-.snap--qa::-webkit-scrollbar{ width:0; height:0; }
-
-.snap--qa .snap__section{
-  min-height: calc(100vh - var(--headerH));
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
-  display:flex;
-  align-items:center;
-  padding: clamp(28px, 6vh, 70px) 0;
-  border-bottom:1px solid rgba(17,17,17,0.06);
-}
-.snap--qa .snap__section:last-child{ border-bottom:none; }
-
-.snap--qa .snap__copy{
-  width:min(980px, 92vw);
-  margin:0 auto;
-  padding:0 18px;
-}
-
-/* QUESTION slide */
-.snap--qa .snap__section--q .snap__kicker{
-  margin:0 0 10px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  font-size: clamp(0.75rem, 1vw, 0.95rem);
-  color: var(--accent);
-}
-.snap--qa .snap__section--q h1{
-  margin:0;
-  font-size: clamp(2.1rem, 4.2vw, 4.1rem);
-  line-height:1.06;
-}
-
-/* ANSWER slide */
-.snap--qa .snap__section--a p{
-  margin:0;
-  font-size: clamp(1.05rem, 1.5vw, 1.5rem);
-  line-height:1.85;
-  color:rgba(17,17,17,0.78);
-  max-width:70ch;
-}
-
-/* subtle visual difference between Q and A (no bubbles) */
-.snap--qa .snap__section--q{
-  background:linear-gradient(180deg, rgba(17,17,17,0.03), rgba(17,17,17,0.00));
-}
-.snap--qa .snap__section--a{
-  background:linear-gradient(180deg, rgba(17,17,17,0.00), rgba(17,17,17,0.02));
-}
-
-@media (max-width:700px){
-  .snap--qa .snap__copy{
-    margin-left:18px;
-    margin-right:18px;
-  }
-}
 /* ===== EXPERIENCE PAGE POLISH ===== */
 .role__title h3{
   margin:0 0 6px;
@@ -917,76 +846,22 @@ html, body { overflow-x: hidden; }
   .cards--featured{ grid-template-columns: 1fr; }
 }
 /* ================================
-   ABOUT PAGE: progression dots
+   ABOUT PAGE: Q&A list (normal document flow — same page-hero + section
+   pattern as Experience/Skills, not a separate scroll app)
 ================================ */
-.page-dots{
-  position: fixed;
-  right: 28px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(16px, 3vh, 32px);
-  z-index: 9999;
+.about-qa__item{ padding: 38px 0; border-top: 1px solid var(--border); }
+.about-qa__item:last-child{ padding-bottom: 0; }
+.about-qa__kicker{
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 10px;
 }
-
-.page-dots .dot{
-  width: clamp(8px, 0.9vw, 12px);
-  height: clamp(8px, 0.9vw, 12px);
-  border-radius: 999px;
-  background: rgba(17,17,17,0.28);
-  border: 1px solid var(--border);
-  padding: 0;
-  cursor: pointer;
-  transition: transform 180ms ease, background 180ms ease;
-}
-
-.page-dots .dot.is-active{
-  background: var(--text);
-  transform: scale(1.55);
-}
-
-.page-dots .dot:hover{
-  transform: scale(1.25);
-}
-
-@media (max-width: 900px){
-  .page-dots{ display: none; }
-}
-/* ===== ABOUT PAGE: prevent page scroll (fix header disappearing) ===== */
-.page-about{
-  height: 100vh;
-  overflow: hidden; /* IMPORTANT: stops the document from scrolling */
-}
-
-/* keep header always visible */
-.page-about .header,
-.page-about .portfolio-nav{
-  position: sticky;
-  top: 0;
-  z-index: 500;
-}
-
-/* ONLY the snap container scrolls */
-.page-about .snap--qa{
-  height: calc(100vh - var(--headerH));
-  overflow-y: auto;
-  overscroll-behavior: contain; /* prevents scroll chaining to body */
-}
-
-/* arrow keys sometimes nudge the page on some browsers; this helps */
-.page-about main{
-  height: calc(100vh - var(--headerH));
-  overflow: hidden;
-}
-
-
-/* ===== REMOVE FOOTER ONLY ON ABOUT PAGE ===== */
-.page-about .footer {
-  display: none !important;
-}
-
+.about-qa__item h3{ margin: 0 0 14px; font-size: clamp(1.5rem, 3vw, 2.3rem); line-height: 1.15; }
+.about-qa__answer p{ margin: 0 0 14px; color: var(--muted); font-size: 1.05rem; line-height: 1.75; max-width: 68ch; }
+.about-qa__answer p:last-child{ margin-bottom: 0; }
 
 
 
@@ -2035,16 +1910,9 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
   font-weight:600;
   letter-spacing:-.02em;
 }
-.editorial-theme .snap--qa .snap__section--q .snap__kicker{
-  font-family:"DM Sans",sans-serif;
-  font-weight:700;
-}
-.editorial-theme .snap--qa .snap__section--q h1{
+.editorial-theme .about-qa__item h3{
   font-family:"Manrope",sans-serif;
-  font-weight:500;
-  letter-spacing:-.03em;
-}
-.editorial-theme .snap--qa .snap__section--a p{
-  font-family:"DM Sans",sans-serif;
+  font-weight:600;
+  letter-spacing:-.02em;
 }
 

@@ -25,7 +25,6 @@
       rel="stylesheet"
     />
 
-    <!-- IMPORTANT: go up one level to find styles.css -->
     <link rel="stylesheet" href="../styles.css" />
   </head>
 
@@ -43,14 +42,44 @@
       </nav>
     </header>
 
-    <!-- === Scroll Progress Dots (About Page) === -->
-    <nav class="page-dots" id="aboutDots" aria-label="Section progress"></nav>
-
     <main id="main">
-      <div class="snap snap--qa" id="aboutMount"></div>
+      <!-- PAGE HERO -->
+      <section class="page-hero">
+        <div class="container page-hero__inner">
+          <p class="muted small"><a class="link" href="/">← Back home</a></p>
+
+          <div class="page-hero__grid">
+            <div class="page-hero__copy">
+              <p class="page-hero__eyebrow">About</p>
+              <h1 class="page-hero__title">
+                Who I am, and how I got here.
+              </h1>
+              <p class="page-hero__subtitle muted">
+                The longer version of the story — background, what drives me, and the people and
+                experiences that shaped how I work.
+              </p>
+
+              <div class="cta page-hero__cta">
+                <a class="btn" href="/projects/">See projects</a>
+                <a class="btn btn--ghost" href="/assets/resume.pdf" target="_blank" rel="noopener">
+                  Download resume
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q&A -->
+      <section class="section section--tight">
+        <div class="container">
+          <div id="aboutMount"></div>
+        </div>
+      </section>
     </main>
 
-    
+    <footer class="editorial-footer"><span>© <span id="year"></span> Paul Poleon Jr</span><span>Industrial engineer · problem solver · teammate</span><a href="#main">Back to top ↑</a></footer>
+
     <script src="../script.js"></script>
   </body>
 </html>

@@ -4,7 +4,6 @@
 // - Footer year
 // - Optional: collapsible projects section (if you have #projectsToggle + #projects)
 // - Reveal-on-scroll (.reveal)
-// - About page dots (.page-dots / .snap__section)
 // - Projects page Explore + modal (only runs if #projectGrid exists)
 // ===============================
 
@@ -417,38 +416,23 @@ function renderHome(data) {
   setText("footerTagline", (data.footer || {}).tagline);
 }
 
-function renderAbout(list, slidesMount, dotsMount) {
-  if (!slidesMount) return;
-  slidesMount.innerHTML = "";
-  if (dotsMount) dotsMount.innerHTML = "";
+function renderAbout(list, mount) {
+  if (!mount) return;
+  mount.innerHTML = "";
 
   list.forEach((item, i) => {
-    const qId = `q${i + 1}`;
-    const aId = `a${i + 1}`;
-
-    const qSection = mkEl("section", {
-      className: "snap__section snap__section--q",
-      attrs: { id: qId, "data-edit-entity": "about", "data-edit-index": i },
+    const article = mkEl("article", {
+      className: "about-qa__item reveal",
+      attrs: { "data-edit-entity": "about", "data-edit-index": i },
     });
-    const qCopy = mkEl("div", { className: "snap__copy" });
-    qCopy.appendChild(mkEl("p", { className: "snap__kicker", text: item.kicker }));
-    qCopy.appendChild(mkEl("h1", { text: item.question }));
-    qSection.appendChild(qCopy);
-    slidesMount.appendChild(qSection);
+    article.appendChild(mkEl("p", { className: "about-qa__kicker", text: item.kicker }));
+    article.appendChild(mkEl("h3", { text: item.question }));
 
-    const aSection = mkEl("section", {
-      className: "snap__section snap__section--a",
-      attrs: { id: aId, "data-edit-entity": "about", "data-edit-index": i },
-    });
-    const aCopy = mkEl("div", { className: "snap__copy" });
-    (item.answer || []).forEach((para) => aCopy.appendChild(mkEl("p", { text: para })));
-    aSection.appendChild(aCopy);
-    slidesMount.appendChild(aSection);
+    const answer = mkEl("div", { className: "about-qa__answer" });
+    (item.answer || []).forEach((para) => answer.appendChild(mkEl("p", { text: para })));
+    article.appendChild(answer);
 
-    if (dotsMount) {
-      dotsMount.appendChild(mkEl("button", { className: "dot", attrs: { "data-target": qId, "aria-label": `Go to section ${i * 2 + 1}` } }));
-      dotsMount.appendChild(mkEl("button", { className: "dot", attrs: { "data-target": aId, "aria-label": `Go to section ${i * 2 + 2}` } }));
-    }
+    mount.appendChild(article);
   });
 }
 
@@ -823,91 +807,9 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("/data/about.json")
       .then((r) => r.json())
       .then((list) => {
-        renderAbout(list, aboutMount, document.getElementById("aboutDots"));
-        initAboutNav();
+        renderAbout(list, aboutMount);
         initReveal();
       })
       .catch((err) => console.error("Failed to load about data", err));
   }
 });
-
-// === About page: dot navigation + keyboard slide-by-slide (snap sections) ===
-// Called once the slides/dots have been rendered from data/about.json (see
-// the fetch-bootstrap block above) — content arrives async now, so this
-// can no longer just run unconditionally at parse time.
-function initAboutNav() {
-  const snap = document.querySelector(".snap--qa");
-  const dotsNav = document.querySelector(".page-dots");
-  if (!snap || !dotsNav) return; // only run on About page
-
-  const sections = Array.from(snap.querySelectorAll(".snap__section"));
-  const dots = Array.from(dotsNav.querySelectorAll(".dot"));
-  if (!sections.length) return;
-
-  let currentIndex = 0;
-
-  function setActiveDot(index) {
-    dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
-  }
-
-  function scrollToIndex(index) {
-    const clamped = Math.max(0, Math.min(sections.length - 1, index));
-    currentIndex = clamped;
-    sections[clamped].scrollIntoView({ behavior: smoothOrAuto, block: "start" });
-    setActiveDot(clamped);
-  }
-
-  // Dot clicks
-  dots.forEach((dot) => {
-    dot.addEventListener("click", () => {
-      const idx = sections.findIndex((s) => s.id === dot.dataset.target);
-      if (idx !== -1) scrollToIndex(idx);
-    });
-  });
-
-  // Track which section is visible (updates active dot + currentIndex)
-  const io = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((e) => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible) return;
-
-      const idx = sections.indexOf(visible.target);
-      if (idx !== -1) {
-        currentIndex = idx;
-        setActiveDot(idx);
-      }
-    },
-    { root: snap, threshold: 0.55 }
-  );
-
-  sections.forEach((s) => io.observe(s));
-  setActiveDot(0);
-
-  // Keyboard navigation
-  window.addEventListener(
-    "keydown",
-    (e) => {
-      // Don’t hijack keys when typing in inputs/textareas/contenteditable
-      // fields (edit mode makes the questions/answers directly editable).
-      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
-      if (tag === "input" || tag === "textarea" || (e.target && e.target.isContentEditable)) return;
-
-      if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
-        e.preventDefault();
-        scrollToIndex(currentIndex + 1);
-      } else if (e.key === "ArrowUp" || e.key === "PageUp") {
-        e.preventDefault();
-        scrollToIndex(currentIndex - 1);
-      } else if (e.key === "Home") {
-        e.preventDefault();
-        scrollToIndex(0);
-      } else if (e.key === "End") {
-        e.preventDefault();
-        scrollToIndex(sections.length - 1);
-      }
-    },
-    { passive: false }
-  );
-}
