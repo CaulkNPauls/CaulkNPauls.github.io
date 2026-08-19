@@ -2147,6 +2147,37 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
 }
 .fieldnotes-theme .hero-note__arrow{ flex-shrink: 0; }
 
+/* Self-portrait sketch, About page only. .page-hero__grid is shared with
+   the 3 case-study pages (which only ever put .page-hero__copy in it),
+   so the two-column layout is gated behind this extra modifier class
+   rather than touching the shared rule. */
+.fieldnotes-theme .page-hero__grid--sketch{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: clamp(24px, 4vw, 56px);
+}
+.fieldnotes-theme .page-hero__portrait{
+  margin: 0;
+  width: clamp(150px, 20vw, 220px);
+}
+.fieldnotes-theme .page-hero__portrait svg{ width: 100%; height: auto; display: block; }
+.fieldnotes-theme .page-hero__portrait figcaption{
+  margin-top: 6px;
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  color: var(--pen-strong);
+  text-align: center;
+}
+@media (max-width: 820px){
+  .fieldnotes-theme .page-hero__grid--sketch{ grid-template-columns: 1fr; }
+  .fieldnotes-theme .page-hero__portrait{
+    width: clamp(130px, 38vw, 190px);
+    justify-self: center;
+    order: -1;
+  }
+}
+
 /* Margin doodles around the About flashcard stack, swapped per question
    by showFlashcard() in script.js (toggles .is-active by data-doodle-index
    — plain querySelectorAll, a no-op on every other page). Positioned at
@@ -2168,7 +2199,7 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
   filter: url(#sketchy) blur(0px);
   opacity: 1;
   transform: translate(0, 0) rotate(0deg) scale(1);
-  transition: filter 750ms ease, opacity 750ms ease, transform 750ms ease;
+  transition: filter 1300ms ease, opacity 1300ms ease, transform 1300ms ease;
 }
 /* Eraser smudge: on deactivate, the whole doodle blurs hard, fades
    almost fully out, drifts, tilts, and shrinks — like a hand rubbing it
@@ -2202,7 +2233,7 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
   transform: rotate(-10deg);
 }
 .fieldnotes-theme .flashcards-doodle.is-erasing::after{
-  animation: eraserSweep 700ms ease-in-out;
+  animation: eraserSweep 1200ms ease-in-out;
 }
 @keyframes eraserSweep{
   0%{ opacity: 0; left: -40%; }
@@ -2223,7 +2254,7 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
 .fieldnotes-theme .flashcards-doodle ellipse{
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  transition: stroke-dashoffset 650ms ease;
+  transition: stroke-dashoffset 1100ms ease;
 }
 .fieldnotes-theme .flashcards-doodle.is-active path,
 .fieldnotes-theme .flashcards-doodle.is-active circle,
