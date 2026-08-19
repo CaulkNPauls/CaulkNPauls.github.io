@@ -29,7 +29,7 @@
   },
   {
     "id": "geek-squad-repair-agent",
-    "featured": false,
+    "featured": true,
     "icon": "wrench",
     "date": "Sep 2023 – Present",
     "location": "Buffalo, NY",
