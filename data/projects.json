@@ -6,7 +6,11 @@
       "meta": "Manufacturing systems · 2026",
       "blurbShort": "From manual gauges and paperwork to guided testing, live data capture, and centralized reporting.",
       "blurbLong": "A connected digital pressure-testing and reporting ecosystem — Raspberry Pi operator stations, guided testing workflows, and a manager dashboard — replacing paper-based valve testing.",
-      "tags": ["Raspberry Pi", "Systems Design", "Process Improvement"],
+      "tags": [
+        "Raspberry Pi",
+        "Systems Design",
+        "Process Improvement"
+      ],
       "href": "/projects/flowsafe-pressure-testing-system/",
       "image": null,
       "placeholderNote": "A clean photo of the Raspberry Pi operator station, pressure gauge, and test hardware in use."
@@ -17,7 +21,11 @@
       "meta": "Facility design · 2026",
       "blurbShort": "104 activity locations and a future state with 18.75% less modeled transportation effort.",
       "blurbLong": "Two years of operational data and a scaled AutoCAD facility model, quantifying a recommended future-state layout for production, cleaning, testing, and storage areas.",
-      "tags": ["AutoCAD", "Facility Layout", "Data Analysis"],
+      "tags": [
+        "AutoCAD",
+        "Facility Layout",
+        "Data Analysis"
+      ],
       "href": "/projects/flowsafe-facility-flow-layout/",
       "image": null,
       "placeholderNote": "A sanitized AutoCAD facility plan with a spaghetti diagram or before-and-after flow paths."
@@ -28,9 +36,16 @@
       "meta": "Python & data · 2026",
       "blurbShort": "A searchable engineering reference built from thousands of hard-to-use historical PDF records.",
       "blurbLong": "A Python application converting thousands of historical PDF pick-sheets into a structured, searchable engineering database.",
-      "tags": ["Python", "Data Structuring", "PDF Parsing"],
+      "tags": [
+        "Python",
+        "Data Structuring",
+        "PDF Parsing"
+      ],
       "href": "/projects/flowsafe-valve-decoder/",
-      "image": null,
+      "image": {
+        "src": "/assets/photos/mt0ik94v-photo.jpg",
+        "alt": "Valve Decoder"
+      },
       "placeholderNote": "The Valve Decoder search interface with a safe sample model and its decoded attributes."
     }
   ],
@@ -41,8 +56,20 @@
       "filter": "cad",
       "cardText": "Structured and engineered a responsive portfolio website, utilizing an AI-assisted iteration to accelerate the front-end development of the site while maintaining full control over architecture and UX decisions.",
       "summary": "Designed and built a responsive multi-page portfolio website using an AI-assisted development workflow, focusing on UX structure, modular components, and scalable layout architecture.",
-      "tags": ["Front-End", "UX", "System Design", "AI-Assisted"],
-      "tools": ["HTML", "CSS", "JavaScript", "GitHub Pages", "Responsive Design", "AI-Assisted Iteration"],
+      "tags": [
+        "Front-End",
+        "UX",
+        "System Design",
+        "AI-Assisted"
+      ],
+      "tools": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "GitHub Pages",
+        "Responsive Design",
+        "AI-Assisted Iteration"
+      ],
       "results": [
         "Built fully responsive multi-page site",
         "Implemented reusable card + modal component system",
@@ -50,8 +77,14 @@
         "Deployed via GitHub Pages with custom domain."
       ],
       "links": [
-        { "label": "Live site", "href": "https://paulpoleon.com/" },
-        { "label": "GitHub repository", "href": "https://github.com/CaulkNPauls/CaulkNPauls.github.io" }
+        {
+          "label": "Live site",
+          "href": "https://paulpoleon.com/"
+        },
+        {
+          "label": "GitHub repository",
+          "href": "https://github.com/CaulkNPauls/CaulkNPauls.github.io"
+        }
       ]
     },
     {
@@ -60,16 +93,32 @@
       "filter": "analytics",
       "cardText": "Regression model in R predicting prices from specs, rating, discount %, and brand.",
       "summary": "Built a regression model in R to predict smartphone prices using memory, storage, rating, discount %, and brand.",
-      "tags": ["R", "EDA", "Regression", "Validation"],
-      "tools": ["R", "ggplot2", "Linear Regression", "Train/Test Split"],
+      "tags": [
+        "R",
+        "EDA",
+        "Regression",
+        "Validation"
+      ],
+      "tools": [
+        "R",
+        "ggplot2",
+        "Linear Regression",
+        "Train/Test Split"
+      ],
       "results": [
         "R² ≈ 0.73 on test set",
         "RMSE ≈ $152",
         "Memory/storage/brand were strongest predictors."
       ],
       "links": [
-        { "label": "Final report (PDF)", "href": "/assets/ie322-smartphone-pricing.pdf" },
-        { "label": "View detail page", "href": "/projects/smartphone-prices/" }
+        {
+          "label": "Final report (PDF)",
+          "href": "/assets/ie322-smartphone-pricing.pdf"
+        },
+        {
+          "label": "View detail page",
+          "href": "/projects/smartphone-prices/"
+        }
       ]
     },
     {
@@ -78,15 +127,31 @@
       "filter": "humanfactors",
       "cardText": "User study with performance + comfort/fatigue ratings to assess ergonomic mismatch.",
       "summary": "Human factors study evaluating controller fit across small/medium/large hand sizes using a standardized FPS task and surveys.",
-      "tags": ["Human Factors", "Usability", "Study Design", "Analysis"],
-      "tools": ["Experimental Design", "Observation Checklist", "Likert Surveys", "Performance Metrics"],
+      "tags": [
+        "Human Factors",
+        "Usability",
+        "Study Design",
+        "Analysis"
+      ],
+      "tools": [
+        "Experimental Design",
+        "Observation Checklist",
+        "Likert Surveys",
+        "Performance Metrics"
+      ],
       "results": [
         "Medium hand-size group performed best and reported highest comfort",
         "Small/large groups showed more fatigue and grip adjustments."
       ],
       "links": [
-        { "label": "Final report (PDF)", "href": "/assets/ie323-dualsense-ergonomics.pdf" },
-        { "label": "View detail page", "href": "/projects/dualsense-ergonomics/" }
+        {
+          "label": "Final report (PDF)",
+          "href": "/assets/ie323-dualsense-ergonomics.pdf"
+        },
+        {
+          "label": "View detail page",
+          "href": "/projects/dualsense-ergonomics/"
+        }
       ]
     },
     {
@@ -95,12 +160,29 @@
       "filter": "cad",
       "cardText": "ADA-compliant lift design using engineering calculations and safety analysis.",
       "summary": "Designed an ADA-compliant pool lift with engineering calculations and safety considerations.",
-      "tags": ["CAD", "Statics", "Safety", "Design"],
-      "tools": ["Statics", "Design Calculations", "CAD"],
-      "results": ["Designed for safe support up to 300 lbs with optimized linkage geometry and joint placement."],
+      "tags": [
+        "CAD",
+        "Statics",
+        "Safety",
+        "Design"
+      ],
+      "tools": [
+        "Statics",
+        "Design Calculations",
+        "CAD"
+      ],
+      "results": [
+        "Designed for safe support up to 300 lbs with optimized linkage geometry and joint placement."
+      ],
       "links": [
-        { "label": "Resume bullet(s) (PDF)", "href": "/assets/resume.pdf" },
-        { "label": "View detail page", "href": "/projects/ada-pool-lift/" }
+        {
+          "label": "Resume bullet(s) (PDF)",
+          "href": "/assets/resume.pdf"
+        },
+        {
+          "label": "View detail page",
+          "href": "/projects/ada-pool-lift/"
+        }
       ]
     },
     {
@@ -109,12 +191,29 @@
       "filter": "cad",
       "cardText": "3D CAD model + engineering drawings with exploded views and projections.",
       "summary": "Created a detailed SolidWorks model and produced engineering drawings with exploded views and labeled components.",
-      "tags": ["SolidWorks", "CAD", "Drawings", "MFG"],
-      "tools": ["SolidWorks", "Engineering Drawings", "Dimensioning"],
-      "results": ["Produced detailed model and drawings with exploded views and clear component labeling."],
+      "tags": [
+        "SolidWorks",
+        "CAD",
+        "Drawings",
+        "MFG"
+      ],
+      "tools": [
+        "SolidWorks",
+        "Engineering Drawings",
+        "Dimensioning"
+      ],
+      "results": [
+        "Produced detailed model and drawings with exploded views and clear component labeling."
+      ],
       "links": [
-        { "label": "Resume bullet(s) (PDF)", "href": "/assets/resume.pdf" },
-        { "label": "View detail page", "href": "/projects/solidworks-ps5-model/" }
+        {
+          "label": "Resume bullet(s) (PDF)",
+          "href": "/assets/resume.pdf"
+        },
+        {
+          "label": "View detail page",
+          "href": "/projects/solidworks-ps5-model/"
+        }
       ]
     },
     {
@@ -123,12 +222,29 @@
       "filter": "prototype",
       "cardText": "Prototype testing + optimization; built a wind-only propelled model.",
       "summary": "Team project testing design variables and hull concepts to improve performance and minimize time.",
-      "tags": ["Prototyping", "Testing", "Optimization", "Team"],
-      "tools": ["Prototyping", "Testing", "Iteration"],
-      "results": ["Produced the only model in the class propelled purely by wind."],
+      "tags": [
+        "Prototyping",
+        "Testing",
+        "Optimization",
+        "Team"
+      ],
+      "tools": [
+        "Prototyping",
+        "Testing",
+        "Iteration"
+      ],
+      "results": [
+        "Produced the only model in the class propelled purely by wind."
+      ],
       "links": [
-        { "label": "Resume bullet(s) (PDF)", "href": "/assets/resume.pdf" },
-        { "label": "View detail page", "href": "/projects/wind-boat-prototype/" }
+        {
+          "label": "Resume bullet(s) (PDF)",
+          "href": "/assets/resume.pdf"
+        },
+        {
+          "label": "View detail page",
+          "href": "/projects/wind-boat-prototype/"
+        }
       ]
     },
     {
@@ -137,15 +253,31 @@
       "filter": "analytics",
       "cardText": "Statistical analysis comparing performance patterns across categorized weeks using fantasy football data.",
       "summary": "Analyzed Kyler Murray’s weekly fantasy football performance and compared weeks around Call of Duty releases/events vs typical weeks to explore whether the pattern showed a measurable change in performance.",
-      "tags": ["Excel", "Statistics", "Analytics", "Charts"],
-      "tools": ["Excel", "Data cleaning", "Data organization", "Summary statistics", "Averages", "Standard deviation", "Charts/graphs"],
+      "tags": [
+        "Excel",
+        "Statistics",
+        "Analytics",
+        "Charts"
+      ],
+      "tools": [
+        "Excel",
+        "Data cleaning",
+        "Data organization",
+        "Summary statistics",
+        "Averages",
+        "Standard deviation",
+        "Charts/graphs"
+      ],
       "results": [
         "Built season-by-season comparisons for COD vs non-COD weeks",
         "Computed averages and variability to evaluate consistency",
         "Presented results in tables and visuals with a written conclusion."
       ],
       "links": [
-        { "label": "View IA (PDF)", "href": "/assets/A&A IA - Paul Poleon Jr.pdf" }
+        {
+          "label": "View IA (PDF)",
+          "href": "/assets/A&A IA - Paul Poleon Jr.pdf"
+        }
       ]
     },
     {
@@ -154,15 +286,29 @@
       "filter": "analytics",
       "cardText": "Technical research on wave-based sensing (LiDAR/radar) and object detection limits in autonomous vehicles.",
       "summary": "Researched how self-driving cars use wave-based sensors (LiDAR/radar/cameras) to detect objects and estimate distance, then discussed real-world limitations like weather interference and sensor uncertainty.",
-      "tags": ["Physics", "Research", "LiDAR", "Radar"],
-      "tools": ["Research synthesis", "Physics concepts (waves)", "Sensor fundamentals", "Technical writing", "Structured argumentation"],
+      "tags": [
+        "Physics",
+        "Research",
+        "LiDAR",
+        "Radar"
+      ],
+      "tools": [
+        "Research synthesis",
+        "Physics concepts (waves)",
+        "Sensor fundamentals",
+        "Technical writing",
+        "Structured argumentation"
+      ],
       "results": [
         "Explained time-of-flight distance measurement (conceptually) and compared sensor strengths/limitations",
         "Discussed why multi-sensor fusion improves reliability",
         "Produced a structured long-form technical paper."
       ],
       "links": [
-        { "label": "View Extended Essay (PDF)", "href": "/assets/EE FINAL.pdf" }
+        {
+          "label": "View Extended Essay (PDF)",
+          "href": "/assets/EE FINAL.pdf"
+        }
       ]
     },
     {
@@ -171,11 +317,27 @@
       "filter": "cad",
       "cardText": "Team-based teardown and analysis of a Toro CCR Powerlite snowblower, evaluating subsystems and proposing design improvements.",
       "summary": "A team-based reverse engineering analysis of a Toro CCR Powerlite snowblower, focusing on subsystems, usability, and design improvements.",
-      "tags": ["Reverse Engineering", "Mechanical Systems", "Design Analysis", "Team Project"],
-      "tools": ["System Decomposition", "Mechanical Analysis", "Disassembly", "Design Evaluation", "GSEE Framework"],
-      "results": ["Proposed three major improvements: battery conversion, rototiller attachment, and right-to-repair design."],
+      "tags": [
+        "Reverse Engineering",
+        "Mechanical Systems",
+        "Design Analysis",
+        "Team Project"
+      ],
+      "tools": [
+        "System Decomposition",
+        "Mechanical Analysis",
+        "Disassembly",
+        "Design Evaluation",
+        "GSEE Framework"
+      ],
+      "results": [
+        "Proposed three major improvements: battery conversion, rototiller attachment, and right-to-repair design."
+      ],
       "links": [
-        { "label": "Final Report (PDF)", "href": "/assets/Reverse Engineering of Toro Snowblower.pdf" }
+        {
+          "label": "Final Report (PDF)",
+          "href": "/assets/Reverse Engineering of Toro Snowblower.pdf"
+        }
       ]
     }
   ]
