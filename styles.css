@@ -2159,14 +2159,34 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
   width: clamp(64px, 7vw, 110px);
   height: clamp(64px, 7vw, 110px);
   pointer-events: none;
+  /* Resting/active state — sharp, upright, in place. Combined with
+     .doodle's own filter (must be repeated here, url(#sketchy) + blur(),
+     since a single `filter` declaration replaces the whole value list —
+     this rule has higher specificity than .doodle's so it always wins,
+     and folding the sketchy reference into every state keeps the wobble
+     even while blur is animating). */
+  filter: url(#sketchy) blur(0px);
+  opacity: 1;
+  transform: translate(0, 0) rotate(0deg) scale(1);
+  transition: filter 550ms ease, opacity 550ms ease, transform 550ms ease;
+}
+/* Eraser smudge: on deactivate, the whole doodle blurs, fades, drifts
+   sideways and tilts — like a hand rubbing it out — while its lines
+   simultaneously retract (below). Plain bidirectional transition, so
+   activating plays the same motion in reverse: blur clears, it drifts
+   back into place, then draws in. */
+.fieldnotes-theme .flashcards-doodle:not(.is-active){
+  filter: url(#sketchy) blur(7px);
+  opacity: .1;
+  transform: translate(5px, -3px) rotate(-4deg) scale(.94);
 }
 /* Hand-drawn reveal: pathLength="1" on every shape (set in the markup)
    normalizes its length to 1 regardless of actual size, so a single
    dasharray/dashoffset pair animates the whole doodle "drawing itself"
    in — and, since it's a plain class-toggled CSS transition, animates
-   the same stroke back out again when a doodle deactivates, which reads
-   as the previous drawing being erased. No JS beyond the existing
-   .is-active class toggle in showFlashcard(). */
+   the same stroke back out again when a doodle deactivates, reinforcing
+   the smudge above with the lines themselves shrinking away. No JS
+   beyond the existing .is-active class toggle in showFlashcard(). */
 .fieldnotes-theme .flashcards-doodle path,
 .fieldnotes-theme .flashcards-doodle circle,
 .fieldnotes-theme .flashcards-doodle rect,
@@ -2182,6 +2202,7 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
   stroke-dashoffset: 0;
 }
 @media (prefers-reduced-motion: reduce){
+  .fieldnotes-theme .flashcards-doodle,
   .fieldnotes-theme .flashcards-doodle path,
   .fieldnotes-theme .flashcards-doodle circle,
   .fieldnotes-theme .flashcards-doodle rect,
