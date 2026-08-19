@@ -21,14 +21,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="../styles.css" />
   </head>
 
-  <body class="page-about editorial-theme">
+  <body class="page-about editorial-theme fieldnotes-theme">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <filter id="sketchy" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="7" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6"/>
+        </filter>
+      </defs>
+    </svg>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="portfolio-nav">
@@ -50,6 +58,12 @@
       <section class="page-hero">
         <div class="container page-hero__inner">
           <p class="muted small"><a class="link" href="/">← Back home</a></p>
+
+          <svg class="doodle page-hero__doodle" width="86" height="86" viewBox="0 0 86 86" aria-hidden="true">
+            <path d="M20 66 L58 20"/>
+            <path d="M52 16 L64 14 L60 26 Z"/>
+            <path d="M18 70 L24 64 L22 72 Z"/>
+          </svg>
 
           <div class="page-hero__grid">
             <div class="page-hero__copy">

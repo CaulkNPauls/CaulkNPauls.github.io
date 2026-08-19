@@ -1969,3 +1969,165 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
   letter-spacing:-.02em;
 }
 
+/* =========================================================
+   FIELD NOTES THEME — hand-drawn blue-ballpoint-pen-on-graph-paper
+   look, applied ONLY where body carries .fieldnotes-theme alongside
+   .editorial-theme: the About Q&A flashcards and the three FlowSafe
+   case-study detail pages. Everywhere else (home, /projects/ hub,
+   Experience, Skills) is untouched.
+
+   This block redefines the same custom-property names .editorial-theme
+   and the global :root token set already use (--paper/--ink/--rust/--line
+   and --bg/--border/--muted/--accent/--accent-soft/--accent-border/
+   --radius/--shadow), so nav, footer, buttons, cards, tags, and the
+   result/evidence components retheme automatically via cascade with no
+   markup changes. Placed at the very end of the file, after every other
+   rule (including the subpage-chrome block just above and the mobile
+   media queries earlier on), so any equal-specificity plain-property
+   override here (e.g. font-family on .page-hero__eyebrow) reliably wins
+   by source order rather than depending on selector-weight tricks.
+
+   Token values and the hand-wobbled-border filter technique are ported
+   directly from the "Field Notes" design-concept artifact.
+========================================================= */
+.fieldnotes-theme{
+  --ink:#1c1c1a; --paper:#f6efdb; --rust:#2b5c82; --line:rgba(43,92,130,.40);
+  --bg:#faf3e2; --border:rgba(28,28,26,.12); --muted:rgba(28,28,26,.62);
+  --accent:#2b5c82; --accent-soft:rgba(43,92,130,.12); --accent-border:rgba(43,92,130,.40);
+  --shadow:0 14px 30px rgba(28,28,26,.12); --radius:4px;
+  --pen:#2b5c82; --pen-strong:#173c56; --pen-soft:rgba(43,92,130,.12); --pen-border:rgba(43,92,130,.40);
+  --font-hand:"Caveat",cursive; --font-mono:"IBM Plex Mono",monospace;
+
+  background:
+    linear-gradient(var(--pen-soft) 1px, transparent 1px) 0 0/16px 16px,
+    linear-gradient(90deg, var(--pen-soft) 1px, transparent 1px) 0 0/16px 16px,
+    var(--paper);
+}
+
+/* Small inline hand-drawn accent doodles (see markup in each themed page) */
+.fieldnotes-theme .doodle{
+  stroke: var(--pen);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#sketchy);
+}
+.fieldnotes-theme .page-hero{ position: relative; }
+.fieldnotes-theme .page-hero__doodle{
+  position: absolute;
+  right: clamp(12px, 4vw, 56px);
+  top: 6px;
+  opacity: .85;
+  pointer-events: none;
+}
+
+.fieldnotes-theme .btn{ border-radius: 999px; border-color: var(--pen-strong); }
+.fieldnotes-theme .btn--ghost{ border-color: var(--pen-border); color: var(--pen-strong); }
+
+/* Hand-wobbled borders: drawn on a ::before instead of the element's own
+   border, so the SVG displacement filter (defined per-page, see markup)
+   wobbles the LINE without also distorting the text/content on top. */
+.fieldnotes-theme .flashcard,
+.fieldnotes-theme .result-callout,
+.fieldnotes-theme .evidence-placeholder,
+.fieldnotes-theme .experience-cta__card{
+  position: relative;
+  border-color: transparent;
+}
+.fieldnotes-theme .flashcard::before,
+.fieldnotes-theme .result-callout::before,
+.fieldnotes-theme .evidence-placeholder::before,
+.fieldnotes-theme .experience-cta__card::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1.6px solid var(--pen-border);
+  border-radius: inherit;
+  filter: url(#sketchy);
+  pointer-events: none;
+}
+.fieldnotes-theme .evidence-placeholder::before{ border-style: dashed; }
+
+.fieldnotes-theme .result-callout{ background: var(--pen-soft); }
+.fieldnotes-theme .evidence-placeholder{ background: var(--bg); }
+.fieldnotes-theme .evidence-placeholder__icon{ color: var(--pen); }
+.fieldnotes-theme .evidence-placeholder__label{ color: var(--pen-strong); }
+.fieldnotes-theme .section--alt{ background: var(--pen-soft); border-color: var(--pen-border); }
+
+/* Notebook-page divider between case-study sections — zero markup changes */
+.fieldnotes-theme .case-study-section{ border-top: 1.5px dashed var(--border); }
+.fieldnotes-theme .case-study-section:first-of-type{ border-top: none; }
+.fieldnotes-theme .section h2{ color: var(--pen-strong); }
+
+/* Utility / mono labels (tags, eyebrow, kicker, progress counter) */
+.fieldnotes-theme .page-hero__eyebrow,
+.fieldnotes-theme .tags li,
+.fieldnotes-theme .flashcards-progress,
+.fieldnotes-theme .flashcard__kicker{
+  font-family: var(--font-mono);
+}
+.fieldnotes-theme .tags li{
+  border-style: dashed;
+  border-color: var(--pen-border);
+  color: var(--pen-strong);
+  background: var(--pen-soft);
+}
+
+/* Marginalia — hand font, reserved for this one UI accent, never body copy */
+.fieldnotes-theme .flashcard__reveal{
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--pen-strong);
+  border-color: var(--pen-border);
+}
+
+.fieldnotes-theme .result-callout__value{
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: var(--pen-strong);
+}
+
+/* Index-card stack behind the active flashcard, plus a spiral-binding
+   strip down its left edge — pure CSS pseudo-elements, no extra DOM,
+   so script.js's renderAbout()/showFlashcard() need no changes. */
+.fieldnotes-theme .flashcards{ padding-top: 10px; }
+.fieldnotes-theme .flashcards::before,
+.fieldnotes-theme .flashcards::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  border: 1.5px solid var(--pen-border);
+  border-radius: 6px;
+  z-index: 0;
+}
+.fieldnotes-theme .flashcards::before{ transform: rotate(-2.4deg) translateY(6px); opacity: .75; }
+.fieldnotes-theme .flashcards::after{ transform: rotate(3.2deg) translateY(10px); opacity: .5; }
+.fieldnotes-theme .flashcard{
+  z-index: 1;
+  padding-left: clamp(46px, 8vw, 66px);
+}
+.fieldnotes-theme .flashcard::after{
+  content: "";
+  position: absolute;
+  left: 18px; top: 18px; bottom: 18px; width: 20px;
+  background-image: radial-gradient(circle, var(--pen-border) 0 3px, transparent 3px);
+  background-size: 20px 26px;
+  background-repeat: repeat-y;
+  pointer-events: none;
+}
+
+@media (max-width: 560px){
+  .fieldnotes-theme .flashcard{ padding-left: clamp(28px, 5vw, 56px); }
+  .fieldnotes-theme .flashcard::after{ display: none; }
+}
+
+@media (max-width: 700px){
+  /* Hero doodles are sized for the spare top-right corner of a wide,
+     multi-column hero; on a single-column mobile layout that corner is
+     occupied by the back-link/eyebrow, so hide rather than overlap. */
+  .fieldnotes-theme .page-hero__doodle{ display: none; }
+}
+
