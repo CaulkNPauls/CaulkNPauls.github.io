@@ -1614,7 +1614,8 @@ html{ scroll-behavior: smooth; }
 
 /* Editorial portfolio homepage */
 .editorial-theme{--ink:#171714;--paper:#f3f0e9;--rust:#2b5c82;--line:rgba(23,23,20,.2);background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif}
-.portfolio-nav{height:86px;padding:0 clamp(24px,5vw,76px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:relative;z-index:10;background:var(--paper)}
+.portfolio-nav{height:86px;padding:0 clamp(24px,5vw,76px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40;background:var(--paper)}
+#home,#about,#work,#contact,main#main{ scroll-margin-top:86px; }
 .portfolio-nav__mark{display:inline-flex;align-items:center;text-decoration:none}.portfolio-nav__mark span{color:var(--rust)}
 .portfolio-nav__logo{height:75px;width:auto;display:block;transition:transform 160ms ease}
 .portfolio-nav__mark:hover .portfolio-nav__logo{transform:translateY(-1px)}
@@ -1637,7 +1638,7 @@ html{ scroll-behavior: smooth; }
 .editorial-role--featured{display:grid;grid-template-columns:140px 1.05fr 1fr;gap:3vw}.editorial-role__meta{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;display:flex;flex-direction:column;gap:8px}.editorial-role__visual{min-height:500px}.editorial-role__company{color:var(--rust);font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700}.editorial-role__copy h3{font:500 clamp(2rem,3.7vw,4rem)/1.05 "Manrope";letter-spacing:-.04em;margin:15px 0 28px}.editorial-role__copy>p,.editorial-role__copy li{font-size:1rem}.editorial-role__copy ul{padding-left:20px;margin:28px 0}.editorial-role__copy li{margin-bottom:10px}
 .editorial-role-list{margin-top:80px}.editorial-role-row{display:grid;grid-template-columns:200px 1fr 120px;gap:30px;border-top:1px solid var(--line);padding:28px 0}.editorial-role-row>span{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}.editorial-role-row h3{font:600 1.35rem "Manrope";margin:0 0 5px}.editorial-role-row p{margin:0;color:#625e57}
 .editorial-projects{display:grid;grid-template-columns:1fr 1fr;gap:70px 28px}.editorial-project{text-decoration:none}.editorial-project--large{grid-column:1/-1}.editorial-placeholder--project{aspect-ratio:16/10}.editorial-project--large .editorial-placeholder--project{aspect-ratio:2.1/1}.editorial-project__info{padding-top:22px}.editorial-project__info>span{font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:#625e57}.editorial-project__info h3{font:600 clamp(1.7rem,3vw,3.4rem)/1.1 "Manrope";letter-spacing:-.035em;margin:11px 0}.editorial-project__info p{color:#625e57;max-width:65ch}
-.editorial-origin{display:grid;grid-template-columns:150px 1fr 1fr;gap:4vw}.editorial-origin__visual{min-height:570px}.editorial-origin__copy{align-self:center}.editorial-origin__copy h2{font:500 clamp(2.7rem,5vw,5.4rem)/1 "Manrope";letter-spacing:-.05em;margin:0 0 35px}.editorial-origin__copy p:not(.editorial-kicker){font-size:1.05rem}
+.editorial-origin{display:grid;grid-template-columns:150px 1fr 1fr;gap:4vw}.editorial-origin__visual{min-height:570px;position:relative}.editorial-origin__copy{align-self:center}.editorial-origin__copy h2{font:500 clamp(2.7rem,5vw,5.4rem)/1 "Manrope";letter-spacing:-.05em;margin:0 0 35px}.editorial-origin__copy p:not(.editorial-kicker){font-size:1.05rem}
 .editorial-contact{background:var(--rust);color:#fff;padding:clamp(80px,10vw,150px) clamp(24px,5vw,76px)}.editorial-contact h2{font:500 clamp(4rem,10vw,10rem)/.82 "Manrope";letter-spacing:-.075em;margin:0}.editorial-contact__links{margin-top:70px;display:flex;gap:35px}.editorial-contact__links a{color:#fff;text-underline-offset:6px}
 .editorial-footer{padding:25px clamp(24px,5vw,76px);display:flex;justify-content:space-between;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}.editorial-footer a{color:inherit}
 @media(max-width:800px){
@@ -1960,6 +1961,28 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
   text-align:center;
 }
 .edit-add-tile:hover{ background:var(--accent); color:#fff; }
+
+/* ===== photo crop/resize tool (dev/editor.js openCropModal) ===== */
+.crop-modal__panel{ max-width:480px; }
+.crop-modal__hint{ margin:0 0 14px; font-size:.88rem; }
+.crop-stage{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  background:#111;
+  border-radius:var(--radius);
+  cursor:grab;
+  touch-action:none;
+  user-select:none;
+}
+.crop-stage:active{ cursor:grabbing; }
+.crop-stage img{
+  position:absolute;
+  top:0; left:0;
+  max-width:none;
+  pointer-events:none;
+}
+.crop-zoom{ width:100%; margin:14px 0 4px; accent-color:var(--accent); }
 
 .edit-toolbar{
   position:fixed;

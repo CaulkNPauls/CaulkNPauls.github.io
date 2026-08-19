@@ -349,12 +349,6 @@ function fileToBase64(file) {
   });
 }
 
-// Downscale + re-encode as JPEG before upload — keeps full-resolution phone
-// photos (often 5-15MB) safely under the Contents API's practical request
-// size, and keeps the site fast. Falls back to the original file untouched
-// if decoding fails for any reason (e.g. an exotic format the browser can't
-// draw to canvas), so a photo never silently fails to upload because of this.
-const MAX_PHOTO_DIM = 2000;
 const PHOTO_QUALITY = 0.85;
 
 function loadImageEl(url) {
@@ -364,32 +358,6 @@ function loadImageEl(url) {
     img.onerror = reject;
     img.src = url;
   });
-}
-
-async function resizeImageFile(file) {
-  if (!file.type.startsWith("image/")) return null;
-  const objectUrl = URL.createObjectURL(file);
-  try {
-    const img = await loadImageEl(objectUrl);
-    const scale = Math.min(1, MAX_PHOTO_DIM / Math.max(img.naturalWidth, img.naturalHeight));
-    if (scale === 1 && file.size < 1.5 * 1024 * 1024) return null; // already small enough
-
-    const w = Math.max(1, Math.round(img.naturalWidth * scale));
-    const h = Math.max(1, Math.round(img.naturalHeight * scale));
-    const canvas = document.createElement("canvas");
-    canvas.width = w;
-    canvas.height = h;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0, w, h);
-
-    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", PHOTO_QUALITY));
-    if (!blob) return null;
-    return { base64: await fileToBase64(blob), ext: "jpg" };
-  } catch (_) {
-    return null;
-  } finally {
-    URL.revokeObjectURL(objectUrl);
-  }
 }
 
 async function loadFile(path) {
@@ -626,6 +594,8 @@ function refreshMountsFor(entityKey) {
     if (typeof renderSkills === "function") {
       renderSkills(data, document.getElementById("skillsCoreMount"), document.getElementById("skillsCourseworkMount"));
     }
+  } else if (entityKey.startsWith("home-")) {
+    if (typeof renderHome === "function") renderHome(data);
   }
   if (typeof initReveal === "function") initReveal();
 }
@@ -935,6 +905,28 @@ function watchHomeListMount(id, wireFn) {
   obs.observe(el, { childList: true });
 }
 
+// Standalone (non-entity) photo slots — the hero portrait and the "beyond
+// engineering" photo. renderHome() fully rebuilds these mounts' contents on
+// every home-* refresh (not just their own), so both the placeholder-note
+// text and the photo button need the same re-wire-on-mutation treatment as
+// the list mounts above, not a one-time wire.
+function wireHomePhotoSlot(mountId, entityKey, noteId) {
+  watchHomeListMount(mountId, () => {
+    const mount = document.getElementById(mountId);
+    if (!mount) return;
+    wireHomeField(document.getElementById(noteId), entityKey, "placeholderNote");
+    if (!mount.querySelector(".edit-affordance--photo")) {
+      const photoBtn = mkEl("button", { className: "edit-affordance edit-affordance--photo", text: "📷 Photo", attrs: { type: "button" } });
+      photoBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        promptPhotoUpload(entityKey, undefined);
+      });
+      mount.appendChild(photoBtn);
+    }
+  });
+}
+
 function wireHomeInlineFields() {
   if (!document.getElementById("heroKicker")) return; // only present on the homepage
 
@@ -942,7 +934,7 @@ function wireHomeInlineFields() {
   wireHomeField(document.getElementById("heroNameMain"), "home-hero", "nameMain");
   wireHomeField(document.getElementById("heroNameAccent"), "home-hero", "nameAccent");
   wireHomeField(document.getElementById("heroLede"), "home-hero", "lede");
-  wireHomeField(document.getElementById("heroPlaceholderNote"), "home-hero", "placeholderNote");
+  wireHomePhotoSlot("heroVisual", "home-hero", "heroPlaceholderNote");
 
   const ctaPrimary = document.getElementById("heroCtaPrimary");
   guardEditableAnchor(ctaPrimary);
@@ -974,7 +966,7 @@ function wireHomeInlineFields() {
   });
 
   wireHomeField(document.getElementById("originLabel"), "home-origin", "label");
-  wireHomeField(document.getElementById("originPlaceholderNote"), "home-origin", "placeholderNote");
+  wireHomePhotoSlot("originVisual", "home-origin", "originPlaceholderNote");
   wireHomeField(document.getElementById("originKicker"), "home-origin", "kicker");
   wireHomeField(document.getElementById("originHeading"), "home-origin", "heading");
   watchHomeListMount("originParagraphs", () => {
@@ -989,6 +981,181 @@ function wireHomeInlineFields() {
 }
 
 // ===== contextual photo upload =====
+// Target aspect ratio (width/height) each photo slot displays at on the
+// real page — the crop stage below is locked to this ratio, so what's
+// framed in the cropper is exactly what object-fit:cover will show live.
+const PHOTO_ASPECTS = {
+  experience: 16 / 10,
+  "projects-featured": 16 / 10,
+  "home-hero": 4 / 5,
+  "home-origin": 4 / 3,
+};
+// Where the uploaded photo gets written on the entity, and in what shape —
+// experience.photo is a bare path string; everything else is {src, alt}.
+const PHOTO_FIELD = {
+  "projects-featured": { key: "image", shape: "object" },
+  experience: { key: "photo", shape: "string" },
+  "home-hero": { key: "photo", shape: "object" },
+  "home-origin": { key: "photo", shape: "object" },
+};
+
+function injectCropModal() {
+  if (document.getElementById("cropModal")) return;
+
+  const modal = mkEl("div", { className: "modal crop-modal", attrs: { id: "cropModal", "aria-hidden": "true" } });
+  modal.appendChild(mkEl("div", { className: "modal__backdrop", attrs: { "data-close": "true" } }));
+
+  const panel = mkEl("div", { className: "modal__panel crop-modal__panel", attrs: { role: "dialog", "aria-modal": "true", "aria-labelledby": "cropModalTitle" } });
+  panel.appendChild(mkEl("button", { className: "modal__close", text: "✕", attrs: { type: "button", "data-close": "true", "aria-label": "Close" } }));
+  panel.appendChild(mkEl("h3", { text: "Crop & position photo", attrs: { id: "cropModalTitle" } }));
+  panel.appendChild(mkEl("p", { className: "muted crop-modal__hint", text: "Drag to reposition, use the slider to zoom — this framing is exactly what will show on the page." }));
+
+  const stage = mkEl("div", { className: "crop-stage", attrs: { id: "cropStage" } });
+  stage.appendChild(mkEl("img", { attrs: { id: "cropImage", alt: "", draggable: "false" } }));
+  panel.appendChild(stage);
+
+  const zoom = document.createElement("input");
+  zoom.type = "range";
+  zoom.id = "cropZoom";
+  zoom.min = "100";
+  zoom.max = "320";
+  zoom.value = "100";
+  zoom.className = "crop-zoom";
+  panel.appendChild(zoom);
+
+  const actions = mkEl("div", { className: "admin-form__actions" });
+  actions.appendChild(mkEl("button", { className: "btn btn--ghost", text: "Cancel", attrs: { type: "button", id: "cropCancelBtn" } }));
+  actions.appendChild(mkEl("button", { className: "btn", text: "Use this photo", attrs: { type: "button", id: "cropConfirmBtn" } }));
+  panel.appendChild(actions);
+
+  modal.appendChild(panel);
+  document.body.appendChild(modal);
+}
+
+// Resolves to a cropped/resized JPEG Blob, or null if the user cancels.
+// The crop "stage" is a fixed-aspect viewport the source photo is panned
+// and zoomed inside of — since it's locked to the same aspect ratio the
+// photo will actually render at (object-fit:cover), it doubles as an exact
+// live preview of the final framing rather than a separate mockup.
+function openCropModal(file, aspect) {
+  injectCropModal();
+  return new Promise((resolve) => {
+    const modal = document.getElementById("cropModal");
+    const stage = document.getElementById("cropStage");
+    const img = document.getElementById("cropImage");
+    const zoom = document.getElementById("cropZoom");
+    const cancelBtn = document.getElementById("cropCancelBtn");
+    const confirmBtn = document.getElementById("cropConfirmBtn");
+
+    const objectUrl = URL.createObjectURL(file);
+    let naturalW, naturalH, scaleCover, scale, tx, ty;
+    let dragging = false, dragStartX, dragStartY, dragStartTx, dragStartTy;
+
+    function applyTransform() {
+      img.style.width = `${naturalW * scale}px`;
+      img.style.height = `${naturalH * scale}px`;
+      img.style.transform = `translate(${tx}px, ${ty}px)`;
+    }
+
+    function clamp() {
+      const stageW = stage.clientWidth, stageH = stage.clientHeight;
+      const dispW = naturalW * scale, dispH = naturalH * scale;
+      tx = Math.min(0, Math.max(stageW - dispW, tx));
+      ty = Math.min(0, Math.max(stageH - dispH, ty));
+    }
+
+    function setScale(newScale) {
+      const stageW = stage.clientWidth, stageH = stage.clientHeight;
+      // Anchor the point currently at the stage's center so zooming feels
+      // like it's zooming into what you're looking at, not the corner.
+      const cx = (stageW / 2 - tx) / scale;
+      const cy = (stageH / 2 - ty) / scale;
+      scale = newScale;
+      tx = stageW / 2 - cx * scale;
+      ty = stageH / 2 - cy * scale;
+      clamp();
+      applyTransform();
+    }
+
+    function onPointerDown(e) {
+      dragging = true;
+      dragStartX = e.clientX; dragStartY = e.clientY;
+      dragStartTx = tx; dragStartTy = ty;
+      stage.setPointerCapture(e.pointerId);
+    }
+    function onPointerMove(e) {
+      if (!dragging) return;
+      tx = dragStartTx + (e.clientX - dragStartX);
+      ty = dragStartTy + (e.clientY - dragStartY);
+      clamp();
+      applyTransform();
+    }
+    function onPointerUp(e) {
+      dragging = false;
+      try { stage.releasePointerCapture(e.pointerId); } catch (_) {}
+    }
+    function onZoomInput() {
+      setScale(scaleCover * (Number(zoom.value) / 100));
+    }
+
+    function cleanup() {
+      URL.revokeObjectURL(objectUrl);
+      stage.removeEventListener("pointerdown", onPointerDown);
+      stage.removeEventListener("pointermove", onPointerMove);
+      stage.removeEventListener("pointerup", onPointerUp);
+      stage.removeEventListener("pointercancel", onPointerUp);
+      zoom.removeEventListener("input", onZoomInput);
+      cancelBtn.removeEventListener("click", onCancel);
+      confirmBtn.removeEventListener("click", onConfirm);
+      modal.removeEventListener("click", onBackdropClick);
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+    function onCancel() { cleanup(); resolve(null); }
+    function onBackdropClick(e) { if (e.target.dataset.close === "true") onCancel(); }
+    function onConfirm() {
+      const stageW = stage.clientWidth, stageH = stage.clientHeight;
+      const sx = -tx / scale, sy = -ty / scale;
+      const sw = stageW / scale, sh = stageH / scale;
+      const outW = aspect >= 1 ? 1600 : Math.round(1600 * aspect);
+      const outH = aspect >= 1 ? Math.round(1600 / aspect) : 1600;
+      const canvas = document.createElement("canvas");
+      canvas.width = outW;
+      canvas.height = outH;
+      canvas.getContext("2d").drawImage(img, sx, sy, sw, sh, 0, 0, outW, outH);
+      canvas.toBlob((blob) => { cleanup(); resolve(blob); }, "image/jpeg", PHOTO_QUALITY);
+    }
+
+    img.onload = () => {
+      // Show the modal before measuring — a display:none ancestor reports
+      // clientWidth/Height as 0, which would poison every calc below.
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      stage.style.aspectRatio = String(aspect);
+
+      naturalW = img.naturalWidth;
+      naturalH = img.naturalHeight;
+      const stageW = stage.clientWidth, stageH = stage.clientHeight;
+      scaleCover = Math.max(stageW / naturalW, stageH / naturalH);
+      scale = scaleCover;
+      tx = (stageW - naturalW * scale) / 2;
+      ty = (stageH - naturalH * scale) / 2;
+      zoom.value = "100";
+      applyTransform();
+
+      stage.addEventListener("pointerdown", onPointerDown);
+      stage.addEventListener("pointermove", onPointerMove);
+      stage.addEventListener("pointerup", onPointerUp);
+      stage.addEventListener("pointercancel", onPointerUp);
+      zoom.addEventListener("input", onZoomInput);
+      cancelBtn.addEventListener("click", onCancel);
+      confirmBtn.addEventListener("click", onConfirm);
+      modal.addEventListener("click", onBackdropClick);
+    };
+    img.src = objectUrl;
+  });
+}
+
 function promptPhotoUpload(entityKey, idx) {
   const input = document.createElement("input");
   input.type = "file";
@@ -997,31 +1164,24 @@ function promptPhotoUpload(entityKey, idx) {
     const file = input.files[0];
     if (!file) return;
 
+    const cropped = await openCropModal(file, PHOTO_ASPECTS[entityKey] || 16 / 10);
+    if (!cropped) return; // user cancelled — nothing uploaded, nothing changed
+
     setToolbarStatus("Uploading photo…");
     try {
       const entity = ENTITIES[entityKey];
-      let safeName = file.name.toLowerCase().replace(/[^a-z0-9.\-]+/g, "-");
-      let base64 = await fileToBase64(file);
-
-      const resized = await resizeImageFile(file);
-      if (resized) {
-        base64 = resized.base64;
-        safeName = safeName.replace(/\.[a-z0-9]+$/, "") + "." + resized.ext;
-      }
-
-      const path = `assets/photos/${Date.now().toString(36)}-${safeName}`;
-      await ghPutBinary(path, base64, null, `Upload photo ${safeName} via edit mode`);
+      const path = `assets/photos/${Date.now().toString(36)}-photo.jpg`;
+      await ghPutBinary(path, await fileToBase64(cropped), null, "Upload photo via edit mode");
 
       const file2 = await loadFile(entity.file);
-      const list = entity.rootIsList ? file2.data : entity.getList(file2.data);
-      const item = list[idx];
-      if (entityKey === "projects-featured") {
-        item.image = { src: `/${path}`, alt: item.title || "" };
-      } else {
-        item.photo = `/${path}`;
-      }
-      if (!entity.rootIsList) entity.setList(file2.data, list);
-      else file2.data = list;
+      const item = entity.singleton
+        ? entity.getItem(file2.data)
+        : (entity.rootIsList ? file2.data : entity.getList(file2.data))[idx];
+
+      const fieldCfg = PHOTO_FIELD[entityKey] || { key: "photo", shape: "string" };
+      item[fieldCfg.key] = fieldCfg.shape === "object"
+        ? { src: `/${path}`, alt: item.title || item.heading || "" }
+        : `/${path}`;
 
       await saveFile(entity.file, `Update ${entity.file} via edit mode (photo)`);
       refreshMountsFor(entityKey);

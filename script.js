@@ -313,6 +313,41 @@ function setText(id, value) {
 // a singleton object (not a list) rendered into the static elements already
 // in index.html, so edit mode can wire them as click-and-type just like the
 // list-backed sections, via dev/editor.js's ENTITIES.home-*.
+// Renders a standalone (non-list) photo slot — the hero portrait and the
+// "beyond engineering" photo aren't attached to any project/experience/skill
+// entity, so they get their own placeholder <-> photo swap here instead of
+// going through renderExperience/renderFeaturedProjects.
+function renderPhotoSlot(mount, photo, opts) {
+  if (!mount) return;
+  mount.innerHTML = "";
+  mount.classList.toggle("editorial-placeholder", !(photo && photo.src));
+
+  if (photo && photo.src) {
+    mount.removeAttribute("role");
+    mount.removeAttribute("aria-label");
+    const img = mkEl("img", { attrs: { src: photo.src, alt: photo.alt || opts.imgAlt || "", loading: "lazy" } });
+    // Absolute-filled against the mount (already position:relative for the
+    // photo-button overlay) rather than width/height:100%, since these
+    // mounts are grid items whose own height isn't always a definite value
+    // percentage heights can resolve against.
+    img.style.position = "absolute";
+    img.style.inset = "0";
+    img.style.width = "100%";
+    img.style.height = "100%";
+    img.style.objectFit = "cover";
+    img.style.display = "block";
+    mount.appendChild(img);
+  } else {
+    mount.setAttribute("role", "img");
+    mount.setAttribute("aria-label", "Photo placeholder");
+    if (opts.number) mount.appendChild(mkEl("span", { className: "editorial-placeholder__number", text: opts.number }));
+    const wrap = document.createElement("div");
+    wrap.appendChild(mkEl("strong", { text: opts.title }));
+    wrap.appendChild(mkEl("p", { attrs: { id: opts.noteId } }));
+    mount.appendChild(wrap);
+  }
+}
+
 function renderHome(data) {
   if (!data) return;
   const hero = data.hero || {};
@@ -322,6 +357,7 @@ function renderHome(data) {
   setText("heroLede", hero.lede);
   setText("heroCtaPrimary", hero.ctaPrimaryLabel);
   setText("heroCtaSecondary", hero.ctaSecondaryLabel);
+  renderPhotoSlot(document.getElementById("heroVisual"), hero.photo, { number: "01", title: "Portrait needed", noteId: "heroPlaceholderNote", imgAlt: "Paul Poleon Jr" });
   setText("heroPlaceholderNote", hero.placeholderNote);
 
   const statusMount = document.getElementById("heroStatus");
@@ -363,6 +399,7 @@ function renderHome(data) {
 
   const origin = data.origin || {};
   setText("originLabel", origin.label);
+  renderPhotoSlot(document.getElementById("originVisual"), origin.photo, { number: "06", title: "Personal story photo", noteId: "originPlaceholderNote", imgAlt: "Paul Poleon Jr" });
   setText("originPlaceholderNote", origin.placeholderNote);
   setText("originKicker", origin.kicker);
   setText("originHeading", origin.heading);

@@ -11,7 +11,8 @@
       "University at Buffalo",
       "Open to engineering opportunities"
     ],
-    "placeholderNote": "A candid vertical photo of Paul in a manufacturing or engineering environment—beside a test station, CAD workstation, or physical prototype."
+    "placeholderNote": "A candid vertical photo of Paul in a manufacturing or engineering environment—beside a test station, CAD workstation, or physical prototype.",
+    "photo": null
   },
   "summary": {
     "label": "01 / Summary",
@@ -45,6 +46,7 @@
   "origin": {
     "label": "05 / Beyond engineering",
     "placeholderNote": "Paul coaching football, at an Eagle Scout event, or with teammates—something candid that shows leadership and community.",
+    "photo": null,
     "kicker": "The person behind the projects",
     "heading": "Team-first, by experience.",
     "paragraphs": [
