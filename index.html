@@ -19,6 +19,24 @@
       <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="7" result="n"/>
       <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6"/>
     </filter>
+    <!-- Small torn-off paper bits left behind mid-tear, reused via <use> at
+         various sizes/rotations wherever a tear shouldn't read as perfectly clean. -->
+    <path id="straggler-a" d="M30.7,13.7 L25.5,24.1 L9.8,21.8 L3.0,12.2 L10.7,3.0 L19.2,7.0 Z"/>
+    <path id="straggler-b" d="M31.1,12.3 L30.4,23.8 L15.0,19.0 L3.0,10.1 L10.7,3.0 L25.1,5.9 Z"/>
+    <path id="straggler-c" d="M31.4,14.1 L26.3,22.8 L13.7,20.6 L3.0,13.9 L13.4,10.2 L28.7,3.0 Z"/>
+    <!-- Hand-drawn contact icons, same sketchy stroke language as the case-study doodles.
+         currentColor so CSS (.notebook__icon{color:...}) still controls the hue. -->
+    <g id="icon-email" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#sketchy)">
+      <rect x="3" y="8" width="34" height="24" rx="2"/>
+      <path d="M4 9 L20 23 L36 9"/>
+    </g>
+    <g id="icon-linkedin" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#sketchy)">
+      <rect x="3" y="3" width="34" height="34" rx="5"/>
+      <path d="M12 17v13"/>
+      <circle cx="12" cy="11" r="1.6" fill="currentColor" stroke="none"/>
+      <path d="M20 30V17 M20 22c0-3 3-5 6-5s5 2 5 5v8"/>
+    </g>
+    <path id="icon-github" fill="currentColor" stroke="none" filter="url(#sketchy)" d="M20 3C10.6 3 3 10.6 3 20c0 7.5 4.9 13.9 11.6 16.1.8.2 1.1-.4 1.1-.8v-3.1c-4.7 1-5.7-2.1-5.7-2.1-.8-1.9-1.9-2.5-1.9-2.5-1.5-1 .1-1 .1-1 1.7.1 2.6 1.7 2.6 1.7 1.5 2.6 4 1.8 4.9 1.4.2-1.1.6-1.8 1.1-2.2-3.8-.4-7.7-1.9-7.7-8.4 0-1.9.7-3.4 1.7-4.6-.2-.4-.8-2.1.2-4.4 0 0 1.4-.5 4.6 1.7 1.3-.4 2.8-.6 4.2-.6 1.4 0 2.9.2 4.2.6 3.2-2.2 4.6-1.7 4.6-1.7.9 2.3.3 4 .2 4.4 1.1 1.2 1.7 2.7 1.7 4.6 0 6.5-3.9 8-7.7 8.3.6.5 1.2 1.6 1.2 3.2v4.7c0 .4.3 1 1.1.8C32.1 33.9 37 27.5 37 20c0-9.4-7.6-17-17-17Z"/>
   </defs>
 </svg>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -45,7 +63,8 @@
   <div class="editorial-section__label" id="summaryLabel"></div><div class="editorial-intro__body reveal"><h2><span id="summaryHeadingLead"></span> <em id="summaryHeadingAccent"></em></h2><div class="editorial-intro__columns" id="summaryParagraphs"></div><a class="editorial-text-link" href="/about/" id="summaryLinkText"></a></div>
 </section>
 <section class="editorial-section editorial-personality">
-  <div class="paper-tear paper-tear--1" aria-hidden="true"><svg viewBox="0 0 125.1 49.7" preserveAspectRatio="none"><path d="M121.1,23.9 L108.5,35.5 L97.0,41.5 L76.1,43.9 L39.3,45.7 L31.9,37.6 L4.0,32.6 L25.2,19.8 L19.6,5.0 L46.1,4.0 L65.0,9.7 L88.1,11.9 L103.8,14.9 Z" fill="url(#paperTearGrid)" stroke="rgba(28,28,26,.22)" stroke-width="1.4" filter="url(#tearWobble)"/></svg></div>
+  <div class="paper-bite paper-bite--left paper-bite--seam1" aria-hidden="true"><svg viewBox="0 0 100.3 70" preserveAspectRatio="none"><path d="M0,0 L13.2,0.0 L35.0,8.8 L76.9,17.5 L94.3,26.2 L83.8,35.0 L85.2,43.8 L55.8,52.5 L35.5,61.2 L11.6,70.0 L0,70 Z" fill="url(#paperTearGrid)" stroke="#fdfbf3" stroke-width="3" filter="url(#tearWobble)"/></svg></div>
+  <div class="paper-bite paper-bite--right paper-bite--seam1" aria-hidden="true"><svg viewBox="0 0 100.3 70" preserveAspectRatio="none"><path d="M0,0 L13.2,0.0 L35.0,8.8 L76.9,17.5 L94.3,26.2 L83.8,35.0 L85.2,43.8 L55.8,52.5 L35.5,61.2 L11.6,70.0 L0,70 Z" fill="url(#paperTearGrid)" stroke="#fdfbf3" stroke-width="3" filter="url(#tearWobble)"/></svg></div>
   <div class="editorial-section__label" id="briefLabel"></div><div class="editorial-personality__grid"><div class="editorial-list-block reveal"><h3 id="briefStrengthsTitle"></h3><ol id="briefStrengthsList"></ol></div><div class="editorial-list-block editorial-list-block--rust reveal"><h3 id="briefCuriousTitle"></h3><ol id="briefCuriousList"></ol></div></div>
 </section>
 <section class="editorial-section editorial-experience">
@@ -61,12 +80,56 @@
   </div>
 </section>
 <section id="work" class="editorial-section editorial-work">
-  <div class="paper-tear paper-tear--2" aria-hidden="true"><svg viewBox="0 0 189.3 58.2" preserveAspectRatio="none"><path d="M154.8,34.0 L185.3,40.0 L138.8,45.2 L112.8,54.2 L80.3,52.9 L52.7,49.7 L18.5,49.0 L4.0,36.0 L39.2,25.8 L36.6,12.7 L59.9,12.9 L94.5,4.0 L131.4,4.3 L153.8,13.8 L168.8,21.4 Z" fill="url(#paperTearGrid)" stroke="rgba(28,28,26,.22)" stroke-width="1.4" filter="url(#tearWobble)"/></svg></div>
+  <div class="paper-bite paper-bite--left paper-bite--seam2" aria-hidden="true"><svg viewBox="0 0 199.0 115" preserveAspectRatio="none"><path d="M0,0 L26.8,0.0 L70.2,11.5 L99.8,23.0 L116.2,34.5 L165.3,46.0 L193.0,57.5 L148.5,69.0 L154.7,80.5 L82.7,92.0 L66.8,103.5 L20.8,115.0 L0,115 Z" fill="url(#paperTearGrid)" stroke="#fdfbf3" stroke-width="3.5" filter="url(#tearWobble)"/></svg>
+    <svg class="paper-straggler" viewBox="0 0 34 27" style="top:38%; left:78%; width:26px; height:22px; transform:rotate(18deg);"><use href="#straggler-a" fill="#f3f0e9" stroke="rgba(28,28,26,.18)" stroke-width="1"/></svg>
+  </div>
+  <div class="paper-bite paper-bite--right paper-bite--seam2" aria-hidden="true"><svg viewBox="0 0 199.0 115" preserveAspectRatio="none"><path d="M0,0 L26.8,0.0 L70.2,11.5 L99.8,23.0 L116.2,34.5 L165.3,46.0 L193.0,57.5 L148.5,69.0 L154.7,80.5 L82.7,92.0 L66.8,103.5 L20.8,115.0 L0,115 Z" fill="url(#paperTearGrid)" stroke="#fdfbf3" stroke-width="3.5" filter="url(#tearWobble)"/></svg>
+    <svg class="paper-straggler" viewBox="0 0 34 27" style="top:55%; left:15%; width:24px; height:20px; transform:rotate(-24deg);"><use href="#straggler-b" fill="#f3f0e9" stroke="rgba(28,28,26,.18)" stroke-width="1"/></svg>
+  </div>
   <div class="editorial-section__label">04 / Selected work</div><div class="editorial-section__heading editorial-section__heading--split"><div><p class="editorial-kicker">A few problems I’ve taken apart</p><h2>Projects</h2></div><a class="editorial-text-link" href="/projects/">View every project →</a></div>
   <div class="editorial-projects" id="projectsFeaturedMount" data-variant="home"></div>
 </section>
-<section class="editorial-section editorial-origin"><div class="paper-tear paper-tear--3" aria-hidden="true"><svg viewBox="0 0 206.8 73.9" preserveAspectRatio="none"><path d="M202.8,36.7 L176.7,48.6 L177.9,62.3 L123.3,60.6 L97.2,67.7 L57.2,69.9 L35.8,56.5 L4.0,44.2 L15.6,37.6 L32.8,27.0 L29.5,11.7 L57.1,4.0 L114.3,5.5 L135.3,13.9 L172.7,6.7 L175.3,24.6 Z" fill="url(#paperTearGrid)" stroke="rgba(28,28,26,.22)" stroke-width="1.4" filter="url(#tearWobble)"/></svg></div><div class="editorial-section__label" id="originLabel"></div><div class="editorial-origin__visual" id="originVisual" data-edit-photo-field="photo"></div><div class="editorial-origin__copy reveal"><p class="editorial-kicker" id="originKicker"></p><h2 id="originHeading"></h2><div id="originParagraphs"></div></div></section>
-<section id="contact" class="editorial-contact"><div class="reveal"><p class="editorial-kicker" id="contactKicker"></p><h2><span id="contactHeadingLine1"></span><br><span id="contactHeadingLine2"></span></h2><div class="editorial-contact__links"><a href="mailto:ppoleonjr@gmail.com">ppoleonjr@gmail.com ↗</a><a href="https://www.linkedin.com/in/paul-poleon-jr-3155b0287/" target="_blank">LinkedIn ↗</a><a href="https://github.com/CaulkNPauls" target="_blank">GitHub ↗</a></div></div></section>
+<section class="editorial-section editorial-origin">
+  <div class="paper-bite paper-bite--left paper-bite--seam3" aria-hidden="true"><svg viewBox="0 0 277.6 165" preserveAspectRatio="none"><path d="M0,0 L31.7,0.0 L114.2,13.8 L131.3,27.5 L233.9,41.2 L271.6,55.0 L228.1,68.8 L261.7,82.5 L242.2,96.2 L222.1,110.0 L217.9,123.8 L169.1,137.5 L86.8,151.2 L39.7,165.0 L0,165 Z" fill="url(#paperTearGrid)" stroke="#fdfbf3" stroke-width="4" filter="url(#tearWobble)"/></svg>
+    <svg class="paper-straggler" viewBox="0 0 34 27" style="top:20%; left:82%; width:32px; height:27px; transform:rotate(-10deg);"><use href="#straggler-c" fill="#f3f0e9" stroke="rgba(28,28,26,.18)" stroke-width="1"/></svg>
+    <svg class="paper-straggler" viewBox="0 0 34 27" style="top:68%; left:70%; width:22px; height:18px; transform:rotate(30deg);"><use href="#straggler-a" fill="#f3f0e9" stroke="rgba(28,28,26,.18)" stroke-width="1"/></svg>
+  </div>
+  <div class="paper-bite paper-bite--right paper-bite--seam3" aria-hidden="true"><svg viewBox="0 0 277.6 165" preserveAspectRatio="none"><path d="M0,0 L31.7,0.0 L114.2,13.8 L131.3,27.5 L233.9,41.2 L271.6,55.0 L228.1,68.8 L261.7,82.5 L242.2,96.2 L222.1,110.0 L217.9,123.8 L169.1,137.5 L86.8,151.2 L39.7,165.0 L0,165 Z" fill="url(#paperTearGrid)" stroke="#fdfbf3" stroke-width="4" filter="url(#tearWobble)"/></svg>
+    <svg class="paper-straggler" viewBox="0 0 34 27" style="top:30%; left:10%; width:28px; height:23px; transform:rotate(12deg);"><use href="#straggler-b" fill="#f3f0e9" stroke="rgba(28,28,26,.18)" stroke-width="1"/></svg>
+  </div>
+  <div class="editorial-section__label" id="originLabel"></div><div class="editorial-origin__visual" id="originVisual" data-edit-photo-field="photo"></div><div class="editorial-origin__copy reveal"><p class="editorial-kicker" id="originKicker"></p><h2 id="originHeading"></h2><div id="originParagraphs"></div></div></section>
+<section id="contact" class="editorial-contact">
+  <div class="paper-tear-finale" aria-hidden="true">
+    <svg viewBox="0 0 1400 190" preserveAspectRatio="none"><path d="M0,28.5 L56,69.7 L112,49.8 L168,77.4 L224,58.4 L280,27.5 L336,86.6 L392,62.6 L448,83.4 L504,88.9 L560,34.9 L616,58.6 L672,69.8 L728,46.1 L784,56.2 L840,85.2 L896,67.4 L952,45.8 L1008,70.6 L1064,45.7 L1120,71.2 L1176,57.1 L1232,64.3 L1288,54.1 L1344,68.4 L1400,60.4 L1400,190 L0,190 Z" fill="url(#paperTearGrid)" filter="url(#tearWobble)"/></svg>
+    <svg class="paper-tear-finale__ridge" viewBox="0 0 1400 190" preserveAspectRatio="none"><path d="M0,28.5 L56,69.7 L112,49.8 L168,77.4 L224,58.4 L280,27.5 L336,86.6 L392,62.6 L448,83.4 L504,88.9 L560,34.9 L616,58.6 L672,69.8 L728,46.1 L784,56.2 L840,85.2 L896,67.4 L952,45.8 L1008,70.6 L1064,45.7 L1120,71.2 L1176,57.1 L1232,64.3 L1288,54.1 L1344,68.4 L1400,60.4" fill="none" stroke="#fdfbf3" stroke-width="5" filter="url(#tearWobble)"/></svg>
+    <svg class="paper-straggler" viewBox="0 0 34 27" style="top:2%; left:6%; width:34px; height:28px; transform:rotate(-14deg);"><use href="#straggler-a" fill="#f3f0e9" stroke="rgba(28,28,26,.18)" stroke-width="1"/></svg>
+    <svg class="paper-straggler" viewBox="0 0 34 27" style="top:8%; left:23%; width:24px; height:20px; transform:rotate(22deg);"><use href="#straggler-b" fill="#f3f0e9" stroke="rgba(28,28,26,.18)" stroke-width="1"/></svg>
+    <svg class="paper-straggler" viewBox="0 0 34 27" style="top:0%; left:47%; width:30px; height:25px; transform:rotate(-6deg);"><use href="#straggler-c" fill="#f3f0e9" stroke="rgba(28,28,26,.18)" stroke-width="1"/></svg>
+    <svg class="paper-straggler" viewBox="0 0 34 27" style="top:10%; left:68%; width:26px; height:22px; transform:rotate(16deg);"><use href="#straggler-a" fill="#f3f0e9" stroke="rgba(28,28,26,.18)" stroke-width="1"/></svg>
+    <svg class="paper-straggler" viewBox="0 0 34 27" style="top:3%; left:88%; width:28px; height:23px; transform:rotate(-20deg);"><use href="#straggler-b" fill="#f3f0e9" stroke="rgba(28,28,26,.18)" stroke-width="1"/></svg>
+  </div>
+  <div class="notebook reveal">
+    <div class="notebook__page notebook__page--left">
+      <p class="editorial-kicker" id="contactKicker"></p>
+      <h2><span id="contactHeadingLine1"></span><br><span id="contactHeadingLine2"></span></h2>
+    </div>
+    <div class="notebook__spine" aria-hidden="true"></div>
+    <div class="notebook__page notebook__page--right">
+      <a class="notebook__contact" href="mailto:ppoleonjr@gmail.com">
+        <svg class="notebook__icon" viewBox="0 0 40 40" aria-hidden="true"><use href="#icon-email"/></svg>
+        <span class="notebook__contact-text"><span class="notebook__contact-label">Email</span><span class="notebook__contact-sub">ppoleonjr@gmail.com</span></span>
+      </a>
+      <a class="notebook__contact" href="https://www.linkedin.com/in/paul-poleon-jr-3155b0287/" target="_blank" rel="noopener">
+        <svg class="notebook__icon" viewBox="0 0 40 40" aria-hidden="true"><use href="#icon-linkedin"/></svg>
+        <span class="notebook__contact-text"><span class="notebook__contact-label">LinkedIn</span><span class="notebook__contact-sub">/in/paul-poleon-jr</span></span>
+      </a>
+      <a class="notebook__contact" href="https://github.com/CaulkNPauls" target="_blank" rel="noopener">
+        <svg class="notebook__icon" viewBox="0 0 40 40" aria-hidden="true"><use href="#icon-github"/></svg>
+        <span class="notebook__contact-text"><span class="notebook__contact-label">GitHub</span><span class="notebook__contact-sub">CaulkNPauls</span></span>
+      </a>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="editorial-footer"><span>© <span id="year"></span> Paul Poleon Jr</span><span id="footerTagline"></span><a href="#home">Back to top ↑</a></footer>
 <script src="script.js"></script>

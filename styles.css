@@ -1607,12 +1607,11 @@ html{ scroll-behavior: smooth; }
 .editorial-role-list{margin-top:80px}.editorial-role-row{display:grid;grid-template-columns:200px 1fr 120px;gap:30px;border-top:1px solid var(--line);padding:28px 0}.editorial-role-row>span{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}.editorial-role-row h3{font:600 1.35rem "Manrope";margin:0 0 5px}.editorial-role-row p{margin:0;color:#625e57}
 .editorial-projects{display:grid;grid-template-columns:1fr 1fr;gap:70px 28px}.editorial-project{text-decoration:none}.editorial-project--large{grid-column:1/-1}.editorial-placeholder--project{aspect-ratio:16/10}.editorial-project--large .editorial-placeholder--project{aspect-ratio:2.1/1}.editorial-project__info{padding-top:22px}.editorial-project__info>span{font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:#625e57}.editorial-project__info h3{font:600 clamp(1.7rem,3vw,3.4rem)/1.1 "Manrope";letter-spacing:-.035em;margin:11px 0}.editorial-project__info p{color:#625e57;max-width:65ch}
 .editorial-origin{display:grid;grid-template-columns:150px 1fr 1fr;gap:4vw}.editorial-origin__visual{min-height:570px;position:relative}.editorial-origin__copy{align-self:center}.editorial-origin__copy h2{font:500 clamp(2.7rem,5vw,5.4rem)/1 "Manrope";letter-spacing:-.05em;margin:0 0 35px}.editorial-origin__copy p:not(.editorial-kicker){font-size:1.05rem}
-.editorial-contact{background:var(--rust);color:#fff;padding:clamp(80px,10vw,150px) clamp(24px,5vw,76px)}.editorial-contact h2{font:500 clamp(4rem,10vw,10rem)/.82 "Manrope";letter-spacing:-.075em;margin:0}.editorial-contact__links{margin-top:70px;display:flex;gap:35px}.editorial-contact__links a{color:#fff;text-underline-offset:6px}
 .editorial-footer{padding:25px clamp(24px,5vw,76px);display:flex;justify-content:space-between;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}.editorial-footer a{color:inherit}
 @media(max-width:800px){
  .portfolio-nav{height:72px}.portfolio-nav .nav__toggle{display:block}.portfolio-nav__links{display:none;position:absolute;top:72px;left:0;right:0;padding:22px 24px;background:var(--paper);border-bottom:1px solid var(--line);flex-direction:column}.portfolio-nav__links.open{display:flex}
  .editorial-hero{grid-template-columns:1fr;padding-top:55px}.editorial-placeholder--hero{min-height:420px}.editorial-hero__status{flex-direction:column;gap:8px}.editorial-intro{grid-template-columns:1fr}.editorial-intro__columns{grid-template-columns:1fr;margin-left:0}.editorial-intro__body>.editorial-text-link{margin-left:0}.editorial-personality__grid{grid-template-columns:1fr}.editorial-list-block{padding:30px 24px}
- .editorial-role--featured{grid-template-columns:1fr}.editorial-role__meta{flex-direction:row;justify-content:space-between}.editorial-role-row{grid-template-columns:1fr}.editorial-role-row>span:last-child{display:none}.editorial-section__heading--split{display:block}.editorial-section__heading--split .editorial-text-link{display:inline-block;margin:-45px 0 65px}.editorial-projects{grid-template-columns:1fr}.editorial-project--large{grid-column:auto}.editorial-project--large .editorial-placeholder--project{aspect-ratio:16/10}.editorial-origin{grid-template-columns:1fr}.editorial-origin__visual{min-height:420px}.editorial-contact__links,.editorial-footer{flex-direction:column}.editorial-footer{gap:12px}
+ .editorial-role--featured{grid-template-columns:1fr}.editorial-role__meta{flex-direction:row;justify-content:space-between}.editorial-role-row{grid-template-columns:1fr}.editorial-role-row>span:last-child{display:none}.editorial-section__heading--split{display:block}.editorial-section__heading--split .editorial-text-link{display:inline-block;margin:-45px 0 65px}.editorial-projects{grid-template-columns:1fr}.editorial-project--large{grid-column:auto}.editorial-project--large .editorial-placeholder--project{aspect-ratio:16/10}.editorial-origin{grid-template-columns:1fr}.editorial-origin__visual{min-height:420px}.editorial-footer{flex-direction:column;gap:12px}
 }
 
 /* =========================================================
@@ -1816,31 +1815,146 @@ html{ scroll-behavior: smooth; }
 /* =========================================================
    HOMEPAGE PAPER TEARS — the home page is the one page that keeps the
    plain-paper .editorial-theme look (everywhere else now carries
-   .fieldnotes-theme's cream graph-paper look too). These three small
-   accents suggest that plain top sheet is starting to tear away to
-   reveal the graph paper underneath — deliberately absent through the
-   hero and Summary (#about) so the page opens on clean paper, then
-   appears at each section seam after that, growing slightly larger
-   each time. Stops before #contact, which is a solid color block, not
-   paper, so a "tear" there wouldn't read as paper-on-paper.
+   .fieldnotes-theme's cream graph-paper look too). Starting after the
+   Summary section, the plain top sheet is shown tearing away at the
+   page edges to reveal the graph paper underneath, escalating seam by
+   seam until it's torn away almost entirely right before #contact,
+   which sits directly on the graph paper as an open notebook.
 ========================================================= */
 .editorial-personality,
 .editorial-work,
-.editorial-origin{ position:relative; }
+.editorial-origin,
+.editorial-contact{ position:relative; }
 
-.paper-tear{
+/* Corner "bites" torn in from the left/right page edges. Path data is
+   authored edge-anchored at x=0 reaching inward; the --right variant
+   mirrors it with scaleX so both edges tear inward symmetrically-ish
+   without needing separate path data. */
+.paper-bite{
   position:absolute;
+  top:0;
   z-index:2;
   pointer-events:none;
-  filter:drop-shadow(0 5px 8px rgba(23,23,20,.22));
+  filter:drop-shadow(0 6px 10px rgba(23,23,20,.24));
 }
-.paper-tear svg{ display:block; width:100%; height:100%; }
-.paper-tear--1{ left:10%; width:150px; height:60px; top:-30px; transform:rotate(-3deg); }
-.paper-tear--2{ right:14%; width:210px; height:65px; top:-33px; transform:rotate(2deg); }
-.paper-tear--3{ left:20%; width:250px; height:89px; top:-45px; transform:rotate(-2deg); }
+.paper-bite svg:first-child{ display:block; width:100%; height:100%; }
+.paper-bite--left{ left:0; }
+.paper-bite--right{ right:0; transform:scaleX(-1); }
+
+.paper-bite--seam1{ width:110px; height:76px; top:-40px; }
+.paper-bite--seam2{ width:210px; height:120px; top:-62px; }
+.paper-bite--seam3{ width:290px; height:172px; top:-88px; }
+
+/* Small torn-off bits left behind mid-tear, positioned (via inline
+   style, per-instance) near a bite's jagged edge or scattered along the
+   finale zone's torn ceiling. */
+.paper-straggler{
+  position:absolute;
+  pointer-events:none;
+  filter:drop-shadow(0 3px 4px rgba(23,23,20,.2));
+}
+
+/* The finale: a full-width torn ceiling right above #contact. Past this
+   point the plain paper is gone — #contact's own background is the same
+   graph paper this reveals, so the tear and the section below it read as
+   one continuous sheet, not a patch. */
+.paper-tear-finale{
+  position:absolute;
+  top:-130px;
+  left:0;
+  width:100%;
+  height:170px;
+  z-index:1;
+  pointer-events:none;
+  overflow:visible;
+}
+.paper-tear-finale svg{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+.paper-tear-finale__ridge{ filter:drop-shadow(0 3px 5px rgba(23,23,20,.28)); }
 
 @media (max-width:700px){
-  .paper-tear{ display:none; } /* the section-seam positioning assumes desktop-width columns */
+  .paper-bite,
+  .paper-tear-finale{ display:none; } /* positioning assumes the desktop-width section layout */
+}
+
+/* =========================================================
+   CONTACT NOTEBOOK — #contact sits permanently on the graph-paper
+   background the finale tear reveals (a scoped set of the Field Notes
+   tokens, not the .fieldnotes-theme class itself, since the rest of the
+   homepage stays on the plain-paper look). The notebook is a two-page
+   spread floating on that paper: left page keeps the existing kicker/
+   heading copy, right page lists contact methods with hand-drawn icons
+   and pen-handwriting labels.
+========================================================= */
+.editorial-contact{
+  --nb-ink:#1c1c1a; --nb-paper:#f6efdb; --nb-pen:#2b5c82; --nb-pen-strong:#173c56;
+  --nb-pen-soft:rgba(43,92,130,.12); --nb-pen-border:rgba(43,92,130,.35);
+  --nb-font-hand:"Caveat",cursive;
+  background:
+    linear-gradient(var(--nb-pen-soft) 1px, transparent 1px) 0 0/16px 16px,
+    linear-gradient(90deg, var(--nb-pen-soft) 1px, transparent 1px) 0 0/16px 16px,
+    var(--nb-paper);
+  color:var(--nb-ink);
+  padding:clamp(180px,20vw,280px) clamp(24px,5vw,76px) clamp(80px,10vw,150px);
+}
+
+.notebook{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:1fr 2px 1fr;
+  max-width:980px;
+  margin:0 auto;
+  background:#fdfcf6;
+  border-radius:10px;
+  box-shadow:0 24px 60px rgba(23,23,20,.28), 0 4px 14px rgba(23,23,20,.14);
+}
+.notebook__page{ padding:clamp(32px,5vw,60px); min-width:0; }
+.notebook__page--left{
+  box-shadow:inset -10px 0 14px -12px rgba(23,23,20,.3);
+  background:repeating-linear-gradient(to bottom, transparent 0 27px, var(--nb-pen-border) 27px 28px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.notebook__page--left .editorial-kicker{ color:var(--nb-pen); }
+.notebook__page--left h2{
+  font:600 clamp(1.9rem,3.6vw,3.1rem)/1.12 "Manrope",sans-serif;
+  letter-spacing:-.03em;
+  margin:14px 0 0;
+  color:var(--nb-ink);
+}
+.notebook__spine{ background:linear-gradient(to bottom, transparent, var(--nb-pen-border) 15%, var(--nb-pen-border) 85%, transparent); }
+.notebook__page--right{
+  box-shadow:inset 10px 0 14px -12px rgba(23,23,20,.3);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:26px;
+}
+.notebook__contact{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  text-decoration:none;
+  color:inherit;
+}
+.notebook__icon{ width:34px; height:34px; flex:0 0 auto; color:var(--nb-pen); }
+.notebook__contact-text{ display:flex; flex-direction:column; }
+.notebook__contact-label{
+  font-family:var(--nb-font-hand);
+  font-size:2.1rem;
+  line-height:1;
+  color:var(--nb-pen-strong);
+}
+.notebook__contact:hover .notebook__contact-label{ text-decoration:underline wavy 2px; text-underline-offset:4px; }
+.notebook__contact-sub{ font-size:.82rem; color:rgba(28,28,26,.6); margin-top:4px; }
+
+@media (max-width:800px){
+  .editorial-contact{ padding-top:clamp(70px,14vw,110px); }
+  .notebook{ grid-template-columns:1fr; }
+  .notebook__spine{ display:none; }
+  .notebook__page--left,
+  .notebook__page--right{ box-shadow:none; }
 }
 
 /* =========================================================
