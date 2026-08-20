@@ -1,0 +1,235 @@
+{
+  "flowsafe-valve-decoder": {
+    "hero": {
+      "eyebrow": "FlowSafe / Dresser Utility Solutions",
+      "title": "Valve Decoder",
+      "subtitle": "A Python application that turns FlowSafe's historical PDF pick-sheets into a structured, searchable engineering database.",
+      "factline": "Role: Industrial Engineering Intern · FlowSafe / Dresser Utility Solutions · Continuing during the academic semester",
+      "ctaPrimary": { "label": "See Experience", "href": "/experience/" },
+      "ctaSecondary": { "label": "Download resume", "href": "/assets/resume.pdf" }
+    },
+    "style": { "fontFamily": "default", "fontSizeScale": 1, "accentColor": "" },
+    "blocks": [
+      {
+        "id": "b1", "type": "text", "heading": "Problem",
+        "body": "FlowSafe's historical shipped-valve records existed only as PDF pick-sheets — a format that's fine for a single job, but effectively unusable as a data source once you need to search, aggregate, or analyze across thousands of them."
+      },
+      {
+        "id": "b2", "type": "text", "heading": "Why it mattered",
+        "body": "The facility material-flow analysis needed reliable historical valve-shipment data to calculate accurate travel-path frequencies between facility locations. That data existed, but it was locked inside thousands of individual PDF documents with no structured or searchable form — directly blocking the facility study until a real dataset existed."
+      },
+      {
+        "id": "b3", "type": "list", "heading": "Constraints",
+        "items": [
+          "No clean structured export of the historical pick-sheet data existed — only the original PDFs.",
+          "The extracted data needed to be accurate enough to support a real quantitative analysis, not just a rough approximation.",
+          "Needed to be general enough to stay useful as a reference tool after the immediate need (the facility study) was done."
+        ]
+      },
+      {
+        "id": "b4", "type": "text", "heading": "My role",
+        "body": "I built the Valve Decoder independently as my project during my Industrial Engineering internship at FlowSafe / Dresser Utility Solutions."
+      },
+      {
+        "id": "b5", "type": "list", "heading": "Data & engineering approach",
+        "items": [
+          "Built a Python application to parse historical PDF pick-sheets and extract structured records.",
+          "Processed 19,567 shipped-valve records covering 1,951 unique valve models.",
+          "Structured the extracted data into a searchable database, rather than a one-off export."
+        ]
+      },
+      {
+        "id": "b6", "type": "text", "heading": "Development process",
+        "body": "I built the PDF-parsing and data-extraction pipeline first, validated the extracted records for accuracy against the source documents, then structured the output into a searchable database — usable both for the immediate facility material-flow analysis and as a standalone engineering reference tool afterward."
+      },
+      {
+        "id": "b7", "type": "text", "heading": "Solution",
+        "body": "A Python application that converts FlowSafe's historical PDF pick-sheets into a structured, searchable database of shipped-valve records — closing the data gap that was blocking the facility material-flow study, and outliving that original purpose as a reusable production/engineering reference tool."
+      },
+      {
+        "id": "b8", "type": "stats", "heading": "Quantified result",
+        "stats": [
+          { "value": "19,567", "label": "Shipped-valve records structured from historical PDF pick-sheets" },
+          { "value": "1,951", "label": "Unique valve models covered" }
+        ],
+        "note": "This dataset directly closed the data gap that was blocking the Facility Material Flow & Layout Analysis, and has since been used as a standalone reference tool."
+      },
+      {
+        "id": "b9", "type": "gallery", "heading": "Visual evidence",
+        "caption": "Placeholders below — sanitized screenshots to be added.",
+        "layout": "grid",
+        "images": [
+          { "src": "", "alt": "", "caption": "Source pick-sheet — Example historical PDF, sanitized" },
+          { "src": "", "alt": "", "caption": "Application interface — Valve Decoder UI screenshot" },
+          { "src": "", "alt": "", "caption": "Search / database view — Structured, searchable record view" }
+        ]
+      },
+      {
+        "id": "b10", "type": "tags", "heading": "Technologies & tools",
+        "items": ["Python", "PDF data extraction", "Structured / searchable database"],
+        "note": "[Placeholder — add the specific PDF-parsing library and database technology used.]"
+      },
+      {
+        "id": "b11", "type": "text", "heading": "What I learned",
+        "body": "[Placeholder — your own engineering takeaway from this project: what you'd tell a recruiter about what building this taught you, e.g. about unlocking legacy data sources, or about building a tool that outlives its original one-off purpose.]"
+      }
+    ]
+  },
+  "flowsafe-facility-flow-layout": {
+    "hero": {
+      "eyebrow": "FlowSafe / Dresser Utility Solutions",
+      "title": "Facility Material Flow & Layout Analysis",
+      "subtitle": "Two years of operational data and a scaled AutoCAD facility model, turned into a quantified case for how FlowSafe's production, cleaning, testing, and storage areas should be arranged.",
+      "factline": "Role: Industrial Engineering Intern · FlowSafe / Dresser Utility Solutions · Continuing during the academic semester",
+      "ctaPrimary": { "label": "See Experience", "href": "/experience/" },
+      "ctaSecondary": { "label": "Download resume", "href": "/assets/resume.pdf" }
+    },
+    "style": { "fontFamily": "default", "fontSizeScale": 1, "accentColor": "" },
+    "blocks": [
+      {
+        "id": "b1", "type": "text", "heading": "Problem",
+        "body": "FlowSafe's facility layout — how production, cleaning, testing, and point-of-use storage areas sit relative to one another — had developed over time without a data-driven relayout. No one had a quantified picture of how much material and people movement the existing layout actually required, so there was no basis for saying which layout changes would meaningfully help versus which would just move the problem around."
+      },
+      {
+        "id": "b2", "type": "text", "heading": "Why it mattered",
+        "body": "Every job that moves through the facility pays a travel cost between areas — production to cleaning, cleaning to testing, testing to storage, and back — and that cost repeats on every job, every day. Without a quantified baseline, layout decisions were effectively guesses. Establishing a real, data-backed measure of transportation effort was the precondition for making a defensible case for any layout change at all."
+      },
+      {
+        "id": "b3", "type": "list", "heading": "Constraints",
+        "items": [
+          "Had to work within FlowSafe's existing building footprint — this is a relayout study, not new construction.",
+          "Had to preserve required adjacencies between production, cleaning, and testing rather than optimize travel distance in isolation.",
+          "Recommendations needed to be justified by a quantified model, not intuition, to be actionable for management.",
+          "Needed to hold up against two years of real operational variation, not a single snapshot in time."
+        ]
+      },
+      {
+        "id": "b4", "type": "text", "heading": "My role",
+        "body": "I analyzed the operational data, built the scaled AutoCAD facility model, and developed the transportation-effort analysis independently as my project during my Industrial Engineering internship at FlowSafe / Dresser Utility Solutions."
+      },
+      {
+        "id": "b5", "type": "list", "heading": "Data & engineering approach",
+        "items": [
+          "Built a scaled AutoCAD model of the facility covering 104 distinct activity locations.",
+          "Constructed the full set of origin-destination travel paths between those locations from two years of production/operational data — 10,816 paths in total.",
+          "Applied a distance × movement-frequency transportation-effort model to quantify how much effort the current layout requires, giving a current-state baseline to test future layouts against.",
+          "Used the Valve Decoder database to close data gaps in the historical valve-shipment records feeding this analysis."
+        ]
+      },
+      {
+        "id": "b6", "type": "text", "heading": "Development process",
+        "body": "I built the current-state model first — mapping all 104 activity locations and calculating baseline transportation effort from the historical travel-path data — then iterated on layout scenarios, testing changes to production-area placement, cleaning-area placement, testing-capacity allocation, and point-of-use storage locations, recalculating modeled transportation effort for each scenario until arriving at a recommended future-state layout."
+      },
+      {
+        "id": "b7", "type": "text", "heading": "Solution",
+        "body": "A recommended future-state facility layout with specific changes to production-area organization, cleaning-area placement, testing-capacity allocation, and point-of-use storage locations — every recommendation justified by the same distance × frequency effort model used to establish the current-state baseline, so the comparison between current and future state is apples-to-apples."
+      },
+      {
+        "id": "b8", "type": "stats", "heading": "Quantified result",
+        "stats": [
+          { "value": "18.75%", "label": "Reduction in modeled transportation effort, current state vs. recommended future state" },
+          { "value": "~1 year", "label": "Planning-level payback for the recommended changes" }
+        ],
+        "note": "18.75% is a reduction in modeled transportation effort (distance × movement frequency) — not a direct cost or dollar-value reduction. Payback is a planning-level estimate, not an audited figure."
+      },
+      {
+        "id": "b9", "type": "gallery", "heading": "Visual evidence",
+        "caption": "Placeholders below — sanitized AutoCAD exports and diagrams to be added.",
+        "layout": "row",
+        "images": [
+          { "src": "", "alt": "", "caption": "Current-state layout — AutoCAD facility model, sanitized" },
+          { "src": "", "alt": "", "caption": "Recommended future-state layout — AutoCAD facility model, sanitized" },
+          { "src": "", "alt": "", "caption": "Travel-path / flow diagram — Origin-destination flow visualization" },
+          { "src": "", "alt": "", "caption": "Effort comparison chart — Current vs. future modeled effort" }
+        ]
+      },
+      {
+        "id": "b10", "type": "tags", "heading": "Technologies & tools",
+        "items": ["AutoCAD", "Facility layout modeling", "Distance × frequency effort analysis", "Two years of operational data"],
+        "note": "[Placeholder — add the specific data-analysis tools/software used to process the two years of operational data (e.g. Excel, a specific script/language).]"
+      },
+      {
+        "id": "b11", "type": "text", "heading": "What I learned",
+        "body": "[Placeholder — your own engineering takeaway from this project: what you'd tell a recruiter about what this analysis taught you, e.g. about quantifying a problem before proposing a solution, or about balancing a pure optimization model against real operational constraints.]"
+      }
+    ]
+  },
+  "flowsafe-pressure-testing-system": {
+    "hero": {
+      "eyebrow": "FlowSafe / Dresser Utility Solutions",
+      "title": "Digital Pressure-Testing System",
+      "subtitle": "A connected digital pressure-testing and reporting ecosystem — from operator station to manager dashboard — built to replace paper-based valve testing with a guided, centrally recorded digital workflow.",
+      "factline": "Role: Industrial Engineering Intern · FlowSafe / Dresser Utility Solutions · Continuing during the academic semester",
+      "ctaPrimary": { "label": "See Experience", "href": "/experience/" },
+      "ctaSecondary": { "label": "Download resume", "href": "/assets/resume.pdf" }
+    },
+    "style": { "fontFamily": "default", "fontSizeScale": 1, "accentColor": "" },
+    "blocks": [
+      {
+        "id": "b1", "type": "text", "heading": "Problem",
+        "body": "Valve pressure testing at FlowSafe relied on physical dial gauges and manual, paper-based recordkeeping. Test results — including the three-pop and bubble-test procedures used to verify a valve — existed only as handwritten records tied to a single physical location, with no centralized digital record, no stored pressure trace, and no live visibility into what was happening on the test stands from outside the test area."
+      },
+      {
+        "id": "b2", "type": "text", "heading": "Why it mattered",
+        "body": "Every test still required a technician to run the procedure, then separately transcribe results into paperwork that fed the Functional Test Report (FTR) and other downstream documentation. That duplication — testing, then documenting the test — consumed real technician and administrative time on every valve that shipped, and gave managers no way to see test-stand status without physically walking the floor."
+      },
+      {
+        "id": "b3", "type": "list", "heading": "Constraints",
+        "items": [
+          "Had to work on the shop floor, integrated with existing physical digital pressure gauges rather than replacing them.",
+          "Had to preserve FlowSafe's existing test procedures (three-pop testing, bubble-test workflows) rather than change the underlying engineering process.",
+          "Had to support the existing Functional Test Report (FTR) output that downstream documentation depends on.",
+          "Full ERP integration was out of scope — the system needed to lay a read-only foundation for a future Epicor integration, not replace or write into Epicor."
+        ]
+      },
+      {
+        "id": "b4", "type": "text", "heading": "My role",
+        "body": "I developed the system as my project during my Industrial Engineering internship at FlowSafe / Dresser Utility Solutions — from the operator-station hardware and guided testing workflow through the centralized data model and the manager-facing dashboard."
+      },
+      {
+        "id": "b5", "type": "list", "heading": "Data & engineering approach",
+        "items": [
+          "Raspberry Pi operator stations at the test stands, connected to the physical digital pressure gauges for live pressure capture during a test.",
+          "Guided, on-screen operator workflows that walk a technician through the correct testing sequence — including the three-pop and bubble-test procedures — instead of relying on memory or a paper checklist.",
+          "Every test tagged with operator, job, and valve identification, and its full pressure trace stored against a centralized test record rather than a handwritten sheet.",
+          "A manager-facing dashboard giving live visibility into test-stand status, independent of walking the floor."
+        ]
+      },
+      {
+        "id": "b6", "type": "text", "heading": "Development process",
+        "body": "I built the system incrementally on the shop floor: standing up an operator station and gauge integration first, then layering in the guided workflow, the centralized test-record database and pressure-trace storage, and the manager dashboard on top of that same data. Functional Test Report support and the read-only Epicor integration foundation were built to sit on the same central record, so the live test data, the FTR, and the future ERP link all trace back to one source instead of three separate, disconnected records."
+      },
+      {
+        "id": "b7", "type": "text", "heading": "Solution",
+        "body": "The result is a connected pressure-testing ecosystem: operators run guided tests at Raspberry Pi stations wired to the physical digital gauges, every test is captured with its full pressure trace and operator/job/valve identification, and that record is centralized rather than sitting on paper. Managers get live visibility into test-stand activity, the Functional Test Report draws from the same recorded data, and the system has a read-only foundation in place for a future Epicor connection."
+      },
+      {
+        "id": "b8", "type": "stats", "heading": "Quantified result",
+        "stats": [
+          { "value": "~1,453 hrs/yr", "label": "Projected labor-hours recoverable across testing, documentation, and admin work" }
+        ],
+        "note": "This is a planning-level estimate presented internally at FlowSafe, not an audited or realized figure. No internal dollar-value estimates are published here."
+      },
+      {
+        "id": "b9", "type": "gallery", "heading": "Visual evidence",
+        "caption": "Placeholders below — sanitized screenshots and photos to be added.",
+        "layout": "grid",
+        "images": [
+          { "src": "", "alt": "", "caption": "Operator station UI — Guided test workflow screenshot" },
+          { "src": "", "alt": "", "caption": "Manager dashboard — Live test-stand visibility view" },
+          { "src": "", "alt": "", "caption": "Pressure trace — Example recorded test trace" },
+          { "src": "", "alt": "", "caption": "Test-stand photo — Raspberry Pi station in place, sanitized" }
+        ]
+      },
+      {
+        "id": "b10", "type": "tags", "heading": "Technologies & tools",
+        "items": ["Raspberry Pi", "Digital pressure gauge integration", "Centralized test-record database", "Live manager dashboard", "Functional Test Report (FTR) support", "Read-only Epicor integration foundation"],
+        "note": "[Placeholder — add the specific programming language, framework, and database used.]"
+      },
+      {
+        "id": "b11", "type": "text", "heading": "What I learned",
+        "body": "[Placeholder — your own engineering takeaway from this project: what you'd tell a recruiter about what building this taught you, e.g. about designing for how operators actually work, or about connecting shop-floor data to management visibility.]"
+      }
+    ]
+  }
+}

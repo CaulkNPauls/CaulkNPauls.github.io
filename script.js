@@ -52,6 +52,7 @@ const ICONS = {
   trend: '<path d="M5 17l6-6 4 4 4-8"/><path d="M5 17h14"/>',
   building: '<path d="M4 7h16M7 7v10M17 7v10M4 17h16"/>',
   heart: '<path d="M12 21s7-4.4 7-10a4 4 0 0 0-7-2.5A4 4 0 0 0 5 11c0 5.6 7 10 7 10Z"/>',
+  photo: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>',
 };
 
 function iconSVG(name) {
@@ -261,6 +262,166 @@ function renderQuickviewProjects(list, mount) {
     article.appendChild(meta);
 
     mount.appendChild(article);
+  });
+}
+
+// ===============================
+// Case-study pages (/projects/<slug>/) — flexible content blocks
+// Each project's hero + an ordered list of typed blocks live in
+// data/case-studies.json, keyed by the slug the page's own URL already
+// carries (see the bootstrap fetch below). Blocks render into the same
+// CSS classes the case-study template always used (case-study-body,
+// result-callout, evidence-grid, tags) so the page looks identical to the
+// old hand-written HTML it replaced; dev/editor.js (edit mode) decorates
+// these same [data-block-id] sections with add/reorder/delete controls.
+// ===============================
+
+function caseStudySectionShell(block, index, extraClass) {
+  return mkEl("section", {
+    className: "section case-study-section reveal" + (index % 2 === 1 ? " section--alt" : "") + (extraClass ? " " + extraClass : ""),
+    attrs: { "data-block-id": block.id, "data-block-index": index, "data-block-type": block.type },
+  });
+}
+
+function renderTextBlock(block, index) {
+  const section = caseStudySectionShell(block, index);
+  const body = mkEl("div", { className: "container case-study-body" });
+  if (block.heading) body.appendChild(mkEl("h2", { text: block.heading, attrs: { "data-block-field": "heading" } }));
+  const paragraphs = (block.body || "").split(/\n\s*\n/).filter((p) => p.trim());
+  (paragraphs.length ? paragraphs : [""]).forEach((p) => {
+    body.appendChild(mkEl("p", { text: p.trim(), attrs: { "data-block-field": "body" } }));
+  });
+  section.appendChild(body);
+  return section;
+}
+
+function renderListBlock(block, index) {
+  const section = caseStudySectionShell(block, index);
+  const body = mkEl("div", { className: "container case-study-body" });
+  if (block.heading) body.appendChild(mkEl("h2", { text: block.heading, attrs: { "data-block-field": "heading" } }));
+  const ul = mkEl("ul", { attrs: { "data-block-field": "items" } });
+  (block.items || []).forEach((item) => ul.appendChild(mkEl("li", { text: item })));
+  body.appendChild(ul);
+  section.appendChild(body);
+  return section;
+}
+
+function renderStatsBlock(block, index) {
+  const section = caseStudySectionShell(block, index);
+  const body = mkEl("div", { className: "container case-study-body" });
+  if (block.heading) body.appendChild(mkEl("h2", { text: block.heading, attrs: { "data-block-field": "heading" } }));
+  const callout = mkEl("div", { className: "result-callout", attrs: { "data-block-field": "stats" } });
+  (block.stats || []).forEach((s) => {
+    const stat = mkEl("div", { className: "result-callout__stat" });
+    stat.appendChild(mkEl("div", { className: "result-callout__value", text: s.value }));
+    stat.appendChild(mkEl("div", { className: "result-callout__label", text: s.label }));
+    callout.appendChild(stat);
+  });
+  if (block.note) callout.appendChild(mkEl("p", { className: "result-callout__note", text: block.note, attrs: { "data-block-field": "note" } }));
+  body.appendChild(callout);
+  section.appendChild(body);
+  return section;
+}
+
+function renderTagsBlock(block, index) {
+  const section = caseStudySectionShell(block, index);
+  const container = mkEl("div", { className: "container" });
+  if (block.heading) container.appendChild(mkEl("h2", { text: block.heading, attrs: { "data-block-field": "heading" } }));
+  const ul = mkEl("ul", { className: "tags", attrs: { "data-block-field": "items" } });
+  (block.items || []).forEach((item) => ul.appendChild(mkEl("li", { text: item })));
+  container.appendChild(ul);
+  if (block.note) {
+    container.appendChild(mkEl("p", {
+      className: "muted small",
+      text: block.note,
+      attrs: { style: "margin-top:12px;", "data-block-field": "note" },
+    }));
+  }
+  section.appendChild(container);
+  return section;
+}
+
+// Empty slots ({src:""}) render the same dashed-box look the old hardcoded
+// placeholders used, so a project with no photos yet still reads the same
+// as it always has; a caption of "Label — note" splits into a bold label
+// line and a smaller note line, matching that same original layout.
+function renderGalleryImage(img) {
+  if (img.src) {
+    const figure = mkEl("figure", { className: "evidence-photo" });
+    figure.appendChild(mkEl("img", { attrs: { src: img.src, alt: img.alt || "", loading: "lazy" } }));
+    if (img.caption) figure.appendChild(mkEl("figcaption", { text: img.caption }));
+    return figure;
+  }
+  const [label, note] = (img.caption || "Add a photo").split(/\s+—\s+/);
+  const ph = mkEl("div", { className: "evidence-placeholder" });
+  const iconWrap = mkEl("div", { className: "evidence-placeholder__icon", attrs: { "aria-hidden": "true" } });
+  iconWrap.appendChild(iconSVG("photo"));
+  ph.appendChild(iconWrap);
+  ph.appendChild(mkEl("div", { className: "evidence-placeholder__label", text: label }));
+  if (note) ph.appendChild(mkEl("div", { className: "evidence-placeholder__note", text: note }));
+  return ph;
+}
+
+function renderGalleryBlock(block, index) {
+  const section = caseStudySectionShell(block, index);
+  const container = mkEl("div", { className: "container" });
+  if (block.heading) container.appendChild(mkEl("h2", { text: block.heading, attrs: { "data-block-field": "heading" } }));
+  if (block.caption) {
+    container.appendChild(mkEl("p", {
+      className: "muted",
+      text: block.caption,
+      attrs: { style: "margin:0 0 16px;max-width:72ch;", "data-block-field": "caption" },
+    }));
+  }
+  const grid = mkEl("div", {
+    className: "evidence-grid",
+    attrs: { "data-block-field": "images", "data-layout": block.layout || "grid" },
+  });
+  (block.images || []).forEach((img) => grid.appendChild(renderGalleryImage(img)));
+  container.appendChild(grid);
+  section.appendChild(container);
+  return section;
+}
+
+const CASE_STUDY_BLOCK_RENDERERS = {
+  text: renderTextBlock,
+  list: renderListBlock,
+  stats: renderStatsBlock,
+  tags: renderTagsBlock,
+  gallery: renderGalleryBlock,
+};
+
+function renderCaseStudyHero(hero) {
+  if (!hero) return;
+  const set = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value || ""; };
+  set("csEyebrow", hero.eyebrow);
+  set("csTitle", hero.title);
+  set("csSubtitle", hero.subtitle);
+  set("csFactline", hero.factline);
+  const primary = document.getElementById("csCtaPrimary");
+  if (primary && hero.ctaPrimary) {
+    primary.textContent = hero.ctaPrimary.label || "";
+    primary.setAttribute("href", hero.ctaPrimary.href || "#");
+  }
+  const secondary = document.getElementById("csCtaSecondary");
+  if (secondary && hero.ctaSecondary) {
+    secondary.textContent = hero.ctaSecondary.label || "";
+    secondary.setAttribute("href", hero.ctaSecondary.href || "#");
+  }
+  if (hero.title) document.title = `${hero.title} | Paul Poleon Jr`;
+}
+
+function renderCaseStudy(caseStudy, slug, mount) {
+  if (!mount) return;
+  mount.innerHTML = "";
+  if (!caseStudy) {
+    mount.appendChild(mkEl("div", { className: "container case-study-body", text: "This project isn't available yet." }));
+    return;
+  }
+  renderCaseStudyHero(caseStudy.hero);
+  (caseStudy.blocks || []).forEach((block, i) => {
+    const renderer = CASE_STUDY_BLOCK_RENDERERS[block.type];
+    if (renderer) mount.appendChild(renderer(block, i));
   });
 }
 
@@ -908,6 +1069,21 @@ document.addEventListener("DOMContentLoaded", () => {
         initReveal();
       })
       .catch((err) => console.error("Failed to load projects data", err));
+  }
+
+  const caseStudyMount = document.getElementById("caseStudyBlocks");
+  if (caseStudyMount) {
+    // The page's own URL is the slug (/projects/<slug>/) — same file every
+    // project's page loads, so which project it renders is never baked
+    // into the HTML itself.
+    const slug = location.pathname.split("/").filter(Boolean).pop();
+    fetch("/data/case-studies.json")
+      .then((r) => r.json())
+      .then((all) => {
+        renderCaseStudy(all[slug], slug, caseStudyMount);
+        initReveal();
+      })
+      .catch((err) => console.error("Failed to load case study data", err));
   }
 
   const skillsCoreMount = document.getElementById("skillsCoreMount");

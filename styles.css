@@ -1425,6 +1425,41 @@ html, body { overflow-x: hidden; }
   margin-top: 8px;
 }
 
+/* Real gallery photos (case-study blocks) — sit in the same .evidence-grid
+   as the dashed placeholders above, so an empty slot and a filled one line
+   up identically whichever mix a project currently has. */
+.evidence-grid[data-layout="row"]{ grid-template-columns: repeat(2, minmax(240px, 1fr)); }
+.evidence-photo{ margin: 0; }
+.evidence-photo img{
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  background: rgba(17,17,17,.035);
+}
+.evidence-photo figcaption{
+  margin-top: 8px;
+  font-size: .82rem;
+  color: var(--muted);
+}
+
+/* Per-project base style overrides (case-study "style" panel) — scoped to
+   this content only, never the global theme tokens, with fallbacks so a
+   project with no override renders identically to before this existed. */
+.case-study-content{
+  --cs-font-family: inherit;
+  --cs-font-size-scale: 1;
+  --cs-accent: var(--accent);
+}
+.case-study-content .case-study-body p,
+.case-study-content .case-study-body ul,
+.case-study-content .tags li{
+  font-family: var(--cs-font-family);
+  font-size: calc(1em * var(--cs-font-size-scale));
+}
+.case-study-content .case-study-section h2{ color: var(--cs-accent); }
+.case-study-content .result-callout__value{ color: var(--cs-accent); }
+
 /* =========================================================
    PHOTO PLACEHOLDER — for real photography not yet supplied.
    Use aspect-ratio via inline style or a modifier class; default

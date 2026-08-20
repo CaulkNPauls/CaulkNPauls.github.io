@@ -71,241 +71,30 @@
 
           <div class="page-hero__grid">
             <div class="page-hero__copy">
-              <p class="page-hero__eyebrow">FlowSafe / Dresser Utility Solutions</p>
-              <h1 class="page-hero__title">
-                Facility Material Flow &amp; Layout Analysis
-              </h1>
-              <p class="page-hero__subtitle muted">
-                Two years of operational data and a scaled AutoCAD facility model, turned into a
-                quantified case for how FlowSafe's production, cleaning, testing, and storage
-                areas should be arranged.
-              </p>
+              <p class="page-hero__eyebrow" id="csEyebrow"></p>
+              <h1 class="page-hero__title" id="csTitle"></h1>
+              <p class="page-hero__subtitle muted" id="csSubtitle"></p>
 
               <div class="cta page-hero__cta">
-                <a class="btn" href="/experience/">See Experience</a>
-                <a class="btn btn--ghost" href="/assets/resume.pdf" target="_blank" rel="noopener">
-                  Download resume
-                </a>
+                <a class="btn" href="/experience/" id="csCtaPrimary"></a>
+                <a class="btn btn--ghost" href="/assets/resume.pdf" target="_blank" rel="noopener" id="csCtaSecondary"></a>
               </div>
 
-              <p class="page-hero__factline">
-                Role: Industrial Engineering Intern &nbsp;·&nbsp; FlowSafe / Dresser Utility Solutions
-                &nbsp;·&nbsp; Continuing during the academic semester
-              </p>
+              <p class="page-hero__factline" id="csFactline"></p>
             </div>
           </div>
         </div>
 
       </section>
 
-      <!-- PROBLEM -->
-      <section class="section case-study-section reveal">
-        <div class="container case-study-body">
-          <h2>Problem</h2>
-          <p>
-            FlowSafe's facility layout — how production, cleaning, testing, and point-of-use
-            storage areas sit relative to one another — had developed over time without a
-            data-driven relayout. No one had a quantified picture of how much material and
-            people movement the existing layout actually required, so there was no basis for
-            saying which layout changes would meaningfully help versus which would just move
-            the problem around.
-          </p>
-        </div>
-      </section>
-
-      <!-- WHY IT MATTERED -->
-      <section class="section section--alt case-study-section reveal">
-        <div class="container case-study-body">
-          <h2>Why it mattered</h2>
-          <p>
-            Every job that moves through the facility pays a travel cost between areas —
-            production to cleaning, cleaning to testing, testing to storage, and back — and that
-            cost repeats on every job, every day. Without a quantified baseline, layout decisions
-            were effectively guesses. Establishing a real, data-backed measure of transportation
-            effort was the precondition for making a defensible case for any layout change at all.
-          </p>
-        </div>
-      </section>
-
-      <!-- CONSTRAINTS -->
-      <section class="section case-study-section reveal">
-        <div class="container case-study-body">
-          <h2>Constraints</h2>
-          <ul>
-            <li>Had to work within FlowSafe's existing building footprint — this is a relayout study, not new construction.</li>
-            <li>Had to preserve required adjacencies between production, cleaning, and testing rather than optimize travel distance in isolation.</li>
-            <li>Recommendations needed to be justified by a quantified model, not intuition, to be actionable for management.</li>
-            <li>Needed to hold up against two years of real operational variation, not a single snapshot in time.</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- MY ROLE -->
-      <section class="section section--alt case-study-section reveal">
-        <div class="container case-study-body">
-          <h2>My role</h2>
-          <p>
-            I analyzed the operational data, built the scaled AutoCAD facility model, and
-            developed the transportation-effort analysis independently as my project during my
-            Industrial Engineering internship at FlowSafe / Dresser Utility Solutions.
-          </p>
-        </div>
-      </section>
-
-      <!-- DATA / ENGINEERING APPROACH -->
-      <section class="section case-study-section reveal">
-        <div class="container case-study-body">
-          <h2>Data &amp; engineering approach</h2>
-          <ul>
-            <li>Built a scaled AutoCAD model of the facility covering 104 distinct activity locations.</li>
-            <li>Constructed the full set of origin-destination travel paths between those locations from two years of production/operational data — 10,816 paths in total.</li>
-            <li>Applied a distance × movement-frequency transportation-effort model to quantify how much effort the current layout requires, giving a current-state baseline to test future layouts against.</li>
-            <li>Used the Valve Decoder database to close data gaps in the historical valve-shipment records feeding this analysis.</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- DEVELOPMENT PROCESS -->
-      <section class="section section--alt case-study-section reveal">
-        <div class="container case-study-body">
-          <h2>Development process</h2>
-          <p>
-            I built the current-state model first — mapping all 104 activity locations and
-            calculating baseline transportation effort from the historical travel-path data —
-            then iterated on layout scenarios, testing changes to production-area placement,
-            cleaning-area placement, testing-capacity allocation, and point-of-use storage
-            locations, recalculating modeled transportation effort for each scenario until
-            arriving at a recommended future-state layout.
-          </p>
-        </div>
-      </section>
-
-      <!-- SOLUTION -->
-      <section class="section case-study-section reveal">
-        <div class="container case-study-body">
-          <h2>Solution</h2>
-          <p>
-            A recommended future-state facility layout with specific changes to production-area
-            organization, cleaning-area placement, testing-capacity allocation, and point-of-use
-            storage locations — every recommendation justified by the same distance × frequency
-            effort model used to establish the current-state baseline, so the comparison between
-            current and future state is apples-to-apples.
-          </p>
-        </div>
-      </section>
-
-      <!-- QUANTIFIED RESULT -->
-      <section class="section section--alt case-study-section reveal">
-        <div class="container case-study-body">
-          <h2>Quantified result</h2>
-          <div class="result-callout">
-            <div class="result-callout__stat">
-              <div class="result-callout__value">18.75%</div>
-              <div class="result-callout__label">Reduction in modeled transportation effort, current state vs. recommended future state</div>
-            </div>
-            <div class="result-callout__stat">
-              <div class="result-callout__value">~1 year</div>
-              <div class="result-callout__label">Planning-level payback for the recommended changes</div>
-            </div>
-            <p class="result-callout__note">
-              18.75% is a reduction in modeled <strong>transportation effort</strong> (distance ×
-              movement frequency) — not a direct cost or dollar-value reduction. Payback is a
-              planning-level estimate, not an audited figure.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- VISUAL EVIDENCE -->
-      <section class="section case-study-section reveal">
-        <div class="container">
-          <h2>Visual evidence</h2>
-          <p class="muted" style="margin: 0 0 16px; max-width: 72ch;">
-            Placeholders below — sanitized AutoCAD exports and diagrams to be added.
-          </p>
-          <div class="evidence-grid">
-            <div class="evidence-placeholder reveal">
-              <div class="evidence-placeholder__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="1" />
-                  <path d="M3 9h18M9 21V9" />
-                </svg>
-              </div>
-              <div class="evidence-placeholder__label">Current-state layout</div>
-              <div class="evidence-placeholder__note">AutoCAD facility model, sanitized</div>
-            </div>
-            <div class="evidence-placeholder reveal">
-              <div class="evidence-placeholder__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="1" />
-                  <path d="M3 9h18M15 21V9" />
-                </svg>
-              </div>
-              <div class="evidence-placeholder__label">Recommended future-state layout</div>
-              <div class="evidence-placeholder__note">AutoCAD facility model, sanitized</div>
-            </div>
-            <div class="evidence-placeholder reveal">
-              <div class="evidence-placeholder__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="6" cy="6" r="2" />
-                  <circle cx="18" cy="8" r="2" />
-                  <circle cx="9" cy="18" r="2" />
-                  <circle cx="18" cy="18" r="2" />
-                  <path d="M7.7 7.1 16.3 8M10.5 16.8 16.5 9.5M10.5 17.5l6-.4" />
-                </svg>
-              </div>
-              <div class="evidence-placeholder__label">Travel-path / flow diagram</div>
-              <div class="evidence-placeholder__note">Origin-destination flow visualization</div>
-            </div>
-            <div class="evidence-placeholder reveal">
-              <div class="evidence-placeholder__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6" />
-                </svg>
-              </div>
-              <div class="evidence-placeholder__label">Effort comparison chart</div>
-              <div class="evidence-placeholder__note">Current vs. future modeled effort</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TECHNOLOGIES & TOOLS -->
-      <section class="section section--alt case-study-section reveal">
-        <div class="container">
-          <h2>Technologies &amp; tools</h2>
-          <ul class="tags">
-            <li>AutoCAD</li>
-            <li>Facility layout modeling</li>
-            <li>Distance &times; frequency effort analysis</li>
-            <li>Two years of operational data</li>
-          </ul>
-          <p class="muted small" style="margin-top: 12px;">
-            [Placeholder — add the specific data-analysis tools/software used to process the two years of operational data (e.g. Excel, a specific script/language).]
-          </p>
-        </div>
-      </section>
-
-      <!-- TAKEAWAY -->
-      <section class="section case-study-section reveal">
-        <div class="container case-study-body">
-          <h2>What I learned</h2>
-          <p>
-            [Placeholder — your own engineering takeaway from this project: what you'd tell a
-            recruiter about what this analysis taught you, e.g. about quantifying a problem
-            before proposing a solution, or about balancing a pure optimization model against
-            real operational constraints.]
-          </p>
-        </div>
-      </section>
+      <div id="caseStudyBlocks" class="case-study-content"></div>
 
       <div class="container case-study-footer-cta">
         <div class="card experience-cta__card">
           <div>
             <div class="card__title">More FlowSafe work</div>
             <p class="muted" style="margin:0;">
-              This is one of three FlowSafe projects — see the Digital Pressure-Testing System
-              and the Valve Decoder too.
+              This is one of several FlowSafe projects — see the rest on the Projects page.
             </p>
           </div>
           <div class="experience-cta__actions">
