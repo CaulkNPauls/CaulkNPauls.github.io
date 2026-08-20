@@ -2092,13 +2092,7 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
 /* Index-card stack behind the active flashcard, plus a spiral-binding
    strip down its left edge — pure CSS pseudo-elements, no extra DOM,
    so script.js's renderAbout()/showFlashcard() need no changes. */
-/* min-height sized to comfortably fit the tallest card fully revealed
-   (the 2-paragraph "people" card), so .flashcards-nav below never moves
-   when showFlashcard() swaps the active card (display:none<->block,
-   no transition) between a revealed/tall card and a fresh/short one —
-   that swap was the actual cause of the page "bouncing", not the
-   reveal transition itself, which already animates smoothly. */
-.fieldnotes-theme .flashcards{ max-width: 900px; min-height: 640px; padding-top: 10px; }
+.fieldnotes-theme .flashcards{ max-width: 900px; min-height: 340px; padding-top: 10px; }
 .fieldnotes-theme .flashcard{ padding: clamp(36px, 6vw, 72px); }
 .fieldnotes-theme .flashcard__question{ font-size: clamp(1.9rem, 4.2vw, 3.1rem); }
 .fieldnotes-theme .flashcard__answer p{ font-size: 1.12rem; }

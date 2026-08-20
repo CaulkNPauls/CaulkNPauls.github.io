@@ -451,7 +451,22 @@ function showFlashcard(index) {
   if (!cards.length) return;
 
   flashcardIndex = Math.max(0, Math.min(cards.length - 1, index));
+
+  // Cards aren't a fixed height (a revealed card is taller than a fresh
+  // one), and swapping which one is .is-active is an instant
+  // display:none<->block flip with no transition, so the page's height
+  // can jump right at this line. Anchor scroll position to the nav
+  // controls across that flip so the viewport doesn't shift and you
+  // don't have to re-scroll to reach Next/Prev.
+  const nav = document.querySelector(".flashcards-nav");
+  const navTopBefore = nav ? nav.getBoundingClientRect().top : null;
+
   cards.forEach((c, i) => c.classList.toggle("is-active", i === flashcardIndex));
+
+  if (nav && navTopBefore !== null) {
+    const delta = nav.getBoundingClientRect().top - navTopBefore;
+    if (delta !== 0) window.scrollBy(0, delta);
+  }
 
   const progress = document.getElementById("flashcardProgress");
   if (progress) progress.textContent = `${flashcardIndex + 1} / ${cards.length}`;
