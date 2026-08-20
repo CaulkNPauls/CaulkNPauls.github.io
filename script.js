@@ -512,8 +512,29 @@ function initFlashcards() {
     mount.addEventListener("click", (e) => {
       const btn = e.target.closest(".flashcard__reveal");
       if (!btn) return;
-      btn.closest(".flashcard").classList.add("is-flipped");
+      const card = btn.closest(".flashcard");
+      const answer = card.querySelector(".flashcard__answer");
+      card.classList.add("is-flipped");
       btn.remove();
+
+      // The answer's max-height transition grows the card (and pushes
+      // the prev/next buttons below it further down) after this click,
+      // not during it, so re-centering has to wait for that transition
+      // to actually finish rather than measuring/scrolling right away.
+      const recenter = () => {
+        const block = card.closest(".container") || card;
+        block.scrollIntoView({ block: "center", behavior: prefersReducedMotion ? "auto" : "smooth" });
+      };
+      if (prefersReducedMotion || !answer) {
+        recenter();
+      } else {
+        const onGrown = (ev) => {
+          if (ev.propertyName !== "max-height") return;
+          answer.removeEventListener("transitionend", onGrown);
+          recenter();
+        };
+        answer.addEventListener("transitionend", onGrown);
+      }
     });
 
     const prevBtn = document.getElementById("flashcardPrev");
