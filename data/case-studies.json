@@ -15,7 +15,7 @@
       }
     },
     "style": {
-      "fontFamily": "DM Sans",
+      "fontFamily": "default",
       "fontSizeScale": 1,
       "accentColor": "#2b5c82"
     },
