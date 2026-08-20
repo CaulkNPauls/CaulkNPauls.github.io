@@ -2281,3 +2281,127 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
   .fieldnotes-theme .flashcards-doodle{ display: none; }
 }
 
+/* =========================================================
+   PROJECTS HUB — index-card + post-it board, Field Notes theme.
+   Only .project__filter-badge, .project--open, the data-* attributes,
+   h3, the direct-child <p> and <ul class="tags">, and
+   .editorial-placeholder--project are load-bearing for dev/editor.js's
+   inline editing and script.js's filter/search/modal logic (confirmed
+   by reading both) — everything else below is free to restyle.
+========================================================= */
+
+/* Featured FlowSafe projects -> wide ruled-notebook "case cards" */
+.fieldnotes-theme .cards--flowsafe .project{
+  position: relative;
+  border-color: transparent;
+  background-color: var(--bg);
+  background-image: linear-gradient(var(--border) 1px, transparent 1px);
+  background-size: 100% 28px;
+}
+.fieldnotes-theme .cards--flowsafe .project::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1.6px solid var(--pen-border);
+  border-radius: inherit;
+  filter: url(#sketchy);
+  pointer-events: none;
+}
+.fieldnotes-theme .cards--flowsafe .project::after{
+  content: "Full case study";
+  position: absolute;
+  top: -11px;
+  left: 18px;
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  background: var(--pen-strong);
+  color: var(--paper);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+.fieldnotes-theme .project__title-link:hover{ color: var(--pen); }
+
+/* Academic/personal projects -> pinned post-it notes. Deliberately kept
+   inside the site's own cream/pen-blue palette (--bg / --pen-soft / a
+   warm parchment tint) rather than the yellow/pink/blue post-its from
+   the original Field Notes concept artwork. */
+.fieldnotes-theme .cards--static .project--open{
+  position: relative;
+  border-color: transparent;
+  box-shadow: 0 10px 18px rgba(28, 28, 26, .18);
+  transition: transform 200ms ease;
+}
+.fieldnotes-theme .cards--static .project--open::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--pen-border);
+  border-radius: inherit;
+  filter: url(#sketchy);
+  pointer-events: none;
+}
+.fieldnotes-theme .cards--static .project--open::after{
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 15px;
+  height: 15px;
+  margin-left: -7.5px;
+  border-radius: 50%;
+  background: var(--pen-strong);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+}
+.fieldnotes-theme .cards--static .project--open:nth-child(3n+1){ background: var(--bg); transform: rotate(-1.8deg); }
+.fieldnotes-theme .cards--static .project--open:nth-child(3n+2){ background: var(--pen-soft); transform: rotate(1.6deg); }
+.fieldnotes-theme .cards--static .project--open:nth-child(3n+3){ background: #f3e8d2; transform: rotate(-1.1deg); }
+.fieldnotes-theme .cards--static .project--open:hover,
+.fieldnotes-theme .cards--static .project--open:focus-within{
+  transform: rotate(0deg) translateY(-3px);
+  z-index: 2;
+}
+.fieldnotes-theme .project__filter-badge{ font-family: var(--font-mono); }
+
+/* Filter chips, search input, section labels */
+.fieldnotes-theme .chip{
+  font-family: var(--font-mono);
+  border-style: dashed;
+  border-color: var(--pen-border);
+  background: var(--pen-soft);
+  color: var(--pen-strong);
+}
+.fieldnotes-theme .chip.is-active{
+  background: var(--pen-strong);
+  border-style: solid;
+  border-color: var(--pen-strong);
+  color: var(--paper);
+}
+.fieldnotes-theme .input{
+  border-color: var(--pen-border);
+  background: var(--bg);
+}
+.fieldnotes-theme .projects-featured__eyebrow{
+  font-family: var(--font-mono);
+  color: var(--pen);
+}
+.fieldnotes-theme .projects-secondary-head h3,
+.fieldnotes-theme .explore-head h3{
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  color: var(--pen-strong);
+}
+
+/* Quick-view modal */
+.fieldnotes-theme .modal__panel{
+  background: var(--paper);
+  border-color: var(--pen-border);
+}
+.fieldnotes-theme .modal__panel h3{ color: var(--pen-strong); font-family: "Manrope", sans-serif; }
+.fieldnotes-theme .panel{
+  background: var(--pen-soft);
+  border-color: var(--pen-border);
+}
+.fieldnotes-theme .panel h4{ color: var(--pen-strong); }
+
