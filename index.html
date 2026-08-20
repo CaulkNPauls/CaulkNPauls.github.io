@@ -9,6 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css">
 </head>
 <body class="editorial-theme page-home">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="paperTearGrid" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#f6efdb"/>
+      <path d="M16 0H0V16" fill="none" stroke="rgba(43,92,130,.4)" stroke-width="1"/>
+    </pattern>
+    <filter id="tearWobble" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6"/>
+    </filter>
+  </defs>
+</svg>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="portfolio-nav">
   <a class="portfolio-nav__mark" href="/" aria-label="Home"><img src="assets/logo.website.png" alt="Paul Poleon logo" class="portfolio-nav__logo"></a>
@@ -33,6 +45,7 @@
   <div class="editorial-section__label" id="summaryLabel"></div><div class="editorial-intro__body reveal"><h2><span id="summaryHeadingLead"></span> <em id="summaryHeadingAccent"></em></h2><div class="editorial-intro__columns" id="summaryParagraphs"></div><a class="editorial-text-link" href="/about/" id="summaryLinkText"></a></div>
 </section>
 <section class="editorial-section editorial-personality">
+  <div class="paper-tear paper-tear--1" aria-hidden="true"><svg viewBox="0 0 125.1 49.7" preserveAspectRatio="none"><path d="M121.1,23.9 L108.5,35.5 L97.0,41.5 L76.1,43.9 L39.3,45.7 L31.9,37.6 L4.0,32.6 L25.2,19.8 L19.6,5.0 L46.1,4.0 L65.0,9.7 L88.1,11.9 L103.8,14.9 Z" fill="url(#paperTearGrid)" stroke="rgba(28,28,26,.22)" stroke-width="1.4" filter="url(#tearWobble)"/></svg></div>
   <div class="editorial-section__label" id="briefLabel"></div><div class="editorial-personality__grid"><div class="editorial-list-block reveal"><h3 id="briefStrengthsTitle"></h3><ol id="briefStrengthsList"></ol></div><div class="editorial-list-block editorial-list-block--rust reveal"><h3 id="briefCuriousTitle"></h3><ol id="briefCuriousList"></ol></div></div>
 </section>
 <section class="editorial-section editorial-experience">
@@ -48,10 +61,11 @@
   </div>
 </section>
 <section id="work" class="editorial-section editorial-work">
+  <div class="paper-tear paper-tear--2" aria-hidden="true"><svg viewBox="0 0 189.3 58.2" preserveAspectRatio="none"><path d="M154.8,34.0 L185.3,40.0 L138.8,45.2 L112.8,54.2 L80.3,52.9 L52.7,49.7 L18.5,49.0 L4.0,36.0 L39.2,25.8 L36.6,12.7 L59.9,12.9 L94.5,4.0 L131.4,4.3 L153.8,13.8 L168.8,21.4 Z" fill="url(#paperTearGrid)" stroke="rgba(28,28,26,.22)" stroke-width="1.4" filter="url(#tearWobble)"/></svg></div>
   <div class="editorial-section__label">04 / Selected work</div><div class="editorial-section__heading editorial-section__heading--split"><div><p class="editorial-kicker">A few problems I’ve taken apart</p><h2>Projects</h2></div><a class="editorial-text-link" href="/projects/">View every project →</a></div>
   <div class="editorial-projects" id="projectsFeaturedMount" data-variant="home"></div>
 </section>
-<section class="editorial-section editorial-origin"><div class="editorial-section__label" id="originLabel"></div><div class="editorial-origin__visual" id="originVisual" data-edit-photo-field="photo"></div><div class="editorial-origin__copy reveal"><p class="editorial-kicker" id="originKicker"></p><h2 id="originHeading"></h2><div id="originParagraphs"></div></div></section>
+<section class="editorial-section editorial-origin"><div class="paper-tear paper-tear--3" aria-hidden="true"><svg viewBox="0 0 206.8 73.9" preserveAspectRatio="none"><path d="M202.8,36.7 L176.7,48.6 L177.9,62.3 L123.3,60.6 L97.2,67.7 L57.2,69.9 L35.8,56.5 L4.0,44.2 L15.6,37.6 L32.8,27.0 L29.5,11.7 L57.1,4.0 L114.3,5.5 L135.3,13.9 L172.7,6.7 L175.3,24.6 Z" fill="url(#paperTearGrid)" stroke="rgba(28,28,26,.22)" stroke-width="1.4" filter="url(#tearWobble)"/></svg></div><div class="editorial-section__label" id="originLabel"></div><div class="editorial-origin__visual" id="originVisual" data-edit-photo-field="photo"></div><div class="editorial-origin__copy reveal"><p class="editorial-kicker" id="originKicker"></p><h2 id="originHeading"></h2><div id="originParagraphs"></div></div></section>
 <section id="contact" class="editorial-contact"><div class="reveal"><p class="editorial-kicker" id="contactKicker"></p><h2><span id="contactHeadingLine1"></span><br><span id="contactHeadingLine2"></span></h2><div class="editorial-contact__links"><a href="mailto:ppoleonjr@gmail.com">ppoleonjr@gmail.com ↗</a><a href="https://www.linkedin.com/in/paul-poleon-jr-3155b0287/" target="_blank">LinkedIn ↗</a><a href="https://github.com/CaulkNPauls" target="_blank">GitHub ↗</a></div></div></section>
 </main>
 <footer class="editorial-footer"><span>© <span id="year"></span> Paul Poleon Jr</span><span id="footerTagline"></span><a href="#home">Back to top ↑</a></footer>

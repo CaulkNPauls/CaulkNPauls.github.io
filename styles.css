@@ -1814,6 +1814,36 @@ html{ scroll-behavior: smooth; }
 @keyframes heroFlowDot{ to{ opacity:1; } }
 
 /* =========================================================
+   HOMEPAGE PAPER TEARS — the home page is the one page that keeps the
+   plain-paper .editorial-theme look (everywhere else now carries
+   .fieldnotes-theme's cream graph-paper look too). These three small
+   accents suggest that plain top sheet is starting to tear away to
+   reveal the graph paper underneath — deliberately absent through the
+   hero and Summary (#about) so the page opens on clean paper, then
+   appears at each section seam after that, growing slightly larger
+   each time. Stops before #contact, which is a solid color block, not
+   paper, so a "tear" there wouldn't read as paper-on-paper.
+========================================================= */
+.editorial-personality,
+.editorial-work,
+.editorial-origin{ position:relative; }
+
+.paper-tear{
+  position:absolute;
+  z-index:2;
+  pointer-events:none;
+  filter:drop-shadow(0 5px 8px rgba(23,23,20,.22));
+}
+.paper-tear svg{ display:block; width:100%; height:100%; }
+.paper-tear--1{ left:10%; width:150px; height:60px; top:-30px; transform:rotate(-3deg); }
+.paper-tear--2{ right:14%; width:210px; height:65px; top:-33px; transform:rotate(2deg); }
+.paper-tear--3{ left:20%; width:250px; height:89px; top:-45px; transform:rotate(-2deg); }
+
+@media (max-width:700px){
+  .paper-tear{ display:none; } /* the section-seam positioning assumes desktop-width columns */
+}
+
+/* =========================================================
    REVEAL COVERAGE — extend scroll-reveal to the editorial
    homepage sections (previously none of these animated).
 ========================================================= */
