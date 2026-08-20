@@ -333,7 +333,14 @@ function renderPhotoSlot(mount, photo, opts) {
     img.style.inset = "0";
     img.style.width = "100%";
     img.style.height = "100%";
-    img.style.objectFit = "cover";
+    // contain, not cover: these are transparent-background cutout photos,
+    // and cover crops to fill the mount's box shape, which was cutting
+    // the top of the subject's hair off. contain always shows the full
+    // uploaded image; the mount drops its background once a real photo
+    // is set (see the classList.toggle above), so the letterboxed edges
+    // show the page background through the photo's own transparency
+    // instead of a visible box.
+    img.style.objectFit = "contain";
     img.style.display = "block";
     mount.appendChild(img);
   } else {
