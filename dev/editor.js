@@ -259,6 +259,13 @@ const ENTITIES = {
   "home-origin": { file: "data/home.json", singleton: true, getItem: (d) => d.origin },
   "home-contact": { file: "data/home.json", singleton: true, getItem: (d) => d.contact },
   "home-footer": { file: "data/home.json", singleton: true, getItem: (d) => d.footer },
+
+  // File registration only (no getList/fields) — case-study blocks are a
+  // nested per-project structure the flat ENTITIES shape doesn't fit. This
+  // just gets data/case-studies.json into the shared fileCache/preload/save
+  // machinery; the block editor below (initCaseStudyEditor) reads and
+  // writes it directly.
+  "case-study": { file: "data/case-studies.json" },
 };
 
 const ADD_TILE_LABEL = {
@@ -340,6 +347,23 @@ async function ghPutBinary(path, base64, sha, message) {
   return res.json();
 }
 
+// Same as ghPutJSON, minus the JSON.stringify step — for committing a raw
+// text file (new-project page scaffolding writes an HTML file this way).
+async function ghPutText(path, text, sha, message) {
+  const body = { message, content: b64EncodeUtf8(text), branch };
+  if (sha) body.sha = sha;
+  const res = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`, {
+    method: "PUT",
+    headers: { ...ghHeaders(), "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `PUT ${path} failed (${res.status})`);
+  }
+  return res.json();
+}
+
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -357,6 +381,31 @@ function loadImageEl(url) {
     img.onload = () => resolve(img);
     img.onerror = reject;
     img.src = url;
+  });
+}
+
+// Contain-fit downscale with no crop/pan UI — for case-study gallery photos,
+// which are screenshots/diagrams at varied natural aspect ratios rather than
+// slots that need a fixed crop like the featured-project cover photo does.
+// Resizing only kicks in above maxDim; a Blob that's already small enough
+// still gets re-encoded as JPEG at PHOTO_QUALITY for consistent file size.
+function downscaleImage(file, maxDim = 1600) {
+  return new Promise((resolve, reject) => {
+    const objectUrl = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxDim / Math.max(img.naturalWidth, img.naturalHeight));
+      const w = Math.max(1, Math.round(img.naturalWidth * scale));
+      const h = Math.max(1, Math.round(img.naturalHeight * scale));
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(objectUrl);
+      canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error("Could not process image"))), "image/jpeg", PHOTO_QUALITY);
+    };
+    img.onerror = () => { URL.revokeObjectURL(objectUrl); reject(new Error("Could not read image file")); };
+    img.src = objectUrl;
   });
 }
 
@@ -519,12 +568,21 @@ async function handleFormSave() {
   const values = readForm();
   const item = entity.fromForm(values);
 
+  // A brand-new featured project gets its own case-study page scaffolded
+  // (default blocks + a committed projects/<slug>/index.html) once its id
+  // is known below — "quickview" post-it cards don't have pages, so this
+  // only applies to projects-featured.
+  const isNewProject = idx === null && entityKey === "projects-featured";
+  let newSlug = null;
+
   if (idx === null) {
     let id = slugify(entity.labelOf(item));
     let n = 2;
     const base = id;
     while (list.some((it) => it.id === id)) id = `${base}-${n++}`;
     item.id = id;
+    newSlug = id;
+    if (isNewProject) item.href = `/projects/${id}/`;
     list.push(item);
   } else {
     item.id = list[idx].id;
@@ -536,6 +594,7 @@ async function handleFormSave() {
 
   try {
     await saveFile(entity.file, `Update ${entity.file} via edit mode`);
+    if (isNewProject) await scaffoldCaseStudyPage(newSlug, item);
     closeForm();
     refreshMountsFor(entityKey);
   } catch (_) {
@@ -713,7 +772,11 @@ const INLINE_SINGLE_LINE = new Set([
 // subfield: for arrays of objects (e.g. links: [{label,href}]) — itemIndex
 // picks the array entry, subfield picks which of its properties this
 // element edits ("label"). Omit it for arrays of plain strings.
-function wireInline(el, field, itemIndex, subfield) {
+// onCommit: optional override for what happens on blur, in place of the
+// default applyInlineEdit (which assumes the flat ENTITIES/[data-edit-entity]
+// shape). The case-study block editor below passes its own commit handler,
+// since its data lives nested by slug + block id instead.
+function wireInline(el, field, itemIndex, subfield, onCommit) {
   if (!el || el.dataset.inlineWired === "1") return;
   el.dataset.inlineWired = "1";
 
@@ -729,7 +792,7 @@ function wireInline(el, field, itemIndex, subfield) {
   if (itemIndex !== undefined) el.dataset.editItemIndex = String(itemIndex);
   if (subfield) el.dataset.editItemSubfield = subfield;
 
-  el.addEventListener("blur", () => applyInlineEdit(el));
+  el.addEventListener("blur", () => (onCommit ? onCommit(el) : applyInlineEdit(el)));
   el.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey && (itemIndex !== undefined || INLINE_SINGLE_LINE.has(field))) {
       e.preventDefault();
@@ -1192,6 +1255,631 @@ function promptPhotoUpload(entityKey, idx) {
   input.click();
 }
 
+// ===== case-study block editor (/projects/<slug>/ pages) =====
+// Blocks live in data/case-studies.json, keyed by slug, addressed by the
+// block's own "id" rather than a numeric list index (see the "case-study"
+// ENTITIES registration above) — everything here reads/writes that JSON
+// directly instead of going through the generic ENTITIES getList/fromForm
+// machinery, which assumes a flat list of same-shaped items.
+const CASE_STUDY_BLOCK_LABELS = { text: "Text", list: "Bulleted list", stats: "Stat callout", tags: "Tag list", gallery: "Photo gallery" };
+const CASE_STUDY_FONTS = {
+  default: "inherit",
+  "DM Sans": '"DM Sans", sans-serif',
+  Manrope: '"Manrope", sans-serif',
+  Caveat: '"Caveat", cursive',
+  "IBM Plex Mono": '"IBM Plex Mono", monospace',
+};
+const CASE_STUDY_DEFAULT_ACCENT = "#2b5c82";
+
+function currentCaseStudySlug() {
+  const m = location.pathname.match(/^\/projects\/([^/]+)\/?$/);
+  return m ? m[1] : null;
+}
+
+function getCaseStudyEntry(slug) {
+  const file = fileCache["data/case-studies.json"];
+  if (!slug || !file || !file.data) return null;
+  return file.data[slug] || null;
+}
+
+function findCaseStudyBlock(slug, blockId) {
+  const cs = getCaseStudyEntry(slug);
+  if (!cs) return null;
+  return (cs.blocks || []).find((b) => b.id === blockId) || null;
+}
+
+function rerenderCaseStudyPage() {
+  const slug = currentCaseStudySlug();
+  const mount = document.getElementById("caseStudyBlocks");
+  if (!slug || !mount || typeof renderCaseStudy !== "function") return;
+  renderCaseStudy(getCaseStudyEntry(slug), slug, mount);
+  if (typeof initReveal === "function") initReveal();
+}
+
+// ---- hero (eyebrow/title/subtitle/factline/CTAs) ----
+function wireCaseStudyHeroField(el, field, subfield) {
+  if (!el) return;
+  if (subfield) guardEditableAnchor(el);
+  wireInline(el, field, undefined, subfield, (element) => {
+    const slug = currentCaseStudySlug();
+    const cs = getCaseStudyEntry(slug);
+    if (!cs) return;
+    if (!cs.hero) cs.hero = {};
+    const text = element.textContent.trim();
+    if (subfield) {
+      if (!cs.hero[field] || typeof cs.hero[field] !== "object") cs.hero[field] = {};
+      cs.hero[field][subfield] = text;
+    } else {
+      cs.hero[field] = text;
+    }
+    scheduleInlineSave("case-study");
+  });
+}
+
+function wireCaseStudyHeroFields() {
+  wireCaseStudyHeroField(document.getElementById("csEyebrow"), "eyebrow");
+  wireCaseStudyHeroField(document.getElementById("csTitle"), "title");
+  wireCaseStudyHeroField(document.getElementById("csSubtitle"), "subtitle");
+  wireCaseStudyHeroField(document.getElementById("csFactline"), "factline");
+  wireCaseStudyHeroField(document.getElementById("csCtaPrimary"), "ctaPrimary", "label");
+  wireCaseStudyHeroField(document.getElementById("csCtaSecondary"), "ctaSecondary", "label");
+}
+
+// ---- per-block text fields ----
+// text blocks render one <p> per paragraph with no per-paragraph index, so
+// editing one re-serializes every paragraph in the block (joined back with
+// blank lines) rather than trying to track which <p> is "paragraph 2".
+function applyCaseStudyInlineEdit(el) {
+  const slug = currentCaseStudySlug();
+  const section = el.closest("[data-block-id]");
+  if (!slug || !section) return;
+  const block = findCaseStudyBlock(slug, section.dataset.blockId);
+  if (!block) return;
+
+  const field = el.dataset.editField;
+  const itemIndexRaw = el.dataset.editItemIndex;
+  const subfield = el.dataset.editItemSubfield;
+
+  if (field === "body") {
+    const paras = Array.from(section.querySelectorAll('[data-block-field="body"]')).map((p) => p.textContent.trim());
+    block.body = paras.join("\n\n");
+  } else if (field === "images" && (subfield === "__label" || subfield === "__note")) {
+    // Empty gallery slots show as a bold label + smaller note (matching the
+    // dashed-placeholder look), stored as one "Label — note" caption string.
+    const i = Number(itemIndexRaw);
+    const wrap = el.closest(".evidence-placeholder");
+    const label = wrap.querySelector(".evidence-placeholder__label");
+    const note = wrap.querySelector(".evidence-placeholder__note");
+    const labelText = label ? label.textContent.trim() : "";
+    const noteText = note ? note.textContent.trim() : "";
+    if (!block.images[i]) block.images[i] = { src: "", alt: "", caption: "" };
+    block.images[i].caption = noteText ? `${labelText} — ${noteText}` : labelText;
+  } else if (itemIndexRaw !== undefined) {
+    const i = Number(itemIndexRaw);
+    if (!Array.isArray(block[field]) && field !== "images") block[field] = [];
+    if (subfield) {
+      if (!block[field][i] || typeof block[field][i] !== "object") block[field][i] = {};
+      block[field][i][subfield] = el.textContent.trim();
+    } else {
+      block[field][i] = el.textContent.trim();
+    }
+  } else {
+    block[field] = el.textContent.trim();
+  }
+  scheduleInlineSave("case-study");
+}
+
+function wireCaseStudyBlockFields(section) {
+  const type = section.dataset.blockType;
+  const heading = section.querySelector('[data-block-field="heading"]');
+  if (heading) wireInline(heading, "heading", undefined, undefined, applyCaseStudyInlineEdit);
+
+  if (type === "text") {
+    section.querySelectorAll('[data-block-field="body"]').forEach((p) => wireInline(p, "body", undefined, undefined, applyCaseStudyInlineEdit));
+  } else if (type === "list") {
+    const ul = section.querySelector('[data-block-field="items"]');
+    if (ul) Array.from(ul.children).forEach((li, i) => wireInline(li, "items", i, undefined, applyCaseStudyInlineEdit));
+  } else if (type === "tags") {
+    const ul = section.querySelector('[data-block-field="items"]');
+    if (ul) Array.from(ul.children).forEach((li, i) => wireInline(li, "items", i, undefined, applyCaseStudyInlineEdit));
+    const note = section.querySelector('[data-block-field="note"]');
+    if (note) wireInline(note, "note", undefined, undefined, applyCaseStudyInlineEdit);
+  } else if (type === "stats") {
+    section.querySelectorAll(".result-callout__stat").forEach((stat, i) => {
+      const value = stat.querySelector(".result-callout__value");
+      const label = stat.querySelector(".result-callout__label");
+      if (value) wireInline(value, "stats", i, "value", applyCaseStudyInlineEdit);
+      if (label) wireInline(label, "stats", i, "label", applyCaseStudyInlineEdit);
+    });
+    const note = section.querySelector('[data-block-field="note"]');
+    if (note) wireInline(note, "note", undefined, undefined, applyCaseStudyInlineEdit);
+  } else if (type === "gallery") {
+    const caption = section.querySelector('[data-block-field="caption"]');
+    if (caption) wireInline(caption, "caption", undefined, undefined, applyCaseStudyInlineEdit);
+    section.querySelectorAll(".evidence-placeholder").forEach((ph, i) => {
+      wireInline(ph.querySelector(".evidence-placeholder__label"), "images", i, "__label", applyCaseStudyInlineEdit);
+      wireInline(ph.querySelector(".evidence-placeholder__note"), "images", i, "__note", applyCaseStudyInlineEdit);
+    });
+    section.querySelectorAll(".evidence-photo figcaption").forEach((cap, i) => {
+      wireInline(cap, "images", i, "caption", applyCaseStudyInlineEdit);
+    });
+    wireCaseStudyGalleryControls(section);
+  }
+}
+
+// ---- whole-block move/delete + add ----
+function moveCaseStudyBlock(slug, blockId, dir) {
+  const cs = getCaseStudyEntry(slug);
+  if (!cs) return;
+  const blocks = cs.blocks || [];
+  const i = blocks.findIndex((b) => b.id === blockId);
+  const j = i + dir;
+  if (i < 0 || j < 0 || j >= blocks.length) return;
+  [blocks[i], blocks[j]] = [blocks[j], blocks[i]];
+  scheduleInlineSave("case-study");
+  rerenderCaseStudyPage();
+}
+
+function deleteCaseStudyBlock(slug, blockId) {
+  const cs = getCaseStudyEntry(slug);
+  if (!cs) return;
+  if (!confirm("Delete this block? This can't be undone.")) return;
+  cs.blocks = (cs.blocks || []).filter((b) => b.id !== blockId);
+  scheduleInlineSave("case-study");
+  rerenderCaseStudyPage();
+}
+
+function buildBlockToolbar(section, index, total) {
+  const slug = currentCaseStudySlug();
+  const blockId = section.dataset.blockId;
+  const bar = mkEl("div", { className: "cs-block-toolbar" });
+
+  const up = mkEl("button", { className: "cs-block-toolbar__btn", text: "↑", attrs: { type: "button", title: "Move up" } });
+  if (index === 0) up.disabled = true;
+  up.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); moveCaseStudyBlock(slug, blockId, -1); });
+  bar.appendChild(up);
+
+  const down = mkEl("button", { className: "cs-block-toolbar__btn", text: "↓", attrs: { type: "button", title: "Move down" } });
+  if (index === total - 1) down.disabled = true;
+  down.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); moveCaseStudyBlock(slug, blockId, 1); });
+  bar.appendChild(down);
+
+  const del = mkEl("button", { className: "cs-block-toolbar__btn cs-block-toolbar__btn--danger", text: "🗑", attrs: { type: "button", title: "Delete block" } });
+  del.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); deleteCaseStudyBlock(slug, blockId); });
+  bar.appendChild(del);
+
+  return bar;
+}
+
+function defaultCaseStudyBlock(type) {
+  const id = `b${Date.now().toString(36)}${Math.random().toString(36).slice(2, 5)}`;
+  const shapes = {
+    text: { heading: "New section", body: "Click to add your text here." },
+    list: { heading: "New list", items: ["Click to add an item."] },
+    stats: { heading: "Quantified result", stats: [{ value: "0", label: "Click to edit this label." }], note: "" },
+    tags: { heading: "Technologies & tools", items: ["Click to edit"], note: "" },
+    gallery: { heading: "Photos", caption: "", layout: "grid", images: [] },
+  };
+  return { id, type, ...shapes[type] };
+}
+
+function addCaseStudyBlock(type) {
+  const slug = currentCaseStudySlug();
+  const cs = getCaseStudyEntry(slug);
+  if (!cs) return;
+  if (!cs.blocks) cs.blocks = [];
+  cs.blocks.push(defaultCaseStudyBlock(type));
+  scheduleInlineSave("case-study");
+  rerenderCaseStudyPage();
+}
+
+function closeBlockPickerModal() {
+  const modal = document.getElementById("blockPickerModal");
+  if (!modal) return;
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+function openCaseStudyBlockPicker() {
+  if (!document.getElementById("blockPickerModal")) {
+    const modal = mkEl("div", { className: "modal", attrs: { id: "blockPickerModal", "aria-hidden": "true" } });
+    modal.appendChild(mkEl("div", { className: "modal__backdrop", attrs: { "data-close": "true" } }));
+    const panel = mkEl("div", { className: "modal__panel cs-block-picker__panel", attrs: { role: "dialog", "aria-modal": "true", "aria-labelledby": "blockPickerTitle" } });
+    panel.appendChild(mkEl("button", { className: "modal__close", text: "✕", attrs: { type: "button", "data-close": "true", "aria-label": "Close" } }));
+    panel.appendChild(mkEl("h3", { text: "Add a block", attrs: { id: "blockPickerTitle" } }));
+    const list = mkEl("div", { className: "cs-block-picker__list" });
+    Object.keys(CASE_STUDY_BLOCK_LABELS).forEach((type) => {
+      const btn = mkEl("button", { className: "btn btn--ghost cs-block-picker__option", text: CASE_STUDY_BLOCK_LABELS[type], attrs: { type: "button" } });
+      btn.addEventListener("click", () => { addCaseStudyBlock(type); closeBlockPickerModal(); });
+      list.appendChild(btn);
+    });
+    panel.appendChild(list);
+    modal.appendChild(panel);
+    document.body.appendChild(modal);
+    modal.addEventListener("click", (e) => { if (e.target.dataset.close === "true") closeBlockPickerModal(); });
+  }
+  const modal = document.getElementById("blockPickerModal");
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function ensureCaseStudyAddTile(mount) {
+  if (!mount.parentNode || mount.parentNode.querySelector(".cs-block-add")) return;
+  const tile = mkEl("button", { className: "edit-add-tile cs-block-add", text: "+ Add block", attrs: { type: "button" } });
+  tile.addEventListener("click", openCaseStudyBlockPicker);
+  mount.parentNode.insertBefore(tile, mount.nextSibling);
+}
+
+// ---- gallery images: add/replace/reorder/caption/remove ----
+function moveCaseStudyImage(slug, blockId, i, dir) {
+  const block = findCaseStudyBlock(slug, blockId);
+  if (!block || !block.images) return;
+  const j = i + dir;
+  if (j < 0 || j >= block.images.length) return;
+  [block.images[i], block.images[j]] = [block.images[j], block.images[i]];
+  scheduleInlineSave("case-study");
+  rerenderCaseStudyPage();
+}
+
+function removeCaseStudyImage(slug, blockId, i) {
+  const block = findCaseStudyBlock(slug, blockId);
+  if (!block || !block.images) return;
+  if (!confirm("Remove this photo?")) return;
+  block.images.splice(i, 1);
+  scheduleInlineSave("case-study");
+  rerenderCaseStudyPage();
+}
+
+// i === null appends every uploaded file as a new slot ("+ Add photos",
+// multi-select); a numeric i replaces just that one slot.
+function promptCaseStudyImageUpload(slug, blockId, i) {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "image/*";
+  if (i === null) input.multiple = true;
+  input.addEventListener("change", async () => {
+    const files = Array.from(input.files || []);
+    if (!files.length) return;
+    setToolbarStatus("Uploading photo…");
+    try {
+      for (const file of files) {
+        const downscaled = await downscaleImage(file);
+        const path = `assets/photos/${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}-cs.jpg`;
+        await ghPutBinary(path, await fileToBase64(downscaled), null, "Upload case-study photo via edit mode");
+        const block = findCaseStudyBlock(slug, blockId);
+        if (!block) continue;
+        if (!block.images) block.images = [];
+        const entry = { src: `/${path}`, alt: "", caption: block.images[i] ? block.images[i].caption || "" : "" };
+        if (i === null) block.images.push(entry);
+        else block.images[i] = entry;
+      }
+      await saveFile("data/case-studies.json", "Update data/case-studies.json via edit mode (photo)");
+      rerenderCaseStudyPage();
+    } catch (err) {
+      setToolbarStatus(`Photo upload failed: ${err.message}`, true);
+    }
+  });
+  input.click();
+}
+
+function editCaseStudyImageCaption(slug, blockId, i) {
+  const block = findCaseStudyBlock(slug, blockId);
+  if (!block || !block.images || !block.images[i]) return;
+  const next = prompt("Caption:", block.images[i].caption || "");
+  if (next === null) return;
+  block.images[i].caption = next.trim();
+  scheduleInlineSave("case-study");
+  rerenderCaseStudyPage();
+}
+
+function wireCaseStudyGalleryControls(section) {
+  const slug = currentCaseStudySlug();
+  const blockId = section.dataset.blockId;
+  const container = section.querySelector(".container");
+  const grid = section.querySelector('[data-block-field="images"]');
+  if (!grid || !container) return;
+
+  const layoutBtn = mkEl("button", {
+    className: "cs-gallery-layout-toggle",
+    text: grid.dataset.layout === "row" ? "⇄ Switch to grid" : "⇄ Switch to row (side-by-side)",
+    attrs: { type: "button", title: "Toggle a 2-up row layout for side-by-side comparisons" },
+  });
+  layoutBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const block = findCaseStudyBlock(slug, blockId);
+    if (!block) return;
+    block.layout = block.layout === "row" ? "grid" : "row";
+    scheduleInlineSave("case-study");
+    rerenderCaseStudyPage();
+  });
+  container.insertBefore(layoutBtn, grid);
+
+  const items = Array.from(grid.children);
+  items.forEach((item, i) => {
+    item.classList.add("cs-gallery-item");
+    const controls = mkEl("div", { className: "cs-gallery-item-controls" });
+    if (i > 0) {
+      const left = mkEl("button", { className: "cs-gallery-item-controls__btn", text: "←", attrs: { type: "button", title: "Move earlier" } });
+      left.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); moveCaseStudyImage(slug, blockId, i, -1); });
+      controls.appendChild(left);
+    }
+    const editBtn = mkEl("button", { className: "cs-gallery-item-controls__btn", text: "✏️", attrs: { type: "button", title: "Edit caption" } });
+    editBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); editCaseStudyImageCaption(slug, blockId, i); });
+    controls.appendChild(editBtn);
+    const photoBtn = mkEl("button", { className: "cs-gallery-item-controls__btn", text: "📷", attrs: { type: "button", title: "Upload photo" } });
+    photoBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); promptCaseStudyImageUpload(slug, blockId, i); });
+    controls.appendChild(photoBtn);
+    if (i < items.length - 1) {
+      const right = mkEl("button", { className: "cs-gallery-item-controls__btn", text: "→", attrs: { type: "button", title: "Move later" } });
+      right.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); moveCaseStudyImage(slug, blockId, i, 1); });
+      controls.appendChild(right);
+    }
+    const removeBtn = mkEl("button", { className: "cs-gallery-item-controls__btn cs-gallery-item-controls__btn--danger", text: "✕", attrs: { type: "button", title: "Remove" } });
+    removeBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); removeCaseStudyImage(slug, blockId, i); });
+    controls.appendChild(removeBtn);
+    item.appendChild(controls);
+  });
+
+  const addBtn = mkEl("button", { className: "edit-add-tile cs-gallery-add", text: "+ Add photos", attrs: { type: "button" } });
+  addBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); promptCaseStudyImageUpload(slug, blockId, null); });
+  container.appendChild(addBtn);
+}
+
+// ---- style panel (font / text size / accent color) ----
+function applyCaseStudyStyle(style) {
+  const mount = document.getElementById("caseStudyBlocks");
+  if (!mount || !style) return;
+  mount.style.setProperty("--cs-font-family", CASE_STUDY_FONTS[style.fontFamily] || "inherit");
+  mount.style.setProperty("--cs-font-size-scale", String(style.fontSizeScale || 1));
+  if (style.accentColor) mount.style.setProperty("--cs-accent", style.accentColor);
+  else mount.style.removeProperty("--cs-accent");
+}
+
+function injectCaseStudyStylePanel(slug) {
+  if (document.getElementById("csStylePanel")) return;
+  const cs = getCaseStudyEntry(slug);
+  const style = (cs && cs.style) || { fontFamily: "default", fontSizeScale: 1, accentColor: "" };
+
+  const panel = mkEl("div", { className: "cs-style-panel", attrs: { id: "csStylePanel" } });
+  panel.appendChild(mkEl("div", { className: "cs-style-panel__title", text: "Page style" }));
+
+  const fontRow = mkEl("label", { className: "cs-style-panel__row" });
+  fontRow.appendChild(mkEl("span", { text: "Font" }));
+  const fontSelect = document.createElement("select");
+  fontSelect.className = "input";
+  Object.keys(CASE_STUDY_FONTS).forEach((name) => {
+    const o = document.createElement("option");
+    o.value = name;
+    o.textContent = name === "default" ? "Default" : name;
+    if (name === style.fontFamily) o.selected = true;
+    fontSelect.appendChild(o);
+  });
+  fontRow.appendChild(fontSelect);
+  panel.appendChild(fontRow);
+
+  const sizeRow = mkEl("label", { className: "cs-style-panel__row" });
+  sizeRow.appendChild(mkEl("span", { text: "Text size" }));
+  const sizeSelect = document.createElement("select");
+  sizeSelect.className = "input";
+  [0.9, 1, 1.1, 1.2].forEach((scale) => {
+    const o = document.createElement("option");
+    o.value = String(scale);
+    o.textContent = `${Math.round(scale * 100)}%`;
+    if (scale === (style.fontSizeScale || 1)) o.selected = true;
+    sizeSelect.appendChild(o);
+  });
+  sizeRow.appendChild(sizeSelect);
+  panel.appendChild(sizeRow);
+
+  const colorRow = mkEl("label", { className: "cs-style-panel__row" });
+  colorRow.appendChild(mkEl("span", { text: "Accent color" }));
+  const colorInput = document.createElement("input");
+  colorInput.type = "color";
+  colorInput.value = style.accentColor || CASE_STUDY_DEFAULT_ACCENT;
+  colorRow.appendChild(colorInput);
+  panel.appendChild(colorRow);
+
+  const resetBtn = mkEl("button", { className: "cs-style-panel__reset", text: "Reset to default", attrs: { type: "button" } });
+  panel.appendChild(resetBtn);
+
+  const commit = (newStyle) => {
+    const entry = getCaseStudyEntry(slug);
+    if (!entry) return;
+    entry.style = newStyle;
+    applyCaseStudyStyle(newStyle);
+    scheduleInlineSave("case-study");
+  };
+  const commitFromControls = () => commit({ fontFamily: fontSelect.value, fontSizeScale: Number(sizeSelect.value), accentColor: colorInput.value });
+
+  fontSelect.addEventListener("change", commitFromControls);
+  sizeSelect.addEventListener("change", commitFromControls);
+  colorInput.addEventListener("input", commitFromControls);
+  resetBtn.addEventListener("click", () => {
+    fontSelect.value = "default";
+    sizeSelect.value = "1";
+    colorInput.value = CASE_STUDY_DEFAULT_ACCENT;
+    commit({ fontFamily: "default", fontSizeScale: 1, accentColor: "" });
+  });
+
+  document.body.appendChild(panel);
+  applyCaseStudyStyle(style);
+}
+
+// ---- decoration + activation ----
+function decorateCaseStudyBlocks(mount) {
+  const sections = Array.from(mount.querySelectorAll("[data-block-id]"));
+  sections.forEach((section, i) => {
+    section.classList.add("cs-block");
+    wireCaseStudyBlockFields(section);
+    section.appendChild(buildBlockToolbar(section, i, sections.length));
+  });
+  ensureCaseStudyAddTile(mount);
+}
+
+function watchCaseStudyMount() {
+  const mount = document.getElementById("caseStudyBlocks");
+  if (!mount) return;
+  const run = () => decorateCaseStudyBlocks(mount);
+  run();
+  const obs = new MutationObserver(run);
+  obs.observe(mount, { childList: true });
+}
+
+function initCaseStudyEditor() {
+  const slug = currentCaseStudySlug();
+  if (!slug || !document.getElementById("caseStudyBlocks")) return;
+  wireCaseStudyHeroFields();
+  watchCaseStudyMount();
+  loadFile("data/case-studies.json").then(() => injectCaseStudyStylePanel(slug)).catch(() => {});
+}
+
+// ---- new-project scaffolding (see handleFormSave's isNewProject branch) ----
+function escapeHtml(str) {
+  return String(str || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+function defaultCaseStudyBlocks() {
+  return [
+    { id: "b1", type: "text", heading: "Problem", body: "Click to describe the problem this project solved." },
+    { id: "b2", type: "text", heading: "Why it mattered", body: "Click to describe why this problem mattered." },
+    { id: "b3", type: "list", heading: "Constraints", items: ["Click to add a constraint."] },
+    { id: "b4", type: "text", heading: "My role", body: "Click to describe your role on this project." },
+    { id: "b5", type: "list", heading: "Data & engineering approach", items: ["Click to add an approach detail."] },
+    { id: "b6", type: "text", heading: "Development process", body: "Click to describe how you built it." },
+    { id: "b7", type: "text", heading: "Solution", body: "Click to describe the solution." },
+    { id: "b8", type: "stats", heading: "Quantified result", stats: [{ value: "0", label: "Click to edit this result." }], note: "" },
+    { id: "b9", type: "gallery", heading: "Visual evidence", caption: "Add photos below.", layout: "grid", images: [] },
+    { id: "b10", type: "tags", heading: "Technologies & tools", items: ["Click to edit"], note: "" },
+    { id: "b11", type: "text", heading: "What I learned", body: "Click to describe your takeaway." },
+  ];
+}
+
+function caseStudyBoilerplateHTML(title, description, ogUrl) {
+  const t = escapeHtml(title);
+  const d = escapeHtml(description);
+  const u = escapeHtml(ogUrl);
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="${d}" />
+    <title>${t} | Paul Poleon Jr</title>
+
+  <link rel="icon" href="/assets/logo.website.png?v=2">
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="${t} | Paul Poleon Jr" />
+    <meta property="og:description" content="${d}" />
+    <meta property="og:url" content="${u}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+
+  <body class="editorial-theme fieldnotes-theme">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <filter id="sketchy" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="7" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6"/>
+        </filter>
+      </defs>
+    </svg>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="portfolio-nav">
+      <a class="portfolio-nav__mark" href="/" aria-label="Home"><img src="/assets/logo.website.png" alt="Paul Poleon logo" class="portfolio-nav__logo"></a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <nav id="navLinks" class="portfolio-nav__links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/experience/">Experience</a>
+        <a href="/skills/">Skills</a>
+        <a href="/projects/" aria-current="page">Projects</a>
+        <a href="/assets/resume.pdf" target="_blank">Resume</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="page-hero">
+        <div class="container page-hero__inner">
+          <p class="muted small case-study-nav">
+            <a class="link" href="/projects/">← Back to Projects</a>
+          </p>
+
+          <div class="page-hero__grid">
+            <div class="page-hero__copy">
+              <p class="page-hero__eyebrow" id="csEyebrow"></p>
+              <h1 class="page-hero__title" id="csTitle"></h1>
+              <p class="page-hero__subtitle muted" id="csSubtitle"></p>
+
+              <div class="cta page-hero__cta">
+                <a class="btn" href="/experience/" id="csCtaPrimary"></a>
+                <a class="btn btn--ghost" href="/assets/resume.pdf" target="_blank" rel="noopener" id="csCtaSecondary"></a>
+              </div>
+
+              <p class="page-hero__factline" id="csFactline"></p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <div id="caseStudyBlocks" class="case-study-content"></div>
+
+      <div class="container case-study-footer-cta">
+        <div class="card experience-cta__card">
+          <div>
+            <div class="card__title">More of my work</div>
+            <p class="muted" style="margin:0;">See the rest of my projects.</p>
+          </div>
+          <div class="experience-cta__actions">
+            <a class="btn" href="/projects/">View all projects</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="editorial-footer"><span>© <span id="year"></span> Paul Poleon Jr</span><span>Industrial engineer · problem solver · teammate</span><a href="#main">Back to top ↑</a></footer>
+
+    <script src="../../script.js"></script>
+  </body>
+</html>
+`;
+}
+
+async function scaffoldCaseStudyPage(slug, item) {
+  try {
+    const csFile = await loadFile("data/case-studies.json");
+    csFile.data[slug] = {
+      hero: {
+        eyebrow: "",
+        title: item.title || "",
+        subtitle: item.blurbLong || item.blurbShort || "",
+        factline: "",
+        ctaPrimary: { label: "See Experience", href: "/experience/" },
+        ctaSecondary: { label: "Download resume", href: "/assets/resume.pdf" },
+      },
+      style: { fontFamily: "default", fontSizeScale: 1, accentColor: "" },
+      blocks: defaultCaseStudyBlocks(),
+    };
+    await saveFile("data/case-studies.json", `Add case study for ${slug} via edit mode`);
+
+    const title = item.title || slug;
+    const description = item.blurbShort || item.blurbLong || `Case study: ${title} by Paul Poleon Jr.`;
+    const ogUrl = `https://paulpoleon.com/projects/${slug}/`;
+    await ghPutText(`projects/${slug}/index.html`, caseStudyBoilerplateHTML(title, description, ogUrl), null, `Scaffold projects/${slug}/index.html via edit mode`);
+  } catch (err) {
+    setToolbarStatus(`Project page setup failed: ${err.message}`, true);
+  }
+}
+
 // ===== in-page overlay: toolbar, card decoration, add tiles =====
 function injectToolbar() {
   if (document.getElementById("editToolbar")) return;
@@ -1342,6 +2030,7 @@ function initEditOverlay() {
   // beat the GitHub fetches below) still gets decorated.
   Object.keys(ADD_TILE_MAP).forEach(watchMount);
   wireHomeInlineFields();
+  initCaseStudyEditor();
   // Inline edits need the underlying JSON in fileCache before they can be
   // applied on blur; load it in the background rather than blocking the UI.
   preloadEntityFiles();

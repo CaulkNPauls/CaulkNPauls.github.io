@@ -1989,6 +1989,113 @@ body.is-edit-mode [data-edit-entity].is-editable:hover{
   .edit-toolbar__status{ flex-basis:100%; order:3; }
 }
 
+/* ===== case-study block editor (dev/editor.js initCaseStudyEditor) ===== */
+body.is-edit-mode [data-block-id]{ position:relative; }
+body.is-edit-mode [data-block-id]:hover{
+  outline:2px dashed var(--accent);
+  outline-offset:-2px;
+}
+.cs-block-toolbar{
+  position:absolute;
+  top:8px;
+  right:8px;
+  z-index:20;
+  display:flex;
+  gap:6px;
+}
+.cs-block-toolbar__btn{
+  font-size:.78rem;
+  font-weight:700;
+  padding:5px 9px;
+  border-radius:6px;
+  border:1px solid var(--accent);
+  background:#fff;
+  color:var(--accent);
+  cursor:pointer;
+  line-height:1.2;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+.cs-block-toolbar__btn:hover{ background:var(--accent); color:#fff; }
+.cs-block-toolbar__btn:disabled{ opacity:.35; cursor:default; }
+.cs-block-toolbar__btn:disabled:hover{ background:#fff; color:var(--accent); }
+.cs-block-toolbar__btn--danger{ border-color:#b3261e; color:#b3261e; }
+.cs-block-toolbar__btn--danger:hover{ background:#b3261e; color:#fff; }
+
+.cs-block-add{ margin:24px auto; max-width:640px; }
+
+.cs-gallery-layout-toggle{
+  display:inline-block;
+  margin:0 0 16px;
+  font-size:.8rem;
+  font-weight:700;
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid var(--accent-border);
+  background:var(--accent-soft);
+  color:var(--accent);
+  cursor:pointer;
+}
+.cs-gallery-item{ position:relative; }
+.cs-gallery-item-controls{
+  position:absolute;
+  top:8px;
+  right:8px;
+  z-index:20;
+  display:flex;
+  gap:4px;
+}
+.cs-gallery-item-controls__btn{
+  font-size:.72rem;
+  font-weight:700;
+  padding:4px 7px;
+  border-radius:5px;
+  border:1px solid var(--accent);
+  background:#fff;
+  color:var(--accent);
+  cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+.cs-gallery-item-controls__btn:hover{ background:var(--accent); color:#fff; }
+.cs-gallery-item-controls__btn--danger{ border-color:#b3261e; color:#b3261e; }
+.cs-gallery-item-controls__btn--danger:hover{ background:#b3261e; color:#fff; }
+.cs-gallery-add{ display:block; margin-top:14px; }
+
+.cs-style-panel{
+  position:fixed;
+  right:16px;
+  bottom:72px;
+  z-index:9997;
+  width:220px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+  padding:14px;
+}
+.cs-style-panel__title{ font-weight:700; font-size:.85rem; margin-bottom:10px; }
+.cs-style-panel__row{ display:block; margin-bottom:10px; font-size:.8rem; }
+.cs-style-panel__row span{ display:block; color:var(--muted); margin-bottom:4px; }
+.cs-style-panel__row select,
+.cs-style-panel__row input[type="color"]{ width:100%; }
+.cs-style-panel__reset{
+  width:100%;
+  font-size:.78rem;
+  padding:6px;
+  border:1px solid var(--border);
+  border-radius:6px;
+  background:none;
+  cursor:pointer;
+  color:var(--muted);
+}
+.cs-style-panel__reset:hover{ color:var(--accent); border-color:var(--accent); }
+@media (max-width:700px){
+  .cs-style-panel{ left:16px; right:16px; width:auto; bottom:64px; }
+}
+
+.cs-block-picker__panel{ max-width:340px; }
+.cs-block-picker__list{ display:grid; gap:8px; margin-top:14px; }
+.cs-block-picker__option{ width:100%; text-align:left; }
+
 /* =========================================================
    SUBPAGE EDITORIAL CHROME — brings Experience/Skills/Projects/
    About headings in line with the homepage's Manrope display type
