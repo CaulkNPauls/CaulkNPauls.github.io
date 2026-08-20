@@ -514,26 +514,28 @@ function initFlashcards() {
       if (!btn) return;
       const card = btn.closest(".flashcard");
       const answer = card.querySelector(".flashcard__answer");
+
+      // scrollHeight reports the answer's full, un-clipped content height
+      // even while it's still visually collapsed (max-height: 0), so the
+      // growth this reveal is about to cause can be measured *before* the
+      // class goes on. 22 is the margin-top .is-flipped adds. Using that
+      // to scroll to the card's post-reveal centered position right away
+      // means the page scroll and the card's grow transition run together,
+      // instead of scrolling as a second jump after the card has already
+      // finished opening and the reader has started reading it.
+      const growth = answer ? answer.scrollHeight + 22 : 0;
+
       card.classList.add("is-flipped");
       btn.remove();
 
-      // The answer's max-height transition grows the card (and pushes
-      // the prev/next buttons below it further down) after this click,
-      // not during it, so re-centering has to wait for that transition
-      // to actually finish rather than measuring/scrolling right away.
-      const recenter = () => {
-        const block = card.closest(".container") || card;
-        block.scrollIntoView({ block: "center", behavior: prefersReducedMotion ? "auto" : "smooth" });
-      };
-      if (prefersReducedMotion || !answer) {
-        recenter();
+      const block = card.closest(".container") || card;
+      const rect = block.getBoundingClientRect();
+      const targetY = window.scrollY + rect.top + (rect.height + growth) / 2 - window.innerHeight / 2;
+
+      if (prefersReducedMotion) {
+        window.scrollTo(0, targetY);
       } else {
-        const onGrown = (ev) => {
-          if (ev.propertyName !== "max-height") return;
-          answer.removeEventListener("transitionend", onGrown);
-          recenter();
-        };
-        answer.addEventListener("transitionend", onGrown);
+        window.scrollTo({ top: targetY, behavior: "smooth" });
       }
     });
 
