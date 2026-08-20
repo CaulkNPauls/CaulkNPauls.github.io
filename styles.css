@@ -1820,16 +1820,26 @@ html{ scroll-behavior: smooth; }
    page edges to reveal the graph paper underneath, escalating seam by
    seam until it's torn away almost entirely right before #contact,
    which sits directly on the graph paper as an open notebook.
+
+   Every tear here — seam bites, sporadic notches/curls, and the finale
+   — is capped well under the page's own side padding (clamp(24px,5vw,
+   76px), ~76px at desktop) so it only ever eats into the margin, never
+   the text column next to it. That cap is deliberate: an earlier version
+   let a bite reach 290px in, which was wide enough to cut across the
+   Beyond Engineering section's 150px label column. Mostly-vertical
+   reach (tall, narrow shapes) plus more of them, rather than raw width,
+   is what should read as "more torn" from here down.
 ========================================================= */
 .editorial-personality,
+.editorial-experience,
 .editorial-work,
 .editorial-origin,
 .editorial-contact{ position:relative; }
 
-/* Corner "bites" torn in from the left/right page edges. Path data is
-   authored edge-anchored at x=0 reaching inward; the --right variant
-   mirrors it with scaleX so both edges tear inward symmetrically-ish
-   without needing separate path data. */
+/* Corner "bites" torn in from the left/right page edges at each section
+   seam — the main escalation spine. Path data is authored edge-anchored
+   at x=0 reaching inward; the --right variant mirrors it with scaleX so
+   both edges tear inward without needing separate path data. */
 .paper-bite{
   position:absolute;
   top:0;
@@ -1841,9 +1851,28 @@ html{ scroll-behavior: smooth; }
 .paper-bite--left{ left:0; }
 .paper-bite--right{ right:0; transform:scaleX(-1); }
 
-.paper-bite--seam1{ width:110px; height:76px; top:-40px; }
-.paper-bite--seam2{ width:210px; height:120px; top:-62px; }
-.paper-bite--seam3{ width:290px; height:172px; top:-88px; }
+.paper-bite--seam1{ width:58px; height:90px; top:-70px; }
+.paper-bite--seam2{ width:72px; height:150px; top:-120px; }
+.paper-bite--seam3{ width:88px; height:240px; top:-196px; }
+
+/* Sporadic tears scattered mid-section rather than only at seams — two
+   extra silhouettes (thin "notch" rips, rounder "curl" peels) besides
+   the seam bites, so the page doesn't only tear at the same predictable
+   spot. Placed via inline style per instance (top offset + which side);
+   count increases section by section toward the bottom. */
+.paper-notch,
+.paper-curl{
+  position:absolute;
+  z-index:2;
+  pointer-events:none;
+  filter:drop-shadow(0 4px 7px rgba(23,23,20,.2));
+}
+.paper-notch svg:first-child,
+.paper-curl svg:first-child{ display:block; width:100%; height:100%; }
+.paper-notch--right,
+.paper-curl--right{ right:0; transform:scaleX(-1); }
+.paper-notch--left,
+.paper-curl--left{ left:0; }
 
 /* Small torn-off bits left behind mid-tear, positioned (via inline
    style, per-instance) near a bite's jagged edge or scattered along the
@@ -1873,6 +1902,8 @@ html{ scroll-behavior: smooth; }
 
 @media (max-width:700px){
   .paper-bite,
+  .paper-notch,
+  .paper-curl,
   .paper-tear-finale{ display:none; } /* positioning assumes the desktop-width section layout */
 }
 
@@ -1903,10 +1934,44 @@ html{ scroll-behavior: smooth; }
   display:grid;
   grid-template-columns:1fr 2px 1fr;
   max-width:980px;
-  margin:0 auto;
+  margin:0 auto 22px;
   background:#fdfcf6;
-  border-radius:10px;
+  border-radius:10px 10px 3px 3px;
   box-shadow:0 24px 60px rgba(23,23,20,.28), 0 4px 14px rgba(23,23,20,.14);
+}
+
+/* Spiral binding along the bottom edge — a row of metal rings, evenly
+   spaced regardless of the notebook's rendered width, each punched
+   slightly into the page (the little shadow above every ring) the way
+   a real spiral pad's holes read from the front. */
+.notebook__spiral{
+  position:absolute;
+  left:26px;
+  right:26px;
+  bottom:-15px;
+  z-index:3;
+  display:flex;
+  justify-content:space-between;
+  pointer-events:none;
+}
+.notebook__ring{
+  position:relative;
+  width:13px;
+  height:22px;
+  border-radius:50%;
+  background:linear-gradient(155deg,#e2e5e7 0%,#aeb3b7 45%,#787d81 75%,#5c6266 100%);
+  box-shadow:0 3px 3px rgba(23,23,20,.4), inset 0 1px 1px rgba(255,255,255,.55), inset 0 -2px 2px rgba(0,0,0,.25);
+}
+.notebook__ring::before{
+  content:"";
+  position:absolute;
+  top:-9px;
+  left:3px;
+  width:7px;
+  height:12px;
+  border-radius:50%;
+  background:rgba(23,23,20,.16);
+  filter:blur(1px);
 }
 .notebook__page{ padding:clamp(32px,5vw,60px); min-width:0; }
 .notebook__page--left{
