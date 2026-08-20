@@ -1847,13 +1847,21 @@ html{ scroll-behavior: smooth; }
   pointer-events:none;
   filter:drop-shadow(0 6px 10px rgba(23,23,20,.24));
 }
-.paper-bite svg:first-child{ display:block; width:100%; height:100%; }
+/* Each shape is TWO overlaid svgs sharing the same path: a plain fill
+   (the grid pattern, undistorted — regular straight ruled lines, not
+   run through the wobble filter) plus a stroke-only ridge on top that
+   IS wobbled. Applying the filter to the fill too was the bug that made
+   the revealed grid look squiggly instead of like the rest of the
+   graph-paper grid on the page. */
+.paper-bite svg:not(.paper-straggler),
+.paper-notch svg:not(.paper-straggler),
+.paper-curl svg:not(.paper-straggler){ position:absolute; inset:0; width:100%; height:100%; display:block; }
 .paper-bite--left{ left:0; }
 .paper-bite--right{ right:0; transform:scaleX(-1); }
 
-.paper-bite--seam1{ width:58px; height:90px; top:-70px; }
-.paper-bite--seam2{ width:72px; height:150px; top:-120px; }
-.paper-bite--seam3{ width:88px; height:240px; top:-196px; }
+.paper-bite--seam1{ width:58px; height:100px; top:-78px; }
+.paper-bite--seam2{ width:72px; height:180px; top:-144px; }
+.paper-bite--seam3{ width:88px; height:290px; top:-236px; }
 
 /* Sporadic tears scattered mid-section rather than only at seams — two
    extra silhouettes (thin "notch" rips, rounder "curl" peels) besides
@@ -1867,8 +1875,6 @@ html{ scroll-behavior: smooth; }
   pointer-events:none;
   filter:drop-shadow(0 4px 7px rgba(23,23,20,.2));
 }
-.paper-notch svg:first-child,
-.paper-curl svg:first-child{ display:block; width:100%; height:100%; }
 .paper-notch--right,
 .paper-curl--right{ right:0; transform:scaleX(-1); }
 .paper-notch--left,
@@ -1932,50 +1938,48 @@ html{ scroll-behavior: smooth; }
   position:relative;
   z-index:2;
   display:grid;
-  grid-template-columns:1fr 2px 1fr;
-  max-width:980px;
+  grid-template-columns:1fr 36px 1fr;
+  max-width:1020px;
   margin:0 auto 22px;
   background:#fdfcf6;
-  border-radius:10px 10px 3px 3px;
+  border-radius:10px;
   box-shadow:0 24px 60px rgba(23,23,20,.28), 0 4px 14px rgba(23,23,20,.14);
 }
 
-/* Spiral binding along the bottom edge — a row of metal rings, evenly
-   spaced regardless of the notebook's rendered width, each punched
-   slightly into the page (the little shadow above every ring) the way
-   a real spiral pad's holes read from the front. */
+/* Spiral binding down the center gutter — a real grid column (not an
+   overlay) of metal rings, viewed front-on the way a spiral pad's
+   binding looks when the pad is open flat: horizontal loops stacked
+   vertically, evenly spaced regardless of how tall the pages end up. */
 .notebook__spiral{
-  position:absolute;
-  left:26px;
-  right:26px;
-  bottom:-15px;
-  z-index:3;
   display:flex;
-  justify-content:space-between;
-  pointer-events:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-evenly;
+  padding:24px 0;
+  background:linear-gradient(to right, rgba(23,23,20,.06), transparent 8px, transparent calc(100% - 8px), rgba(23,23,20,.06));
 }
 .notebook__ring{
   position:relative;
-  width:13px;
-  height:22px;
+  width:24px;
+  height:14px;
   border-radius:50%;
-  background:linear-gradient(155deg,#e2e5e7 0%,#aeb3b7 45%,#787d81 75%,#5c6266 100%);
-  box-shadow:0 3px 3px rgba(23,23,20,.4), inset 0 1px 1px rgba(255,255,255,.55), inset 0 -2px 2px rgba(0,0,0,.25);
+  background:linear-gradient(160deg,#e6e9eb 0%,#b3b8bc 45%,#83888c 75%,#61666a 100%);
+  box-shadow:0 2px 3px rgba(23,23,20,.4), inset 0 1px 1px rgba(255,255,255,.55), inset 0 -2px 2px rgba(0,0,0,.25);
 }
 .notebook__ring::before{
   content:"";
   position:absolute;
-  top:-9px;
-  left:3px;
-  width:7px;
-  height:12px;
+  top:3px;
+  left:-9px;
+  width:12px;
+  height:7px;
   border-radius:50%;
   background:rgba(23,23,20,.16);
   filter:blur(1px);
 }
-.notebook__page{ padding:clamp(32px,5vw,60px); min-width:0; }
-.notebook__page--left{
-  box-shadow:inset -10px 0 14px -12px rgba(23,23,20,.3);
+.notebook__page{ padding:clamp(32px,5vw,60px); min-height:420px; min-width:0; }
+.notebook__page--left,
+.notebook__page--right{
   background:repeating-linear-gradient(to bottom, transparent 0 27px, var(--nb-pen-border) 27px 28px);
   display:flex;
   flex-direction:column;
@@ -1988,14 +1992,7 @@ html{ scroll-behavior: smooth; }
   margin:14px 0 0;
   color:var(--nb-ink);
 }
-.notebook__spine{ background:linear-gradient(to bottom, transparent, var(--nb-pen-border) 15%, var(--nb-pen-border) 85%, transparent); }
-.notebook__page--right{
-  box-shadow:inset 10px 0 14px -12px rgba(23,23,20,.3);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:26px;
-}
+.notebook__page--right{ gap:26px; }
 .notebook__contact{
   display:flex;
   align-items:center;
@@ -2017,9 +2014,7 @@ html{ scroll-behavior: smooth; }
 @media (max-width:800px){
   .editorial-contact{ padding-top:clamp(70px,14vw,110px); }
   .notebook{ grid-template-columns:1fr; }
-  .notebook__spine{ display:none; }
-  .notebook__page--left,
-  .notebook__page--right{ box-shadow:none; }
+  .notebook__spiral{ display:none; }
 }
 
 /* =========================================================
