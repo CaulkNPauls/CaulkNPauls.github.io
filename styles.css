@@ -1362,7 +1362,11 @@ html, body { overflow-x: hidden; }
   width: calc(100% + 36px);
   margin: -18px -18px 14px;
   aspect-ratio: 16 / 10;
-  object-fit: cover;
+  /* contain, not cover: these are often app screenshots with real text up
+     to the edges, and cover crops whatever doesn't fit the frame instead
+     of just trimming empty background like it would for a plain photo. */
+  object-fit: contain;
+  background: var(--paper);
   border-radius: var(--radius) var(--radius) 0 0;
 }
 .project__thumb--placeholder{

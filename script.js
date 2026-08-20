@@ -204,7 +204,11 @@ function renderFeaturedProjects(list, mount, variant) {
       });
       visual.style.width = "100%";
       visual.style.height = "100%";
-      visual.style.objectFit = "cover";
+      // contain, not cover: these thumbnails are often app screenshots with
+      // real text baked in right up to the edges, and cover crops whatever
+      // doesn't fit the box's aspect ratio — cutting words off the side
+      // instead of just trimming empty background like a photo.
+      visual.style.objectFit = "contain";
     } else {
       visual = mkEl("div", { className: "editorial-placeholder editorial-placeholder--project" });
       const wrap = document.createElement("div");
