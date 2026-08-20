@@ -488,12 +488,17 @@ function initFlashcards() {
   if (mount.dataset.flashcardsInit !== "1") {
     mount.dataset.flashcardsInit = "1";
 
+    // One-way reveal: clicking shows the answer and removes the button —
+    // no "Show question" toggle back. Cards themselves are rendered once
+    // by renderAbout() and never torn down between prev/next (only
+    // .is-active toggles for display), so .is-flipped staying on the
+    // card element is what makes a revealed card stay revealed if you
+    // navigate away and back to it.
     mount.addEventListener("click", (e) => {
       const btn = e.target.closest(".flashcard__reveal");
       if (!btn) return;
-      const card = btn.closest(".flashcard");
-      const revealed = card.classList.toggle("is-flipped");
-      btn.textContent = revealed ? "Show question" : "Reveal answer";
+      btn.closest(".flashcard").classList.add("is-flipped");
+      btn.remove();
     });
 
     const prevBtn = document.getElementById("flashcardPrev");
