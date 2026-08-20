@@ -1555,7 +1555,8 @@ html{ scroll-behavior: smooth; }
 .editorial-hero h1{font:500 clamp(4.5rem,10vw,10rem)/.79 "Manrope",sans-serif;letter-spacing:-.075em;margin:0}.editorial-hero h1 span{color:var(--rust)}.editorial-hero h1 .hero-name-main{color:inherit}
 .editorial-hero__lede{font-size:clamp(1.05rem,1.6vw,1.4rem);max-width:610px;line-height:1.45;margin:42px 0 28px}
 .editorial-hero__actions{display:flex;gap:25px;align-items:center}.editorial-button{background:var(--ink);color:#fff;padding:14px 19px;text-decoration:none;display:inline-flex;gap:30px}.editorial-text-link{text-underline-offset:5px;font-weight:600}
-.editorial-hero__status{grid-column:1/-1;border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;text-transform:uppercase;letter-spacing:.1em;font-size:.67rem}
+.editorial-hero__status-wrap{grid-column:1/-1;position:relative}
+.editorial-hero__status{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;text-transform:uppercase;letter-spacing:.1em;font-size:.67rem}
 .editorial-placeholder{background:#ded9cf;border:1px dashed rgba(23,23,20,.35);display:flex;flex-direction:column;justify-content:space-between;padding:20px;color:#57534c;min-width:0}
 .editorial-placeholder p{max-width:38ch;font-size:.78rem;line-height:1.45;margin:7px 0 0}.editorial-placeholder strong{text-transform:uppercase;letter-spacing:.1em;font-size:.68rem;color:var(--ink)}.editorial-placeholder__number{align-self:flex-end;font-size:.7rem}
 .editorial-placeholder--hero{min-height:560px;align-self:stretch}.editorial-section{padding:clamp(80px,10vw,150px) clamp(24px,5vw,76px);border-top:1px solid var(--line)}
@@ -1732,12 +1733,17 @@ html{ scroll-behavior: smooth; }
 ========================================================= */
 .editorial-hero{ position:relative; }
 .editorial-hero__copy,
-.editorial-hero__status,
+.editorial-hero__status-wrap,
 .editorial-placeholder--hero{ position:relative; z-index:1; }
 
+/* Anchored to the top of the status bar (its own row, sized by its own
+   content) rather than a fixed pixel offset from the bottom of the whole
+   hero section — that guess broke as soon as the copy or photo got taller
+   than whatever height it was tuned against, and the line ended up
+   crossing the photo/status text instead of sitting in the gap above them. */
 .editorial-hero__flow{
   position:absolute;
-  left:0; right:0; bottom:58px;
+  left:0; right:0; bottom:100%;
   width:100%; height:64px;
   opacity:.55;
   pointer-events:none;
