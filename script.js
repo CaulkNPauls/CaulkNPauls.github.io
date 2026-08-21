@@ -69,17 +69,18 @@ function iconSVG(name) {
 
 function experienceOrganizationMark(id) {
   const trusted = {
-    "geek-squad-repair-agent": '<ellipse class="org-mark__badge" cx="32" cy="18" rx="29" ry="15"/><text class="org-mark__geek" x="32" y="18">Geek</text><text class="org-mark__squad" x="32" y="27">SQUAD</text>',
-    "kohls-retail-associate": '<text class="org-mark__kohls" x="32" y="22">KOHL\'S</text>',
-    "common-council-intern": '<circle class="org-mark__seal-ring" cx="32" cy="18" r="16"/><circle class="org-mark__seal-ring" cx="32" cy="18" r="12.5"/><text class="org-mark__seal-top" x="32" y="7.4">SEAL OF THE</text><text class="org-mark__seal-bottom" x="32" y="31.1">CITY OF BUFFALO</text><path class="org-mark__seal-art" d="M21.5 22.5h21M23 21c3-1 5-1 8 0s5 1 9 0M24 18h16M25.5 17V12h2v5m1-2h7v2m2 0v-6h2v6M29 13h6l-3-3Zm3 4V11m-4 6 4-6 4 6"/>',
+    "geek-squad-repair-agent": ["/assets/organization-marks/geek-squad.png", "/assets/organization-marks/geek-squad.png", "Geek Squad"],
+    "kohls-retail-associate": ["/assets/organization-marks/kohls.png", "/assets/organization-marks/kohls.png", "Kohl's"],
+    "common-council-intern": ["/assets/organization-marks/buffalo-seal.png", "/assets/organization-marks/buffalo-silhouette.png", "City of Buffalo"],
   };
   if (!trusted[id]) return null;
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("class", "timeline-node__org-mark");
-  svg.setAttribute("viewBox", "0 0 64 36");
-  svg.setAttribute("aria-hidden", "true");
-  svg.innerHTML = trusted[id];
-  return svg;
+  const [originalSrc, sketchSrc, label] = trusted[id];
+  const mark = mkEl("span", { className: "timeline-node__org-mark", attrs: { "aria-label": label } });
+  mark.append(
+    mkEl("img", { className: "org-mark__original", attrs: { src: originalSrc, alt: "" } }),
+    mkEl("img", { className: "org-mark__sketch", attrs: { src: sketchSrc, alt: "" } })
+  );
+  return mark;
 }
 
 function renderExperience(list, mount) {
