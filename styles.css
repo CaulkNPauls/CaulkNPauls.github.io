@@ -2531,6 +2531,20 @@ body.is-edit-mode [data-block-id]:hover{
 @media(max-width:700px){.page-home .paper-bite,.page-home .paper-notch,.page-home .paper-curl{display:none}}
 @media(max-width:700px){.page-home .editorial-personality::after,.page-home .editorial-experience::after,.page-home .editorial-work::after,.page-home .editorial-origin::after{display:none}}
 
+/* A separate white fibre layer behind the clipped cream sheet. Unlike a
+   drop-shadow, this layer is not discarded by the sheet's clip-path, so
+   it remains visible along the full left and right torn boundaries. */
+.page-home .editorial-personality::after,
+.page-home .editorial-experience::after,
+.page-home .editorial-work::after,
+.page-home .editorial-origin::after{content:"";position:absolute;inset:-2px 0;z-index:-2;width:auto;height:auto;background:#fff;filter:drop-shadow(0 3px 3px rgba(23,23,20,.2));pointer-events:none}
+.page-home .editorial-personality::after{clip-path:polygon(0 0,100% 0,100% 12%,calc(100% - 18px) 25%,calc(100% - 4px) 38%,calc(100% - 22px) 52%,calc(100% - 7px) 66%,calc(100% - 25px) 80%,calc(100% - 14px) 100%,14px 100%,25px 81%,6px 67%,22px 53%,4px 39%,18px 25%,0 12%)}
+.page-home .editorial-experience::after{clip-path:polygon(14px 0,calc(100% - 14px) 0,calc(100% - 27px) 12%,calc(100% - 12px) 25%,calc(100% - 39px) 38%,calc(100% - 20px) 52%,calc(100% - 45px) 66%,calc(100% - 24px) 81%,calc(100% - 47px) 100%,47px 100%,25px 82%,44px 67%,19px 53%,39px 39%,12px 25%,27px 12%)}
+.page-home .editorial-work::after{clip-path:polygon(45px 0,calc(100% - 45px) 0,calc(100% - 58px) 12%,calc(100% - 37px) 25%,calc(100% - 59px) 38%,calc(100% - 42px) 52%,calc(100% - 62px) 66%,calc(100% - 39px) 81%,calc(100% - 57px) 100%,57px 100%,38px 82%,61px 67%,41px 53%,58px 39%,36px 25%,57px 12%)}
+.page-home .editorial-origin::after{clip-path:polygon(43px 0,calc(100% - 43px) 0,calc(100% - 63px) 8%,calc(100% - 34px) 16%,calc(100% - 65px) 24%,calc(100% - 39px) 32%,calc(100% - 64px) 40%,calc(100% - 35px) 48%,calc(100% - 66px) 56%,calc(100% - 40px) 64%,calc(100% - 65px) 72%,calc(100% - 36px) 80%,calc(100% - 63px) 88%,calc(100% - 56px) 100%,56px 100%,34px 92%,63px 84%,37px 76%,66px 68%,35px 60%,64px 52%,38px 44%,65px 36%,34px 28%,63px 20%,37px 12%,62px 5%)}
+
+@media(max-width:700px){.page-home .editorial-personality::after,.page-home .editorial-experience::after,.page-home .editorial-work::after,.page-home .editorial-origin::after{display:none}}
+
 /* Index-card stack behind the active flashcard, plus a spiral-binding
    strip down its left edge — pure CSS pseudo-elements, no extra DOM,
    so script.js's renderAbout()/showFlashcard() need no changes. */
