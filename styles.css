@@ -2558,6 +2558,10 @@ body.is-edit-mode [data-block-id]:hover{
 .origin-bottom-tear path{fill:none;stroke:#fff;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;filter:drop-shadow(0 3px 5px rgba(23,23,20,.28))}
 @media(max-width:700px){.origin-bottom-tear{height:90px}}
 
+/* This section already has the exact SVG bottom ridge. Its expanded
+   backing copy produced white corner shards where the two systems met. */
+.page-home .editorial-origin::after{display:none}
+
 /* Organic side-rip geometry. Damage is intentionally non-monotonic:
    deep bites alternate with hairline frays and near-complete returns to
    the page edge. The white backing reuses the exact silhouette, merely
