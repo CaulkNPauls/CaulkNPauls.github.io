@@ -2713,6 +2713,55 @@ body.is-edit-mode [data-block-id]:hover{
   .page-experience .timeline-node--featured .timeline-node__company{padding-right:0}
 }
 
+/* Experience desktop opening: introduction at left, current role visible
+   immediately at right. The timeline becomes a consistent rail-and-card
+   column instead of alternating narrow cards around a center line. */
+@media(min-width:1101px){
+  .page-experience main{
+    display:grid;
+    grid-template-columns:minmax(340px,.72fr) minmax(620px,1.28fr);
+    gap:clamp(44px,5vw,88px);
+    width:min(1760px,calc(100% - clamp(48px,7vw,132px)));
+    margin:0 auto;
+    align-items:start;
+  }
+  .page-experience .page-hero{
+    padding:42px 0 34px;
+    position:sticky;
+    top:84px;
+  }
+  .page-experience .page-hero .container,
+  .page-experience .section--tight>.container{
+    width:auto;
+    max-width:none;
+    padding:0;
+  }
+  .page-experience .page-hero__copy{max-width:520px}
+  .page-experience .page-hero__title{
+    max-width:15ch;
+    font-size:clamp(2.35rem,3.25vw,4rem);
+  }
+  .page-experience .page-hero__subtitle{line-height:1.65}
+  .page-experience .section--tight{padding:42px 0 72px;overflow:visible}
+  .page-experience .section__head{margin-bottom:0}
+  .page-experience .section__head h2{margin-bottom:4px}
+  .page-experience .timeline-path{margin-top:34px}
+  .page-experience .timeline-node__rail{
+    left:22px;
+    transform:none;
+  }
+  .page-experience .timeline-node:nth-child(odd) .timeline-node__card,
+  .page-experience .timeline-node:nth-child(even) .timeline-node__card{
+    width:calc(100% - 78px);
+    margin-left:78px;
+    margin-right:0;
+  }
+}
+@media(max-width:1100px){
+  .page-experience main{display:block;width:auto;margin:0}
+  .page-experience .page-hero{position:relative;top:auto}
+}
+
 /* Fill both sides of the lowered ripple: surviving homepage paper above
    the fibre ridge, continuous ruled paper below it. */
 .page-home .origin-bottom-tear{background:none;clip-path:none}
