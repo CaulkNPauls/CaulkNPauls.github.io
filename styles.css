@@ -2775,12 +2775,13 @@ body.is-edit-mode [data-block-id]:hover{
   text-align:center;
   color:var(--pen);
 }
+.experience-education-list{display:grid;gap:14px;margin-top:22px}
 .experience-education{
   display:grid;
   grid-template-columns:52px 1fr;
   gap:14px;
   align-items:center;
-  margin-top:22px;
+  margin:0;
   padding:16px 18px;
   border:1.5px solid rgba(43,92,130,.42);
   border-left:5px solid var(--pen-strong);
@@ -2789,11 +2790,13 @@ body.is-edit-mode [data-block-id]:hover{
   box-shadow:3px 5px 0 rgba(28,28,26,.08);
   transform:rotate(.45deg);
 }
+.experience-education--secondary{transform:rotate(-.35deg)}
 .experience-education__icon{color:var(--pen-strong)}
 .experience-education__icon svg{display:block;width:48px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:url(#sketchy)}
 .experience-education__eyebrow{margin:0 0 4px;font:600 .66rem/1.3 var(--font-mono);text-transform:uppercase;letter-spacing:.12em;color:var(--pen)}
 .experience-education h2{margin:0;font:700 1.08rem/1.35 "Manrope",sans-serif;color:var(--ink)}
 .experience-education__program{margin:3px 0 0;font-size:.84rem;color:var(--muted)}
+.experience-education__summary{margin:10px 0 0;font-size:.76rem;line-height:1.55;color:var(--muted)}
 .experience-education__honors{list-style:none;margin:13px 0 0;padding:12px 0 0;border-top:1px dashed rgba(43,92,130,.32);display:grid;gap:9px}
 .experience-education__honors li{display:grid;gap:1px}
 .experience-education__honors strong{font-size:.79rem;line-height:1.35;color:var(--ink)}
