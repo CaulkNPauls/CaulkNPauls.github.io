@@ -2761,7 +2761,11 @@ body.is-edit-mode [data-block-id]:hover{
 .experience-education__icon svg{display:block;width:48px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:url(#sketchy)}
 .experience-education__eyebrow{margin:0 0 4px;font:600 .66rem/1.3 var(--font-mono);text-transform:uppercase;letter-spacing:.12em;color:var(--pen)}
 .experience-education h2{margin:0;font:700 1.08rem/1.35 "Manrope",sans-serif;color:var(--ink)}
-.experience-education div>p:last-child{margin:3px 0 0;font-size:.84rem;color:var(--muted)}
+.experience-education__program{margin:3px 0 0;font-size:.84rem;color:var(--muted)}
+.experience-education__honors{list-style:none;margin:13px 0 0;padding:12px 0 0;border-top:1px dashed rgba(43,92,130,.32);display:grid;gap:9px}
+.experience-education__honors li{display:grid;gap:1px}
+.experience-education__honors strong{font-size:.79rem;line-height:1.35;color:var(--ink)}
+.experience-education__honors span{font-size:.72rem;line-height:1.4;color:var(--muted)}
 @media(min-width:1101px){
   .page-experience main{
     display:grid;
