@@ -2505,7 +2505,7 @@ body.is-edit-mode [data-block-id]:hover{
    inset to meet the side tears, so no horizontal end-stubs remain. */
 .page-home .paper-tear-finale{left:min(4.1vw,60px);right:min(4.1vw,60px);width:auto}
 .page-home .paper-tear-finale>svg:first-child{display:block}
-.page-home .paper-tear-finale::before{display:block;background-position:calc(0px - min(4.1vw,60px)) 2px,calc(0px - min(4.1vw,60px)) 2px,0 0;clip-path:polygon(0 15%,4% 36.68%,8% 26.21%,12% 40.74%,16% 30.74%,20% 14.47%,24% 45.58%,28% 32.95%,32% 43.89%,36% 46.79%,40% 18.37%,44% 30.84%,48% 36.74%,52% 24.26%,56% 29.58%,60% 44.84%,64% 35.47%,68% 24.11%,72% 37.16%,76% 24.05%,80% 37.47%,84% 30.05%,88% 33.84%,92% 28.47%,96% 36%,100% 31.79%,100% 100%,0 100%)}
+.page-home .paper-tear-finale::before{display:block;background-position:calc(0px - min(4.1vw,60px)) 2px,calc(0px - min(4.1vw,60px)) 2px,0 0;clip-path:polygon(0 23.68%,3.57% 25.26%,7.14% 22.11%,10.71% 28.95%,14.29% 20%,17.86% 41.05%,21.43% 37.89%,25% 21.05%,28.57% 24.74%,32.14% 46.32%,35.71% 43.16%,39.29% 18.42%,42.86% 22.63%,46.43% 35.26%,50% 20.53%,53.57% 24.21%,57.14% 44.21%,60.71% 40.53%,64.29% 21.58%,67.86% 27.37%,71.43% 18.95%,75% 36.84%,78.57% 32.63%,82.14% 22.63%,85.71% 25.79%,89.29% 42.63%,92.86% 38.42%,96.43% 20.53%,100% 24.21%,100% 100%,0 100%)}
 .page-home .paper-tear-finale__ridge path,
 .page-home .paper-bite svg:not(.paper-straggler):last-of-type path,
 .page-home .paper-notch svg:last-of-type path,
