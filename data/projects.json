@@ -30,7 +30,10 @@
         "Data Analysis"
       ],
       "href": "/projects/flowsafe-facility-flow-layout/",
-      "image": null,
+      "image": {
+        "src": "/assets/photos/mt36psts-photo.jpg",
+        "alt": "Material Flow & Layout"
+      },
       "placeholderNote": "A sanitized AutoCAD facility plan with a spaghetti diagram or before-and-after flow paths."
     },
     {
