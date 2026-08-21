@@ -416,6 +416,16 @@ async function loadFile(path) {
   return fileCache[path];
 }
 
+// Photo uploads are two commits (binary first, JSON reference second).
+// Always refresh the data file immediately before the second commit: an
+// editor tab can stay open while another device or Codex updates main,
+// making the tab's cached SHA stale and causing GitHub to reject the save.
+async function reloadFile(path) {
+  const { json, sha } = await ghGetFile(path);
+  fileCache[path] = { data: json, sha, loaded: true };
+  return fileCache[path];
+}
+
 async function saveFile(path, message) {
   const file = fileCache[path];
   setToolbarStatus("Saving…");
@@ -1236,7 +1246,7 @@ function promptPhotoUpload(entityKey, idx) {
       const path = `assets/photos/${Date.now().toString(36)}-photo.jpg`;
       await ghPutBinary(path, await fileToBase64(cropped), null, "Upload photo via edit mode");
 
-      const file2 = await loadFile(entity.file);
+      const file2 = await reloadFile(entity.file);
       const item = entity.singleton
         ? entity.getItem(file2.data)
         : (entity.rootIsList ? file2.data : entity.getList(file2.data))[idx];
