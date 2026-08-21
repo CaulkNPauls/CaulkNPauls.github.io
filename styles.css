@@ -2558,10 +2558,6 @@ body.is-edit-mode [data-block-id]:hover{
 .origin-bottom-tear path{fill:none;stroke:#fff;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;filter:drop-shadow(0 3px 5px rgba(23,23,20,.28))}
 @media(max-width:700px){.origin-bottom-tear{height:90px}}
 
-/* This section already has the exact SVG bottom ridge. Its expanded
-   backing copy produced white corner shards where the two systems met. */
-.page-home .editorial-origin::after{display:none}
-
 /* Organic side-rip geometry. Damage is intentionally non-monotonic:
    deep bites alternate with hairline frays and near-complete returns to
    the page edge. The white backing reuses the exact silhouette, merely
@@ -2587,6 +2583,11 @@ body.is-edit-mode [data-block-id]:hover{
 .page-home .editorial-experience::after{clip-path:polygon(14px 0,calc(100% - 14px) 0,calc(100% - 27px) 12%,calc(100% - 12px) 25%,calc(100% - 39px) 38%,calc(100% - 20px) 52%,calc(100% - 45px) 66%,calc(100% - 24px) 81%,calc(100% - 47px) 100%,47px 100%,25px 82%,44px 67%,19px 53%,39px 39%,12px 25%,27px 12%)}
 .page-home .editorial-work::after{clip-path:polygon(45px 0,calc(100% - 45px) 0,calc(100% - 58px) 12%,calc(100% - 37px) 25%,calc(100% - 59px) 38%,calc(100% - 42px) 52%,calc(100% - 62px) 66%,calc(100% - 39px) 81%,calc(100% - 57px) 100%,57px 100%,38px 82%,61px 67%,41px 53%,58px 39%,36px 25%,57px 12%)}
 .page-home .editorial-origin::after{clip-path:polygon(43px 0,calc(100% - 43px) 0,calc(100% - 63px) 8%,calc(100% - 34px) 16%,calc(100% - 65px) 24%,calc(100% - 39px) 32%,calc(100% - 64px) 40%,calc(100% - 35px) 48%,calc(100% - 66px) 56%,calc(100% - 40px) 64%,calc(100% - 65px) 72%,calc(100% - 36px) 80%,calc(100% - 63px) 88%,calc(100% - 56px) 100%,56px 100%,34px 92%,63px 84%,37px 76%,66px 68%,35px 60%,64px 52%,38px 44%,65px 36%,34px 28%,63px 20%,37px 12%,62px 5%)}
+
+/* Restore the established side fibres and lower the existing ripple so
+   its visible tear line lands at the endpoints of both side cuts. */
+.page-home .origin-bottom-tear{bottom:-92px}
+@media(max-width:700px){.page-home .origin-bottom-tear{bottom:-58px}}
 
 @media(max-width:700px){.page-home .editorial-personality::after,.page-home .editorial-experience::after,.page-home .editorial-work::after,.page-home .editorial-origin::after{display:none}}
 
