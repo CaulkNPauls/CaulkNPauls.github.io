@@ -12,7 +12,10 @@
         "Process Improvement"
       ],
       "href": "/projects/flowsafe-pressure-testing-system/",
-      "image": null,
+      "image": {
+        "src": "/assets/photos/mt36jr6d-photo.jpg",
+        "alt": "Digital Pressure-Testing System"
+      },
       "placeholderNote": "A clean photo of the Raspberry Pi operator station, pressure gauge, and test hardware in use."
     },
     {
