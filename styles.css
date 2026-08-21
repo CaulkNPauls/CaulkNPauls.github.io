@@ -2461,6 +2461,40 @@ body.is-edit-mode [data-block-id]:hover{
    sheet. Their SVG stragglers become loose scraps of the cream page. */
 .page-home .paper-bite,.page-home .paper-notch,.page-home .paper-curl{display:block}
 
+/* Torn-through openings in the intact page. The ruled fill represents
+   the sheet underneath; ragged polygons and a pale double shadow make
+   each opening read as exposed paper fibres instead of a clean cutout. */
+.page-home .editorial-personality::after,
+.page-home .editorial-experience::after,
+.page-home .editorial-work::after,
+.page-home .editorial-origin::after{
+  content:"";
+  position:absolute;
+  z-index:2;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(43,92,130,.12) 1px,transparent 1px) 0 0/16px 16px,
+    linear-gradient(90deg,rgba(43,92,130,.12) 1px,transparent 1px) 0 0/16px 16px,
+    #f6efdb;
+  filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff) drop-shadow(0 4px 4px rgba(23,23,20,.2));
+}
+.page-home .editorial-personality::after{
+  top:24%; right:0; width:min(5vw,70px); height:34px;
+  clip-path:polygon(0 46%,12% 27%,25% 31%,37% 12%,51% 25%,66% 8%,78% 30%,100% 20%,100% 77%,82% 70%,70% 91%,53% 73%,38% 94%,24% 72%,10% 82%);
+}
+.page-home .editorial-experience::after{
+  top:58%; left:0; width:min(6vw,86px); height:48px;
+  clip-path:polygon(0 18%,18% 25%,31% 8%,46% 28%,61% 13%,74% 31%,100% 21%,100% 77%,82% 68%,69% 91%,50% 74%,34% 94%,19% 69%,0 82%);
+}
+.page-home .editorial-work::after{
+  right:0; bottom:30px; width:min(18vw,250px); height:42px;
+  clip-path:polygon(0 40%,7% 19%,15% 31%,23% 10%,31% 27%,41% 8%,50% 24%,59% 5%,68% 27%,78% 12%,87% 31%,100% 18%,100% 75%,90% 66%,81% 91%,71% 70%,61% 94%,51% 72%,40% 96%,30% 73%,19% 89%,9% 68%,0 82%);
+}
+.page-home .editorial-origin::after{
+  left:18%; bottom:34px; width:64%; height:62px;
+  clip-path:polygon(0 35%,4% 16%,9% 27%,14% 8%,20% 24%,26% 5%,32% 27%,38% 11%,44% 29%,50% 7%,56% 25%,62% 10%,68% 30%,74% 8%,80% 26%,86% 12%,92% 31%,100% 18%,99% 72%,94% 64%,89% 88%,83% 70%,77% 93%,70% 72%,64% 96%,58% 73%,51% 91%,45% 70%,38% 95%,32% 71%,25% 90%,19% 68%,13% 92%,7% 67%,1% 80%);
+}
+
 /* The finale previously used an SVG pattern that stretched with its
    viewBox. This fixed-size CSS fill shares the Contact grid's exact
    16px scale and phase, so the ruled sheet reads as one continuous page. */
@@ -2485,6 +2519,7 @@ body.is-edit-mode [data-block-id]:hover{
 
 @media(max-width:800px){.notebook{transform:none}.notebook::after,.notebook__page::after{display:none}.notebook__tabs{right:-12px}}
 @media(max-width:700px){.page-home .paper-bite,.page-home .paper-notch,.page-home .paper-curl{display:none}}
+@media(max-width:700px){.page-home .editorial-personality::after,.page-home .editorial-experience::after,.page-home .editorial-work::after,.page-home .editorial-origin::after{display:none}}
 
 /* Index-card stack behind the active flashcard, plus a spiral-binding
    strip down its left edge — pure CSS pseudo-elements, no extra DOM,
