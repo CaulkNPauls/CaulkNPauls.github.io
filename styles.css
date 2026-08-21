@@ -2450,7 +2450,7 @@ body.is-edit-mode [data-block-id]:hover{
 .page-home main{background:linear-gradient(rgba(43,92,130,.12) 1px,transparent 1px) 0 0/16px 16px,linear-gradient(90deg,rgba(43,92,130,.12) 1px,transparent 1px) 0 0/16px 16px,#f6efdb}
 .page-home .editorial-hero,.page-home .editorial-intro{background:var(--paper)}
 .page-home .editorial-personality,.page-home .editorial-experience,.page-home .editorial-work,.page-home .editorial-origin{background:transparent;isolation:isolate}
-.page-home .editorial-personality::before,.page-home .editorial-experience::before,.page-home .editorial-work::before,.page-home .editorial-origin::before{content:"";position:absolute;inset:-2px 0;z-index:-1;background:var(--paper);filter:drop-shadow(0 0 2px var(--paper)) drop-shadow(0 0 2px var(--paper)) drop-shadow(0 5px 4px rgba(23,23,20,.15));pointer-events:none}
+.page-home .editorial-personality::before,.page-home .editorial-experience::before,.page-home .editorial-work::before,.page-home .editorial-origin::before{content:"";position:absolute;inset:-2px 0;z-index:-1;background:var(--paper);filter:drop-shadow(0 0 1px #fff) drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px rgba(255,255,255,.9)) drop-shadow(0 5px 4px rgba(23,23,20,.15));pointer-events:none}
 /* Horizontal tear depth always stays inside the 5vw content padding,
    including between breakpoints, so every word and image retains paper. */
 .page-home .editorial-personality::before{clip-path:polygon(0 0,100% 0,100% 8%,calc(100% - min(1vw,14px)) 16%,100% 27%,calc(100% - min(1.4vw,20px)) 38%,calc(100% - min(.5vw,8px)) 50%,calc(100% - min(1.7vw,24px)) 62%,calc(100% - min(.8vw,12px)) 75%,calc(100% - min(2vw,28px)) 88%,calc(100% - min(1.2vw,18px)) 100%,min(1.2vw,18px) 100%,min(2vw,28px) 89%,min(.7vw,10px) 77%,min(1.7vw,24px) 64%,min(.5vw,8px) 51%,min(1.4vw,20px) 39%,min(.4vw,6px) 26%,min(1vw,14px) 14%)}
@@ -2509,7 +2509,7 @@ body.is-edit-mode [data-block-id]:hover{
 .page-home .paper-tear-finale__ridge path,
 .page-home .paper-bite svg:not(.paper-straggler):last-of-type path,
 .page-home .paper-notch svg:last-of-type path,
-.page-home .paper-curl svg:last-of-type path{stroke:var(--paper)!important}
+.page-home .paper-curl svg:last-of-type path{stroke:#fff!important}
 
 /* Open ruled notebook, modeled after a real hard-backed center-bound pad. */
 .notebook{grid-template-columns:1fr 42px 1fr;border:1px solid rgba(28,28,26,.22);border-radius:4px 10px 10px 4px;transform:rotate(-.35deg);overflow:visible}
