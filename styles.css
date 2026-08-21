@@ -2501,6 +2501,12 @@ body.is-edit-mode [data-block-id]:hover{
 .paper-tear-finale>svg:first-child{display:none}
 .paper-tear-finale::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(43,92,130,.12) 1px,transparent 1px) 0 2px/16px 16px,linear-gradient(90deg,rgba(43,92,130,.12) 1px,transparent 1px) 0 2px/16px 16px,#f6efdb;clip-path:polygon(0 15%,4% 37%,8% 26%,12% 41%,16% 31%,20% 15%,24% 46%,28% 33%,32% 44%,36% 47%,40% 18%,44% 31%,48% 37%,52% 24%,56% 30%,60% 45%,64% 35%,68% 24%,72% 37%,76% 24%,80% 37%,84% 30%,88% 34%,92% 28%,96% 36%,100% 32%,100% 100%,0 100%)}
 
+/* The finale fill and its fibre ridge now use the same SVG path. It is
+   inset to meet the side tears, so no horizontal end-stubs remain. */
+.page-home .paper-tear-finale{left:min(4.1vw,60px);right:min(4.1vw,60px);width:auto}
+.page-home .paper-tear-finale>svg:first-child{display:block}
+.page-home .paper-tear-finale::before{display:block;background-position:calc(0px - min(4.1vw,60px)) 2px,calc(0px - min(4.1vw,60px)) 2px,0 0;clip-path:polygon(0 15%,4% 36.68%,8% 26.21%,12% 40.74%,16% 30.74%,20% 14.47%,24% 45.58%,28% 32.95%,32% 43.89%,36% 46.79%,40% 18.37%,44% 30.84%,48% 36.74%,52% 24.26%,56% 29.58%,60% 44.84%,64% 35.47%,68% 24.11%,72% 37.16%,76% 24.05%,80% 37.47%,84% 30.05%,88% 33.84%,92% 28.47%,96% 36%,100% 31.79%,100% 100%,0 100%)}
+
 /* Open ruled notebook, modeled after a real hard-backed center-bound pad. */
 .notebook{grid-template-columns:1fr 42px 1fr;border:1px solid rgba(28,28,26,.22);border-radius:4px 10px 10px 4px;transform:rotate(-.35deg);overflow:visible}
 .notebook__cover{position:absolute;inset:10px 8px -12px -12px;z-index:-2;border-radius:4px 9px 9px 4px;background:#848784;box-shadow:0 8px 12px rgba(23,23,20,.2)}
