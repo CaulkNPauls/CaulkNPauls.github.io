@@ -53,24 +53,32 @@
 
           <div class="page-hero__grid">
             <div class="page-hero__copy">
-              <p class="page-hero__eyebrow">Skills</p>
+              <p class="page-hero__eyebrow">Engineering field notes</p>
               <h1 class="page-hero__title">
-                Tools, methods, and coursework I use to <span class="accent">improve systems</span>.
+                What I use, how I think, and <span class="accent">what I can build</span>.
               </h1>
               <p class="page-hero__subtitle muted">
-                I’m strongest where process, people, and data work together as one. I excel at mapping workflows, analyzing outcomes, and executing
-                improvements cleanly.
+                My work sits between the factory floor and the data behind it. These are the tools and methods I use to understand a problem, test an idea, and make the result useful.
               </p>
+
+              <nav class="skills-index" aria-label="Skills page sections">
+                <a href="#toolkit">Engineering</a>
+                <a href="#toolkit">Data and software</a>
+                <a href="#toolkit">Process improvement</a>
+                <a href="#coursework">Coursework</a>
+              </nav>
 
               <div class="cta page-hero__cta">
                 <a class="btn" href="/projects/">See projects</a>
                 <a class="btn btn--ghost" href="/assets/resume.pdf" target="_blank" rel="noopener">Download resume</a>
               </div>
 
-              <p class="page-hero__factline">
-                Focus: Lean &middot; Ops &middot; Analytics &nbsp;·&nbsp; Core tools: Excel &middot; R &middot; CAD
-                &nbsp;·&nbsp; Detail-oriented &middot; Team-oriented &middot; Clear communication
-              </p>
+              <div class="skills-evidence-key" aria-label="Experience labels">
+                <span><i></i>Professional use</span>
+                <span><i></i>Project use</span>
+                <span><i></i>Coursework</span>
+                <span><i></i>In progress</span>
+              </div>
             </div>
           </div>
         </div>
@@ -78,12 +86,13 @@
       </section>
 
       <!-- CORE SKILLS -->
-      <section class="section section--tight">
+      <section class="section section--tight skills-toolkit" id="toolkit">
         <div class="container">
           <div class="section__head">
             <div>
-              <h2>Core skill areas</h2>
-              <p class="muted">A clean breakdown of what I use most often.</p>
+              <p class="page-hero__eyebrow">01 / Toolkit</p>
+              <h2>Skills I reach for</h2>
+              <p class="muted">Grouped by the part of the problem they help me solve.</p>
             </div>
           </div>
 
@@ -91,14 +100,34 @@
         </div>
       </section>
 
+      <section class="section section--tight skills-proof" aria-labelledby="proofTitle">
+        <div class="container">
+          <div class="skills-proof__sheet">
+            <header class="skills-proof__head">
+              <div>
+                <p class="page-hero__eyebrow">02 / Applied in the field</p>
+                <h2 id="proofTitle">A few receipts</h2>
+              </div>
+              <span class="skills-proof__stamp">Project use</span>
+            </header>
+            <div class="skills-proof__grid">
+              <article><strong>Python and structured data</strong><p>Built the Valve Decoder from 19,567 shipped-valve records covering 1,951 unique models.</p><a href="/projects/">Valve Decoder →</a></article>
+              <article><strong>AutoCAD and facility flow</strong><p>Modeled 104 activity locations and analyzed 10,816 origin-to-destination travel paths.</p><a href="/projects/">Facility layout →</a></article>
+              <article><strong>Process and interface design</strong><p>Developed a connected pressure-testing workflow with operator stations, live capture, centralized records, and reporting.</p><a href="/projects/">Pressure testing →</a></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- RELEVANT COURSEWORK -->
-      <section class="section section--alt section--tight">
+      <section class="section section--alt section--tight skills-coursework" id="coursework">
         <div class="container">
           <div class="section__head">
             <div>
+              <p class="page-hero__eyebrow">03 / Course sheet</p>
               <h2>Relevant coursework</h2>
               <p class="muted">
-                Skills backed by coursework, includes current courses marked as “In progress”.
+                The academic side of the methods I use. Current classes are marked “In progress.”
               </p>
             </div>
             <a class="btn btn--ghost" href="/projects/">See outcomes →</a>
@@ -109,14 +138,17 @@
       </section>
 
       <!-- CTA -->
-      <section class="section section--tight">
+      <section class="section section--tight skills-principles">
         <div class="container">
+          <div class="skills-principles__notes" aria-label="How I work">
+            <p>Make the problem visible.</p>
+            <p>Check the data before trusting the conclusion.</p>
+            <p>Build something people can actually use.</p>
+          </div>
           <div class="card skills-cta__card">
             <div>
-              <div class="card__title">Want to see these skills in action?</div>
-              <p class="muted" style="margin:0;">
-                Projects show how I apply this to real deliverables, analysis, write-ups, and outcomes.
-              </p>
+              <div class="card__title">See the work behind the list.</div>
+              <p class="muted" style="margin:0;">The projects show the decisions, tradeoffs, and results.</p>
             </div>
             <div class="skills-cta__actions">
               <a class="btn" href="/projects/">View Projects</a>

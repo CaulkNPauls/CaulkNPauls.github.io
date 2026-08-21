@@ -450,7 +450,7 @@ function renderCaseStudy(caseStudy, slug, mount) {
 
 function renderSkillCard(card, mount, isCourse, index) {
   const article = mkEl("article", {
-    className: "skills-card reveal" + (isCourse ? " skills-card--course" : ""),
+    className: "skills-card reveal skills-card--" + String(card.id || "note").replace(/[^a-z0-9-]/gi, "-").toLowerCase() + (isCourse ? " skills-card--course" : ""),
     attrs: { "data-edit-entity": isCourse ? "skills-coursework" : "skills-core", "data-edit-index": index },
   });
 

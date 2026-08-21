@@ -1,24 +1,31 @@
 {
   "core": [
     {
-      "id": "tools",
+      "id": "engineering-toolkit",
       "icon": "wrench-plug",
-      "title": "Tools",
-      "description": "Software and platforms I’m comfortable using.",
-      "chips": ["SolidWorks CAD", "Engineering Drawings", "MATLAB", "Microsoft Excel", "Word", "PowerPoint"]
+      "title": "Engineering Toolkit",
+      "description": "Tools for laying out, modeling, and documenting physical systems.",
+      "chips": ["AutoCAD", "SolidWorks CAD", "Facility Layout", "Engineering Drawings", "Material Handling"]
     },
     {
-      "id": "methods",
+      "id": "data-software",
+      "icon": "bars",
+      "title": "Data & Software",
+      "description": "Turning operational records into analysis and usable tools.",
+      "chips": ["Python", "Microsoft Excel", "MATLAB", "Data Cleaning", "Dashboard Development", "Database Design"]
+    },
+    {
+      "id": "ie-methods",
       "icon": "flow",
-      "title": "Methods",
-      "description": "How I break down problems and improve processes.",
-      "chips": ["Process Mapping", "Lean", "Time Study", "Basic Statistics"]
+      "title": "Industrial Engineering Methods",
+      "description": "Ways I break down a system, compare options, and improve the flow of work.",
+      "chips": ["Process Mapping", "Lean", "Time Study", "Statistics", "Optimization", "Simulation", "Quality Assurance", "Human Factors"]
     },
     {
-      "id": "strengths",
+      "id": "working-with-people",
       "icon": "star",
-      "title": "Strengths",
-      "description": "How I show up on a team.",
+      "title": "Working with People",
+      "description": "The habits that help technical work survive contact with the real world.",
       "chips": ["Clear communication", "Ownership & follow-through", "Detail-oriented execution", "Team collaboration"]
     }
   ],
