@@ -1658,6 +1658,38 @@ html{ scroll-behavior: smooth; }
   align-items:center;
   z-index:2;
 }
+
+/* Keep each milestone attached to the visual center of its card. The rail
+   itself remains continuous from one centered marker to the next. */
+.page-experience .timeline-node{--timeline-node-gap:56px}
+.page-experience .timeline-node:last-child{--timeline-node-gap:0px}
+.page-experience .timeline-node__rail::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  bottom:0;
+  width:2px;
+  transform:translateX(-50%);
+  background:var(--border);
+  z-index:-1;
+}
+.page-experience .timeline-node:first-child .timeline-node__rail::before{
+  top:calc((100% - var(--timeline-node-gap))/2);
+}
+.page-experience .timeline-node:last-child .timeline-node__rail::before{
+  bottom:50%;
+}
+.page-experience .timeline-node__dot{
+  position:absolute;
+  top:calc((100% - var(--timeline-node-gap))/2);
+  transform:translateY(-50%);
+  z-index:1;
+}
+.page-experience .timeline-node.is-visible .timeline-node__dot{
+  transform:translateY(-50%) scale(1.05);
+}
+.page-experience .timeline-node__seg{display:none}
 .timeline-node__dot{
   width:44px;
   height:44px;
@@ -2492,7 +2524,7 @@ body.is-edit-mode [data-block-id]:hover{
 
 .page-experience .timeline-node--featured .timeline-node__card{background-color:#fff!important;background-image:linear-gradient(90deg,transparent 0 38px,rgba(181,76,69,.3) 38px 39px,transparent 39px),repeating-linear-gradient(to bottom,transparent 0 29px,rgba(43,92,130,.25) 29px 30px)!important;background-position:0 0,0 7px;background-repeat:no-repeat,repeat;background-clip:padding-box;border:13px solid #947251;outline:2px solid #684e37;border-radius:8px;padding:34px 26px 26px 42px;box-shadow:inset 0 0 0 1px #d8d3c8,inset 0 0 18px rgba(28,28,26,.035),0 18px 34px rgba(28,28,26,.2)}
 .page-experience .timeline-node--featured .timeline-node__card::before{content:none}
-.page-experience .timeline-node--featured .timeline-node__card::after{content:"";position:absolute;top:-24px;left:50%;width:88px;height:42px;transform:translateX(-50%);border-radius:8px 8px 3px 3px;background:linear-gradient(#c9ced0,#858b8e 55%,#606568);border:2px solid #565b5d;box-shadow:0 4px 5px rgba(28,28,26,.28);z-index:3}
+.page-experience .timeline-node--featured .timeline-node__card::after{content:"";position:absolute;top:-23px;left:50%;width:clamp(108px,18%,132px);height:38px;transform:translateX(-50%);border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,#d9ddde 0,#aeb3b5 20%,#777d80 72%,#5c6163 100%);border:2px solid #555a5c;box-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 8px 0 10px rgba(255,255,255,.12),inset -8px 0 10px rgba(28,28,26,.12),0 4px 5px rgba(28,28,26,.28);z-index:3}
 .page-experience .timeline-node--featured .timeline-node__card>*{position:relative;z-index:1}
 
 .page-experience .section--tight{position:relative;overflow:hidden}
