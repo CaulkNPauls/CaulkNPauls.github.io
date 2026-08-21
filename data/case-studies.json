@@ -357,7 +357,7 @@
         "type": "gallery",
         "heading": "Visual evidence",
         "caption": "Placeholders below — sanitized screenshots and photos to be added.",
-        "layout": "row",
+        "layout": "dashboard",
         "images": [
           {
             "src": "/assets/photos/mt3a1qta-8vy9-cs.jpg",
