@@ -1567,7 +1567,11 @@ function promptCaseStudyImageUpload(slug, blockId, i) {
     setToolbarStatus("Uploading photo…");
     try {
       for (const file of files) {
-        const downscaled = await downscaleImage(file);
+        const targetBlock = findCaseStudyBlock(slug, blockId);
+        const downscaled = i === null
+          ? await downscaleImage(file)
+          : await openCropModal(file, caseStudyCropAspect(targetBlock || { layout: "grid" }, i));
+        if (!downscaled) continue;
         const path = `assets/photos/${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}-cs.jpg`;
         await ghPutBinary(path, await fileToBase64(downscaled), null, "Upload case-study photo via edit mode");
         const block = findCaseStudyBlock(slug, blockId);
@@ -1596,6 +1600,43 @@ function editCaseStudyImageCaption(slug, blockId, i) {
   rerenderCaseStudyPage();
 }
 
+function caseStudyCropAspect(block, i) {
+  if (block.layout === "dashboard") {
+    if (i < 3) return 16 / 7;
+    if (i === 3) return 4 / 5;
+    return 16 / 9;
+  }
+  return 16 / 10;
+}
+
+async function cropExistingCaseStudyImage(slug, blockId, i) {
+  const block = findCaseStudyBlock(slug, blockId);
+  const current = block && block.images && block.images[i];
+  if (!current || !current.src) return;
+  setToolbarStatus("Loading image for crop…");
+  try {
+    const response = await fetch(current.src, { cache: "no-store" });
+    if (!response.ok) throw new Error(`Could not load image (${response.status})`);
+    const sourceBlob = await response.blob();
+    const sourceFile = new File([sourceBlob], "existing-photo", { type: sourceBlob.type || "image/jpeg" });
+    const cropped = await openCropModal(sourceFile, caseStudyCropAspect(block, i));
+    if (!cropped) { setToolbarStatus("Crop cancelled"); return; }
+
+    setToolbarStatus("Saving cropped image…");
+    const path = `assets/photos/${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}-crop.jpg`;
+    await ghPutBinary(path, await fileToBase64(cropped), null, "Crop case-study photo via edit mode");
+    const latest = await reloadFile("data/case-studies.json");
+    const latestBlock = latest.data[slug] && latest.data[slug].blocks.find((candidate) => candidate.id === blockId);
+    if (!latestBlock || !latestBlock.images || !latestBlock.images[i]) throw new Error("Image slot changed while cropping; reload and try again");
+    latestBlock.images[i] = { ...latestBlock.images[i], src: `/${path}` };
+    await saveFile("data/case-studies.json", "Update data/case-studies.json via edit mode (crop)");
+    rerenderCaseStudyPage();
+    setToolbarStatus("Crop saved");
+  } catch (err) {
+    setToolbarStatus(`Crop failed: ${err.message}`, true);
+  }
+}
+
 function wireCaseStudyGalleryControls(section) {
   const slug = currentCaseStudySlug();
   const blockId = section.dataset.blockId;
@@ -1605,14 +1646,14 @@ function wireCaseStudyGalleryControls(section) {
 
   const layoutBtn = mkEl("button", {
     className: "cs-gallery-layout-toggle",
-    text: grid.dataset.layout === "row" ? "⇄ Switch to grid" : "⇄ Switch to row (side-by-side)",
-    attrs: { type: "button", title: "Toggle a 2-up row layout for side-by-side comparisons" },
+    text: grid.dataset.layout === "dashboard" ? "⇄ Dashboard stack" : (grid.dataset.layout === "row" ? "⇄ Side-by-side" : "⇄ Grid"),
+    attrs: { type: "button", title: "Cycle grid, side-by-side, and dashboard-stack gallery layouts" },
   });
   layoutBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const block = findCaseStudyBlock(slug, blockId);
     if (!block) return;
-    block.layout = block.layout === "row" ? "grid" : "row";
+    block.layout = block.layout === "grid" ? "row" : (block.layout === "row" ? "dashboard" : "grid");
     scheduleInlineSave("case-study");
     rerenderCaseStudyPage();
   });
@@ -1633,6 +1674,12 @@ function wireCaseStudyGalleryControls(section) {
     const photoBtn = mkEl("button", { className: "cs-gallery-item-controls__btn", text: "📷", attrs: { type: "button", title: "Upload photo" } });
     photoBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); promptCaseStudyImageUpload(slug, blockId, i); });
     controls.appendChild(photoBtn);
+    const block = findCaseStudyBlock(slug, blockId);
+    if (block && block.images && block.images[i] && block.images[i].src) {
+      const cropBtn = mkEl("button", { className: "cs-gallery-item-controls__btn", text: "✂", attrs: { type: "button", title: "Crop and reposition existing photo" } });
+      cropBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); cropExistingCaseStudyImage(slug, blockId, i); });
+      controls.appendChild(cropBtn);
+    }
     if (i < items.length - 1) {
       const right = mkEl("button", { className: "cs-gallery-item-controls__btn", text: "→", attrs: { type: "button", title: "Move later" } });
       right.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); moveCaseStudyImage(slug, blockId, i, 1); });
