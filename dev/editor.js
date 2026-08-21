@@ -303,7 +303,10 @@ function b64DecodeUtf8(str) {
 }
 
 async function ghGetMeta(path) {
-  const res = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}?ref=${encodeURIComponent(branch)}`, { headers: ghHeaders() });
+  const res = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}?ref=${encodeURIComponent(branch)}&_=${Date.now()}`, {
+    headers: ghHeaders(),
+    cache: "no-store",
+  });
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`GET ${path} failed (${res.status})`);
   return res.json();
@@ -1246,17 +1249,28 @@ function promptPhotoUpload(entityKey, idx) {
       const path = `assets/photos/${Date.now().toString(36)}-photo.jpg`;
       await ghPutBinary(path, await fileToBase64(cropped), null, "Upload photo via edit mode");
 
-      const file2 = await reloadFile(entity.file);
-      const item = entity.singleton
-        ? entity.getItem(file2.data)
-        : (entity.rootIsList ? file2.data : entity.getList(file2.data))[idx];
-
       const fieldCfg = PHOTO_FIELD[entityKey] || { key: "photo", shape: "string" };
-      item[fieldCfg.key] = fieldCfg.shape === "object"
-        ? { src: `/${path}`, alt: item.title || item.heading || "" }
-        : `/${path}`;
-
-      await saveFile(entity.file, `Update ${entity.file} via edit mode (photo)`);
+      // GitHub may briefly return the pre-upload branch state after the
+      // binary commit. Retry the JSON attachment once with a fresh SHA;
+      // reapply the photo path to the newly fetched object each time.
+      for (let attempt = 0; attempt < 2; attempt += 1) {
+        const file2 = await reloadFile(entity.file);
+        const item = entity.singleton
+          ? entity.getItem(file2.data)
+          : (entity.rootIsList ? file2.data : entity.getList(file2.data))[idx];
+        item[fieldCfg.key] = fieldCfg.shape === "object"
+          ? { src: `/${path}`, alt: item.title || item.heading || "" }
+          : `/${path}`;
+        try {
+          await saveFile(entity.file, `Update ${entity.file} via edit mode (photo)`);
+          break;
+        } catch (err) {
+          const conflict = /does not match|sha|conflict/i.test(err.message || "");
+          if (!conflict || attempt === 1) throw err;
+          setToolbarStatus("Photo uploaded; refreshing latest data and retryingâ€¦");
+          await new Promise((resolve) => setTimeout(resolve, 500));
+        }
+      }
       refreshMountsFor(entityKey);
     } catch (err) {
       setToolbarStatus(`Photo upload failed: ${err.message}`, true);
