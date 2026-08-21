@@ -69,14 +69,14 @@ function iconSVG(name) {
 
 function experienceOrganizationMark(id) {
   const trusted = {
-    "geek-squad-repair-agent": '<path d="M3 7h13l5 5-5 5H3Z"/><circle cx="16.2" cy="12" r="1"/><text x="5" y="13.4">GEEK SQUAD</text>',
-    "kohls-retail-associate": '<path d="M3 7.5h18v9H3Z"/><text x="5.1" y="13.6">KOHL\'S</text>',
-    "common-council-intern": '<path d="M3 14.8c1.8-2.4 3.7-4.1 6.1-4.7l1.8-3.1 2.3 1.8 3.3-.7 3 2.2 1.5 3.2-2.3.5-1.5 3-3.2-1.3-2.6 1.6-2.3-1.4-3.1.7Z"/><path d="M7 17.5h11"/>',
+    "geek-squad-repair-agent": '<ellipse class="org-mark__badge" cx="32" cy="18" rx="29" ry="15"/><text class="org-mark__geek" x="32" y="18">Geek</text><text class="org-mark__squad" x="32" y="27">SQUAD</text>',
+    "kohls-retail-associate": '<text class="org-mark__kohls" x="32" y="22">KOHL\'S</text>',
+    "common-council-intern": '<circle class="org-mark__seal-ring" cx="32" cy="18" r="16"/><circle class="org-mark__seal-ring" cx="32" cy="18" r="12.5"/><text class="org-mark__seal-top" x="32" y="7.4">SEAL OF THE</text><text class="org-mark__seal-bottom" x="32" y="31.1">CITY OF BUFFALO</text><path class="org-mark__seal-art" d="M21.5 22.5h21M23 21c3-1 5-1 8 0s5 1 9 0M24 18h16M25.5 17V12h2v5m1-2h7v2m2 0v-6h2v6M29 13h6l-3-3Zm3 4V11m-4 6 4-6 4 6"/>',
   };
   if (!trusted[id]) return null;
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("class", "timeline-node__org-mark");
-  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("viewBox", "0 0 64 36");
   svg.setAttribute("aria-hidden", "true");
   svg.innerHTML = trusted[id];
   return svg;
