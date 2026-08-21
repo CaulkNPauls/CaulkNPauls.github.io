@@ -2555,7 +2555,7 @@ body.is-edit-mode [data-block-id]:hover{
 
 .origin-bottom-tear{position:absolute;left:min(3vw,44px);right:min(3vw,44px);bottom:-2px;height:140px;z-index:4;overflow:hidden;pointer-events:none;background:linear-gradient(rgba(43,92,130,.12) 1px,transparent 1px) calc(0px - min(3vw,44px)) 0/16px 16px,linear-gradient(90deg,rgba(43,92,130,.12) 1px,transparent 1px) calc(0px - min(3vw,44px)) 0/16px 16px,#f6efdb;clip-path:polygon(0 27.14%,2.5% 22.86%,6.43% 32.14%,10.36% 20%,16.43% 38.57%,20% 34.29%,25% 51.43%,29.29% 35.71%,36.07% 60%,40% 54.29%,45.71% 67.86%,50% 47.86%,53.93% 62.86%,60% 42.86%,64.29% 56.43%,70% 39.29%,74.29% 50%,79.29% 31.43%,85% 45%,88.57% 25.71%,94.29% 37.14%,97.5% 21.43%,100% 29.29%,100% 100%,0 100%)}
 .origin-bottom-tear svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.origin-bottom-tear path{fill:none;stroke:#fff;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;filter:drop-shadow(0 3px 5px rgba(23,23,20,.28))}
+.origin-bottom-tear path{fill:none;stroke:#fff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;filter:url(#tearWobble) drop-shadow(0 3px 5px rgba(23,23,20,.28))}
 @media(max-width:700px){.origin-bottom-tear{height:90px}}
 
 /* Organic side-rip geometry. Damage is intentionally non-monotonic:
