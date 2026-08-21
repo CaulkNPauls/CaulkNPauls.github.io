@@ -2632,6 +2632,64 @@ body.is-edit-mode [data-block-id]:hover{
 .page-home .origin-bottom-tear{bottom:-92px}
 @media(max-width:700px){.page-home .origin-bottom-tear{bottom:-58px}}
 
+/* Ruled-paper typography rhythm. Text boxes begin immediately after a
+   rule and use the paper's exact row height, keeping glyphs centered in
+   the clear band instead of letting rules cut through them. */
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__card{
+  background-position:0 0,0 6px;
+  padding-top:34px;
+}
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__dateline,
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__company,
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__card h3,
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__card>p,
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__bullets,
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__bullets li{
+  line-height:28px;
+}
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__dateline,
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__company{margin:0}
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__card h3{margin:0 0 28px}
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__card>p:not(.timeline-node__dateline):not(.timeline-node__company){margin:0 0 28px}
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__bullets{margin:0 0 28px;gap:0}
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__tags{min-height:28px;align-items:center;row-gap:0;margin:0 0 28px}
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__tags li{box-sizing:border-box;min-height:28px;padding:4px 9px;line-height:18px}
+
+.page-experience .timeline-node--featured .timeline-node__card{
+  background-position:0 0,0 18px;
+}
+.page-experience .timeline-node--featured .timeline-node__card--branded{padding-right:184px}
+.page-experience .timeline-node--featured .timeline-node__org-mark{top:18px;right:24px}
+.page-experience .timeline-node--featured .timeline-node__dateline,
+.page-experience .timeline-node--featured .timeline-node__company,
+.page-experience .timeline-node--featured .timeline-node__card h3,
+.page-experience .timeline-node--featured .timeline-node__card>p,
+.page-experience .timeline-node--featured .timeline-node__bullets,
+.page-experience .timeline-node--featured .timeline-node__bullets li{line-height:30px}
+.page-experience .timeline-node--featured .timeline-node__dateline,
+.page-experience .timeline-node--featured .timeline-node__company{margin:0}
+.page-experience .timeline-node--featured .timeline-node__card h3{margin:0 0 30px}
+.page-experience .timeline-node--featured .timeline-node__card>p:not(.timeline-node__dateline):not(.timeline-node__company){margin:0 0 30px}
+.page-experience .timeline-node--featured .timeline-node__bullets{margin:0 0 30px;gap:0}
+.page-experience .timeline-node--featured .timeline-node__tags{min-height:30px;align-items:center;row-gap:0;margin:0 0 30px}
+
+/* The open contact notebook uses a roomier two-rule writing row so its
+   large handwritten labels and heading remain between rules. */
+.notebook__page--left,.notebook__page--right{
+  justify-content:flex-start;
+  background:linear-gradient(90deg,transparent 0 38px,rgba(183,74,66,.35) 38px 39px,transparent 39px),repeating-linear-gradient(to bottom,#fffef8 0 61px,var(--nb-pen-border) 61px 62px);
+  padding-top:62px;
+}
+.notebook__page--left .editorial-kicker{line-height:31px;margin:0}
+.notebook__page--left h2{line-height:62px;margin:0}
+.notebook__page--right{gap:0}
+.notebook__contact{min-height:62px}
+.notebook__contact-label{line-height:31px}
+.notebook__contact-sub{line-height:31px;margin:0}
+@media(max-width:800px){
+  .page-experience .timeline-node--featured .timeline-node__card--branded{padding-right:24px}
+}
+
 /* Fill both sides of the lowered ripple: surviving homepage paper above
    the fibre ridge, continuous ruled paper below it. */
 .page-home .origin-bottom-tear{background:none;clip-path:none}
@@ -2851,7 +2909,15 @@ body.is-edit-mode [data-block-id]:hover{
   background-color: var(--bg);
   background-image: linear-gradient(var(--border) 1px, transparent 1px);
   background-size: 100% 28px;
+  background-position:0 17px;
 }
+.fieldnotes-theme .cards--flowsafe .project h3,
+.fieldnotes-theme .cards--flowsafe .project p,
+.fieldnotes-theme .cards--flowsafe .project .tags,
+.fieldnotes-theme .cards--flowsafe .project .project__meta{line-height:28px}
+.fieldnotes-theme .cards--flowsafe .project h3,
+.fieldnotes-theme .cards--flowsafe .project p{margin:0 0 28px}
+.fieldnotes-theme .cards--flowsafe .project .tags{min-height:28px;align-items:center;row-gap:0;margin-bottom:28px}
 .fieldnotes-theme .cards--flowsafe .project::before{
   content: "";
   position: absolute;
