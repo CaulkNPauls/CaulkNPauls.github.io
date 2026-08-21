@@ -49,7 +49,10 @@
   "origin": {
     "label": "05 / Beyond engineering",
     "placeholderNote": "A candid photo of Paul coaching football, attending an Eagle Scout event, or spending time with teammates. The image should show leadership and community.",
-    "photo": null,
+    "photo": {
+      "src": "/assets/photos/mt3dd0oe-photo.jpg",
+      "alt": "Team-first, by experience."
+    },
     "kicker": "The person behind the projects",
     "heading": "Team-first, by experience.",
     "paragraphs": [
