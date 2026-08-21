@@ -2531,6 +2531,12 @@ body.is-edit-mode [data-block-id]:hover{
 @media(max-width:700px){.page-home .paper-bite,.page-home .paper-notch,.page-home .paper-curl{display:none}}
 @media(max-width:700px){.page-home .editorial-personality::after,.page-home .editorial-experience::after,.page-home .editorial-work::after,.page-home .editorial-origin::after{display:none}}
 
+/* Legacy SVG bites used a different edge language and now compete with
+   the continuous organic silhouette. Loose scraps in the finale remain. */
+.page-home .paper-bite,
+.page-home .paper-notch,
+.page-home .paper-curl{display:none!important}
+
 /* Organic side-rip geometry. Damage is intentionally non-monotonic:
    deep bites alternate with hairline frays and near-complete returns to
    the page edge. The white backing reuses the exact silhouette, merely
