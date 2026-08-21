@@ -204,7 +204,8 @@ function renderFeaturedProjects(list, mount, variant) {
         attrs: { src: p.image.src, alt: p.image.alt || p.title, loading: "lazy" },
       });
       visual.style.width = "100%";
-      visual.style.height = "100%";
+      visual.style.height = "auto";
+      visual.style.display = "block";
       // contain, not cover: these thumbnails are often app screenshots with
       // real text baked in right up to the edges, and cover crops whatever
       // doesn't fit the box's aspect ratio — cutting words off the side
