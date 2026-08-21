@@ -2553,6 +2553,11 @@ body.is-edit-mode [data-block-id]:hover{
 .page-home .editorial-origin::before,
 .page-home .editorial-origin::after{clip-path:polygon(3% 0,97% 0,99.5% 7%,96.4% 14%,99.2% 21%,97.1% 28%,99.8% 35%,96.5% 42%,99.3% 49%,97.4% 56%,99.7% 63%,96.3% 70%,99.1% 77%,97% 82%,96% 84%,92% 80%,88% 85%,84% 81%,80% 87%,76% 83%,72% 89%,68% 85%,64% 91%,60% 87%,56% 92%,52% 89%,48% 94%,44% 90%,40% 96%,36% 92%,32% 97%,28% 93%,24% 99%,20% 95%,16% 100%,12% 96%,8% 99%,3.2% 97%,.4% 88%,3.5% 81%,.3% 74%,3.2% 67%,.2% 60%,3.6% 53%,.4% 46%,3.4% 39%,.2% 32%,3.5% 25%,.5% 18%,3.4% 11%)}
 
+.origin-bottom-tear{position:absolute;left:0;right:0;bottom:-2px;height:140px;z-index:4;pointer-events:none;background:linear-gradient(rgba(43,92,130,.12) 1px,transparent 1px) 0 0/16px 16px,linear-gradient(90deg,rgba(43,92,130,.12) 1px,transparent 1px) 0 0/16px 16px,#f6efdb;clip-path:polygon(0 27.14%,3.21% 22.14%,6.43% 32.86%,9.64% 17.86%,12.86% 38.57%,16.07% 26.43%,19.29% 47.14%,22.5% 30%,25.71% 52.86%,28.93% 35%,32.14% 58.57%,35.36% 41.43%,38.57% 65%,41.79% 45%,45% 70%,48.21% 50%,51.43% 72.14%,54.64% 49.29%,57.86% 67.14%,61.07% 43.57%,64.29% 61.43%,67.5% 37.86%,70.71% 55.71%,73.93% 32.14%,77.14% 49.29%,80.36% 27.14%,83.57% 43.57%,86.79% 22.14%,90% 37.14%,93.21% 17.14%,96.43% 30.71%,100% 14.29%,100% 100%,0 100%)}
+.origin-bottom-tear svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.origin-bottom-tear path{fill:none;stroke:#fff;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;filter:url(#tearWobble)}
+@media(max-width:700px){.origin-bottom-tear{height:90px}}
+
 /* Organic side-rip geometry. Damage is intentionally non-monotonic:
    deep bites alternate with hairline frays and near-complete returns to
    the page edge. The white backing reuses the exact silhouette, merely
