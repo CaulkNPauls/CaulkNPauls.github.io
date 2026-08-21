@@ -2544,6 +2544,10 @@ body.is-edit-mode [data-block-id]:hover{
 .page-home .paper-tear-finale{display:none!important}
 .page-home .editorial-contact{padding-top:clamp(90px,10vw,145px);background:transparent}
 
+/* Deeper bottom bites: enough vertical range to remain visibly ragged
+   at desktop scale, rather than flattening into a nearly straight line. */
+.page-home .editorial-origin{--tear-shape:polygon(min(3.8vw,56px) 0,calc(100% - min(3.8vw,56px)) 0,calc(100% - min(.4vw,6px)) 7%,calc(100% - min(4.6vw,68px)) 14%,calc(100% - min(.8vw,12px)) 21%,calc(100% - min(2.8vw,41px)) 28%,calc(100% - min(.2vw,3px)) 35%,calc(100% - min(4.5vw,66px)) 42%,calc(100% - min(.7vw,10px)) 49%,calc(100% - min(3.3vw,49px)) 56%,calc(100% - min(.3vw,4px)) 63%,calc(100% - min(4.6vw,68px)) 70%,calc(100% - min(1vw,15px)) 77%,calc(100% - min(3.8vw,56px)) 86%,calc(100% - min(4.1vw,60px)) 94%,96% 91%,92% 99%,88% 89%,84% 97%,80% 92%,76% 100%,72% 88%,68% 97%,64% 91%,60% 99%,56% 87%,52% 96%,48% 89%,44% 100%,40% 92%,36% 98%,32% 88%,28% 97%,24% 90%,20% 99%,16% 87%,12% 97%,8% 90%,min(4.1vw,60px) 96%,min(3.5vw,51px) 90%,min(.3vw,4px) 83%,min(4.5vw,66px) 76%,min(.8vw,12px) 69%,min(2.7vw,40px) 62%,min(.2vw,3px) 55%,min(4.6vw,68px) 48%,min(.7vw,10px) 41%,min(3.2vw,47px) 34%,min(.2vw,3px) 27%,min(4.4vw,65px) 20%,min(.6vw,9px) 13%,min(3.8vw,56px) 6%)}
+
 /* Organic side-rip geometry. Damage is intentionally non-monotonic:
    deep bites alternate with hairline frays and near-complete returns to
    the page edge. The white backing reuses the exact silhouette, merely
