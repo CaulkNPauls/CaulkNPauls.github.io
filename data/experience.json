@@ -7,11 +7,11 @@
     "location": "Buffalo, NY",
     "company": "FlowSafe / Dresser Utility Solutions",
     "title": "Industrial Engineering Intern",
-    "summary": "I work across the factory floor and the data behind it—building tools that make manufacturing information visible, useful, and actionable.",
+    "summary": "I work across the factory floor and the data behind it, building tools that make manufacturing information visible, useful, and actionable.",
     "bullets": [
-      "Developed a connected digital pressure-testing and reporting system — Raspberry Pi operator stations, live pressure capture, guided three-pop/bubble-test workflows, centralized test records, and a manager dashboard — with a planning-level estimate of ~1,453 labor-hours/year recoverable across testing, documentation, and administrative work.",
+      "Developed a connected digital pressure-testing and reporting system with Raspberry Pi operator stations, live pressure capture, guided three-pop and bubble-test workflows, centralized test records, and a manager dashboard. The planning-level estimate identified about 1,453 labor-hours per year recoverable across testing, documentation, and administrative work.",
       "Analyzed two years of production data and modeled the facility in AutoCAD (104 activity locations, 10,816 origin-destination travel paths) to identify material-flow improvements, producing a recommended future state with an estimated 18.75% reduction in modeled transportation effort and roughly a one-year planning-level payback.",
-      "Built a Python application (the Valve Decoder) that converted 19,567 historical shipped-valve records and 1,951 unique valve models from hard-to-use PDF pick-sheets into a structured, searchable database — used to close data gaps in the facility flow study and since expanded into a reusable engineering reference tool."
+      "Built a Python application called the Valve Decoder. It converted 19,567 historical shipped-valve records and 1,951 unique valve models from hard-to-use PDF pick-sheets into a structured, searchable database. The tool closed data gaps in the facility flow study and later became a reusable engineering reference."
     ],
     "tags": [
       "Process Improvement",
@@ -33,7 +33,7 @@
     "icon": "wrench",
     "date": "Sep 2023 – Present",
     "location": "Buffalo, NY",
-    "company": "Best Buy — Geek Squad",
+    "company": "Best Buy, Geek Squad",
     "title": "Advanced Repair Agent",
     "summary": "Diagnosis, repair, communication, and disciplined execution under pressure.",
     "bullets": [

@@ -11,7 +11,7 @@
       "University at Buffalo",
       "Open to engineering opportunities"
     ],
-    "placeholderNote": "A candid vertical photo of Paul in a manufacturing or engineering environment—beside a test station, CAD workstation, or physical prototype.",
+    "placeholderNote": "A candid vertical photo of Paul beside a test station, CAD workstation, or physical prototype in a manufacturing or engineering environment.",
     "photo": {
       "src": "/assets/photos/mt0ihipq-photo-cutout.webp",
       "alt": "Paul Poleon Jr"
@@ -48,12 +48,12 @@
   },
   "origin": {
     "label": "05 / Beyond engineering",
-    "placeholderNote": "Paul coaching football, at an Eagle Scout event, or with teammates—something candid that shows leadership and community.",
+    "placeholderNote": "A candid photo of Paul coaching football, attending an Eagle Scout event, or spending time with teammates. The image should show leadership and community.",
     "photo": null,
     "kicker": "The person behind the projects",
     "heading": "Team-first, by experience.",
     "paragraphs": [
-      "Earning Eagle Scout and serving as Senior Patrol Leader taught me responsibility before engineering ever gave it a name. Football and lacrosse taught me to read the entire field, communicate early, and stay composed. Returning to coach taught me that leadership is not about having every answer—it is about helping a group find its best one.",
+      "Earning Eagle Scout and serving as Senior Patrol Leader taught me responsibility before engineering ever gave it a name. Football and lacrosse taught me to read the entire field, communicate early, and stay composed. Returning to coach taught me that leadership is not about having every answer. It is about helping a group find its best one.",
       "I bring that mindset to technical teams: listen closely, make the problem visible, and build a solution people believe in enough to use."
     ]
   },

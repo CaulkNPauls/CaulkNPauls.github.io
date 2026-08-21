@@ -5,7 +5,7 @@
       "title": "Digital Pressure-Testing System",
       "meta": "Manufacturing systems · 2026",
       "blurbShort": "From manual gauges and paperwork to guided testing, live data capture, and centralized reporting.",
-      "blurbLong": "A connected digital pressure-testing and reporting ecosystem — Raspberry Pi operator stations, guided testing workflows, and a manager dashboard — replacing paper-based valve testing.",
+      "blurbLong": "A connected digital pressure-testing and reporting ecosystem with Raspberry Pi operator stations, guided testing workflows, and a manager dashboard. It replaces paper-based valve testing.",
       "tags": [
         "Raspberry Pi",
         "Systems Design",
@@ -255,7 +255,7 @@
     },
     {
       "id": "ib-math-ia-sports-analytics",
-      "title": "IB Math AA IA — Sports Analytics",
+      "title": "IB Math AA IA: Sports Analytics",
       "filter": "analytics",
       "cardText": "Statistical analysis comparing performance patterns across categorized weeks using fantasy football data.",
       "summary": "Analyzed Kyler Murray’s weekly fantasy football performance and compared weeks around Call of Duty releases/events vs typical weeks to explore whether the pattern showed a measurable change in performance.",
@@ -288,7 +288,7 @@
     },
     {
       "id": "ib-physics-ee-self-driving-sensors",
-      "title": "IB Physics EE — Self-Driving Sensors",
+      "title": "IB Physics EE: Self-Driving Sensors",
       "filter": "analytics",
       "cardText": "Technical research on wave-based sensing (LiDAR/radar) and object detection limits in autonomous vehicles.",
       "summary": "Researched how self-driving cars use wave-based sensors (LiDAR/radar/cameras) to detect objects and estimate distance, then discussed real-world limitations like weather interference and sensor uncertainty.",

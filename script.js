@@ -375,7 +375,7 @@ function renderGalleryImage(img) {
     if (img.caption) figure.appendChild(mkEl("figcaption", { text: img.caption }));
     return figure;
   }
-  const [label, note] = (img.caption || "Add a photo").split(/\s+—\s+/);
+  const [label, note] = (img.caption || "Add a photo").split(/\s+(?:—|:)\s+/);
   const ph = mkEl("div", { className: "evidence-placeholder" });
   const iconWrap = mkEl("div", { className: "evidence-placeholder__icon", attrs: { "aria-hidden": "true" } });
   iconWrap.appendChild(iconSVG("photo"));
