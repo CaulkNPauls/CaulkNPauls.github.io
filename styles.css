@@ -2450,6 +2450,8 @@ body.is-edit-mode [data-block-id]:hover{
 .timeline-node__org-mark{position:absolute;top:18px;right:20px;width:96px;height:58px;display:grid;place-items:center}
 .timeline-node__org-mark img{grid-area:1/1;display:block;width:100%;height:100%;object-fit:contain}
 .timeline-node__org-mark .org-mark__sketch{display:none}
+.timeline-node--flowsafe-intern .timeline-node__org-mark{width:132px}
+.timeline-node--flowsafe-intern .timeline-node__card--branded{padding-right:164px}
 .timeline-node__card{position:relative}
 .timeline-node__card--branded{padding-right:112px}
 
@@ -2464,6 +2466,7 @@ body.is-edit-mode [data-block-id]:hover{
 .page-experience .timeline-node:not(.timeline-node--featured):nth-child(4) .timeline-node__card{transform:rotate(.8deg)}
 .page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__card::before{content:"";position:absolute;inset:0;border:1.6px solid rgba(43,92,130,.36);filter:url(#sketchy);pointer-events:none}
 .page-experience .timeline-node__org-mark{width:104px;height:62px;transform:rotate(-4deg);opacity:.88;mix-blend-mode:multiply}
+.page-experience .timeline-node--flowsafe-intern .timeline-node__org-mark{width:142px;transform:rotate(2deg)}
 .page-experience .timeline-node__org-mark .org-mark__original{display:none}
 .page-experience .timeline-node__org-mark .org-mark__sketch{display:block;filter:none;opacity:.92}
 .page-experience .timeline-node--kohls-retail-associate .timeline-node__org-mark{transform:rotate(3deg)}
