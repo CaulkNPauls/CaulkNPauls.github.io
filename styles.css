@@ -1308,6 +1308,33 @@ html, body { overflow-x: hidden; }
 .page-skills .coursework-grid::before{content:"";position:absolute;top:-30px;left:50%;width:122px;height:42px;transform:translateX(-50%);border:2px solid #555a5c;border-radius:7px 7px 3px 3px;background:linear-gradient(#d9ddde,#858b8e 60%,#5c6163);box-shadow:0 4px 5px rgba(28,28,26,.25);z-index:3}
 .page-skills .skills-card--course{min-height:0;padding:24px;border:0;border-bottom:1px dashed rgba(43,92,130,.35);border-radius:0;background:transparent;box-shadow:none;transform:none!important}.page-skills .skills-card--course:nth-child(odd){border-right:1px dashed rgba(43,92,130,.35)}.page-skills .skills-card--course::before{display:none}.page-skills .skills-card--course .skills-card__head{margin-bottom:10px}.page-skills .skills-card--course .skills-card__title{font-size:1.05rem}.page-skills .skills-card--course .skills-card__sub{font-size:.82rem}.page-skills .skills-card--course .skill-chip{font-size:.66rem}
 .skills-principles__notes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:34px}.skills-principles__notes p{display:grid;place-items:center;min-height:112px;margin:0;padding:22px;background:#fff2a9;box-shadow:3px 5px 0 rgba(28,28,26,.1);color:#193e5c;font:600 1.05rem/1.45 "Manrope",sans-serif;text-align:center;transform:rotate(-1deg)}.skills-principles__notes p:nth-child(2){background:#dff0ef;transform:rotate(.8deg)}.skills-principles__notes p:nth-child(3){background:#efddec;transform:rotate(-.4deg)}
+/* Match the Experience page opening on wide screens: the introduction acts
+   as a left-hand notebook legend while useful content starts at the top in
+   the wider right column. Later sections return to the full page width. */
+@media(min-width:1101px){
+  .page-skills main{
+    display:grid;
+    grid-template-columns:minmax(340px,.72fr) minmax(620px,1.28fr);
+    gap:0 clamp(44px,5vw,88px);
+    width:min(1760px,calc(100% - clamp(48px,7vw,132px)));
+    margin:0 auto;
+    align-items:start;
+  }
+  .page-skills .page-hero,
+  .page-skills .skills-toolkit{padding:42px 0 64px}
+  .page-skills .page-hero .container,
+  .page-skills .skills-toolkit>.container{width:auto;max-width:none;padding:0}
+  .page-skills .page-hero__copy{max-width:520px}
+  .page-skills .page-hero__title{max-width:13ch;font-size:clamp(2.35rem,3.25vw,4rem)}
+  .page-skills .page-hero__subtitle{line-height:1.65}
+  .page-skills .skills-toolkit .section__head{margin-bottom:0}
+  .page-skills .skills-toolkit .section__head h2{margin-bottom:4px;font-size:clamp(2rem,3vw,3.1rem)}
+  .page-skills .skills-toolkit .skills-grid{gap:22px;margin-top:26px}
+  .page-skills .skills-toolkit .skills-card{min-height:270px;padding-right:24px}
+  .page-skills .skills-proof,
+  .page-skills .skills-coursework,
+  .page-skills .skills-principles{grid-column:1/-1;width:100vw;margin-left:calc(50% - 50vw)}
+}
 @media(max-width:900px){.page-skills .skills-grid,.page-skills .coursework-grid,.skills-proof__grid,.skills-principles__notes{grid-template-columns:1fr}.skills-proof__grid article,.skills-proof__grid article:first-child,.skills-proof__grid article:last-child{padding:20px 0;border-right:0;border-bottom:1px dashed rgba(28,28,26,.3)}.skills-proof__grid article:last-child{border-bottom:0}.page-skills .skills-card--course:nth-child(odd){border-right:0}.page-skills .coursework-grid{padding:38px 22px 24px}.skills-proof__sheet{padding:36px 24px 26px}}
 @media(max-width:560px){.skills-index{display:grid;grid-template-columns:1fr 1fr}.skills-evidence-key{display:grid;grid-template-columns:1fr 1fr}.page-skills .skills-card{padding:28px 20px 24px 38px}.skills-proof__head{display:block}.skills-proof__stamp{display:inline-block;margin-top:14px}}
 
