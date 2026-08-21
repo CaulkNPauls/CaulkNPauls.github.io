@@ -2537,6 +2537,13 @@ body.is-edit-mode [data-block-id]:hover{
 .page-home .paper-notch,
 .page-home .paper-curl{display:none!important}
 
+/* The lower sheet is one closed silhouette: right tear, bottom rip,
+   then left tear. This replaces the separate finale overlay whose
+   endpoints could not stay aligned with the side masks. */
+.page-home .editorial-origin{--tear-shape:polygon(min(3.8vw,56px) 0,calc(100% - min(3.8vw,56px)) 0,calc(100% - min(.4vw,6px)) 7%,calc(100% - min(4.6vw,68px)) 14%,calc(100% - min(.8vw,12px)) 21%,calc(100% - min(2.8vw,41px)) 28%,calc(100% - min(.2vw,3px)) 35%,calc(100% - min(4.5vw,66px)) 42%,calc(100% - min(.7vw,10px)) 49%,calc(100% - min(3.3vw,49px)) 56%,calc(100% - min(.3vw,4px)) 63%,calc(100% - min(4.6vw,68px)) 70%,calc(100% - min(1vw,15px)) 77%,calc(100% - min(3.8vw,56px)) 86%,calc(100% - min(4.1vw,60px)) 94%,96% 96%,92% 99%,88% 95.5%,84% 98.5%,80% 96%,76% 99.3%,72% 95%,68% 98%,64% 96.2%,60% 99%,56% 95.4%,52% 98.6%,48% 95.2%,44% 99.2%,40% 96%,36% 98.8%,32% 95.3%,28% 99%,24% 96.1%,20% 98.5%,16% 95%,12% 99%,8% 96%,min(4.1vw,60px) 98%,min(3.5vw,51px) 90%,min(.3vw,4px) 83%,min(4.5vw,66px) 76%,min(.8vw,12px) 69%,min(2.7vw,40px) 62%,min(.2vw,3px) 55%,min(4.6vw,68px) 48%,min(.7vw,10px) 41%,min(3.2vw,47px) 34%,min(.2vw,3px) 27%,min(4.4vw,65px) 20%,min(.6vw,9px) 13%,min(3.8vw,56px) 6%)}
+.page-home .paper-tear-finale{display:none!important}
+.page-home .editorial-contact{padding-top:clamp(90px,10vw,145px);background:transparent}
+
 /* Organic side-rip geometry. Damage is intentionally non-monotonic:
    deep bites alternate with hairline frays and near-complete returns to
    the page edge. The white backing reuses the exact silhouette, merely
