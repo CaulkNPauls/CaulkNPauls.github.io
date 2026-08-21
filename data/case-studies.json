@@ -360,14 +360,14 @@
         "layout": "grid",
         "images": [
           {
-            "src": "/assets/photos/mt3a30a9-wgsm-cs.jpg",
-            "alt": "",
-            "caption": "Operator station UI — Guided test workflow screenshot"
-          },
-          {
             "src": "/assets/photos/mt3a1qta-8vy9-cs.jpg",
             "alt": "",
             "caption": "Flow Safe Dashboard, Main Dashboard Screen"
+          },
+          {
+            "src": "/assets/photos/mt3a30a9-wgsm-cs.jpg",
+            "alt": "",
+            "caption": "Operator station UI — Guided test workflow screenshot"
           },
           {
             "src": "/assets/photos/mt39zmoe-7vjd-cs.jpg",
