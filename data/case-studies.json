@@ -365,14 +365,14 @@
             "caption": "Flow Safe Dashboard, Main Dashboard Screen"
           },
           {
-            "src": "/assets/photos/mt3a30a9-wgsm-cs.jpg",
-            "alt": "",
-            "caption": "Operator station UI — Guided test workflow screenshot"
-          },
-          {
             "src": "/assets/photos/mt39zmoe-7vjd-cs.jpg",
             "alt": "",
             "caption": "Pressure trace — Example recorded test trace"
+          },
+          {
+            "src": "/assets/photos/mt3a30a9-wgsm-cs.jpg",
+            "alt": "",
+            "caption": "Operator station UI — Guided test workflow screenshot"
           },
           {
             "src": "/assets/photos/mt39zx5i-obv3-cs.jpg",
