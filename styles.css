@@ -2674,10 +2674,12 @@ body.is-edit-mode [data-block-id]:hover{
 .page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__tags li{box-sizing:border-box;min-height:28px;padding:4px 9px;line-height:18px}
 
 .page-experience .timeline-node--featured .timeline-node__card{
-  background-position:0 0,0 18px;
+  background-position:0 0,0 5px;
 }
-.page-experience .timeline-node--featured .timeline-node__card--branded{padding-right:184px}
-.page-experience .timeline-node--featured .timeline-node__org-mark{top:18px;right:24px}
+.page-experience .timeline-node--featured .timeline-node__card--branded{padding-right:26px}
+.page-experience .timeline-node--featured .timeline-node__org-mark{position:absolute!important;top:18px;right:24px;z-index:2}
+.page-experience .timeline-node--featured .timeline-node__dateline,
+.page-experience .timeline-node--featured .timeline-node__company{padding-right:160px}
 .page-experience .timeline-node--featured .timeline-node__dateline,
 .page-experience .timeline-node--featured .timeline-node__company,
 .page-experience .timeline-node--featured .timeline-node__card h3,
@@ -2698,14 +2700,17 @@ body.is-edit-mode [data-block-id]:hover{
   background:linear-gradient(90deg,transparent 0 38px,rgba(183,74,66,.35) 38px 39px,transparent 39px),repeating-linear-gradient(to bottom,#fffef8 0 61px,var(--nb-pen-border) 61px 62px);
   padding-top:62px;
 }
-.notebook__page--left .editorial-kicker{line-height:31px;margin:0}
+.notebook__page--left .editorial-kicker{line-height:62px;margin:0}
 .notebook__page--left h2{line-height:62px;margin:0}
 .notebook__page--right{gap:0}
-.notebook__contact{min-height:62px}
+.notebook__contact{min-height:62px;margin-bottom:62px}
 .notebook__contact-label{line-height:31px}
 .notebook__contact-sub{line-height:31px;margin:0}
 @media(max-width:800px){
   .page-experience .timeline-node--featured .timeline-node__card--branded{padding-right:24px}
+  .page-experience .timeline-node--featured .timeline-node__org-mark{position:static!important}
+  .page-experience .timeline-node--featured .timeline-node__dateline,
+  .page-experience .timeline-node--featured .timeline-node__company{padding-right:0}
 }
 
 /* Fill both sides of the lowered ripple: surviving homepage paper above
