@@ -2486,22 +2486,6 @@ body.is-edit-mode [data-block-id]:hover{
 @media(max-width:800px){.notebook{transform:none}.notebook::after,.notebook__page::after{display:none}.notebook__tabs{right:-12px}}
 @media(max-width:700px){.page-home .paper-bite,.page-home .paper-notch,.page-home .paper-curl{display:none}}
 
-/* Final tear construction: all four content sections live on one sheet,
-   eliminating the visible joins created by section-by-section masks. */
-.page-tear-sheet{position:relative;isolation:isolate;background:transparent}
-.page-tear-sheet::before{content:"";position:absolute;inset:-2px 0;z-index:0;background:var(--paper);clip-path:polygon(0 0,100% 0,100% 5%,calc(100% - min(.7vw,10px)) 11%,calc(100% - min(1.2vw,18px)) 18%,calc(100% - min(1vw,15px)) 25%,calc(100% - min(1.8vw,26px)) 32%,calc(100% - min(1.5vw,22px)) 39%,calc(100% - min(2.4vw,35px)) 46%,calc(100% - min(2vw,29px)) 53%,calc(100% - min(3vw,44px)) 60%,calc(100% - min(2.7vw,39px)) 67%,calc(100% - min(3.6vw,52px)) 74%,calc(100% - min(3.2vw,47px)) 81%,calc(100% - min(4.2vw,60px)) 88%,calc(100% - min(3.8vw,55px)) 94%,96% 97.5%,91% 95%,86% 98.5%,80% 96%,74% 99%,68% 95.5%,62% 98%,56% 96%,50% 99.3%,44% 96.2%,38% 98.7%,32% 95.5%,26% 98%,20% 95%,14% 98.4%,8% 95.2%,min(3.8vw,55px) 97.5%,min(4.2vw,60px) 90%,min(3.3vw,48px) 83%,min(3.8vw,55px) 76%,min(2.8vw,41px) 69%,min(3.2vw,46px) 62%,min(2.2vw,32px) 55%,min(2.6vw,38px) 48%,min(1.7vw,25px) 41%,min(2vw,29px) 34%,min(1.1vw,16px) 27%,min(1.4vw,20px) 20%,min(.6vw,9px) 13%,0 6%);filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff) drop-shadow(0 5px 5px rgba(23,23,20,.2));pointer-events:none}
-.page-tear-sheet>.editorial-section{position:relative;z-index:1;background:transparent}
-.page-home .page-tear-sheet>.editorial-section::before{display:none}
-.page-home .paper-bite,.page-home .paper-notch,.page-home .paper-curl{display:none}
-.page-tear-chip{position:absolute;z-index:2;width:24px;height:18px;background:var(--paper);clip-path:polygon(11% 35%,34% 5%,85% 17%,100% 61%,72% 95%,20% 82%,0 55%);filter:drop-shadow(0 0 1px #fff) drop-shadow(0 3px 3px rgba(23,23,20,.22));pointer-events:none}
-.page-tear-chip--one{top:31%;left:1.5%;transform:rotate(24deg) scale(.75)}
-.page-tear-chip--two{top:61%;right:2%;transform:rotate(-17deg) scale(1.1)}
-.page-tear-chip--three{bottom:4.5%;left:8%;transform:rotate(11deg)}
-.page-home .paper-tear-finale{display:none}
-.page-home .editorial-contact{padding-top:clamp(90px,10vw,145px);background:transparent}
-
-@media(max-width:700px){.page-tear-chip{display:none}.page-home .editorial-contact{padding-top:72px}}
-
 /* Index-card stack behind the active flashcard, plus a spiral-binding
    strip down its left edge — pure CSS pseudo-elements, no extra DOM,
    so script.js's renderAbout()/showFlashcard() need no changes. */
