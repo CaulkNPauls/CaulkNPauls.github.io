@@ -2589,6 +2589,15 @@ body.is-edit-mode [data-block-id]:hover{
 .page-home .origin-bottom-tear{bottom:-92px}
 @media(max-width:700px){.page-home .origin-bottom-tear{bottom:-58px}}
 
+/* Fill both sides of the lowered ripple: surviving homepage paper above
+   the fibre ridge, continuous ruled paper below it. */
+.page-home .origin-bottom-tear{background:none;clip-path:none}
+.page-home .origin-bottom-tear::before,
+.page-home .origin-bottom-tear::after{content:"";position:absolute;inset:0;pointer-events:none}
+.page-home .origin-bottom-tear::before{background:var(--paper);clip-path:polygon(0 0,100% 0,100% 29.29%,97.5% 21.43%,94.29% 37.14%,88.57% 25.71%,85% 45%,79.29% 31.43%,74.29% 50%,70% 39.29%,64.29% 56.43%,60% 42.86%,53.93% 62.86%,50% 47.86%,45.71% 67.86%,40% 54.29%,36.07% 60%,29.29% 35.71%,25% 51.43%,20% 34.29%,16.43% 38.57%,10.36% 20%,6.43% 32.14%,2.5% 22.86%,0 27.14%)}
+.page-home .origin-bottom-tear::after{background:linear-gradient(rgba(43,92,130,.12) 1px,transparent 1px) calc(0px - min(3vw,44px)) 0/16px 16px,linear-gradient(90deg,rgba(43,92,130,.12) 1px,transparent 1px) calc(0px - min(3vw,44px)) 0/16px 16px,#f6efdb;clip-path:polygon(0 27.14%,2.5% 22.86%,6.43% 32.14%,10.36% 20%,16.43% 38.57%,20% 34.29%,25% 51.43%,29.29% 35.71%,36.07% 60%,40% 54.29%,45.71% 67.86%,50% 47.86%,53.93% 62.86%,60% 42.86%,64.29% 56.43%,70% 39.29%,74.29% 50%,79.29% 31.43%,85% 45%,88.57% 25.71%,94.29% 37.14%,97.5% 21.43%,100% 29.29%,100% 100%,0 100%)}
+.page-home .origin-bottom-tear svg{z-index:1}
+
 @media(max-width:700px){.page-home .editorial-personality::after,.page-home .editorial-experience::after,.page-home .editorial-work::after,.page-home .editorial-origin::after{display:none}}
 
 /* Index-card stack behind the active flashcard, plus a spiral-binding
