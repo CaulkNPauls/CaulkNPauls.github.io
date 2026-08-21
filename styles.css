@@ -2495,15 +2495,7 @@ body.is-edit-mode [data-block-id]:hover{
 .page-experience .timeline-node--featured .timeline-node__card::after{content:"";position:absolute;top:-24px;left:50%;width:88px;height:42px;transform:translateX(-50%);border-radius:8px 8px 3px 3px;background:linear-gradient(#c9ced0,#858b8e 55%,#606568);border:2px solid #565b5d;box-shadow:0 4px 5px rgba(28,28,26,.28);z-index:3}
 .page-experience .timeline-node--featured .timeline-node__card>*{position:relative;z-index:1}
 
-/* Spare graph-paper space gets restrained engineering marginalia. */
 .page-experience .section--tight{position:relative;overflow:hidden}
-.experience-margin-doodles{position:absolute;inset:0;pointer-events:none;color:var(--pen);opacity:.42}
-.experience-doodle{position:absolute;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:url(#sketchy)}
-.experience-doodle--gear{width:105px;left:clamp(8px,2vw,28px);top:9% ;transform:rotate(-8deg)}
-.experience-doodle--ruler{width:145px;right:clamp(8px,2vw,28px);top:42%;transform:rotate(7deg)}
-.experience-doodle--flow{width:150px;left:clamp(6px,1.5vw,22px);bottom:9%;transform:rotate(3deg)}
-
-@media(max-width:1050px){.experience-margin-doodles{display:none}}
 @media(max-width:800px){.page-experience .timeline-node__card,.page-experience .timeline-node--featured .timeline-node__card{padding:34px 24px 28px 42px}.timeline-node__org-mark{position:static;display:block;margin:0 0 8px auto}.timeline-node__card--branded{padding-right:24px}.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__card{transform:none}}
 
 /* Homepage progressive tear: a single top sheet recedes continuously
@@ -2716,6 +2708,60 @@ body.is-edit-mode [data-block-id]:hover{
 /* Experience desktop opening: introduction at left, current role visible
    immediately at right. The timeline becomes a consistent rail-and-card
    column instead of alternating narrow cards around a center line. */
+.experience-work-sketches{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin:22px 0 18px;
+}
+.experience-work-sketch{
+  margin:0;
+  min-width:0;
+  padding:9px 8px 7px;
+  border:1px dashed rgba(43,92,130,.42);
+  border-radius:4px;
+  background:rgba(255,253,245,.72);
+  color:var(--pen-strong);
+  transform:rotate(-1deg);
+}
+.experience-work-sketch:nth-child(2){transform:rotate(1.2deg)}
+.experience-work-sketch:nth-child(3){transform:rotate(-.5deg)}
+.experience-work-sketch svg{
+  display:block;
+  width:100%;
+  height:58px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:url(#sketchy);
+}
+.experience-work-sketch figcaption{
+  margin-top:3px;
+  font:600 .66rem/1.25 var(--font-mono);
+  text-align:center;
+  color:var(--pen);
+}
+.experience-education{
+  display:grid;
+  grid-template-columns:52px 1fr;
+  gap:14px;
+  align-items:center;
+  margin-top:22px;
+  padding:16px 18px;
+  border:1.5px solid rgba(43,92,130,.42);
+  border-left:5px solid var(--pen-strong);
+  border-radius:4px;
+  background:#fffdf5;
+  box-shadow:3px 5px 0 rgba(28,28,26,.08);
+  transform:rotate(.45deg);
+}
+.experience-education__icon{color:var(--pen-strong)}
+.experience-education__icon svg{display:block;width:48px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:url(#sketchy)}
+.experience-education__eyebrow{margin:0 0 4px;font:600 .66rem/1.3 var(--font-mono);text-transform:uppercase;letter-spacing:.12em;color:var(--pen)}
+.experience-education h2{margin:0;font:700 1.08rem/1.35 "Manrope",sans-serif;color:var(--ink)}
+.experience-education div>p:last-child{margin:3px 0 0;font-size:.84rem;color:var(--muted)}
 @media(min-width:1101px){
   .page-experience main{
     display:grid;
@@ -2727,8 +2773,8 @@ body.is-edit-mode [data-block-id]:hover{
   }
   .page-experience .page-hero{
     padding:42px 0 34px;
-    position:sticky;
-    top:84px;
+    position:relative;
+    top:auto;
   }
   .page-experience .page-hero .container,
   .page-experience .section--tight>.container{
@@ -2760,6 +2806,10 @@ body.is-edit-mode [data-block-id]:hover{
 @media(max-width:1100px){
   .page-experience main{display:block;width:auto;margin:0}
   .page-experience .page-hero{position:relative;top:auto}
+}
+@media(max-width:560px){
+  .experience-work-sketches{grid-template-columns:1fr 1fr}
+  .experience-work-sketch:last-child{grid-column:1/-1}
 }
 
 /* Fill both sides of the lowered ripple: surviving homepage paper above
