@@ -2445,6 +2445,42 @@ body.is-edit-mode [data-block-id]:hover{
   color: var(--pen-strong);
 }
 
+/* Experience organization marks: clean/transparent on Home, then
+   redrawn as blue-pen marks on the dedicated Field Notes page. */
+.timeline-node__org-mark{position:absolute;top:18px;right:20px;width:76px;height:44px;color:var(--accent);overflow:visible}
+.timeline-node__org-mark path,.timeline-node__org-mark circle{fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
+.timeline-node__org-mark text{fill:currentColor;stroke:none;font:700 3.2px/1 "DM Sans",sans-serif;letter-spacing:.12px}
+.timeline-node__card{position:relative}
+.timeline-node__card--branded{padding-right:112px}
+
+/* /experience/ material system: three ruled index cards and one
+   clipboard-mounted work sheet. These rules are intentionally page
+   scoped so the homepage timeline keeps its clean card treatment. */
+.page-experience .timeline-node__card{isolation:isolate;border-color:rgba(43,92,130,.38);border-radius:3px;background:linear-gradient(90deg,transparent 0 34px,rgba(181,76,69,.28) 34px 35px,transparent 35px),repeating-linear-gradient(to bottom,#fffdf5 0 27px,rgba(43,92,130,.28) 27px 28px);box-shadow:3px 5px 0 rgba(28,28,26,.08),0 12px 26px rgba(28,28,26,.12);padding:34px 30px 30px 48px}
+.page-experience .timeline-node:not(.timeline-node--featured):nth-child(2) .timeline-node__card{transform:rotate(1.1deg)}
+.page-experience .timeline-node:not(.timeline-node--featured):nth-child(3) .timeline-node__card{transform:rotate(-1.35deg)}
+.page-experience .timeline-node:not(.timeline-node--featured):nth-child(4) .timeline-node__card{transform:rotate(.8deg)}
+.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__card::before{content:"";position:absolute;inset:0;border:1.6px solid rgba(43,92,130,.36);filter:url(#sketchy);pointer-events:none}
+.page-experience .timeline-node__org-mark{color:var(--pen-strong);width:92px;height:54px;transform:rotate(-4deg);filter:url(#sketchy);opacity:.88}
+.page-experience .timeline-node--kohls-retail-associate .timeline-node__org-mark{transform:rotate(3deg)}
+.page-experience .timeline-node--common-council-intern .timeline-node__org-mark{width:72px;transform:rotate(-7deg)}
+
+.page-experience .timeline-node--featured .timeline-node__card{background:linear-gradient(90deg,transparent 0 38px,rgba(181,76,69,.3) 38px 39px,transparent 39px),repeating-linear-gradient(to bottom,#fffdf5 0 29px,rgba(43,92,130,.28) 29px 30px);border-color:rgba(28,28,26,.22);border-radius:3px;padding:46px 38px 38px 54px;box-shadow:0 18px 34px rgba(28,28,26,.2)}
+.page-experience .timeline-node--featured .timeline-node__card::before{content:"";position:absolute;inset:-13px -15px -19px;background:#947251;border:2px solid #684e37;border-radius:8px;box-shadow:0 12px 22px rgba(28,28,26,.2);z-index:-2;transform:rotate(-.7deg)}
+.page-experience .timeline-node--featured .timeline-node__card::after{content:"";position:absolute;top:-24px;left:50%;width:88px;height:42px;transform:translateX(-50%);border-radius:8px 8px 3px 3px;background:linear-gradient(#c9ced0,#858b8e 55%,#606568);border:2px solid #565b5d;box-shadow:0 4px 5px rgba(28,28,26,.28);z-index:3}
+.page-experience .timeline-node--featured .timeline-node__card>*{position:relative;z-index:1}
+
+/* Spare graph-paper space gets restrained engineering marginalia. */
+.page-experience .section--tight{position:relative;overflow:hidden}
+.experience-margin-doodles{position:absolute;inset:0;pointer-events:none;color:var(--pen);opacity:.42}
+.experience-doodle{position:absolute;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:url(#sketchy)}
+.experience-doodle--gear{width:105px;left:clamp(8px,2vw,28px);top:9% ;transform:rotate(-8deg)}
+.experience-doodle--ruler{width:145px;right:clamp(8px,2vw,28px);top:42%;transform:rotate(7deg)}
+.experience-doodle--flow{width:150px;left:clamp(6px,1.5vw,22px);bottom:9%;transform:rotate(3deg)}
+
+@media(max-width:1050px){.experience-margin-doodles{display:none}}
+@media(max-width:800px){.page-experience .timeline-node__card,.page-experience .timeline-node--featured .timeline-node__card{padding:34px 24px 28px 42px}.timeline-node__org-mark{position:static;display:block;margin:0 0 8px auto}.timeline-node__card--branded{padding-right:24px}.page-experience .timeline-node:not(.timeline-node--featured) .timeline-node__card{transform:none}}
+
 /* Homepage progressive tear: a single top sheet recedes continuously
    over the ruled Field Notes paper instead of appearing only at seams. */
 .page-home main{background:linear-gradient(rgba(43,92,130,.12) 1px,transparent 1px) 0 0/16px 16px,linear-gradient(90deg,rgba(43,92,130,.12) 1px,transparent 1px) 0 0/16px 16px,#f6efdb}

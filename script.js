@@ -67,6 +67,21 @@ function iconSVG(name) {
   return svg;
 }
 
+function experienceOrganizationMark(id) {
+  const trusted = {
+    "geek-squad-repair-agent": '<path d="M3 7h13l5 5-5 5H3Z"/><circle cx="16.2" cy="12" r="1"/><text x="5" y="13.4">GEEK SQUAD</text>',
+    "kohls-retail-associate": '<path d="M3 7.5h18v9H3Z"/><text x="5.1" y="13.6">KOHL\'S</text>',
+    "common-council-intern": '<path d="M3 14.8c1.8-2.4 3.7-4.1 6.1-4.7l1.8-3.1 2.3 1.8 3.3-.7 3 2.2 1.5 3.2-2.3.5-1.5 3-3.2-1.3-2.6 1.6-2.3-1.4-3.1.7Z"/><path d="M7 17.5h11"/>',
+  };
+  if (!trusted[id]) return null;
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("class", "timeline-node__org-mark");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("aria-hidden", "true");
+  svg.innerHTML = trusted[id];
+  return svg;
+}
+
 function renderExperience(list, mount) {
   if (!mount) return;
   mount.innerHTML = "";
@@ -74,7 +89,7 @@ function renderExperience(list, mount) {
   list.forEach((role, i) => {
     const isLast = i === list.length - 1;
     const article = mkEl("article", {
-      className: "timeline-node reveal" + (role.featured ? " timeline-node--featured" : ""),
+      className: "timeline-node reveal timeline-node--" + role.id + (role.featured ? " timeline-node--featured" : ""),
       attrs: { "data-edit-entity": "experience", "data-edit-index": i, "data-edit-photo-field": "photo" },
     });
 
@@ -90,6 +105,11 @@ function renderExperience(list, mount) {
     article.appendChild(rail);
 
     const card = mkEl("div", { className: "timeline-node__card" });
+    const orgMark = experienceOrganizationMark(role.id);
+    if (orgMark) {
+      card.classList.add("timeline-node__card--branded");
+      card.appendChild(orgMark);
+    }
     const dateLine = mkEl("p", { className: "timeline-node__dateline" });
     dateLine.appendChild(mkEl("span", { className: "timeline-node__date", text: role.date }));
     dateLine.appendChild(document.createTextNode(" · "));
