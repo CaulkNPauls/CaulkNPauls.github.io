@@ -69,9 +69,9 @@ function iconSVG(name) {
 
 function experienceOrganizationMark(id) {
   const trusted = {
-    "geek-squad-repair-agent": ["/assets/organization-marks/geek-squad.png", "/assets/organization-marks/geek-squad.png", "Geek Squad"],
-    "kohls-retail-associate": ["/assets/organization-marks/kohls.png", "/assets/organization-marks/kohls.png", "Kohl's"],
-    "common-council-intern": ["/assets/organization-marks/buffalo-seal.png", "/assets/organization-marks/buffalo-silhouette.png", "City of Buffalo"],
+    "geek-squad-repair-agent": ["/assets/organization-marks/geek-squad.png", "/assets/organization-marks/geek-squad-sketch.png", "Geek Squad"],
+    "kohls-retail-associate": ["/assets/organization-marks/kohls.png", "/assets/organization-marks/kohls-sketch.png", "Kohl's"],
+    "common-council-intern": ["/assets/organization-marks/buffalo-seal.png", "/assets/organization-marks/buffalo-sketch.png", "City of Buffalo"],
   };
   if (!trusted[id]) return null;
   const [originalSrc, sketchSrc, label] = trusted[id];
