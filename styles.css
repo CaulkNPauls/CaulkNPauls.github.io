@@ -1476,6 +1476,301 @@ html, body { overflow-x: hidden; }
   .page-case-study .case-study-actions > * { width: 100%; }
 }
 
+/* TRUE PHONE LAYOUT
+   Every major surface owns the viewport width and every content card becomes
+   a single-column component. This is intentionally the final mobile layer. */
+@media (max-width: 700px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .container,
+  .page-hero .container,
+  .section > .container,
+  .section--tight > .container {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 16px;
+  }
+
+  .portfolio-nav {
+    width: 100%;
+    max-width: 100%;
+    gap: 10px;
+  }
+  .portfolio-nav__mark { min-width: 0; }
+  .portfolio-nav__logo {
+    width: auto;
+    max-width: 150px;
+    object-fit: contain;
+  }
+  .portfolio-nav .nav__toggle {
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+  .portfolio-nav__links {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .mobile-desktop-notice {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 18px 16px 14px;
+  }
+  .mobile-desktop-notice p {
+    width: 100%;
+    min-width: 0;
+    padding-right: 0;
+    font-size: .78rem;
+  }
+  .mobile-desktop-notice__close {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .page-hero,
+  .page-home .editorial-hero,
+  .section,
+  .editorial-section,
+  .case-study-section {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .page-hero__grid,
+  .editorial-hero,
+  .editorial-intro,
+  .editorial-intro__columns,
+  .editorial-personality__grid,
+  .editorial-role--featured,
+  .editorial-projects,
+  .editorial-origin,
+  .education-grid,
+  .skills-grid,
+  .skills-proof-grid,
+  .course-grid,
+  .cards,
+  .evidence-grid,
+  .data-layout,
+  .result-callout,
+  .stat-strip {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .page-hero__copy,
+  .editorial-hero__copy,
+  .editorial-intro__body,
+  .editorial-role__copy,
+  .editorial-origin__copy,
+  .case-study-content {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .page-hero__title,
+  .page-about .page-hero__title,
+  .page-experience .page-hero__title,
+  .page-skills .page-hero__title,
+  .page-case-study .page-hero__title {
+    max-width: 100%;
+    font-size: clamp(2.25rem, 10.5vw, 3rem);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+    overflow-wrap: anywhere;
+  }
+  .page-home .editorial-hero h1 {
+    max-width: 100%;
+    font-size: clamp(2.85rem, 14vw, 3.8rem);
+    line-height: .9;
+  }
+  .page-home .editorial-intro h2,
+  .page-home .editorial-section__heading h2,
+  .page-projects .section__head h1,
+  .page-projects .section__head h2,
+  .page-case-study .case-study-section h2 {
+    max-width: 100%;
+    font-size: clamp(2.1rem, 10vw, 2.8rem);
+    line-height: 1;
+    overflow-wrap: anywhere;
+  }
+  .page-hero__subtitle,
+  .page-home .editorial-hero__lede,
+  .section__head p {
+    max-width: 100%;
+    font-size: .94rem;
+    line-height: 1.6;
+  }
+
+  .btn,
+  .editorial-button,
+  .page-hero__cta > *,
+  .editorial-hero__actions > * {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Home cards */
+  .page-home .editorial-section { padding: 46px 16px; }
+  .page-home .editorial-list-block,
+  .page-home .editorial-role__visual,
+  .page-home .editorial-role__copy,
+  .page-home .editorial-project,
+  .page-home .editorial-origin__visual,
+  .page-home .editorial-origin__copy {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .page-home .editorial-list-block { padding: 24px 18px; }
+  .page-home .editorial-list-block li {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 8px;
+    padding: 16px 0;
+    font-size: .92rem;
+  }
+  .page-home .editorial-role__meta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .page-home .editorial-role-row {
+    width: 100%;
+    padding: 20px 0;
+  }
+  .page-home .editorial-project__info h3 { font-size: 1.7rem; }
+
+  /* About cards */
+  .page-about .page-hero__portrait {
+    width: min(42vw, 150px);
+    max-width: 150px;
+  }
+  .page-about .flashcards,
+  .page-about .flashcard {
+    width: 100%;
+    max-width: 100%;
+  }
+  .page-about .flashcard {
+    min-height: 0;
+    padding: 24px 18px !important;
+  }
+  .page-about .flashcard__question { font-size: 1.35rem; }
+
+  /* Experience cards */
+  .page-experience .experience-work-sketches,
+  .page-experience .education-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .page-experience .experience-work-sketch,
+  .page-experience .education-card {
+    width: 100%;
+    max-width: 100%;
+    transform: none !important;
+  }
+  .page-experience .experience-work-sketch:last-child { grid-column: auto; }
+  .page-experience .timeline-node__rail { display: none; }
+  .page-experience .timeline-node:nth-child(odd) .timeline-node__card,
+  .page-experience .timeline-node:nth-child(even) .timeline-node__card,
+  .page-experience .timeline-node--featured .timeline-node__card {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 24px 17px !important;
+    border-width: 1px;
+  }
+  .page-experience .timeline-node--featured .timeline-node__card::after { display: none; }
+  .page-experience .timeline-node__card h3 { font-size: 1.3rem; }
+  .page-experience .timeline-node__card > p,
+  .page-experience .timeline-node__bullets { font-size: .86rem; }
+
+  /* Skills cards */
+  .page-skills .skills-card,
+  .page-skills .skills-proof__sheet,
+  .page-skills .coursework-grid,
+  .page-skills .skills-principles__notes p {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    transform: none !important;
+  }
+  .page-skills .skills-card {
+    min-height: 0;
+    padding: 58px 16px 22px;
+  }
+  .page-skills .skills-card::before,
+  .page-skills .skills-card::after,
+  .page-skills .skills-card__head::before,
+  .page-skills .skills-card__head::after { max-width: 100%; }
+  .page-skills .skills-card--engineering-toolkit .skills-card__head::before,
+  .page-skills .skills-card--engineering-toolkit .skills-card__head::after { display: none; }
+  .page-skills .skills-card__title { font-size: 1.35rem; }
+  .page-skills .skill-chip { font-size: .7rem; }
+  .page-skills .skills-proof__sheet { padding: 24px 16px; }
+  .page-skills .skills-proof__head {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .page-skills .skills-proof__stamp {
+    justify-self: start;
+    transform: none;
+  }
+  .page-skills .coursework-grid { padding: 42px 12px 18px; }
+  .page-skills .course-link {
+    grid-template-columns: 52px minmax(0, 1fr);
+    width: 100%;
+  }
+  .page-skills .course-link__code { min-width: 0; }
+  .page-skills .course-link__name { font-size: .8rem; }
+  .page-skills .skills-principles__notes { grid-template-columns: 1fr; }
+
+  /* Project and case-study cards */
+  .page-projects .section { padding: 38px 0; }
+  .page-projects .project {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    transform: none !important;
+  }
+  .page-projects .project::before,
+  .page-projects .project::after { max-width: 100%; }
+  .page-projects .project__thumb {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 15px;
+  }
+  .page-projects .filter-chips {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+  .page-case-study .case-study-section { padding: 30px 0; }
+  .page-case-study .panel,
+  .page-case-study .result-callout,
+  .page-case-study .evidence-photo,
+  .page-case-study .experience-cta__card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 18px 15px;
+  }
+
+  .editorial-footer {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px 16px;
+  }
+}
+
 @media (max-width: 380px) {
   .container { width: calc(100% - 24px); }
   .portfolio-nav { padding-inline: 12px; }
@@ -4057,4 +4352,113 @@ body.is-edit-mode [data-block-id]:hover{
     max-width: 100%;
     min-width: 0;
   }
+}
+
+/* Phone layout authority — must remain the last rules in this file. */
+@media (max-width: 700px) {
+  html, body { width: 100%; max-width: 100%; min-width: 0; overflow-x: clip; }
+  .container,
+  .page-hero .container,
+  .section > .container,
+  .section--tight > .container {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 16px;
+  }
+  .portfolio-nav,
+  .portfolio-nav__links,
+  .mobile-desktop-notice,
+  main,
+  main > section { width: 100%; max-width: 100%; }
+  .mobile-desktop-notice { display: block; }
+  .mobile-desktop-notice p { min-width: 0; }
+  .mobile-desktop-notice__close { width: 100%; margin-top: 10px; }
+
+  .page-hero__grid,
+  .editorial-hero,
+  .editorial-intro,
+  .editorial-intro__columns,
+  .editorial-personality__grid,
+  .editorial-role--featured,
+  .editorial-projects,
+  .editorial-origin,
+  .education-grid,
+  .skills-grid,
+  .skills-proof-grid,
+  .course-grid,
+  .cards,
+  .evidence-grid,
+  .data-layout,
+  .result-callout,
+  .stat-strip { grid-template-columns: minmax(0, 1fr) !important; }
+
+  .page-about .page-hero__title,
+  .page-experience .page-hero__title,
+  .page-skills .page-hero__title,
+  .page-case-study .page-hero__title {
+    max-width: 100%;
+    font-size: clamp(2.25rem, 10.5vw, 3rem);
+    line-height: 1.02;
+  }
+  .page-home .editorial-hero h1 {
+    max-width: 100%;
+    font-size: clamp(2.85rem, 14vw, 3.8rem);
+  }
+  .page-home .editorial-intro h2,
+  .page-home .editorial-section__heading h2,
+  .page-projects .section__head h1,
+  .page-projects .section__head h2,
+  .page-case-study .case-study-section h2 {
+    max-width: 100%;
+    font-size: clamp(2.1rem, 10vw, 2.8rem);
+  }
+
+  .btn,
+  .editorial-button,
+  .page-hero__cta > *,
+  .editorial-hero__actions > * { width: 100%; max-width: 100%; }
+
+  .page-experience .experience-work-sketches,
+  .page-experience .education-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .page-experience .experience-work-sketch,
+  .page-experience .education-card { width: 100%; max-width: 100%; transform: none !important; }
+  .page-experience .experience-work-sketch:last-child { grid-column: auto; }
+  .page-experience .timeline-node__rail { display: none; }
+  .page-experience .timeline-node:nth-child(odd) .timeline-node__card,
+  .page-experience .timeline-node:nth-child(even) .timeline-node__card,
+  .page-experience .timeline-node--featured .timeline-node__card {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 24px 17px !important;
+    border-width: 1px;
+    transform: none !important;
+  }
+  .page-experience .timeline-node--featured .timeline-node__card::after { display: none; }
+
+  .page-skills .skills-card,
+  .page-skills .skills-proof__sheet,
+  .page-skills .coursework-grid,
+  .page-skills .skills-principles__notes p {
+    width: 100%; max-width: 100%; min-width: 0; transform: none !important;
+  }
+  .page-skills .skills-card { min-height: 0; padding: 58px 16px 22px; }
+  .page-skills .skills-card--engineering-toolkit .skills-card__head::before,
+  .page-skills .skills-card--engineering-toolkit .skills-card__head::after { display: none; }
+  .page-skills .skills-proof__sheet { padding: 24px 16px; }
+  .page-skills .skills-proof__head { display: grid; grid-template-columns: 1fr; }
+  .page-skills .skills-principles__notes { grid-template-columns: 1fr; }
+  .page-skills .course-link { grid-template-columns: 52px minmax(0, 1fr); width: 100%; }
+
+  .page-projects .project,
+  .page-case-study .panel,
+  .page-case-study .result-callout,
+  .page-case-study .evidence-photo,
+  .page-case-study .experience-cta__card {
+    width: 100%; max-width: 100%; min-width: 0; transform: none !important;
+  }
+  .page-projects .project { padding: 15px; }
+  .page-projects .project__thumb { width: 100%; max-width: 100%; margin: 0 0 15px; }
+  .page-projects .filter-chips { width: 100%; max-width: 100%; margin-inline: 0; padding-inline: 0; }
 }
