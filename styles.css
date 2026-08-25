@@ -1568,6 +1568,75 @@ html, body { overflow-x: hidden; }
 @media(max-width:900px){.page-skills .skills-grid,.page-skills .coursework-grid,.skills-proof__grid,.skills-principles__notes{grid-template-columns:1fr}.skills-proof__grid article,.skills-proof__grid article:first-child,.skills-proof__grid article:last-child{padding:20px 0;border-right:0;border-bottom:1px dashed rgba(28,28,26,.3)}.skills-proof__grid article:last-child{border-bottom:0}.page-skills .skills-card--course:nth-child(odd){border-right:0}.page-skills .coursework-grid{padding:38px 22px 24px}.skills-proof__sheet{padding:36px 24px 26px}}
 @media(max-width:560px){.skills-evidence-key{display:grid;grid-template-columns:1fr 1fr}.page-skills .skills-card{padding:28px 20px 24px 38px}.skills-proof__head{display:block}.skills-proof__stamp{display:inline-block;margin-top:14px}}
 
+/* Skills page — phone layout. Decorative sheets retain their identity, but
+   lose desktop-scale framing so content remains readable and easy to tap. */
+@media(max-width:700px){
+  .page-skills .page-hero{padding:30px 0 34px}
+  .page-skills .page-hero__title{max-width:12ch;font-size:clamp(2.35rem,11vw,3.15rem);line-height:.98}
+  .page-skills .page-hero__subtitle{font-size:.94rem;line-height:1.65}
+  .page-skills .page-hero__cta{display:grid;grid-template-columns:1fr;gap:9px;margin-top:20px}
+  .page-skills .page-hero__cta .btn{justify-content:center;width:100%}
+  .skills-capability-map{margin-top:22px;padding:29px 13px 7px}
+  .skills-capability-map article{grid-template-columns:26px 1fr;gap:9px;padding:10px 0}
+  .skills-capability-map article p{font-size:.72rem}
+  .skills-evidence-key{gap:12px 10px;margin-top:20px;padding-top:14px;font-size:.6rem}
+
+  .page-skills .section{padding-block:42px}
+  .page-skills .section__head{align-items:flex-start;gap:16px}
+  .page-skills .section__head h2{font-size:clamp(1.9rem,9vw,2.55rem)}
+  .page-skills .skills-grid{gap:18px;margin-top:22px}
+  .page-skills .skills-card{min-height:0;transform:none!important;box-shadow:3px 4px 0 rgba(28,28,26,.09)}
+  .page-skills .skills-card__head{gap:10px}
+  .page-skills .skills-card__title{font-size:1.12rem}
+  .page-skills .skills-card__sub{font-size:.82rem;line-height:1.48}
+  .page-skills .skill-chip{font-size:.66rem}
+
+  .page-skills .skills-card.skills-card--engineering-toolkit{padding:60px 16px 46px 43px}
+  .page-skills .skills-card--engineering-toolkit::before{height:42px;font-size:.4rem;line-height:42px;letter-spacing:.025em;overflow:hidden}
+  .page-skills .skills-card--engineering-toolkit::after{height:25px;padding-inline:8px;font-size:.38rem;line-height:25px;overflow:hidden;white-space:nowrap}
+  .page-skills .skills-card--engineering-toolkit .skills-card__head::before{left:-35px;font-size:.36rem}
+  .page-skills .skills-card--engineering-toolkit .skills-card__icon{width:42px;height:42px}
+
+  .page-skills .skills-card.skills-card--data-software{padding:48px 18px 50px}
+  .page-skills .skills-card--data-software::before{top:14px;right:14px;font-size:.48rem}
+  .page-skills .skills-card--data-software::after{font-size:.44rem}
+  .page-skills .skills-card--data-software .skills-card__icon{width:42px;height:42px}
+
+  .page-skills .skills-card.skills-card--ie-methods{padding:48px 18px 50px 28px}
+  .page-skills .skills-card--ie-methods::before{top:12px;right:12px;font-size:.46rem}
+  .page-skills .skills-card--ie-methods::after{width:112px;font-size:.43rem}
+  .page-skills .skills-card--ie-methods .skills-card__head::after{display:none}
+  .page-skills .skills-card.skills-card--working-with-people{padding:44px 18px 44px}
+
+  .skills-proof{padding-top:12px!important}
+  .skills-proof__sheet{padding:32px 18px 20px;transform:none}
+  .skills-proof__sheet::before{left:18px}
+  .skills-proof__grid article,.skills-proof__grid article:first-child,.skills-proof__grid article:last-child{padding:18px 0}
+
+  .page-skills .skills-coursework{margin-top:16px;padding-block:52px 40px}
+  .page-skills .skills-coursework .section__head>.btn{width:100%;justify-content:center}
+  .page-skills .coursework-grid{margin-top:22px;padding:31px 10px 12px;border-width:5px;outline-width:1px;box-shadow:0 10px 22px rgba(28,28,26,.16)}
+  .page-skills .coursework-grid::before{top:-22px;width:88px;height:30px}
+  .page-skills .skills-card--course{padding:18px 5px}
+  .page-skills .skills-card--course .skills-card__head{align-items:flex-start}
+  .page-skills .skills-card--course .skills-card__icon{width:34px;height:34px}
+  .page-skills .skills-card--course .course-link{min-height:50px;padding:6px;gap:8px}
+  .course-link__code{min-width:54px;padding:5px;font-size:.57rem}
+  .course-link__name{padding-right:13px;font-size:.62rem}
+
+  .skills-principles__notes{gap:12px;margin-bottom:24px}
+  .skills-principles__notes p{min-height:78px;padding:16px;font-size:.92rem;transform:none!important}
+  .skills-cta__card{align-items:stretch;padding:20px}
+  .skills-cta__actions{display:grid;width:100%}
+  .skills-cta__actions .btn{justify-content:center;width:100%}
+
+  .course-dialog{width:calc(100% - 12px);max-height:calc(100dvh - 12px)}
+  .course-dialog__sheet{max-height:calc(100dvh - 12px);padding:44px 18px 22px;box-shadow:none}
+  .course-dialog__heading{gap:12px;padding-bottom:16px}
+  .course-dialog__heading h2{font-size:1.45rem}
+  .course-dialog__section p{font-size:.84rem;line-height:1.6}
+}
+
 /* =========================================================
    CASE STUDY TEMPLATE (project detail pages)
 ========================================================= */
