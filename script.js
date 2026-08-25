@@ -476,7 +476,7 @@ function openCourseDialog(chip, code, name) {
   const details = COURSE_DETAILS[code];
   if (!dialog || !details) return;
   setText("courseDialogCode", code); setText("courseDialogTitle", name);
-  setText("courseDialogStatus", chip.inProgress ? "Grade pending" : `Grade · ${chip.grade || "Completed"}`);
+  setText("courseDialogStatus", chip.inProgress ? "Currently enrolled · grade forthcoming" : `Grade · ${chip.grade || "Completed"}`);
   setText("courseDialogCredits", details.credits); setText("courseDialogOffered", details.offered);
   setText("courseDialogDescription", details.description);
   const source = document.getElementById("courseDialogSource");
@@ -529,6 +529,7 @@ function renderSkillCard(card, mount, isCourse, index) {
       } else {
         link.appendChild(mkEl("span", { className: "course-link__name", text: chip.label }));
       }
+      if (chip.inProgress) link.appendChild(mkEl("span", { className: "course-link__current", attrs: { "aria-label": "Currently enrolled", role: "img" } }));
       link.appendChild(mkEl("span", { className: "course-link__arrow", text: "+", attrs: { "aria-hidden": "true" } }));
       link.addEventListener("click", () => openCourseDialog(chip, match ? match[1] : chip.label, match ? match[2] : chip.label));
       chipsWrap.appendChild(link);
