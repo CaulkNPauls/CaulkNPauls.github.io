@@ -1434,41 +1434,47 @@ html, body { overflow-x: hidden; }
   .page-skills .skills-card--course .course-link__arrow{grid-column:3;grid-row:1}
 }
 
-/* Engineering toolkit — a measured technical drawing on vellum. */
+/* Engineering toolkit — a CAD / 3D-modeling workspace. */
 .page-skills .skills-card.skills-card--engineering-toolkit{
-  padding:52px 30px 48px 48px;
-  border:1px solid rgba(43,92,130,.48);
-  background-color:#f8f2df;
-  background-image:linear-gradient(rgba(43,92,130,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(43,92,130,.07) 1px,transparent 1px);
-  background-size:8px 8px;
+  padding:58px 30px 50px 36px;
+  border:1px solid #090d11;
+  background-color:#202a31;
+  background-image:linear-gradient(30deg,rgba(126,161,178,.1) 1px,transparent 1px),linear-gradient(150deg,rgba(126,161,178,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(126,161,178,.06) 1px,transparent 1px);
+  background-size:28px 16px,28px 16px,28px 16px;
+  box-shadow:4px 6px 0 rgba(9,13,17,.2),0 16px 30px rgba(9,13,17,.18);
+  color:#eef7f8
 }
 .page-skills .skills-card--engineering-toolkit::before{
-  content:"DETAIL A  ·  PHYSICAL SYSTEMS";
-  inset:15px auto auto 18px;width:auto;height:auto;padding:4px 7px;border:1px solid rgba(43,92,130,.46);border-radius:0;background:#f8f2df;box-shadow:none;color:var(--pen);font:700 .54rem/1 var(--font-mono);letter-spacing:.1em;transform:none
+  content:"◈  MODEL   ASSEMBLE   DOCUMENT";
+  inset:0 0 auto 0;width:auto;height:34px;padding:0 14px;border:0;border-bottom:1px solid #090d11;border-radius:0;background:linear-gradient(#394750,#27333a);box-shadow:inset 0 -1px rgba(255,255,255,.08);color:#c7d9de;font:600 .52rem/34px var(--font-mono);letter-spacing:.1em;transform:none
 }
 .page-skills .skills-card--engineering-toolkit::after{
-  content:"←  1.00  →";position:absolute;right:17px;bottom:15px;width:112px;padding-top:4px;border-top:1px solid var(--pen);color:var(--pen);font:600 .52rem/1 var(--font-mono);letter-spacing:.08em;text-align:center
+  content:"X   Y   Z";position:absolute;right:15px;bottom:13px;width:68px;padding:6px 7px;border:1px solid rgba(155,207,219,.45);background:#172026;color:#9bd4df;font:700 .52rem/1 var(--font-mono);letter-spacing:.12em;text-align:center
 }
-.page-skills .skills-card--engineering-toolkit .skills-card__head{padding-bottom:15px;border-bottom:1px dashed rgba(43,92,130,.45)}
-.page-skills .skills-card--engineering-toolkit .skills-card__icon{width:48px;height:48px;border:1px solid var(--pen-border);border-radius:50%;background:#f8f2df}
-.page-skills .skills-card--engineering-toolkit .skill-chip{background:#f8f2df;border-style:dashed}
+.page-skills .skills-card--engineering-toolkit .skills-card__head{padding-bottom:15px;border-bottom:1px solid rgba(155,207,219,.32)}
+.page-skills .skills-card--engineering-toolkit .skills-card__title,.page-skills .skills-card--engineering-toolkit .skills-card__icon{color:#effbfc}
+.page-skills .skills-card--engineering-toolkit .skills-card__sub{color:rgba(225,241,244,.74)}
+.page-skills .skills-card--engineering-toolkit .skills-card__icon{width:50px;height:50px;border:1px solid #77c5d5;border-radius:2px;background:rgba(10,18,23,.34);box-shadow:inset 0 0 0 5px rgba(119,197,213,.07)}
+.page-skills .skills-card--engineering-toolkit .skill-chip{border-color:rgba(155,207,219,.48);border-radius:2px;background:rgba(10,18,23,.5);color:#e8f7f9}
 
-/* IE methods — a warm process-routing sheet with ordered operation tags. */
+/* IE methods — a facility-planning document with routed departments. */
 .page-skills .skills-card.skills-card--ie-methods{
-  counter-reset:method-step;
-  padding:52px 30px 48px 40px;
-  border:2px solid rgba(122,77,17,.48);
-  background:#fff1c9;
-  box-shadow:5px 7px 0 rgba(117,77,22,.12),0 14px 24px rgba(28,28,26,.08)
+  padding:56px 30px 54px 40px;
+  border:1px solid rgba(43,92,130,.52);
+  background-color:#eef3e9;
+  background-image:linear-gradient(rgba(43,92,130,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(43,92,130,.11) 1px,transparent 1px),linear-gradient(90deg,transparent 49%,rgba(181,76,69,.13) 49% 51%,transparent 51%);
+  background-size:12px 12px,12px 12px,100% 100%;
+  box-shadow:5px 7px 0 rgba(43,92,130,.1),0 14px 24px rgba(28,28,26,.08)
 }
 .page-skills .skills-card--ie-methods::before{
-  content:"PROCESS ROUTE / 03";inset:14px 16px auto auto;width:auto;height:auto;padding:5px 8px;border:1px solid rgba(122,77,17,.48);border-radius:999px;background:#fff7df;box-shadow:none;color:#755018;font:700 .53rem/1 var(--font-mono);letter-spacing:.1em;transform:none
+  content:"FACILITY PLAN  ·  FLOW / 03";inset:13px 15px auto auto;width:auto;height:auto;padding:5px 8px;border:1px solid rgba(43,92,130,.5);border-radius:0;background:#f8faf3;box-shadow:none;color:var(--pen);font:700 .53rem/1 var(--font-mono);letter-spacing:.1em;transform:none
 }
-.page-skills .skills-card--ie-methods::after{content:"";position:absolute;left:19px;top:64px;bottom:34px;border-left:1px dashed rgba(122,77,17,.55)}
-.page-skills .skills-card--ie-methods .skills-card__icon{border:2px solid rgba(122,77,17,.55);border-radius:4px;background:#fff8e6;color:#755018;transform:rotate(45deg)}
-.page-skills .skills-card--ie-methods .skills-card__icon svg{transform:rotate(-45deg)}
-.page-skills .skills-card--ie-methods .skill-chip{counter-increment:method-step;position:relative;padding-left:27px;border-color:rgba(122,77,17,.36);border-radius:999px;background:#fff8e6;color:#594019}
-.page-skills .skills-card--ie-methods .skill-chip::before{content:counter(method-step,decimal-leading-zero);position:absolute;left:7px;color:#9b681d;font-size:.54rem}
+.page-skills .skills-card--ie-methods::after{content:"AREA  04   REV A";position:absolute;right:12px;bottom:10px;width:130px;padding:6px 8px;border:1px solid rgba(43,92,130,.5);background:#f8faf3;color:var(--pen);font:700 .5rem/1 var(--font-mono);letter-spacing:.1em;text-align:right}
+.page-skills .skills-card--ie-methods .skills-card__head{position:relative;padding-bottom:16px;border-bottom:2px solid rgba(43,92,130,.32)}
+.page-skills .skills-card--ie-methods .skills-card__head::after{content:"";position:absolute;right:0;bottom:7px;width:76px;height:32px;border:1px solid rgba(43,92,130,.45);background:linear-gradient(90deg,transparent 33%,rgba(43,92,130,.45) 33% 34%,transparent 34% 66%,rgba(43,92,130,.45) 66% 67%,transparent 67%),linear-gradient(transparent 48%,rgba(43,92,130,.45) 48% 52%,transparent 52%)}
+.page-skills .skills-card--ie-methods .skills-card__icon{border:1px solid rgba(43,92,130,.58);border-radius:2px;background:#f8faf3;color:var(--pen-strong)}
+.page-skills .skills-card--ie-methods .skill-chip{position:relative;border-color:rgba(43,92,130,.4);border-radius:2px;background:#f8faf3;color:var(--pen-strong)}
+.page-skills .skills-card--ie-methods .skill-chip:nth-child(3n+1){border-left:4px solid #c37a54}.page-skills .skills-card--ie-methods .skill-chip:nth-child(3n+2){border-left:4px solid #5c91a8}.page-skills .skills-card--ie-methods .skill-chip:nth-child(3n){border-left:4px solid #7b9261}
 
 /* Working with people — a pinned team note with color-coded contributions. */
 .page-skills .skills-card.skills-card--working-with-people{
