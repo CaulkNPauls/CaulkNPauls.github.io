@@ -471,6 +471,23 @@ function renderSkillCard(card, mount, isCourse, index) {
       chipsWrap.appendChild(mkEl("span", { className: "skill-chip", text: chip }));
       return;
     }
+    if (isCourse && chip.url) {
+      const match = String(chip.label || "").match(/^([A-Z]+\s+\d+[A-Z]?):\s*(.+)$/);
+      const link = mkEl("a", {
+        className: "skill-chip course-link" + (chip.inProgress ? " skill-chip--ip" : ""),
+        attrs: { href: chip.url, target: "_blank", rel: "noopener noreferrer", "aria-label": `${chip.label} — view UB course description (opens in a new tab)` },
+      });
+      if (match) {
+        link.appendChild(mkEl("span", { className: "course-link__code", text: match[1] }));
+        link.appendChild(mkEl("span", { className: "course-link__name", text: match[2] }));
+      } else {
+        link.appendChild(mkEl("span", { className: "course-link__name", text: chip.label }));
+      }
+      if (chip.inProgress) link.appendChild(mkEl("span", { className: "ip", text: "In progress" }));
+      link.appendChild(mkEl("span", { className: "course-link__arrow", text: "↗", attrs: { "aria-hidden": "true" } }));
+      chipsWrap.appendChild(link);
+      return;
+    }
     const span = mkEl("span", { className: "skill-chip" + (chip.inProgress ? " skill-chip--ip" : ""), text: chip.label });
     if (chip.inProgress) span.appendChild(mkEl("span", { className: "ip", text: "In progress" }));
     chipsWrap.appendChild(span);

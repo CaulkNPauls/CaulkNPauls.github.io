@@ -1429,6 +1429,9 @@ html, body { overflow-x: hidden; }
   .page-skills .skills-card.skills-card--data-software{padding:50px 22px 56px}
   .page-skills .skills-card--data-software .skills-chips{grid-template-columns:1fr}
   .page-skills .skills-card--data-software .skills-card__head::after{display:none}
+  .page-skills .skills-card--course .course-link{grid-template-columns:auto minmax(0,1fr) auto;gap:8px}
+  .page-skills .skills-card--course .course-link .ip{grid-column:2;justify-self:start}
+  .page-skills .skills-card--course .course-link__arrow{grid-column:3;grid-row:1}
 }
 .skills-proof{padding-top:14px}.skills-proof__sheet{position:relative;padding:38px 42px 34px;border:1px solid rgba(28,28,26,.3);background:#e8e4d9;box-shadow:5px 7px 0 rgba(28,28,26,.1);transform:rotate(.2deg)}
 .skills-proof__sheet::before{content:"FIELD LOG";position:absolute;top:-13px;left:42px;padding:5px 18px;border:1px solid rgba(28,28,26,.4);border-radius:5px;background:linear-gradient(#d4d8d9,#858b8e);color:#202322;font:700 .62rem/1 var(--font-mono);letter-spacing:.12em}
@@ -1438,6 +1441,14 @@ html, body { overflow-x: hidden; }
 .page-skills .coursework-grid{position:relative;grid-template-columns:repeat(2,1fr);gap:0;margin-top:28px;padding:42px 38px 32px;border:12px solid #947251;outline:2px solid #684e37;border-radius:7px;background:linear-gradient(90deg,transparent 0 37px,rgba(181,76,69,.3) 37px 38px,transparent 38px),repeating-linear-gradient(to bottom,#fffdf5 0 31px,rgba(43,92,130,.24) 31px 32px);box-shadow:0 18px 32px rgba(28,28,26,.18)}
 .page-skills .coursework-grid::before{content:"";position:absolute;top:-30px;left:50%;width:122px;height:42px;transform:translateX(-50%);border:2px solid #555a5c;border-radius:7px 7px 3px 3px;background:linear-gradient(#d9ddde,#858b8e 60%,#5c6163);box-shadow:0 4px 5px rgba(28,28,26,.25);z-index:3}
 .page-skills .skills-card--course{min-height:0;padding:24px;border:0;border-bottom:1px dashed rgba(43,92,130,.35);border-radius:0;background:transparent;box-shadow:none;transform:none!important}.page-skills .skills-card--course:nth-child(odd){border-right:1px dashed rgba(43,92,130,.35)}.page-skills .skills-card--course::before{display:none}.page-skills .skills-card--course .skills-card__head{margin-bottom:10px}.page-skills .skills-card--course .skills-card__title{font-size:1.05rem}.page-skills .skills-card--course .skills-card__sub{font-size:.82rem}.page-skills .skills-card--course .skill-chip{font-size:.66rem}
+.page-skills .skills-card--course .skills-chips{display:grid;gap:7px;margin-top:14px}
+.page-skills .skills-card--course .course-link{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:10px;align-items:center;width:100%;min-height:44px;padding:6px 9px 6px 6px;border-color:rgba(43,92,130,.28);background:rgba(255,253,245,.76);color:var(--ink);text-decoration:none;transition:transform 160ms ease,border-color 160ms ease,background 160ms ease,box-shadow 160ms ease}
+.page-skills .skills-card--course .course-link:hover,.page-skills .skills-card--course .course-link:focus-visible{z-index:1;border-color:var(--pen-strong);background:#fffdf5;box-shadow:3px 3px 0 rgba(23,60,86,.13);color:var(--pen-strong);transform:translate(-2px,-2px)}
+.course-link__code{display:grid;place-items:center;align-self:stretch;min-width:58px;padding:5px 7px;border:1px solid rgba(43,92,130,.3);background:var(--pen-strong);color:#fffdf5;font:700 .62rem/1 var(--font-mono);letter-spacing:.04em;white-space:nowrap}
+.course-link__name{font:600 .67rem/1.35 var(--font-mono)}
+.page-skills .skills-card--course .course-link .ip{margin:0;padding:3px 6px;border-color:rgba(181,126,30,.45);background:#fff0c9;color:#70500e;font-size:.55rem;white-space:nowrap}
+.course-link__arrow{color:var(--pen);font:700 .9rem/1 var(--font-mono);transition:transform 160ms ease}
+.course-link:hover .course-link__arrow,.course-link:focus-visible .course-link__arrow{transform:translate(2px,-2px)}
 .skills-principles__notes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:34px}.skills-principles__notes p{display:grid;place-items:center;min-height:112px;margin:0;padding:22px;background:#fff2a9;box-shadow:3px 5px 0 rgba(28,28,26,.1);color:#193e5c;font:600 1.05rem/1.45 "Manrope",sans-serif;text-align:center;transform:rotate(-1deg)}.skills-principles__notes p:nth-child(2){background:#dff0ef;transform:rotate(.8deg)}.skills-principles__notes p:nth-child(3){background:#efddec;transform:rotate(-.4deg)}
 /* Match the Experience page opening on wide screens: the introduction acts
    as a left-hand notebook legend while useful content starts at the top in
