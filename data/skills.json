@@ -12,7 +12,7 @@
       "icon": "bars",
       "title": "Data & Software",
       "description": "Turning operational records into analysis and usable tools.",
-      "chips": ["Python", "Microsoft Excel", "MATLAB", "Data Cleaning", "Dashboard Development", "Database Design"]
+      "chips": ["Python", "R", "Minitab", "Microsoft Excel", "MATLAB", "Data Cleaning", "Dashboard Development", "Database Design"]
     },
     {
       "id": "ie-methods",
