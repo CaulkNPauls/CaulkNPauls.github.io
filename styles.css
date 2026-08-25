@@ -1436,26 +1436,29 @@ html, body { overflow-x: hidden; }
 
 /* Engineering toolkit — a CAD / 3D-modeling workspace. */
 .page-skills .skills-card.skills-card--engineering-toolkit{
-  padding:58px 30px 50px 36px;
+  padding:68px 28px 58px 54px;
   border:1px solid #090d11;
-  background-color:#202a31;
-  background-image:linear-gradient(30deg,rgba(126,161,178,.1) 1px,transparent 1px),linear-gradient(150deg,rgba(126,161,178,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(126,161,178,.06) 1px,transparent 1px);
-  background-size:28px 16px,28px 16px,28px 16px;
+  background-color:#1d252a;
+  background-image:linear-gradient(rgba(143,170,183,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(143,170,183,.09) 1px,transparent 1px),linear-gradient(90deg,transparent 0 34px,#0e1418 34px 35px,transparent 35px);
+  background-size:18px 18px,18px 18px,100% 100%;
   box-shadow:4px 6px 0 rgba(9,13,17,.2),0 16px 30px rgba(9,13,17,.18);
-  color:#eef7f8
+  color:#eef7f8;
+  transform:none
 }
 .page-skills .skills-card--engineering-toolkit::before{
-  content:"◈  MODEL   ASSEMBLE   DOCUMENT";
-  inset:0 0 auto 0;width:auto;height:34px;padding:0 14px;border:0;border-bottom:1px solid #090d11;border-radius:0;background:linear-gradient(#394750,#27333a);box-shadow:inset 0 -1px rgba(255,255,255,.08);color:#c7d9de;font:600 .52rem/34px var(--font-mono);letter-spacing:.1em;transform:none
+  content:"A  │  HOME   SOLID   SURFACE   MESH   ANNOTATE   VIEW";
+  inset:0 0 auto 0;width:auto;height:45px;padding:0 13px;border:0;border-bottom:1px solid #080c0f;border-radius:0;background:linear-gradient(#3f4c54 0 18px,#303b42 18px 45px);box-shadow:inset 0 -1px rgba(255,255,255,.08);color:#d9e4e7;font:600 .5rem/45px var(--font-mono);letter-spacing:.075em;transform:none;white-space:nowrap
 }
 .page-skills .skills-card--engineering-toolkit::after{
-  content:"X   Y   Z";position:absolute;right:15px;bottom:13px;width:68px;padding:6px 7px;border:1px solid rgba(155,207,219,.45);background:#172026;color:#9bd4df;font:700 .52rem/1 var(--font-mono);letter-spacing:.12em;text-align:center
+  content:"Command: _READY        GRID  SNAP  ORTHO  │  X  Y  Z";position:absolute;right:0;bottom:0;left:0;width:auto;padding:0 12px;height:29px;border:0;border-top:1px solid #080c0f;background:#11191e;color:#91cad5;font:600 .48rem/29px var(--font-mono);letter-spacing:.07em;text-align:left
 }
-.page-skills .skills-card--engineering-toolkit .skills-card__head{padding-bottom:15px;border-bottom:1px solid rgba(155,207,219,.32)}
+.page-skills .skills-card--engineering-toolkit .skills-card__head{position:relative;padding-bottom:15px;border-bottom:1px solid rgba(155,207,219,.36)}
+.page-skills .skills-card--engineering-toolkit .skills-card__head::before{content:"LINE\A CIRCLE\A EXTRUDE\A DIM";white-space:pre;position:absolute;top:0;left:-43px;color:#8da4ae;font:500 .42rem/1.9 var(--font-mono);text-align:center}
 .page-skills .skills-card--engineering-toolkit .skills-card__title,.page-skills .skills-card--engineering-toolkit .skills-card__icon{color:#effbfc}
 .page-skills .skills-card--engineering-toolkit .skills-card__sub{color:rgba(225,241,244,.74)}
-.page-skills .skills-card--engineering-toolkit .skills-card__icon{width:50px;height:50px;border:1px solid #77c5d5;border-radius:2px;background:rgba(10,18,23,.34);box-shadow:inset 0 0 0 5px rgba(119,197,213,.07)}
-.page-skills .skills-card--engineering-toolkit .skill-chip{border-color:rgba(155,207,219,.48);border-radius:2px;background:rgba(10,18,23,.5);color:#e8f7f9}
+.page-skills .skills-card--engineering-toolkit .skills-card__icon{width:50px;height:50px;border:1px solid #77c5d5;border-radius:2px;background:rgba(10,18,23,.58);box-shadow:inset 0 0 0 4px rgba(119,197,213,.06)}
+.page-skills .skills-card--engineering-toolkit .skills-card__icon svg{filter:none;shape-rendering:geometricPrecision}
+.page-skills .skills-card--engineering-toolkit .skill-chip{border-color:rgba(155,207,219,.48);border-radius:2px;background:#121b20;color:#e8f7f9;box-shadow:inset 3px 0 #4aa8bc}
 
 /* IE methods — a facility-planning document with routed departments. */
 .page-skills .skills-card.skills-card--ie-methods{
@@ -1493,9 +1496,11 @@ html, body { overflow-x: hidden; }
 .page-skills .skills-card--working-with-people .skill-chip:nth-child(even){background:#dff0ef;transform:rotate(.6deg)}
 
 @media(max-width:560px){
-  .page-skills .skills-card.skills-card--engineering-toolkit,
+  .page-skills .skills-card.skills-card--engineering-toolkit{padding:62px 18px 48px 44px}
   .page-skills .skills-card.skills-card--ie-methods,
   .page-skills .skills-card.skills-card--working-with-people{padding:50px 22px 46px 32px}
+  .page-skills .skills-card--engineering-toolkit::before{font-size:.43rem;letter-spacing:.035em}
+  .page-skills .skills-card--engineering-toolkit::after{font-size:.4rem;white-space:nowrap;overflow:hidden}
 }
 .skills-proof{padding-top:14px}.skills-proof__sheet{position:relative;padding:38px 42px 34px;border:1px solid rgba(28,28,26,.3);background:#e8e4d9;box-shadow:5px 7px 0 rgba(28,28,26,.1);transform:rotate(.2deg)}
 .skills-proof__sheet::before{content:"FIELD LOG";position:absolute;top:-13px;left:42px;padding:5px 18px;border:1px solid rgba(28,28,26,.4);border-radius:5px;background:linear-gradient(#d4d8d9,#858b8e);color:#202322;font:700 .62rem/1 var(--font-mono);letter-spacing:.12em}
