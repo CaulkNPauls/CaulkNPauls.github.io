@@ -478,7 +478,7 @@ function openCourseDialog(chip, code, name) {
   setText("courseDialogCode", code); setText("courseDialogTitle", name);
   setText("courseDialogStatus", chip.inProgress ? "In progress" : "Completed coursework");
   setText("courseDialogCredits", details.credits); setText("courseDialogOffered", details.offered);
-  setText("courseDialogDescription", details.description); setText("courseDialogRequisites", details.requisites);
+  setText("courseDialogDescription", details.description);
   const source = document.getElementById("courseDialogSource");
   if (source) source.href = COURSE_SOURCE_IDS[code] ? `https://catalogs.buffalo.edu/preview_course_nopop.php?catoid=17&coid=${COURSE_SOURCE_IDS[code]}` : chip.url;
   dialog.showModal(); document.body.classList.add("course-dialog-open");
