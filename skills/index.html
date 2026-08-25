@@ -169,6 +169,24 @@
       </section>
     </main>
 
+    <dialog class="course-dialog" id="courseDialog" aria-labelledby="courseDialogTitle">
+      <div class="course-dialog__sheet">
+        <button class="course-dialog__close" type="button" aria-label="Close course details">×</button>
+        <p class="course-dialog__eyebrow">University at Buffalo / course record</p>
+        <div class="course-dialog__heading">
+          <span class="course-dialog__code" id="courseDialogCode"></span>
+          <div><h2 id="courseDialogTitle"></h2><span class="course-dialog__status" id="courseDialogStatus"></span></div>
+        </div>
+        <div class="course-dialog__facts">
+          <p><span>Credits</span><strong id="courseDialogCredits"></strong></p>
+          <p><span>Typically offered</span><strong id="courseDialogOffered"></strong></p>
+        </div>
+        <section class="course-dialog__section"><h3>Course description</h3><p id="courseDialogDescription"></p></section>
+        <section class="course-dialog__section"><h3>Requisites</h3><p id="courseDialogRequisites"></p></section>
+        <footer class="course-dialog__footer"><span>Catalog information summarized from UB.</span><a id="courseDialogSource" href="#" target="_blank" rel="noopener noreferrer">View source record ↗</a></footer>
+      </div>
+    </dialog>
+
     <footer class="editorial-footer"><span>© <span id="year"></span> Paul Poleon Jr</span><span>Industrial engineer · problem solver · teammate</span><a href="#main">Back to top ↑</a></footer>
 
     <script src="../script.js"></script>

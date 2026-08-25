@@ -36,7 +36,7 @@
       "title": "Analytics & Statistics",
       "description": "Interpreting data and drawing conclusions.",
       "chips": [
-        { "label": "IE 322: Analytics & Computing for IE", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=322&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false },
+        { "label": "IE 322: Analytics & Computing for IE", "url": "https://catalogs.buffalo.edu/preview_course_nopop.php?catoid=17&coid=109112", "inProgress": false },
         { "label": "EAS 305: Applied Probability & Statistics", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=EAS&filter%5B29%5D=305&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false },
         { "label": "IE 306: Statistics for Engineers", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=306&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false }
       ]

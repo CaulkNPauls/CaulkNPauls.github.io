@@ -448,6 +448,52 @@ function renderCaseStudy(caseStudy, slug, mount) {
   });
 }
 
+const COURSE_DETAILS = {
+  "IE 322": { credits:"3", offered:"Fall", description:"Builds the skills needed to manage, manipulate, analyze, and draw insight from large data sets using industrial-engineering computational tools. Problems reflect work across manufacturing, service, healthcare, and transportation systems.", requisites:"EAS 230, EAS 240, or CSE 115; EAS 999TRCP. EAS 305, MTH 411, CIE 308, or EE 305 may be required concurrently. Restricted to Engineering and Applied Sciences majors." },
+  "EAS 305": { credits:"4", offered:"Fall, Spring, Summer", description:"Introduces probability and statistics for engineering applications, including discrete, continuous, and multivariate distributions plus descriptive and inferential statistical methods.", requisites:"MTH 142 or MTH 154. Restricted to Engineering or Computer Science majors; credit restrictions apply with CE 305, CIE 308, and EE 305." },
+  "IE 306": { credits:"4", offered:"Spring", description:"Covers statistical inference and data analysis, including point and interval estimation, hypothesis testing, correlation, regression, and analysis of variance.", requisites:"EAS 305, EE 305, CE 305, CIE 308, STA 301, or MTH 411. Restricted to Industrial Engineering or Engineering Science majors." },
+  "IE 373": { credits:"4", offered:"Fall", description:"Introduces operations-research methodology, objective functions, theories of value, optimization, and mathematical models used for reliability, decision analysis, games, queues, and Markov decisions.", requisites:"Restricted to Industrial Engineering or Engineering Science majors." },
+  "IE 374": { credits:"4", offered:"Spring", description:"Extends deterministic optimization into uncertainty and risk through decision models, stochastic processes, Markov chains and decisions, queueing theory, and applied waiting-line models.", requisites:"Restricted to Industrial Engineering or Engineering Science majors." },
+  "MTH 306": { credits:"4", offered:"Fall, Spring, Summer", description:"Studies analytic solutions and qualitative behavior of first- and higher-order differential equations, including nonlinear equations, numerical and geometric methods, matrix theory, and models drawn from several disciplines.", requisites:"MTH 142 or MTH 154, or both MTH 138 and MTH 139." },
+  "IE 477": { credits:"4", offered:"Fall", description:"Develops digital simulation models of complex systems using current simulation software, modeling practices, and analysis methods.", requisites:"IE 306 and computer-programming skills. Restricted to Industrial Engineering majors." },
+  "IE 326": { credits:"3", offered:"Fall", description:"Examines the principles used to plan production processes, including production planning, scheduling, and control.", requisites:"Restricted to Engineering majors. Students must meet with their IE faculty advisor before registering." },
+  "IE 327": { credits:"3", offered:"Spring", description:"Covers the design, analysis, and selection of manufacturing facilities and material-handling equipment, including material flow, storage, computer applications, and economic justification.", requisites:"IE 326. Restricted to Industrial Engineering or Engineering Science majors; faculty-advisor review is required." },
+  "IE 320": { credits:"3", offered:"Spring", description:"Applies economic decision-making methods such as present-worth analysis, cash-flow equivalence, replacement analysis, and equipment selection.", requisites:"MTH 141 or MTH 137. Restricted to Engineering majors." },
+  "IE 420": { credits:"3", offered:"Fall", description:"Integrates production planning, facility design, operations research, and human factors to analyze and solve real-world industrial-engineering problems.", requisites:"IE major plus EAS 305, IE 306, IE 320, IE 326, and IE 327. IE 477 and IE 322 are co-requisites; IE 323 and EAS 360 may be pre- or co-requisites." },
+  "IE 421": { credits:"3", offered:"Varies", description:"Examines manufacturing through a sustainability lens, connecting production decisions with resource use, environmental impact, product life cycles, and more responsible industrial systems.", requisites:"Upper-level engineering standing or department permission may apply." },
+  "IE 323": { credits:"4", offered:"Fall", description:"Studies how people interact with tasks, equipment, and workplace environments. Topics include human capabilities and limitations, ergonomics in system design, human-system analysis, and experimental methods.", requisites:"Restricted to Engineering majors and Human Factors minors." },
+  "IE 408": { credits:"3", offered:"Spring", description:"Applies statistical quality methods to process variation, including sampling, hypothesis testing, ANOVA, correlation, regression, measurement systems, experimental design, response surfaces, and statistical process control.", requisites:"IE 306 as a co-requisite. Restricted to Industrial Engineering majors. Dual-listed with IE 508." },
+  "EAS 360": { credits:"3", offered:"Fall, Spring, Summer, Winter", description:"Develops professional STEM communication across genres and media for technical, professional, and public audiences, with individual, team, and ethical communication practice.", requisites:"Completion of Communication Literacy 1. Restricted to SEAS majors in the UB Curriculum; first-year students may not enroll." },
+  "ENG 105": { credits:"4", offered:"Fall, Spring, Summer", description:"Introduces research, writing, and rhetorical practices used in academic and professional settings through genre and audience analysis, research essays, digital compositions, and oral presentations.", requisites:"ENG 105 non-Z requisite; applicable placement and repeat rules apply." },
+  "IE 409": { credits:"3", offered:"Fall", description:"Introduces customer-focused process and design Six Sigma methods, including project selection, leadership skills, Six Sigma metrics, risk assessment, quality tools, DMAIC, and DMADV.", requisites:"Upper-level Industrial Engineering standing or department permission. Restricted to Engineering majors." },
+  "IE 435": { credits:"3", offered:"Fall", description:"Applies human-centered design to interactive systems through user-needs research, prototyping, evaluation, and iterative design of products that support effective human interaction.", requisites:"Upper-level standing and appropriate human-factors preparation; department restrictions may apply." }
+};
+
+const COURSE_SOURCE_IDS = { "EAS 305":108120, "IE 306":109091, "IE 320":109092, "IE 322":109112, "IE 323":109093, "IE 326":109116, "IE 327":109094, "IE 373":109095, "IE 374":109096, "IE 408":109103, "IE 409":109104, "IE 420":109109, "IE 421":109113, "IE 435":109105, "IE 477":109098 };
+
+function openCourseDialog(chip, code, name) {
+  const dialog = document.getElementById("courseDialog");
+  const details = COURSE_DETAILS[code];
+  if (!dialog || !details) return;
+  setText("courseDialogCode", code); setText("courseDialogTitle", name);
+  setText("courseDialogStatus", chip.inProgress ? "In progress" : "Completed coursework");
+  setText("courseDialogCredits", details.credits); setText("courseDialogOffered", details.offered);
+  setText("courseDialogDescription", details.description); setText("courseDialogRequisites", details.requisites);
+  const source = document.getElementById("courseDialogSource");
+  if (source) source.href = COURSE_SOURCE_IDS[code] ? `https://catalogs.buffalo.edu/preview_course_nopop.php?catoid=17&coid=${COURSE_SOURCE_IDS[code]}` : chip.url;
+  dialog.showModal(); document.body.classList.add("course-dialog-open");
+}
+
+function initCourseDialog() {
+  const dialog = document.getElementById("courseDialog");
+  if (!dialog || dialog.dataset.ready) return;
+  dialog.dataset.ready = "true";
+  const close = () => { dialog.close(); document.body.classList.remove("course-dialog-open"); };
+  dialog.querySelector(".course-dialog__close")?.addEventListener("click", close);
+  dialog.addEventListener("click", (event) => { if (event.target === dialog) close(); });
+  dialog.addEventListener("close", () => document.body.classList.remove("course-dialog-open"));
+}
+
 function renderSkillCard(card, mount, isCourse, index) {
   const article = mkEl("article", {
     className: "skills-card reveal skills-card--" + String(card.id || "note").replace(/[^a-z0-9-]/gi, "-").toLowerCase() + (isCourse ? " skills-card--course" : ""),
@@ -473,9 +519,9 @@ function renderSkillCard(card, mount, isCourse, index) {
     }
     if (isCourse && chip.url) {
       const match = String(chip.label || "").match(/^([A-Z]+\s+\d+[A-Z]?):\s*(.+)$/);
-      const link = mkEl("a", {
+      const link = mkEl("button", {
         className: "skill-chip course-link" + (chip.inProgress ? " skill-chip--ip" : ""),
-        attrs: { href: chip.url, target: "_blank", rel: "noopener noreferrer", "aria-label": `${chip.label} — view UB course description (opens in a new tab)` },
+        attrs: { type: "button", "aria-label": `${chip.label} — view course details` },
       });
       if (match) {
         link.appendChild(mkEl("span", { className: "course-link__code", text: match[1] }));
@@ -484,7 +530,8 @@ function renderSkillCard(card, mount, isCourse, index) {
         link.appendChild(mkEl("span", { className: "course-link__name", text: chip.label }));
       }
       if (chip.inProgress) link.appendChild(mkEl("span", { className: "ip", text: "In progress" }));
-      link.appendChild(mkEl("span", { className: "course-link__arrow", text: "↗", attrs: { "aria-hidden": "true" } }));
+      link.appendChild(mkEl("span", { className: "course-link__arrow", text: "+", attrs: { "aria-hidden": "true" } }));
+      link.addEventListener("click", () => openCourseDialog(chip, match ? match[1] : chip.label, match ? match[2] : chip.label));
       chipsWrap.appendChild(link);
       return;
     }
@@ -498,6 +545,7 @@ function renderSkillCard(card, mount, isCourse, index) {
 }
 
 function renderSkills(data, coreMount, courseworkMount) {
+  initCourseDialog();
   if (coreMount) {
     coreMount.innerHTML = "";
     (data.core || []).forEach((c, i) => renderSkillCard(c, coreMount, false, i));
