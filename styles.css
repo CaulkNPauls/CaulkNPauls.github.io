@@ -1447,6 +1447,7 @@ html, body { overflow-x: hidden; }
 .course-link__code{display:grid;place-items:center;align-self:stretch;min-width:58px;padding:5px 7px;border:1px solid rgba(43,92,130,.3);background:var(--pen-strong);color:#fffdf5;font:700 .62rem/1 var(--font-mono);letter-spacing:.04em;white-space:nowrap}
 .course-link__name{font:600 .67rem/1.35 var(--font-mono)}
 .page-skills .skills-card--course .course-link .ip{margin:0;padding:3px 6px;border-color:rgba(181,126,30,.45);background:#fff0c9;color:#70500e;font-size:.55rem;white-space:nowrap}
+.course-link__grade{display:grid;place-items:center;min-width:27px;padding:4px 6px;border:1px solid rgba(43,92,130,.38);background:#dff0ef;color:var(--pen-strong);font:800 .62rem/1 var(--font-mono);white-space:nowrap}
 .course-link__arrow{color:var(--pen);font:700 .9rem/1 var(--font-mono);transition:transform 160ms ease}
 .course-link:hover .course-link__arrow,.course-link:focus-visible .course-link__arrow{transform:translate(2px,-2px)}
 

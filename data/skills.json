@@ -36,9 +36,9 @@
       "title": "Analytics & Statistics",
       "description": "Interpreting data and drawing conclusions.",
       "chips": [
-        { "label": "IE 322: Analytics & Computing for IE", "url": "https://catalogs.buffalo.edu/preview_course_nopop.php?catoid=17&coid=109112", "inProgress": false },
-        { "label": "EAS 305: Applied Probability & Statistics", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=EAS&filter%5B29%5D=305&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false },
-        { "label": "IE 306: Statistics for Engineers", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=306&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false }
+        { "label": "IE 322: Analytics & Computing for IE", "url": "https://catalogs.buffalo.edu/preview_course_nopop.php?catoid=17&coid=109112", "grade": "A-", "inProgress": false },
+        { "label": "EAS 305: Applied Probability & Statistics", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=EAS&filter%5B29%5D=305&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "grade": "A", "inProgress": false },
+        { "label": "IE 306: Statistics for Engineers", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=306&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "grade": "A", "inProgress": false }
       ]
     },
     {
@@ -47,9 +47,9 @@
       "title": "Optimization & Modeling",
       "description": "Structured problem solving and decision-making.",
       "chips": [
-        { "label": "IE 373: Optimization (Deterministic)", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=373&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false },
-        { "label": "IE 374: Modeling of Stochastic Systems", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=374&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false },
-        { "label": "MTH 306: Differential Equations", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=MTH&filter%5B29%5D=306&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false },
+        { "label": "IE 373: Optimization (Deterministic)", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=373&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "grade": "A-", "inProgress": false },
+        { "label": "IE 374: Modeling of Stochastic Systems", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=374&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "grade": "B+", "inProgress": false },
+        { "label": "MTH 306: Differential Equations", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=MTH&filter%5B29%5D=306&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "grade": "A", "inProgress": false },
         { "label": "IE 477: Simulation Modeling & Analysis", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=477&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": true }
       ]
     },
@@ -59,9 +59,9 @@
       "title": "Operations & IE Core",
       "description": "Planning, layout, and operational thinking.",
       "chips": [
-        { "label": "IE 326: Planning Production & Service Enterprises", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=326&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false },
-        { "label": "IE 327: Facility Design & Material Handling", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=327&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false },
-        { "label": "IE 320: Engineering Economy", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=320&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false },
+        { "label": "IE 326: Planning Production & Service Enterprises", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=326&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "grade": "A", "inProgress": false },
+        { "label": "IE 327: Facility Design & Material Handling", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=327&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "grade": "A", "inProgress": false },
+        { "label": "IE 320: Engineering Economy", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=320&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "grade": "A", "inProgress": false },
         { "label": "IE 420: Systems Engineering Practicum", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=420&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": true },
         { "label": "IE 421: Sustainable Manufacturing", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=421&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": true }
       ]
@@ -72,10 +72,10 @@
       "title": "Human Factors & Quality & Communication",
       "description": "Designing for people, consistency, and clear writing.",
       "chips": [
-        { "label": "IE 323: Human Factors in System Design", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=323&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false },
-        { "label": "IE 408: Quality Assurance", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=408&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false },
-        { "label": "EAS 360: STEM Communications", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=EAS&filter%5B29%5D=360&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false },
-        { "label": "ENG 105: Writing & Rhetoric", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=ENG&filter%5B29%5D=105&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": false },
+        { "label": "IE 323: Human Factors in System Design", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=323&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "grade": "A", "inProgress": false },
+        { "label": "IE 408: Quality Assurance", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=408&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "grade": "A", "inProgress": false },
+        { "label": "EAS 360: STEM Communications", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=EAS&filter%5B29%5D=360&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "grade": "A", "inProgress": false },
+        { "label": "ENG 105: Writing & Rhetoric", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=ENG&filter%5B29%5D=105&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "grade": "A", "inProgress": false },
         { "label": "IE 409: Six Sigma Quality", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=409&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": true },
         { "label": "IE 435: Human Centered Design for Interactive Systems", "url": "https://catalogs.buffalo.edu/content.php?filter%5B27%5D=IE&filter%5B29%5D=435&filter%5B32%5D=1&cur_cat_oid=21&navoid=1161&search_database=Filter", "inProgress": true }
       ]
