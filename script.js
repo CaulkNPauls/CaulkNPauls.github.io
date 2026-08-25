@@ -10,6 +10,19 @@
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const smoothOrAuto = prefersReducedMotion ? "auto" : "smooth";
 
+// Always begin a newly opened page at its top. Browsers can otherwise restore
+// the previous scroll position during cross-page transitions or back/forward
+// navigation. Preserve explicit destinations such as /#contact.
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+function resetPageScroll() {
+  if (window.location.hash) return;
+  window.requestAnimationFrame(() => window.scrollTo(0, 0));
+}
+
+window.addEventListener("pageshow", resetPageScroll);
+document.addEventListener("DOMContentLoaded", resetPageScroll, { once: true });
+
 // ===== Edit mode: load the in-page admin editor only when ?edit=1 is present =====
 if (new URLSearchParams(location.search).get("edit") === "1" && !document.getElementById("gateView")) {
   const editorScript = document.createElement("script");
