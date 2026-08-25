@@ -1283,21 +1283,12 @@ html, body { overflow-x: hidden; }
 .page-skills .page-hero{padding-bottom:42px}
 .page-skills .page-hero__copy{max-width:1020px}
 .page-skills .page-hero__title{max-width:15ch}
-.skills-index{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
-.skills-index a{padding:9px 13px;border:1px solid rgba(43,92,130,.35);border-radius:3px;background:#fffdf5;color:var(--ink);font:600 .76rem/1.2 var(--font-mono);text-decoration:none;box-shadow:2px 3px 0 rgba(28,28,26,.08)}
-.skills-index a:hover,.skills-index a:focus-visible{border-color:var(--pen-strong);box-shadow:3px 4px 0 rgba(23,60,86,.15);transform:translateY(-2px)}
-.skills-index a:nth-child(2){background:#e9f3f5;transform:rotate(.8deg)}
-.skills-index a:nth-child(3){background:#fff0c9;transform:rotate(-.6deg)}
-.skills-index a:nth-child(4){background:#f1e3ef;transform:rotate(.5deg)}
-.skills-blueprint-flow{position:relative;margin-top:26px;padding:28px 14px 14px;border:1px solid rgba(43,92,130,.42);background:rgba(255,253,245,.52)}
-.skills-blueprint-flow::before,.skills-blueprint-flow::after{content:"";position:absolute;width:7px;height:7px;border-color:var(--pen);border-style:solid}
-.skills-blueprint-flow::before{top:5px;left:5px;border-width:1px 0 0 1px}.skills-blueprint-flow::after{right:5px;bottom:5px;border-width:0 1px 1px 0}
-.skills-blueprint-flow__label{position:absolute;top:8px;left:14px;color:var(--pen);font:700 .55rem/1 var(--font-mono);letter-spacing:.13em;text-transform:uppercase}
-.skills-blueprint-flow ol{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;list-style:none;margin:0;padding:0}
-.skills-blueprint-flow li{position:relative;display:grid;gap:3px;color:var(--pen-strong);font:700 .67rem/1.2 var(--font-mono);text-align:center;text-transform:uppercase}
-.skills-blueprint-flow li b{display:grid;place-items:center;width:28px;height:28px;margin:auto;border:1px solid var(--pen);border-radius:50%;background:#fffdf5;color:var(--pen);font-size:.56rem}
-.skills-blueprint-flow li:not(:last-child)::after{content:"";position:absolute;top:14px;left:calc(50% + 18px);width:calc(100% - 18px);border-top:1px dashed var(--pen)}
-.skills-blueprint-flow li:not(:last-child)::before{content:"";position:absolute;z-index:1;top:11px;right:-10px;width:5px;height:5px;border-top:1px solid var(--pen);border-right:1px solid var(--pen);transform:rotate(45deg)}
+.skills-capability-map{position:relative;display:grid;gap:0;margin-top:28px;padding:29px 16px 9px;border:1px solid rgba(43,92,130,.42);background:rgba(255,253,245,.62);box-shadow:3px 4px 0 rgba(28,28,26,.06)}
+.skills-capability-map__label{position:absolute;top:9px;left:16px;margin:0;color:var(--pen);font:700 .55rem/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase}
+.skills-capability-map article{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:11px 0;border-top:1px dashed rgba(43,92,130,.32)}
+.skills-capability-map article>span{display:grid;place-items:center;width:25px;height:25px;border:1px solid var(--pen);border-radius:50%;color:var(--pen);font:700 .53rem/1 var(--font-mono)}
+.skills-capability-map strong{display:block;color:var(--pen-strong);font:700 .78rem/1.25 var(--font-mono)}
+.skills-capability-map article p{margin:3px 0 0;color:var(--muted);font-size:.76rem;line-height:1.45}
 .skills-evidence-key{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:24px;padding-top:16px;border-top:1px dashed rgba(43,92,130,.32);font:600 .68rem/1.3 var(--font-mono);color:var(--muted)}
 .skills-evidence-key span{display:flex;align-items:center;gap:7px}.skills-evidence-key i{width:9px;height:9px;border:1px solid var(--pen);border-radius:50%;background:#fffdf5}.skills-evidence-key span:nth-child(1) i{background:var(--pen)}.skills-evidence-key span:nth-child(2) i{background:#e9b34b}.skills-evidence-key span:nth-child(3) i{background:#fffdf5}.skills-evidence-key span:nth-child(4) i{background:linear-gradient(135deg,var(--pen) 50%,#fffdf5 50%)}
 .page-skills .section{background:transparent}
@@ -1575,7 +1566,7 @@ html, body { overflow-x: hidden; }
   .page-skills .skills-principles{grid-column:1/-1;width:100vw;margin-left:calc(50% - 50vw)}
 }
 @media(max-width:900px){.page-skills .skills-grid,.page-skills .coursework-grid,.skills-proof__grid,.skills-principles__notes{grid-template-columns:1fr}.skills-proof__grid article,.skills-proof__grid article:first-child,.skills-proof__grid article:last-child{padding:20px 0;border-right:0;border-bottom:1px dashed rgba(28,28,26,.3)}.skills-proof__grid article:last-child{border-bottom:0}.page-skills .skills-card--course:nth-child(odd){border-right:0}.page-skills .coursework-grid{padding:38px 22px 24px}.skills-proof__sheet{padding:36px 24px 26px}}
-@media(max-width:560px){.skills-index{display:grid;grid-template-columns:1fr 1fr}.skills-blueprint-flow ol{grid-template-columns:1fr 1fr;gap:16px 24px}.skills-blueprint-flow li:nth-child(2)::after,.skills-blueprint-flow li:nth-child(2)::before{display:none}.skills-evidence-key{display:grid;grid-template-columns:1fr 1fr}.page-skills .skills-card{padding:28px 20px 24px 38px}.skills-proof__head{display:block}.skills-proof__stamp{display:inline-block;margin-top:14px}}
+@media(max-width:560px){.skills-evidence-key{display:grid;grid-template-columns:1fr 1fr}.page-skills .skills-card{padding:28px 20px 24px 38px}.skills-proof__head{display:block}.skills-proof__stamp{display:inline-block;margin-top:14px}}
 
 /* =========================================================
    CASE STUDY TEMPLATE (project detail pages)
