@@ -529,7 +529,6 @@ function renderSkillCard(card, mount, isCourse, index) {
       } else {
         link.appendChild(mkEl("span", { className: "course-link__name", text: chip.label }));
       }
-      link.appendChild(mkEl("span", { className: chip.inProgress ? "ip" : "course-link__grade", text: chip.inProgress ? "Pending" : chip.grade || "Complete" }));
       link.appendChild(mkEl("span", { className: "course-link__arrow", text: "+", attrs: { "aria-hidden": "true" } }));
       link.addEventListener("click", () => openCourseDialog(chip, match ? match[1] : chip.label, match ? match[2] : chip.label));
       chipsWrap.appendChild(link);
