@@ -974,6 +974,30 @@ function initProjectGrid() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // ===== Mobile context notice =====
+  // Keep this in shared JS so every public page receives the same notice.
+  // It is inserted below the sticky navigation and only rendered on phones.
+  if (!document.querySelector(".mobile-desktop-notice")) {
+    const notice = document.createElement("aside");
+    notice.className = "mobile-desktop-notice";
+    notice.setAttribute("aria-label", "Desktop viewing recommendation");
+
+    const noticeCopy = document.createElement("p");
+    noticeCopy.innerHTML = "<strong>Quick heads-up:</strong> This portfolio was built with desktop use in mind. For the best experience, I highly recommend viewing it on a laptop or desktop.";
+
+    const noticeClose = document.createElement("button");
+    noticeClose.type = "button";
+    noticeClose.className = "mobile-desktop-notice__close";
+    noticeClose.setAttribute("aria-label", "Dismiss desktop viewing recommendation");
+    noticeClose.textContent = "Got it";
+    noticeClose.addEventListener("click", () => notice.remove());
+
+    notice.append(noticeCopy, noticeClose);
+    const siteNav = document.querySelector(".portfolio-nav, .nav");
+    if (siteNav) siteNav.insertAdjacentElement("afterend", notice);
+    else document.body.prepend(notice);
+  }
+
   // ===== Mobile nav toggle (works with CSS: .nav.is-open .nav__links { display:flex; } ) =====
   const nav = document.querySelector(".nav");
   const navToggle = document.querySelector(".nav__toggle");

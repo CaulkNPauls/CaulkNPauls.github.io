@@ -1278,6 +1278,214 @@ html, body { overflow-x: hidden; }
   .coursework-grid{ grid-template-columns: 1fr; }
 }
 
+/* MOBILE CORRECTION PASS
+   Prevent desktop artwork and card geometry from clipping narrow screens,
+   and make in-page navigation land on useful content. */
+.mobile-desktop-notice { display: none; }
+
+@media (max-width: 700px) {
+  html {
+    scroll-padding-top: 82px;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body { max-width: 100%; }
+  main,
+  main > section,
+  .container,
+  .page-hero__grid,
+  .page-hero__copy,
+  .section__head,
+  .cards,
+  .card,
+  .project,
+  .panel { min-width: 0; }
+
+  main section[id],
+  main[id],
+  #home,
+  #about,
+  #work,
+  #contact { scroll-margin-top: 82px; }
+
+  img,
+  video,
+  canvas,
+  iframe {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  p,
+  li,
+  h1,
+  h2,
+  h3,
+  a,
+  button { overflow-wrap: anywhere; }
+
+  .mobile-desktop-notice {
+    position: relative;
+    z-index: 12;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+    padding: 13px 16px;
+    border-bottom: 1px solid rgba(43, 92, 130, .34);
+    background:
+      linear-gradient(rgba(43, 92, 130, .1) 1px, transparent 1px) 0 0 / 14px 14px,
+      linear-gradient(90deg, rgba(43, 92, 130, .1) 1px, transparent 1px) 0 0 / 14px 14px,
+      #f6efdb;
+    color: #1c1c1a;
+    box-shadow: 0 5px 14px rgba(23, 23, 20, .1);
+  }
+  .mobile-desktop-notice::before {
+    content: "mobile note";
+    position: absolute;
+    top: -7px;
+    left: 17px;
+    padding: 1px 7px;
+    background: #2b5c82;
+    color: #fff;
+    font: 700 .56rem/1.4 "Manrope", sans-serif;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    transform: rotate(-1.5deg);
+  }
+  .mobile-desktop-notice p {
+    margin: 0;
+    font-size: .78rem;
+    line-height: 1.45;
+  }
+  .mobile-desktop-notice strong { color: #173c56; }
+  .mobile-desktop-notice__close {
+    min-width: 58px;
+    min-height: 40px;
+    padding: 7px 9px;
+    border: 1px solid #2b5c82;
+    border-radius: 3px;
+    background: #fffdf5;
+    color: #173c56;
+    font: 700 .68rem "Manrope", sans-serif;
+    cursor: pointer;
+  }
+
+  /* The contact anchor should reveal the notebook immediately on phones. */
+  .page-home .editorial-contact {
+    padding: 34px 16px 48px;
+    scroll-margin-top: 82px;
+  }
+  .page-home .notebook {
+    width: 100%;
+    margin: 0;
+    border-radius: 5px;
+    box-shadow: 0 12px 28px rgba(23, 23, 20, .18);
+  }
+  .page-home .notebook__page {
+    min-height: 0;
+    padding: 26px 18px;
+  }
+  .page-home .notebook__tabs { display: none; }
+  .page-home .notebook__contact {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 10px;
+  }
+  .page-home .notebook__icon {
+    width: 28px;
+    height: 28px;
+  }
+  .page-home .notebook__contact-label {
+    font-size: clamp(1.08rem, 5.5vw, 1.42rem);
+    overflow-wrap: anywhere;
+  }
+
+  /* Correct the rendered Experience component's actual class name. */
+  .page-experience .timeline-path { width: 100%; }
+  .page-experience .timeline-node__rail {
+    left: 6px;
+    width: 32px;
+  }
+  .page-experience .timeline-node__dot {
+    width: 32px;
+    height: 32px;
+  }
+  .page-experience .timeline-node:nth-child(odd) .timeline-node__card,
+  .page-experience .timeline-node:nth-child(even) .timeline-node__card,
+  .page-experience .timeline-node--featured .timeline-node__card {
+    width: calc(100% - 42px);
+    max-width: none;
+    margin-right: 0;
+    margin-left: 42px;
+    padding: 27px 15px 22px 24px !important;
+    transform: none !important;
+  }
+  .page-experience .timeline-node__card--branded { padding-right: 15px !important; }
+  .page-experience .timeline-node__org-mark {
+    max-width: 104px;
+    margin: 0 0 10px;
+  }
+  .page-experience .timeline-node__dateline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px 7px;
+  }
+  .page-experience .timeline-node__photo { aspect-ratio: 4 / 3; }
+
+  /* Remove remaining desktop offsets and oversized decorative surfaces. */
+  .page-home .editorial-role-list { margin-top: 42px; }
+  .page-home .editorial-role-row { gap: 12px; }
+  .page-home .editorial-section__heading--split .editorial-text-link {
+    margin: 18px 0 38px;
+  }
+  .page-home .editorial-placeholder--project,
+  .page-home .editorial-project--large .editorial-placeholder--project {
+    aspect-ratio: 4 / 3;
+  }
+  .fieldnotes-theme .section__head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .fieldnotes-theme .section__head > * { min-width: 0; }
+  .fieldnotes-theme .stat-strip { grid-template-columns: 1fr 1fr; }
+  .page-skills .skills-grid,
+  .page-skills .skills-proof-grid,
+  .page-skills .course-grid { min-width: 0; }
+  .page-skills .skills-card,
+  .page-skills .skills-proof,
+  .page-skills .course-card { max-width: 100%; }
+  .course-dialog {
+    width: calc(100% - 12px);
+    max-height: calc(100dvh - 12px);
+  }
+  .course-dialog__sheet {
+    max-height: calc(100dvh - 12px);
+    padding: 42px 16px 24px;
+    box-shadow: 5px 7px 0 rgba(5, 20, 30, .2);
+  }
+  .page-projects .project__actions,
+  .page-case-study .case-study-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+  .page-projects .project__actions > *,
+  .page-case-study .case-study-actions > * { width: 100%; }
+}
+
+@media (max-width: 380px) {
+  .container { width: calc(100% - 24px); }
+  .portfolio-nav { padding-inline: 12px; }
+  .portfolio-nav__logo { height: 49px; }
+  .page-home .editorial-hero { padding-inline: 12px; }
+  .page-home .editorial-hero h1 { font-size: clamp(2.8rem, 15vw, 3.55rem); }
+  .mobile-desktop-notice { grid-template-columns: 1fr; }
+  .mobile-desktop-notice__close { width: 100%; }
+}
+
 /* Skills field notebook */
 .page-skills{background:linear-gradient(rgba(43,92,130,.12) 1px,transparent 1px) 0 0/16px 16px,linear-gradient(90deg,rgba(43,92,130,.12) 1px,transparent 1px) 0 0/16px 16px,#f6efdb}
 .page-skills .page-hero{padding-bottom:42px}
@@ -3797,4 +4005,56 @@ body.is-edit-mode [data-block-id]:hover{
     grid-template-columns: 1fr;
   }
   .page-case-study .experience-cta__actions .btn { width: 100%; }
+}
+
+/* Final phone cascade: intentionally last so legacy page art cannot
+   restore desktop dimensions after the shared correction layer. */
+@media (max-width: 700px) {
+  .page-home #contact.editorial-contact {
+    padding: 34px 16px 48px;
+    scroll-margin-top: 82px;
+  }
+  .page-home #contact .notebook {
+    width: 100%;
+    margin: 0;
+    transform: none;
+  }
+  .page-home #contact .notebook__page {
+    min-height: 0;
+    padding: 26px 18px;
+  }
+  .page-home #contact .notebook__tabs { display: none; }
+
+  .page-experience .timeline-node:nth-child(odd) .timeline-node__card,
+  .page-experience .timeline-node:nth-child(even) .timeline-node__card,
+  .page-experience .timeline-node--featured .timeline-node__card {
+    width: calc(100% - 42px);
+    max-width: none;
+    margin-right: 0;
+    margin-left: 42px;
+    padding: 27px 15px 22px 24px !important;
+    transform: none !important;
+  }
+  .page-experience .timeline-node__rail {
+    left: 6px;
+    width: 32px;
+  }
+
+  .page-skills .skills-grid,
+  .page-skills .skills-proof-grid,
+  .page-skills .course-grid,
+  .page-projects .cards,
+  .page-case-study .evidence-grid {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .page-skills .skills-card,
+  .page-skills .skills-proof,
+  .page-skills .course-card,
+  .page-projects .project,
+  .page-case-study .panel {
+    max-width: 100%;
+    min-width: 0;
+  }
 }
