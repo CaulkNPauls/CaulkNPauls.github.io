@@ -1,0 +1,39 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "paulpoleon-spotify-jam",
+	"main": "src/index.js",
+	"compatibility_date": "2026-08-26",
+	"workers_dev": true,
+	"kv_namespaces": [
+		{
+			"binding": "JAM_STORE",
+			"id": "2f8b6c0bcb3c42c48e8ce32d4bee1e1b"
+		}
+	],
+	"secrets": {
+		"required": [
+			"ADMIN_TOKEN"
+		]
+	},
+	"vars": {
+		"ENVIRONMENT": "production"
+	},
+	"env": {
+		"dev": {
+			"name": "paulpoleon-spotify-jam-dev",
+			"kv_namespaces": [
+				{
+					"binding": "JAM_STORE"
+				}
+			],
+			"secrets": {
+				"required": [
+					"ADMIN_TOKEN"
+				]
+			},
+			"vars": {
+				"ENVIRONMENT": "development"
+			}
+		}
+	}
+}
