@@ -66,7 +66,9 @@ a{ color:inherit; }
    visually persist across the swap instead of crossfading with the rest
    of the page.
 ================================ */
-@view-transition{ navigation: auto; }
+/* Full-document snapshots were expensive on the long, textured portfolio
+   pages. Keep normal document navigation; component motion remains intact. */
+@view-transition{ navigation: none; }
 
 ::view-transition-group(*){ animation-duration:220ms; }
 ::view-transition-old(root),
@@ -4794,3 +4796,18 @@ body.is-edit-mode [data-block-id]:hover{
 .page-projects .pin-key--work{background:radial-gradient(circle at 35% 28%,#eff7fb 0 2px,#517b96 3px 8px,#264c66 9px)}
 .pin-filter__all{display:grid;place-items:center;width:22px;height:18px;border-bottom:2px solid #68462f;color:#68462f;font:700 .62rem/1 var(--font-mono)}
 @media(max-width:800px){.page-projects .corkboard-legend__key{justify-content:flex-start}.page-projects .pin-filter{min-height:40px}}
+
+/* Performance pass: preserve the Field Notes appearance without forcing
+   the browser to continuously rasterize large filtered surfaces. */
+.page-projects .cards--flowsafe .project::before{filter:none}
+.page-projects .modal__backdrop{backdrop-filter:none}
+.editorial-section,
+.case-study-section,
+.page-projects .projects-featured,
+.page-projects .projects-explore,
+.page-skills .skills-proof,
+.page-skills .coursework{
+  content-visibility:auto;
+  contain-intrinsic-size:auto 760px;
+}
+@media(max-width:700px){.editorial-section,.case-study-section,.page-projects .projects-featured,.page-projects .projects-explore,.page-skills .skills-proof,.page-skills .coursework{contain-intrinsic-size:auto 980px}}

@@ -153,7 +153,7 @@ function renderExperience(list, mount) {
     if (role.photo) {
       const img = mkEl("img", {
         className: "timeline-node__photo",
-        attrs: { src: role.photo, alt: role.photoAlt || `${role.company} photo`, loading: "lazy" },
+        attrs: { src: role.photo, alt: role.photoAlt || `${role.company} photo`, loading: "lazy", decoding: "async" },
       });
       img.style.width = "100%";
       img.style.objectFit = "cover";
@@ -195,7 +195,7 @@ function renderFeaturedProjects(list, mount, variant) {
       if (p.image && p.image.src) {
         article.appendChild(mkEl("img", {
           className: "project__thumb",
-          attrs: { src: p.image.src, alt: p.image.alt || p.title, loading: "lazy" },
+          attrs: { src: p.image.src, alt: p.image.alt || p.title, width: p.image.width, height: p.image.height, loading: "lazy", decoding: "async", fetchpriority: "low" },
         }));
       } else {
         const ph = mkEl("div", {
@@ -241,7 +241,7 @@ function renderFeaturedProjects(list, mount, variant) {
     if (p.image && p.image.src) {
       visual = mkEl("img", {
         className: "editorial-placeholder--project",
-        attrs: { src: p.image.src, alt: p.image.alt || p.title, loading: "lazy" },
+        attrs: { src: p.image.src, alt: p.image.alt || p.title, width: p.image.width, height: p.image.height, loading: "lazy", decoding: "async", fetchpriority: "low" },
       });
       visual.style.width = "100%";
       visual.style.height = "auto";
@@ -419,7 +419,7 @@ function renderTagsBlock(block, index) {
 function renderGalleryImage(img) {
   if (img.src) {
     const figure = mkEl("figure", { className: "evidence-photo" });
-    figure.appendChild(mkEl("img", { attrs: { src: img.src, alt: img.alt || "", loading: "lazy" } }));
+    figure.appendChild(mkEl("img", { attrs: { src: img.src, alt: img.alt || "", width: img.width, height: img.height, loading: "lazy", decoding: "async", fetchpriority: "low" } }));
     if (img.caption) figure.appendChild(mkEl("figcaption", { text: img.caption }));
     return figure;
   }
@@ -625,7 +625,8 @@ function renderPhotoSlot(mount, photo, opts) {
   if (photo && photo.src) {
     mount.removeAttribute("role");
     mount.removeAttribute("aria-label");
-    const img = mkEl("img", { attrs: { src: photo.src, alt: photo.alt || opts.imgAlt || "", loading: "lazy" } });
+    const isHero = opts.number === "01";
+    const img = mkEl("img", { attrs: { src: photo.src, alt: photo.alt || opts.imgAlt || "", loading: isHero ? "eager" : "lazy", decoding: "async", fetchpriority: isHero ? "high" : "low" } });
     // Absolute-filled against the mount (already position:relative for the
     // photo-button overlay) rather than width/height:100%, since these
     // mounts are grid items whose own height isn't always a definite value
@@ -866,18 +867,28 @@ function initFlashcards() {
 
 // Re-queries the DOM each call, so it's safe to call again after dynamic
 // content is injected (re-observing an already-visible element is a no-op).
+let revealObserver = null;
 function initReveal() {
   const revealEls = document.querySelectorAll(".reveal");
   if (!revealEls.length) return;
-  const obs = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("is-visible");
-      });
-    },
-    { threshold: 0.15 }
-  );
-  revealEls.forEach((el) => obs.observe(el));
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+          delete entry.target.dataset.revealObserved;
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px 120px" }
+    );
+  }
+  revealEls.forEach((el) => {
+    if (el.classList.contains("is-visible") || el.dataset.revealObserved === "1") return;
+    el.dataset.revealObserved = "1";
+    revealObserver.observe(el);
+  });
 }
 
 // ===== Projects page: Explore filter/search + modal (only if projectGrid exists) =====
@@ -1015,6 +1026,8 @@ function initProjectGrid() {
           const img = document.createElement("img");
           img.src = image.src;
           img.alt = image.alt || "";
+          img.loading = "lazy";
+          img.decoding = "async";
           figure.appendChild(img);
           modalLinks.appendChild(figure);
         }
@@ -1033,6 +1046,7 @@ function initProjectGrid() {
             img.src = href;
             img.alt = l.label || "Project image";
             img.loading = "lazy";
+            img.decoding = "async";
             a.appendChild(img);
           } else {
             const icon = document.createElement("span");

@@ -89,7 +89,7 @@
       "projectType": "work",
       "status": "published",
       "href": "/projects/valve-e-internal-assistant/",
-      "image": {"src": "/assets/photos/mt0989pc-valve-e-pointing-up-with-hand-on-hip.png", "alt": "V.A.L.V.E.-E. tutorial character pointing upward"},
+      "image": {"src": "/assets/photos/valve-e-tutorial-720.png", "alt": "V.A.L.V.E.-E. tutorial character pointing upward", "width": 720, "height": 720},
       "placeholderNote": "V.A.L.V.E.-E. tutorial character or a sanitized tutorial screen."
     }
   ],
