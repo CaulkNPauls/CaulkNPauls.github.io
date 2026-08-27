@@ -892,22 +892,26 @@ function initProjectGrid() {
   const listenerOptions = { signal: gridAbort.signal };
 
   const chips = document.querySelectorAll(".chip");
+  const pinFilters = document.querySelectorAll(".pin-filter");
   const search = document.getElementById("projectSearch");
   const cards = Array.from(projectGrid.querySelectorAll(".project--open"));
   const count = document.getElementById("projectCount");
   const empty = document.getElementById("projectsEmpty");
 
   let activeFilter = "all";
+  let activeProjectType = "all";
 
   function matches(card) {
     const filter = card.getAttribute("data-filter") || "";
+    const projectType = card.getAttribute("data-project-type") || "solo";
     const title = (card.getAttribute("data-title") || "").toLowerCase();
     const tags = (card.getAttribute("data-tags") || "").toLowerCase();
     const q = (search?.value || "").trim().toLowerCase();
 
     const filterOk = activeFilter === "all" || filter === activeFilter;
+    const projectTypeOk = activeProjectType === "all" || projectType === activeProjectType;
     const searchOk = !q || title.includes(q) || tags.includes(q);
-    return filterOk && searchOk;
+    return filterOk && projectTypeOk && searchOk;
   }
 
   function apply() {
@@ -935,6 +939,19 @@ function initProjectGrid() {
   }
 
   if (search) search.addEventListener("input", apply, listenerOptions);
+
+  pinFilters.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const requested = btn.dataset.projectTypeFilter || "all";
+      activeProjectType = requested === activeProjectType && requested !== "all" ? "all" : requested;
+      pinFilters.forEach((item) => {
+        const selected = item.dataset.projectTypeFilter === activeProjectType;
+        item.classList.toggle("is-active", selected);
+        item.setAttribute("aria-pressed", String(selected));
+      });
+      apply();
+    }, listenerOptions);
+  });
 
   // Modal wiring
   const modal = document.getElementById("projectModal");

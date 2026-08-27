@@ -4778,3 +4778,19 @@ body.is-edit-mode [data-block-id]:hover{
 .page-projects .modal__attachment-icon{flex-basis:34px;width:34px;height:34px;border-width:1.5px;font-size:.58rem;transform:none}
 .page-projects .modal__attachment::after{right:11px;bottom:9px}
 @media(max-width:700px){.page-projects .modal__panel{padding:44px 18px 28px 36px}.page-projects .modal__cols{grid-template-columns:1fr;gap:22px}.page-projects .modal__panel .modal__cols>.panel,.page-projects .modal__panel .modal__cols>.panel+ .panel{padding:0;border-left:0}.page-projects .modal__panel .modal__cols>.panel+ .panel{padding-top:20px;border-top:1px dashed rgba(43,92,130,.3)}}
+
+/* Clickable, dimensional pushpin legend */
+.page-projects .corkboard-legend__key{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px;margin:0;padding:0}
+.page-projects .pin-filter{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:6px 10px;border:1px dashed rgba(104,70,47,.35);border-radius:2px;background:rgba(255,250,236,.55);color:#68462f;font:600 .61rem/1 var(--font-mono);text-transform:uppercase;letter-spacing:.045em;white-space:nowrap;cursor:pointer;transition:transform .16s ease,background .16s ease,box-shadow .16s ease}
+.page-projects .pin-filter:hover{transform:translateY(-2px);background:#fffaf0;box-shadow:2px 3px 0 rgba(80,48,27,.12)}
+.page-projects .pin-filter:focus-visible{outline:3px solid rgba(43,92,130,.28);outline-offset:2px}
+.page-projects .pin-filter.is-active{border-style:solid;border-color:#68462f;background:#fffaf0;box-shadow:inset 0 -3px rgba(104,70,47,.1)}
+.page-projects .pin-key{position:relative;display:inline-block;flex:0 0 17px;width:17px;height:17px;border:1px solid rgba(44,35,28,.32);border-radius:50%;box-shadow:0 3px 3px rgba(55,31,16,.32),inset -2px -2px 3px rgba(30,30,25,.2)}
+.page-projects .pin-key::before{content:"";position:absolute;left:7px;top:13px;width:3px;height:11px;border-radius:0 0 2px 2px;background:linear-gradient(90deg,#777,#d8d8d2 48%,#686866);transform:rotate(8deg);transform-origin:top}
+.page-projects .pin-key::after{content:"";position:absolute;left:4px;top:3px;width:4px;height:3px;border-radius:50%;background:rgba(255,255,255,.72);transform:rotate(-25deg)}
+.page-projects .pin-key--solo{background:radial-gradient(circle at 35% 28%,#fff7bd 0 2px,#e4b62c 3px 8px,#9c6816 9px)}
+.page-projects .pin-key--personal{background:radial-gradient(circle at 35% 28%,#e5f8df 0 2px,#54a66c 3px 8px,#24633b 9px)}
+.page-projects .pin-key--group{background:radial-gradient(circle at 35% 28%,#ffe1db 0 2px,#cf554d 3px 8px,#7e2824 9px)}
+.page-projects .pin-key--work{background:radial-gradient(circle at 35% 28%,#eff7fb 0 2px,#517b96 3px 8px,#264c66 9px)}
+.pin-filter__all{display:grid;place-items:center;width:22px;height:18px;border-bottom:2px solid #68462f;color:#68462f;font:700 .62rem/1 var(--font-mono)}
+@media(max-width:800px){.page-projects .corkboard-legend__key{justify-content:flex-start}.page-projects .pin-filter{min-height:40px}}

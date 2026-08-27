@@ -97,12 +97,13 @@
 
             <aside class="corkboard-legend" aria-label="How to use the project board">
               <p class="corkboard-legend__instruction"><strong>Pull a card from the board</strong><span>Click any index card to see more details.</span></p>
-              <ul class="corkboard-legend__key">
-                <li><i class="pin-key pin-key--solo" aria-hidden="true"></i>Solo class</li>
-                <li><i class="pin-key pin-key--personal" aria-hidden="true"></i>Personal</li>
-                <li><i class="pin-key pin-key--group" aria-hidden="true"></i>Group</li>
-                <li><i class="pin-key pin-key--work" aria-hidden="true"></i>Work</li>
-              </ul>
+              <div class="corkboard-legend__key" aria-label="Filter projects by pin type">
+                <button class="pin-filter is-active" type="button" data-project-type-filter="all" aria-pressed="true"><span class="pin-filter__all" aria-hidden="true">×4</span>All pins</button>
+                <button class="pin-filter" type="button" data-project-type-filter="solo" aria-pressed="false"><i class="pin-key pin-key--solo" aria-hidden="true"></i>Solo class</button>
+                <button class="pin-filter" type="button" data-project-type-filter="personal" aria-pressed="false"><i class="pin-key pin-key--personal" aria-hidden="true"></i>Personal</button>
+                <button class="pin-filter" type="button" data-project-type-filter="group" aria-pressed="false"><i class="pin-key pin-key--group" aria-hidden="true"></i>Group</button>
+                <button class="pin-filter" type="button" data-project-type-filter="work" aria-pressed="false"><i class="pin-key pin-key--work" aria-hidden="true"></i>Work</button>
+              </div>
             </aside>
 
             <div class="chip-row" role="tablist" aria-label="Project filters">
