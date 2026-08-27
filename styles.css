@@ -4543,12 +4543,36 @@ body.is-edit-mode [data-block-id]:hover{
 .page-projects.fieldnotes-theme .cards--static .project--open{
   border:0;
   border-radius:1px;
+  padding:34px 24px 22px 44px;
+  background-color:#fffdf4;
+  background-image:
+    linear-gradient(90deg,transparent 0 27px,rgba(190,72,63,.42) 27px 28px,transparent 28px),
+    repeating-linear-gradient(to bottom,transparent 0 30px,rgba(67,111,143,.18) 30px 31px);
+  background-position:0 12px;
   box-shadow:3px 5px 8px rgba(55,31,16,.26),0 13px 22px rgba(55,31,16,.18);
 }
-.page-projects.fieldnotes-theme .cards--static .project--open:nth-child(4n+1){background:#fffbed;transform:rotate(-1.4deg)}
-.page-projects.fieldnotes-theme .cards--static .project--open:nth-child(4n+2){background:#e8f0eb;transform:rotate(1.1deg)}
-.page-projects.fieldnotes-theme .cards--static .project--open:nth-child(4n+3){background:#f5e4bd;transform:rotate(-.7deg)}
-.page-projects.fieldnotes-theme .cards--static .project--open:nth-child(4n){background:#e4edf2;transform:rotate(1.5deg)}
+.page-projects.fieldnotes-theme .cards--static .project--open:nth-child(4n+1){transform:rotate(-1.4deg)}
+.page-projects.fieldnotes-theme .cards--static .project--open:nth-child(4n+2){transform:rotate(1.1deg)}
+.page-projects.fieldnotes-theme .cards--static .project--open:nth-child(4n+3){transform:rotate(-.7deg)}
+.page-projects.fieldnotes-theme .cards--static .project--open:nth-child(4n){transform:rotate(1.5deg)}
+.page-projects.fieldnotes-theme .cards--static .project__filter-badge{
+  display:table;
+  margin:0 0 12px;
+  padding:4px 9px;
+  background:var(--pen-strong);
+  color:#fffdf4;
+  line-height:1.2;
+  transform:rotate(-1deg);
+}
+.page-projects.fieldnotes-theme .cards--static .project--open h3{
+  margin-bottom:10px;
+  font-family:var(--font-hand);
+  font-size:1.65rem;
+  line-height:1.08;
+  color:var(--pen-strong);
+}
+.page-projects.fieldnotes-theme .cards--static .project--open>p{line-height:1.62}
+.page-projects.fieldnotes-theme .cards--static .tags li{background:rgba(255,253,244,.78);border-color:rgba(43,92,130,.28)}
 .page-projects.fieldnotes-theme .cards--static .project--open::before{
   inset:0;
   border:1px solid rgba(63,50,36,.2);
@@ -4577,5 +4601,5 @@ body.is-edit-mode [data-block-id]:hover{
   .page-projects .projects-explore{padding:28px 12px 18px;border-width:8px}
   .page-projects .explore-head,.page-projects .chip-row{padding:14px 12px}
   .page-projects .cards--static{gap:34px;padding-inline:2px}
-  .page-projects.fieldnotes-theme .cards--static .project--open{transform:none}
+  .page-projects.fieldnotes-theme .cards--static .project--open{padding:32px 17px 20px 36px;transform:none}
 }
