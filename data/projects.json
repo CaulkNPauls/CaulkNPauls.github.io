@@ -106,7 +106,12 @@
       "tags": ["Facility Planning", "Layout Design", "Adjacency Analysis", "Team Project"],
       "tools": ["Relationship and adjacency analysis", "Space requirements", "Alternative layout development", "Flow evaluation", "Team presentation"],
       "results": ["Developed and evaluated alternative layouts", "Balanced department placement with customer, employee, and material flow", "Presented a structured proposed layout without claiming implementation"],
-      "links": []
+      "links": [
+        {
+          "label": "IE 327 Final Report (PDF)",
+          "href": "/assets/IE%20327%20Final%20Report.pdf"
+        }
+      ]
     },
     {
       "id": "saving-grace-client-website",
@@ -312,12 +317,7 @@
       "results": [
         "Produced the only model in the class propelled purely by wind."
       ],
-      "links": [
-        {
-          "label": "Resume bullet(s) (PDF)",
-          "href": "/assets/resume.pdf"
-        }
-      ]
+      "links": []
     },
     {
       "id": "ib-math-ia-sports-analytics",
