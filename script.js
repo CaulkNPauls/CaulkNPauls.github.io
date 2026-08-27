@@ -184,8 +184,16 @@ function renderFeaturedProjects(list, mount, variant) {
   if (!mount) return;
   mount.innerHTML = "";
 
+  // Keep the homepage concise while retaining the complete work archive on
+  // the Projects page.
+  const homeHiddenProjects = new Set([
+    "flowsafe-sales-workflow-epicor-integration",
+    "valve-e-internal-assistant",
+  ]);
+
   list.forEach((p, i) => {
     if (p.status === "draft" && new URLSearchParams(location.search).get("edit") !== "1") return;
+    if (variant === "home" && homeHiddenProjects.has(p.id)) return;
     if (variant === "hub") {
       const article = mkEl("article", {
         className: "project reveal",
