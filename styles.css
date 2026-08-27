@@ -4603,3 +4603,55 @@ body.is-edit-mode [data-block-id]:hover{
   .page-projects .cards--static{gap:34px;padding-inline:2px}
   .page-projects.fieldnotes-theme .cards--static .project--open{padding:32px 17px 20px 36px;transform:none}
 }
+
+/* Index card -> centered quick-view transition */
+.page-projects .cards--static .project--open{cursor:pointer;transform-origin:50% 0;will-change:transform,opacity}
+.page-projects .cards--static .project--open:focus-visible{outline:4px solid rgba(43,92,130,.38);outline-offset:5px}
+.page-projects .cards--static .project--open.is-unpinning{animation:card-release 480ms cubic-bezier(.22,.8,.3,1) forwards;pointer-events:none}
+.page-projects .cards--static .project--open.is-unpinning::after{animation:pin-release 340ms cubic-bezier(.2,.8,.3,1) forwards}
+@keyframes card-release{0%{opacity:1}35%{transform:rotate(0) translateY(8px);opacity:1}100%{transform:rotate(0) translateY(-24px) scale(1.035);opacity:0}}
+@keyframes pin-release{0%{transform:translate(0,0) scale(1)}55%{transform:translate(8px,-18px) scale(1.08)}100%{transform:translate(18px,-34px) scale(.7);opacity:0}}
+.page-projects .modal.is-preparing,.page-projects .modal.is-closing{display:block}
+.page-projects .modal.is-preparing{visibility:hidden}
+.page-projects .modal.is-open .modal__backdrop{animation:quickview-backdrop-in 360ms ease both}
+.page-projects .modal.is-closing .modal__backdrop{animation:quickview-backdrop-out 340ms ease both}
+.page-projects .modal__backdrop{background:rgba(27,23,19,.68);backdrop-filter:blur(4px)}
+.page-projects .modal__panel{
+  width:min(1040px,calc(100% - 44px));
+  max-height:calc(100dvh - 72px);
+  margin:36px auto;
+  padding:46px 42px 38px 62px;
+  overflow-y:auto;
+  border:0;
+  border-radius:3px;
+  background-color:#fffdf4;
+  background-image:linear-gradient(90deg,transparent 0 38px,rgba(190,72,63,.38) 38px 39px,transparent 39px),repeating-linear-gradient(to bottom,transparent 0 34px,rgba(67,111,143,.14) 34px 35px);
+  background-position:0 15px;
+  box-shadow:0 26px 80px rgba(18,13,10,.45),5px 8px 0 rgba(18,13,10,.12);
+  transform-origin:center;
+}
+.page-projects .modal.is-open .modal__panel{animation:index-card-open 560ms cubic-bezier(.16,.82,.24,1) both}
+.page-projects .modal.is-closing .modal__panel{animation:index-card-close 360ms cubic-bezier(.55,.05,.78,.28) both}
+.page-projects .modal__panel::before{
+  content:"";
+  position:absolute;
+  top:13px;
+  left:50%;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 28%,#eff7fb 0 2px,#517b96 3px 8px,#264c66 9px);
+  box-shadow:0 3px 4px rgba(44,27,16,.38);
+  animation:modal-pin-away 600ms 160ms cubic-bezier(.2,.8,.3,1) both;
+}
+@keyframes index-card-open{0%{opacity:.2;transform:translate(var(--card-x,0),var(--card-y,0)) scale(var(--card-scale,.4)) rotate(-1deg)}45%{opacity:1}72%{transform:translate(0,0) scale(1.018) rotate(.25deg)}100%{opacity:1;transform:translate(0,0) scale(1) rotate(0)}}
+@keyframes index-card-close{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--card-x,0),var(--card-y,0)) scale(var(--card-scale,.4))}}
+@keyframes quickview-backdrop-in{from{opacity:0}to{opacity:1}}@keyframes quickview-backdrop-out{from{opacity:1}to{opacity:0}}
+@keyframes modal-pin-away{0%{opacity:1;transform:translate(0,0) scale(1)}45%{opacity:1;transform:translate(10px,-12px) scale(1.08)}100%{opacity:0;transform:translate(25px,-30px) scale(.7)}}
+.page-projects .modal__panel>h3{margin:0 50px 10px 0;font:600 clamp(2rem,4vw,3.4rem)/1 var(--font-hand);color:var(--pen-strong)}
+.page-projects .modal__panel>#modalSummary{max-width:78ch;font-size:1rem;line-height:1.7}
+.page-projects .modal__close{z-index:2;top:16px;right:17px;border:1px solid var(--pen-border);background:#fffdf4;color:var(--pen-strong);font-size:1.1rem;box-shadow:2px 2px 0 rgba(43,92,130,.12)}
+.page-projects .modal__cols{gap:18px;margin-top:22px}.page-projects .modal__panel .panel{background:rgba(239,244,242,.86);border:1px solid rgba(43,92,130,.26);border-radius:2px}.page-projects .modal__panel .panel h4{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.12em}
+.modal__attachments{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:10px}.modal__attachment{display:flex;align-items:center;gap:11px;min-height:58px;padding:10px 12px;border:1px solid rgba(43,92,130,.28);background:#fffdf4;color:var(--pen-strong);text-decoration:none;font-size:.84rem;font-weight:600;transition:transform .18s ease,box-shadow .18s ease}.modal__attachment:hover{transform:translateY(-2px);box-shadow:3px 4px 0 rgba(43,92,130,.12)}.modal__attachment-icon{display:grid;place-items:center;flex:0 0 36px;height:36px;background:var(--pen-strong);color:#fffdf4;font:600 .63rem/1 var(--font-mono)}.modal__attachment--image{display:block;padding:7px}.modal__attachment--image img{display:block;width:100%;height:130px;object-fit:cover;margin-bottom:8px}.modal__attachment--image span{display:block;padding:3px 4px}
+@media(max-width:700px){.page-projects .modal__panel{width:calc(100% - 16px);max-height:calc(100dvh - 16px);margin:8px;padding:42px 17px 25px 34px}.page-projects .modal__cols{grid-template-columns:1fr}.modal__attachments{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.page-projects .cards--static .project--open.is-unpinning,.page-projects .cards--static .project--open.is-unpinning::after,.page-projects .modal.is-open .modal__panel,.page-projects .modal.is-closing .modal__panel,.page-projects .modal__panel::before,.page-projects .modal__backdrop{animation:none!important}}

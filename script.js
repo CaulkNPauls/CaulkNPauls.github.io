@@ -289,6 +289,10 @@ function renderQuickviewProjects(list, mount) {
         "data-results": (p.results || []).join("; "),
         "data-links": JSON.stringify(p.links || []),
         "data-project-number": String(i + 1).padStart(2, "0"),
+        tabindex: "0",
+        role: "button",
+        "aria-label": `Open quick view for ${p.title}`,
+        "aria-haspopup": "dialog",
       },
     });
 
@@ -911,11 +915,18 @@ function initProjectGrid() {
   const modalTools = document.getElementById("modalTools");
   const modalResults = document.getElementById("modalResults");
   const modalLinks = document.getElementById("modalLinks");
+  const modalPanel = modal?.querySelector(".modal__panel");
+  let activeCard = null;
+  let closeTimer = null;
 
   function openModal(card) {
     if (!modal) return;
 
-    modal.classList.add("is-open");
+    if (closeTimer) window.clearTimeout(closeTimer);
+    activeCard = card;
+    const cardRect = card.getBoundingClientRect();
+    modal.classList.remove("is-closing");
+    modal.classList.add("is-preparing");
     modal.setAttribute("aria-hidden", "false");
 
     if (modalTitle) modalTitle.textContent = card.dataset.title || "";
@@ -953,14 +964,33 @@ function initProjectGrid() {
         const links = JSON.parse(card.dataset.links || "[]");
         links.forEach((l) => {
           const a = document.createElement("a");
-          a.className = "link";
+          const href = l.href || "#";
+          const cleanHref = href.split("?")[0].toLowerCase();
+          const isImage = /\.(png|jpe?g|webp|gif|avif)$/.test(cleanHref);
+          const isPdf = cleanHref.endsWith(".pdf");
+          a.className = "modal__attachment" + (isImage ? " modal__attachment--image" : "");
           a.href = l.href;
           a.target = "_blank";
           a.rel = "noopener";
-          a.textContent = l.label;
+          if (isImage) {
+            const img = document.createElement("img");
+            img.src = href;
+            img.alt = l.label || "Project image";
+            img.loading = "lazy";
+            a.appendChild(img);
+          } else {
+            const icon = document.createElement("span");
+            icon.className = "modal__attachment-icon";
+            icon.setAttribute("aria-hidden", "true");
+            icon.textContent = isPdf ? "PDF" : "↗";
+            a.appendChild(icon);
+          }
+          const label = document.createElement("span");
+          label.textContent = l.label;
+          a.appendChild(label);
           modalLinks.appendChild(a);
-          modalLinks.appendChild(document.createElement("br"));
         });
+        if (!links.length) modalLinks.appendChild(mkEl("p", { className: "muted small", text: "No supporting files attached yet." }));
       } catch (_) {}
     }
 
@@ -970,22 +1000,49 @@ function initProjectGrid() {
       window.__wireQuickViewEdit(card, { modalSummary, modalTools, modalResults, modalLinks });
     }
 
+    const panelRect = modalPanel?.getBoundingClientRect();
+    if (panelRect && modalPanel) {
+      const dx = cardRect.left + cardRect.width / 2 - (panelRect.left + panelRect.width / 2);
+      const dy = cardRect.top + cardRect.height / 2 - (panelRect.top + panelRect.height / 2);
+      const scale = Math.max(.28, Math.min(.72, cardRect.width / panelRect.width));
+      modalPanel.style.setProperty("--card-x", `${dx}px`);
+      modalPanel.style.setProperty("--card-y", `${dy}px`);
+      modalPanel.style.setProperty("--card-scale", String(scale));
+    }
+    card.classList.add("is-unpinning");
     document.body.style.overflow = "hidden";
-    modal.querySelector(".modal__close")?.focus();
+    requestAnimationFrame(() => {
+      modal.classList.remove("is-preparing");
+      modal.classList.add("is-open");
+      window.setTimeout(() => modal.querySelector(".modal__close")?.focus(), 520);
+    });
   }
 
   function closeModal() {
     if (!modal) return;
+    modal.classList.add("is-closing");
     modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
+    closeTimer = window.setTimeout(() => {
+      modal.classList.remove("is-closing", "is-preparing");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      activeCard?.classList.remove("is-unpinning");
+      activeCard?.focus();
+      activeCard = null;
+    }, 380);
   }
 
-  // Open modal only when clicking "Quick view" button
+  // The entire pinned card behaves like the quick-view trigger.
   projectGrid.addEventListener("click", (e) => {
-    const btn = e.target.closest(".link-btn");
     const card = e.target.closest(".project--open");
-    if (!card || !btn) return;
+    if (!card || document.body.classList.contains("is-edit-mode")) return;
+    openModal(card);
+  });
+  projectGrid.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const card = e.target.closest(".project--open");
+    if (!card || document.body.classList.contains("is-edit-mode")) return;
+    e.preventDefault();
     openModal(card);
   });
 
