@@ -577,7 +577,7 @@ function renderSkillCard(card, mount, isCourse, index) {
       const match = String(chip.label || "").match(/^([A-Z]+\s+\d+[A-Z]?):\s*(.+)$/);
       const link = mkEl("button", {
         className: "skill-chip course-link" + (chip.inProgress ? " skill-chip--ip" : ""),
-        attrs: { type: "button", "aria-label": `${chip.label} — view course details` },
+        attrs: { type: "button", "aria-label": `${chip.label}, view course details` },
       });
       if (match) {
         link.appendChild(mkEl("span", { className: "course-link__code", text: match[1] }));

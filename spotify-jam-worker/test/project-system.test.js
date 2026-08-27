@@ -48,6 +48,6 @@ test("renderer and editor retain dynamic project-management behavior", async () 
   assert.match(styles, /pin-key--personal\{background:#54a66c\}/);
   assert.match(styles, /pin-key--group\{background:#cf554d\}/);
   assert.match(styles, /pin-key--work\{background:#517b96\}/);
-  assert.match(page, /id="featuredProjectCount">—/);
-  assert.match(page, /id="archiveProjectCount">—/);
+  assert.match(page, /id="featuredProjectCount">…/);
+  assert.match(page, /id="archiveProjectCount">…/);
 });

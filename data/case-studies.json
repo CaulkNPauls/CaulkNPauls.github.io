@@ -127,7 +127,7 @@
         "id": "b11",
         "type": "text",
         "heading": "What I learned",
-        "body": "I learned that a lot of useful data is not actually missing—it is just trapped in a format that makes it hard to use. The important part was not only extracting the records, but validating and structuring them well enough that other engineering work could depend on them. Building the Valve Decoder also showed me the value of designing past the immediate assignment: what started as a way to unblock the facility study became a tool people could continue using as an engineering reference."
+        "body": "I learned that a lot of useful data is not actually missing, it is just trapped in a format that makes it hard to use. The important part was not only extracting the records, but validating and structuring them well enough that other engineering work could depend on them. Building the Valve Decoder also showed me the value of designing past the immediate assignment, what started as a way to unblock the facility study became a tool people could continue using as an engineering reference."
       }
     ]
   },
@@ -578,7 +578,7 @@
             "alt": "V.A.L.V.E.-E. tutorial character pointing upward",
             "width": 720,
             "height": 720,
-            "caption": "V.A.L.V.E.-E. — consistent tutorial host"
+            "caption": "V.A.L.V.E.-E., consistent tutorial host"
           }
         ]
       },
@@ -587,7 +587,7 @@
         "type": "list",
         "heading": "In Development",
         "items": [
-          "Status: the capabilities below are developed or partially integrated—not represented as fully production-ready.",
+          "The capabilities below are developed or partially integrated, not represented as fully production-ready.",
           "FTR and job lookup capabilities.",
           "Test-stand availability and read-only pressure-test information lookup.",
           "Valve Decoder access and Engineering Viewer navigation.",
