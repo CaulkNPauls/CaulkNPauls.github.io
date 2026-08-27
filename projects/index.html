@@ -50,56 +50,64 @@
     <main id="main">
       <section class="section section--alt">
         <div class="container">
-          <div class="section__head">
-            <div>
-              <h2>Projects</h2>
-              <p class="muted">
-                Industrial engineering work from my internship at FlowSafe / Dresser Utility
-                Solutions, plus coursework and personal projects.
+          <div class="projects-hero">
+            <div class="projects-hero__copy">
+              <p class="projects-hero__index">Field notes / 04</p>
+              <h1>Projects built to <span>make things work better.</span></h1>
+              <p class="projects-hero__lede">
+                Industrial engineering work spanning factory systems, data tools, human factors,
+                and hands-on design—each one started with a real problem worth untangling.
               </p>
+              <a class="projects-hero__jump" href="#featuredWork">Start with the featured work <span aria-hidden="true">↓</span></a>
             </div>
-            <a class="btn btn--ghost" href="/">← Back to Home</a>
+            <aside class="projects-hero__brief" aria-label="Project portfolio summary">
+              <p class="projects-hero__brief-label">Inside this notebook</p>
+              <div class="projects-hero__stat"><strong>03</strong><span>industry case studies</span></div>
+              <div class="projects-hero__stat"><strong>09</strong><span>academic + personal builds</span></div>
+              <p class="projects-hero__note">Data → decisions → useful outcomes</p>
+            </aside>
           </div>
 
           <!-- ===== FEATURED: FLOWSAFE ===== -->
-          <div class="projects-featured">
-            <p class="projects-featured__eyebrow">FlowSafe / Dresser Utility Solutions</p>
+          <div class="projects-featured" id="featuredWork">
+            <div class="projects-section-label">
+              <p class="projects-featured__eyebrow">Featured / FlowSafe + Dresser Utility Solutions</p>
+              <span>Selected industry work · 2026</span>
+            </div>
 
             <div class="cards cards--flowsafe" id="projectsFeaturedMount" data-variant="hub"></div>
           </div>
 
           <!-- ===== ACADEMIC & PERSONAL PROJECTS ===== -->
           <div class="projects-secondary-head">
-            <h3>Academic &amp; personal projects</h3>
-            <p class="muted">Coursework, prototypes, and independent work.</p>
+            <p class="projects-featured__eyebrow">The project archive</p>
+            <h2>Coursework, prototypes &amp; independent work</h2>
+            <p class="muted">Browse the board by discipline, or search for a tool, method, or topic.</p>
           </div>
 
           <!-- ===== Interactive Explore section ===== -->
           <section class="projects-explore" aria-label="Explore projects">
             <div class="explore-head">
-              <div>
-                <h3>Explore</h3>
-                <p class="muted">Filter by skill area or search by keyword.</p>
-              </div>
-
-              
-              <input id="projectSearch" class="input" type="search" placeholder="Search projects (e.g., R, SolidWorks, Human Factors)" />
+              <div class="projects-result-count" aria-live="polite"><strong id="projectCount">9</strong> projects on the board</div>
+              <label class="projects-search" for="projectSearch">
+                <span aria-hidden="true">⌕</span>
+                <input id="projectSearch" class="input" type="search" placeholder="Search tools, methods, or projects…" />
+              </label>
             </div>
 
             <div class="chip-row" role="tablist" aria-label="Project filters">
-              <button class="chip is-active" data-filter="all" type="button">All</button>
-              <button class="chip" data-filter="analytics" type="button">Analytics</button>
-              <button class="chip" data-filter="humanfactors" type="button">Human Factors</button>
-              <button class="chip" data-filter="cad" type="button">CAD / Design</button>
-              <button class="chip" data-filter="prototype" type="button">Prototyping</button>
+              <button class="chip is-active" data-filter="all" type="button" role="tab" aria-selected="true">All</button>
+              <button class="chip" data-filter="analytics" type="button" role="tab" aria-selected="false">Analytics</button>
+              <button class="chip" data-filter="humanfactors" type="button" role="tab" aria-selected="false">Human Factors</button>
+              <button class="chip" data-filter="cad" type="button" role="tab" aria-selected="false">CAD / Design</button>
+              <button class="chip" data-filter="prototype" type="button" role="tab" aria-selected="false">Prototyping</button>
             </div>
 
             <div class="cards cards--static" id="projectGrid"></div>
+            <p class="projects-empty" id="projectsEmpty" hidden>No matching notes found. Try another keyword or filter.</p>
           </section>
 
-          <p class="muted small" style="margin-top: 14px;">
-            Want a deeper dive? Click any project to see its problem, approach, tools, and results.
-          </p>
+          <p class="projects-board-note">Select “Quick view” for the problem, approach, tools, and results.</p>
         </div>
       </section>
     </main>

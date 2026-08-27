@@ -184,7 +184,7 @@ function renderFeaturedProjects(list, mount, variant) {
     if (variant === "hub") {
       const article = mkEl("article", {
         className: "project reveal",
-        attrs: { "data-edit-entity": "projects-featured", "data-edit-index": i, "data-edit-photo-field": "image" },
+        attrs: { "data-edit-entity": "projects-featured", "data-edit-index": i, "data-edit-photo-field": "image", "data-project-number": String(i + 1).padStart(2, "0") },
       });
 
       if (p.image && p.image.src) {
@@ -270,6 +270,12 @@ function renderQuickviewProjects(list, mount) {
   mount.innerHTML = "";
 
   list.forEach((p, i) => {
+    const categoryLabels = {
+      analytics: "Analytics",
+      humanfactors: "Human factors",
+      cad: "CAD / Design",
+      prototype: "Prototyping",
+    };
     const article = mkEl("article", {
       className: "project project--open reveal",
       attrs: {
@@ -282,10 +288,11 @@ function renderQuickviewProjects(list, mount) {
         "data-tools": (p.tools || []).join(", "),
         "data-results": (p.results || []).join("; "),
         "data-links": JSON.stringify(p.links || []),
+        "data-project-number": String(i + 1).padStart(2, "0"),
       },
     });
 
-    article.appendChild(mkEl("span", { className: "project__filter-badge", text: p.filter || "uncategorized" }));
+    article.appendChild(mkEl("span", { className: "project__filter-badge", text: categoryLabels[p.filter] || "Uncategorized" }));
     article.appendChild(mkEl("h3", { text: p.title }));
     article.appendChild(mkEl("p", { text: p.cardText || p.summary || "" }));
 
@@ -855,6 +862,8 @@ function initProjectGrid() {
   const chips = document.querySelectorAll(".chip");
   const search = document.getElementById("projectSearch");
   const cards = Array.from(projectGrid.querySelectorAll(".project--open"));
+  const count = document.getElementById("projectCount");
+  const empty = document.getElementById("projectsEmpty");
 
   let activeFilter = "all";
 
@@ -870,16 +879,23 @@ function initProjectGrid() {
   }
 
   function apply() {
+    let visible = 0;
     cards.forEach((card) => {
-      card.style.display = matches(card) ? "" : "none";
+      const show = matches(card);
+      card.style.display = show ? "" : "none";
+      if (show) visible += 1;
     });
+    if (count) count.textContent = String(visible).padStart(2, "0");
+    if (empty) empty.hidden = visible !== 0;
   }
 
   if (chips.length) {
     chips.forEach((btn) => {
       btn.addEventListener("click", () => {
         chips.forEach((b) => b.classList.remove("is-active"));
+        chips.forEach((b) => b.setAttribute("aria-selected", "false"));
         btn.classList.add("is-active");
+        btn.setAttribute("aria-selected", "true");
         activeFilter = btn.dataset.filter || "all";
         apply();
       });
@@ -955,6 +971,7 @@ function initProjectGrid() {
     }
 
     document.body.style.overflow = "hidden";
+    modal.querySelector(".modal__close")?.focus();
   }
 
   function closeModal() {
