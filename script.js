@@ -51,6 +51,10 @@ function mkEl(tag, opts = {}, children = []) {
   children.forEach((c) => c && node.appendChild(c));
   return node;
 }
+function safeProjectHref(value) {
+  const href = String(value || "").trim();
+  return href.startsWith("/") || /^https:\/\//i.test(href) ? href : "#";
+}
 
 // Fixed, trusted SVG path markup only — never built from data/user input.
 const ICONS = {
@@ -181,6 +185,7 @@ function renderFeaturedProjects(list, mount, variant) {
   mount.innerHTML = "";
 
   list.forEach((p, i) => {
+    if (p.status === "draft" && new URLSearchParams(location.search).get("edit") !== "1") return;
     if (variant === "hub") {
       const article = mkEl("article", {
         className: "project reveal",
@@ -205,7 +210,7 @@ function renderFeaturedProjects(list, mount, variant) {
       }
 
       const h3 = document.createElement("h3");
-      h3.appendChild(mkEl("a", { className: "project__title-link", text: p.title, attrs: { href: p.href } }));
+      h3.appendChild(mkEl("a", { className: "project__title-link", text: p.title, attrs: { href: safeProjectHref(p.href) } }));
       article.appendChild(h3);
       article.appendChild(mkEl("p", { text: p.blurbLong || p.blurbShort || "" }));
 
@@ -214,7 +219,7 @@ function renderFeaturedProjects(list, mount, variant) {
       article.appendChild(tagsUl);
 
       const meta = mkEl("div", { className: "project__meta" });
-      meta.appendChild(mkEl("a", { className: "link", text: "View case study →", attrs: { href: p.href } }));
+      meta.appendChild(mkEl("a", { className: "link", text: "View case study →", attrs: { href: safeProjectHref(p.href) } }));
       article.appendChild(meta);
 
       mount.appendChild(article);
@@ -225,7 +230,7 @@ function renderFeaturedProjects(list, mount, variant) {
     const a = mkEl("a", {
       className: "editorial-project reveal" + (i === 0 ? " editorial-project--large" : ""),
       attrs: {
-        href: p.href,
+        href: safeProjectHref(p.href),
         "data-edit-entity": "projects-featured",
         "data-edit-index": i,
         "data-edit-photo-field": "image",
@@ -270,6 +275,7 @@ function renderQuickviewProjects(list, mount) {
   mount.innerHTML = "";
 
   list.forEach((p, i) => {
+    if (p.status === "draft" && new URLSearchParams(location.search).get("edit") !== "1") return;
     const categoryLabels = {
       analytics: "Analytics",
       humanfactors: "Human factors",
@@ -289,7 +295,9 @@ function renderQuickviewProjects(list, mount) {
         "data-tools": (p.tools || []).join(", "),
         "data-results": (p.results || []).join("; "),
         "data-links": JSON.stringify(p.links || []),
+        "data-image": JSON.stringify(p.image || null),
         "data-project-number": String(i + 1).padStart(2, "0"),
+        "data-edit-photo-field": "image",
         tabindex: "0",
         role: "button",
         "aria-label": `Open quick view for ${p.title}`,
@@ -306,6 +314,25 @@ function renderQuickviewProjects(list, mount) {
     article.appendChild(tagsUl);
 
     mount.appendChild(article);
+  });
+}
+
+function updateProjectHubMeta(data) {
+  const featured = (data.featured || []).filter((p) => p.status !== "draft");
+  const archive = (data.quickview || []).filter((p) => p.status !== "draft");
+  const set = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = String(value).padStart(2, "0"); };
+  set("featuredProjectCount", featured.length);
+  set("archiveProjectCount", archive.length);
+
+  const row = document.querySelector(".chip-row");
+  if (!row) return;
+  const known = new Set(Array.from(row.querySelectorAll("[data-filter]")).map((b) => b.dataset.filter));
+  const labels = { analytics: "Analytics", humanfactors: "Human Factors", cad: "CAD / Design", prototype: "Prototyping" };
+  archive.forEach((project) => {
+    const filter = (project.filter || "other").trim().toLowerCase();
+    if (known.has(filter)) return;
+    row.appendChild(mkEl("button", { className: "chip", text: labels[filter] || project.filter || "Other", attrs: { "data-filter": filter, type: "button", role: "tab", "aria-selected": "false" } }));
+    known.add(filter);
   });
 }
 
@@ -859,6 +886,10 @@ function initReveal() {
 function initProjectGrid() {
   const projectGrid = document.getElementById("projectGrid");
   if (!projectGrid) return;
+  if (projectGrid.__projectGridAbort) projectGrid.__projectGridAbort.abort();
+  const gridAbort = new AbortController();
+  projectGrid.__projectGridAbort = gridAbort;
+  const listenerOptions = { signal: gridAbort.signal };
 
   const chips = document.querySelectorAll(".chip");
   const search = document.getElementById("projectSearch");
@@ -899,11 +930,11 @@ function initProjectGrid() {
         btn.setAttribute("aria-selected", "true");
         activeFilter = btn.dataset.filter || "all";
         apply();
-      });
+      }, listenerOptions);
     });
   }
 
-  if (search) search.addEventListener("input", apply);
+  if (search) search.addEventListener("input", apply, listenerOptions);
 
   // Modal wiring
   const modal = document.getElementById("projectModal");
@@ -960,6 +991,16 @@ function initProjectGrid() {
       modalLinks.innerHTML = "";
       try {
         const links = JSON.parse(card.dataset.links || "[]");
+        const image = JSON.parse(card.dataset.image || "null");
+        if (image && image.src) {
+          const figure = document.createElement("figure");
+          figure.className = "modal__support-image";
+          const img = document.createElement("img");
+          img.src = image.src;
+          img.alt = image.alt || "";
+          figure.appendChild(img);
+          modalLinks.appendChild(figure);
+        }
         links.forEach((l) => {
           const a = document.createElement("a");
           const href = l.href || "#";
@@ -967,7 +1008,7 @@ function initProjectGrid() {
           const isImage = /\.(png|jpe?g|webp|gif|avif)$/.test(cleanHref);
           const isPdf = cleanHref.endsWith(".pdf");
           a.className = "modal__attachment" + (isImage ? " modal__attachment--image" : "");
-          a.href = l.href;
+          a.href = safeProjectHref(l.href);
           a.target = "_blank";
           a.rel = "noopener";
           if (isImage) {
@@ -1008,6 +1049,7 @@ function initProjectGrid() {
       modalPanel.style.setProperty("--card-scale", String(scale));
     }
     card.classList.add("is-unpinning");
+    card.setAttribute("aria-expanded", "true");
     document.body.style.overflow = "hidden";
     requestAnimationFrame(() => {
       modal.classList.remove("is-preparing");
@@ -1025,6 +1067,7 @@ function initProjectGrid() {
       modal.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
       activeCard?.classList.remove("is-unpinning");
+      activeCard?.setAttribute("aria-expanded", "false");
       activeCard?.focus();
       activeCard = null;
     }, 380);
@@ -1035,24 +1078,32 @@ function initProjectGrid() {
     const card = e.target.closest(".project--open");
     if (!card || document.body.classList.contains("is-edit-mode")) return;
     openModal(card);
-  });
+  }, listenerOptions);
   projectGrid.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" && e.key !== " ") return;
     const card = e.target.closest(".project--open");
     if (!card || document.body.classList.contains("is-edit-mode")) return;
     e.preventDefault();
     openModal(card);
-  });
+  }, listenerOptions);
 
   // Close modal on backdrop/close button
   if (modal) {
     modal.addEventListener("click", (e) => {
       if (e.target.dataset.close === "true") closeModal();
-    });
+    }, listenerOptions);
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
-    });
+      if (e.key === "Tab" && modal.classList.contains("is-open")) {
+        const focusable = Array.from(modal.querySelectorAll('button:not([disabled]),a[href],input,select,textarea,[tabindex]:not([tabindex="-1"])'));
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }, listenerOptions);
   }
 
   apply();
@@ -1256,6 +1307,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("/data/projects.json")
       .then((r) => r.json())
       .then((data) => {
+        updateProjectHubMeta(data);
         if (featuredMount) {
           renderFeaturedProjects(data.featured || [], featuredMount, featuredMount.dataset.variant || "home");
         }

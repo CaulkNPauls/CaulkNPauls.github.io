@@ -407,5 +407,46 @@
         "body": "[Placeholder: your own engineering takeaway from this project: what you'd tell a recruiter about what building this taught you, e.g. about designing for how operators actually work, or about connecting shop-floor data to management visibility.]"
       }
     ]
+  },
+  "flowsafe-sales-workflow-epicor-integration": {
+    "hero": {
+      "eyebrow": "FlowSafe / Dresser Utility Solutions",
+      "title": "Sales Workflow & Epicor Integration Platform",
+      "subtitle": "A centralized, auditable sales workflow connecting pre-Epicor work, historical records, and live read-only Epicor data.",
+      "factline": "Role: Designer & developer · Business systems integration · 2026",
+      "ctaPrimary": {"label": "See Experience", "href": "/experience/"},
+      "ctaSecondary": {"label": "View all projects", "href": "/projects/"}
+    },
+    "style": {"fontFamily": "default", "fontSizeScale": 1, "accentColor": ""},
+    "blocks": [
+      {"id":"sw1","type":"text","heading":"The workflow gap","body":"A small inside-sales team needed to track work received before it was formally entered in Epicor. Spreadsheet and email tracking fragmented status, ownership, and history, while the production system required strict controls. The goal was a useful operational layer that connected to Epicor without writing to or weakening the production system."},
+      {"id":"sw2","type":"text","heading":"A controlled integration boundary","body":"The platform uses read-only access for Epicor customer, quote, sales-order, and quote-workflow information. Provisional customer identities support early work, then link conservatively to Epicor identities when validated. Immutable FlowSafe reference numbers keep the internal record stable through those linkage changes."},
+      {"id":"sw3","type":"list","heading":"Implemented workflow","items":["Centralized tracking for requests received before formal Epicor entry.","Global duplicate-PO prevention across provisional and Epicor-linked records.","Automatic PO-to-sales-order matching using conservative validation rules.","Quote-conversion detection and at-risk alerts when expected sales orders are missing.","A reconciliation worker that checks linkage state every 15 minutes.","History and audit records for important identity and transaction-linkage changes."]},
+      {"id":"sw4","type":"stats","heading":"Historical reconciliation","stats":[{"value":"≈9,000","label":"historical Excel rows reconciled"},{"value":"15 min","label":"reconciliation interval"},{"value":"Read-only","label":"Epicor production access"}],"note":"Counts are approximate. No customer data, credentials, internal URLs, employee data, or proprietary records are shown here."},
+      {"id":"sw5","type":"text","heading":"Safe staged implementation","body":"Production implementation was staged deliberately: historical data was reconciled first, matches were accepted only when validation rules were satisfied, and ambiguous records remained visible for review rather than being forced into a link. The platform centralizes workflow without treating automation as permission to guess."},
+      {"id":"sw6","type":"list","heading":"Outcome","items":["One auditable place to track pre-Epicor sales work.","Clear continuity between provisional records and live Epicor customers, quotes, and sales orders.","Earlier visibility into missing sales orders and quote-conversion risk.","A controlled integration pattern that preserves production-system boundaries."]},
+      {"id":"sw7","type":"tags","heading":"Technologies & methods","items":["FastAPI","PostgreSQL","Epicor read-only integration","Process automation","Reconciliation workers","Audit logging","Conservative record matching"],"note":"Implementation details are intentionally limited to protect internal systems and data."},
+      {"id":"sw8","type":"gallery","heading":"Visual evidence","caption":"A sanitized architecture or workflow diagram can be added without exposing customer or production information.","layout":"grid","images":[]}
+    ]
+  },
+  "valve-e-internal-assistant": {
+    "hero": {
+      "eyebrow": "FlowSafe / Dresser Utility Solutions",
+      "title": "V.A.L.V.E.-E. Interactive Tutorial & Internal Assistant",
+      "subtitle": "A consistent tutorial character across the FlowSafe application, with a broader controlled internal assistant still in development.",
+      "factline": "Role: Interaction design & development · Manufacturing UX · 2026",
+      "ctaPrimary": {"label": "See Experience", "href": "/experience/"},
+      "ctaSecondary": {"label": "View all projects", "href": "/projects/"}
+    },
+    "style": {"fontFamily": "default", "fontSizeScale": 1, "accentColor": ""},
+    "blocks": [
+      {"id":"ve1","type":"text","heading":"Why a tutorial character","body":"The FlowSafe application spans tools for operators, engineers, and managers. V.A.L.V.E.-E. gives that system a consistent, approachable guide so users do not have to discover every page, control, and workflow unaided."},
+      {"id":"ve2","type":"list","heading":"Current Role","items":["Appears throughout the application as a consistent tutorial character.","Introduces individual pages and explains their purpose.","Guides users toward important controls, workflows, and available actions.","Uses page-specific tutorial content instead of one generic walkthrough.","Supports onboarding while providing a consistent personality and visual identity."]},
+      {"id":"ve3","type":"gallery","heading":"Current tutorial identity","caption":"The character artwork is used across page-specific tutorials; sensitive application screens are not shown.","layout":"grid","images":[{"src":"/assets/photos/mt0989pc-valve-e-pointing-up-with-hand-on-hip.png","alt":"V.A.L.V.E.-E. tutorial character pointing upward","caption":"V.A.L.V.E.-E. — consistent tutorial host"}]},
+      {"id":"ve4","type":"list","heading":"In Development","items":["Status: the capabilities below are developed or partially integrated—not represented as fully production-ready.","FTR and job lookup capabilities.","Test-stand availability and read-only pressure-test information lookup.","Valve Decoder access and Engineering Viewer navigation.","Controlled internal knowledge sources, role-aware behavior, allowlisted navigation, and audit logging.","Multiple audience and persona concepts for different internal users."]},
+      {"id":"ve5","type":"text","heading":"Safe assistant direction","body":"The longer-term direction is a unified internal assistant for locating information and navigating manufacturing tools safely. Continued work focuses on controlled documentation retrieval, contextual guidance based on page, role, and task, and careful integration with the pressure-testing and engineering ecosystem."},
+      {"id":"ve6","type":"list","heading":"Design principles","items":["Guide rather than overwhelm.","Use controlled, role-appropriate sources.","Keep navigation allowlisted and actions auditable.","Clearly distinguish available behavior from work in progress.","Never expose credentials, proprietary records, or sensitive internal screens."]},
+      {"id":"ve7","type":"tags","heading":"Technologies & disciplines","items":["Human–Computer Interaction","Tutorial Design","Internal Tools","Knowledge Systems","Manufacturing UX","Role-aware behavior","Audit logging"]}
+    ]
   }
 }

@@ -3,6 +3,8 @@
     {
       "id": "flowsafe-pressure-testing-system",
       "title": "Digital Pressure-Testing System",
+      "projectType": "work",
+      "status": "published",
       "meta": "Manufacturing systems · 2026",
       "blurbShort": "From manual gauges and paperwork to guided testing, live data capture, and centralized reporting.",
       "blurbLong": "A connected digital pressure-testing and reporting ecosystem with Raspberry Pi operator stations, guided testing workflows, and a manager dashboard. It replaces paper-based valve testing.",
@@ -21,6 +23,8 @@
     {
       "id": "flowsafe-facility-flow-layout",
       "title": "Material Flow & Layout",
+      "projectType": "work",
+      "status": "published",
       "meta": "Facility design · 2026",
       "blurbShort": "104 activity locations and a future state with 18.75% less modeled transportation effort.",
       "blurbLong": "Two years of operational data and a scaled AutoCAD facility model, quantifying a recommended future-state layout for production, cleaning, testing, and storage areas.",
@@ -39,6 +43,8 @@
     {
       "id": "flowsafe-valve-decoder",
       "title": "Valve Decoder",
+      "projectType": "work",
+      "status": "published",
       "meta": "Python & data · 2026",
       "blurbShort": "A searchable engineering reference built from thousands of hard-to-use historical PDF records.",
       "blurbLong": "A Python application converting thousands of historical PDF pick-sheets into a structured, searchable engineering database.",
@@ -53,9 +59,83 @@
         "alt": "Valve Decoder"
       },
       "placeholderNote": "The Valve Decoder search interface with a safe sample model and its decoded attributes."
+    },
+    {
+      "id": "flowsafe-sales-workflow-epicor-integration",
+      "title": "Sales Workflow & Epicor Integration Platform",
+      "meta": "Business systems integration · 2026",
+      "blurbShort": "A centralized sales workflow that connects pre-Epicor work, historical records, and live Epicor data without compromising production-system controls.",
+      "blurbLong": "Designed and developed a sales workflow platform for a small inside-sales team, replacing fragmented spreadsheet and email tracking with a centralized, auditable system connected to live read-only Epicor data.",
+      "tags": ["Systems Integration", "Epicor", "FastAPI", "PostgreSQL", "Process Automation"],
+      "tools": ["FastAPI", "PostgreSQL", "Read-only Epicor integration", "Reconciliation workers", "Audit logging"],
+      "results": ["Centralized pre-Epicor work tracking", "Reconciled approximately 9,000 historical Excel rows", "Added conservative automated matching and at-risk alerts"],
+      "links": [],
+      "projectType": "work",
+      "status": "published",
+      "href": "/projects/flowsafe-sales-workflow-epicor-integration/",
+      "image": null,
+      "placeholderNote": "Add a sanitized workflow diagram without customer, employee, or production-system data."
+    },
+    {
+      "id": "valve-e-internal-assistant",
+      "title": "V.A.L.V.E.-E. Interactive Tutorial & Internal Assistant",
+      "meta": "Human-centered manufacturing software · 2026",
+      "blurbShort": "An animated tutorial guide that introduces users to each page of the FlowSafe system while developing into a broader internal manufacturing assistant.",
+      "blurbLong": "V.A.L.V.E.-E. currently serves as the interactive tutorial host across the FlowSafe application, helping operators, engineers, and managers understand each page and its available tools. The larger assistant is still in development.",
+      "tags": ["Human–Computer Interaction", "Tutorial Design", "Internal Tools", "Knowledge Systems", "Manufacturing UX"],
+      "tools": ["Page-specific tutorials", "Role-aware behavior", "Allowlisted navigation", "Audit logging", "Controlled knowledge sources"],
+      "results": ["Consistent page-level onboarding across the application", "Reduced reliance on unaided feature discovery", "Established a safe foundation for a broader internal assistant"],
+      "links": [],
+      "projectType": "work",
+      "status": "published",
+      "href": "/projects/valve-e-internal-assistant/",
+      "image": {"src": "/assets/photos/mt0989pc-valve-e-pointing-up-with-hand-on-hip.png", "alt": "V.A.L.V.E.-E. tutorial character pointing upward"},
+      "placeholderNote": "V.A.L.V.E.-E. tutorial character or a sanitized tutorial screen."
     }
   ],
   "quickview": [
+    {
+      "id": "pharmacy-facility-layout",
+      "title": "Pharmacy Facility Layout Design",
+      "filter": "cad",
+      "projectType": "group",
+      "status": "published",
+      "meta": "Facility planning · Academic project",
+      "cardText": "A team-based facility-planning project translating pharmacy operations, relationships, movement patterns, and space requirements into a proposed layout.",
+      "summary": "A team-based facility-planning project that translated pharmacy operations, departmental relationships, movement patterns, and space requirements into a structured proposed layout.",
+      "tags": ["Facility Planning", "Layout Design", "Adjacency Analysis", "Team Project"],
+      "tools": ["Relationship and adjacency analysis", "Space requirements", "Alternative layout development", "Flow evaluation", "Team presentation"],
+      "results": ["Developed and evaluated alternative layouts", "Balanced department placement with customer, employee, and material flow", "Presented a structured proposed layout without claiming implementation"],
+      "links": []
+    },
+    {
+      "id": "saving-grace-client-website",
+      "title": "Saving Grace Client Website",
+      "filter": "cad",
+      "projectType": "work",
+      "status": "published",
+      "meta": "Client front-end work",
+      "cardText": "A responsive client website translating an independent tattoo artist’s alternative brand into a gothic, distressed-paper digital experience.",
+      "summary": "A responsive client website translating an independent tattoo artist’s alternative brand into a gothic, distressed-paper digital experience with clear services, portfolio, FAQ, and booking paths.",
+      "tags": ["Client Work", "Responsive Design", "Front-End", "UX", "Brand Translation"],
+      "tools": ["Direct client requirements", "Responsive multi-page architecture", "Mobile navigation", "Booking-form integration", "Iterative visual development"],
+      "results": ["Prioritized tattoo services while supporting hair and nail offerings", "Maintained readable, functional flows within a highly stylized visual system", "Iterated from reference-site and client feedback"],
+      "links": []
+    },
+    {
+      "id": "nfc-spotify-jam-smart-link",
+      "title": "NFC Spotify Jam Smart-Link System",
+      "filter": "prototype",
+      "projectType": "personal",
+      "status": "published",
+      "meta": "Serverless automation · 2026",
+      "cardText": "Permanent NFC destinations that can open changing Spotify Jam invitations without reprogramming the physical tags.",
+      "summary": "A reusable NFC and serverless redirect system that lets permanent physical tags open temporary Spotify Jam invitations without requiring the tags to be reprogrammed whenever the session link changes.",
+      "tags": ["NFC", "Cloudflare Workers", "JavaScript", "Serverless", "Automation"],
+      "tools": ["Permanent /jam and /carjam endpoints", "Cloudflare Worker", "Workers KV", "Authorized mobile update workflow", "URL validation and fallback behavior"],
+      "results": ["Separated permanent physical tag URLs from temporary Jam invitations", "Supported distinct house and vehicle destinations", "Added immediate redirect with a user-facing fallback"],
+      "links": [{"label": "House Jam endpoint", "href": "/jam/"}, {"label": "Car Jam endpoint", "href": "/carjam/"}]
+    },
     {
       "id": "portfolio-website",
       "title": "Portfolio Website using AI-Assisted Front-End Development",

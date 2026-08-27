@@ -125,13 +125,21 @@ const ENTITIES = {
     getList: (data) => data.featured,
     setList: (data, list) => { data.featured = list; },
     labelOf: (item) => item.title,
-    empty: () => ({ id: "", title: "", meta: "", blurbShort: "", blurbLong: "", tags: [], href: "", image: null, placeholderNote: "" }),
+    empty: () => ({ id: "", title: "", meta: "", blurbShort: "", blurbLong: "", filter: "cad", projectType: "work", status: "published", tags: [], tools: [], results: [], links: [], href: "", image: null, placeholderNote: "" }),
     fields: [
       { key: "title", label: "Title", type: "text" },
+      { key: "placement", label: "Placement", type: "select", options: ["featured", "corkboard"] },
       { key: "meta", label: 'Meta line (e.g. "Manufacturing systems · 2026")', type: "text" },
       { key: "blurbShort", label: "Short blurb (homepage card)", type: "textarea" },
       { key: "blurbLong", label: "Long blurb (projects page card)", type: "textarea" },
+      { key: "filter", label: "Category / filter", type: "text" },
+      { key: "projectType", label: "Project type / saved pin", type: "select", options: ["solo", "personal", "group", "work"] },
+      { key: "status", label: "Publishing status", type: "select", options: ["published", "draft"] },
+      { key: "caseStudySlug", label: "Optional case-study slug (generated from title if blank)", type: "text" },
       { key: "tags", label: "Tags (comma-separated)", type: "csv" },
+      { key: "tools", label: "Tools & methods (comma-separated)", type: "csv" },
+      { key: "results", label: "Results (one per line)", type: "lines" },
+      { key: "links", label: "Supporting links (Label | URL)", type: "links" },
       { key: "href", label: "Link to the case-study page", type: "text" },
       { key: "imageSrc", label: "Image path (use the Photo button on the card instead, or paste one here)", type: "text" },
       { key: "imageAlt", label: "Image alt text", type: "text" },
@@ -139,13 +147,13 @@ const ENTITIES = {
     ],
     fromForm: (v) => ({
       title: v.title, meta: v.meta, blurbShort: v.blurbShort, blurbLong: v.blurbLong,
-      tags: v.tags, href: v.href,
+      filter: v.filter, projectType: v.projectType, status: v.status, tags: v.tags, tools: v.tools, results: v.results, links: v.links, href: v.href,
       image: v.imageSrc ? { src: v.imageSrc, alt: v.imageAlt } : null,
       placeholderNote: v.placeholderNote,
     }),
     toForm: (item) => ({
-      title: item.title, meta: item.meta, blurbShort: item.blurbShort, blurbLong: item.blurbLong,
-      tags: item.tags, href: item.href,
+      title: item.title, placement: "featured", caseStudySlug: (item.href || "").split("/").filter(Boolean).pop() || "", meta: item.meta, blurbShort: item.blurbShort, blurbLong: item.blurbLong,
+      filter: item.filter || "cad", projectType: item.projectType || "work", status: item.status || "published", tags: item.tags, tools: item.tools || [], results: item.results || [], links: item.links || [], href: item.href,
       imageSrc: item.image ? item.image.src : "", imageAlt: item.image ? item.image.alt : "",
       placeholderNote: item.placeholderNote,
     }),
@@ -156,25 +164,32 @@ const ENTITIES = {
     getList: (data) => data.quickview,
     setList: (data, list) => { data.quickview = list; },
     labelOf: (item) => item.title,
-    empty: () => ({ id: "", title: "", filter: "", projectType: "solo", cardText: "", summary: "", tags: [], tools: [], results: [], links: [] }),
+    empty: () => ({ id: "", title: "", meta: "", filter: "cad", projectType: "solo", status: "published", cardText: "", summary: "", tags: [], tools: [], results: [], links: [], href: "", image: null }),
     fields: [
       { key: "title", label: "Title", type: "text" },
+      { key: "placement", label: "Placement", type: "select", options: ["corkboard", "featured"] },
       { key: "filter", label: "Filter category (analytics / humanfactors / cad / prototype)", type: "text" },
       { key: "projectType", label: "Pin color / project type", type: "select", options: ["solo", "personal", "group", "work"] },
+      { key: "status", label: "Publishing status", type: "select", options: ["published", "draft"] },
+      { key: "meta", label: "Meta / year line", type: "text" },
       { key: "cardText", label: "Card text (short, shown on the card)", type: "textarea" },
       { key: "summary", label: "Summary (longer, shown in Quick View)", type: "textarea" },
       { key: "tags", label: "Tags (comma-separated)", type: "csv" },
       { key: "tools", label: "Tools & methods (comma-separated)", type: "csv" },
       { key: "results", label: "Results (one per line)", type: "lines" },
       { key: "links", label: "Links (one per line: Label | https://url)", type: "links" },
+      { key: "href", label: "Optional retained case-study route", type: "text" },
+      { key: "caseStudySlug", label: "Case-study slug if promoting with a new page", type: "text" },
+      { key: "imageSrc", label: "Optional supporting image path (or use Photo)", type: "text" },
+      { key: "imageAlt", label: "Supporting image alt text", type: "text" },
     ],
     fromForm: (v) => ({
-      title: v.title, filter: v.filter, projectType: v.projectType, cardText: v.cardText, summary: v.summary,
-      tags: v.tags, tools: v.tools, results: v.results, links: v.links,
+      title: v.title, meta: v.meta, filter: v.filter, projectType: v.projectType, status: v.status, cardText: v.cardText, summary: v.summary,
+      tags: v.tags, tools: v.tools, results: v.results, links: v.links, href: v.href, image: v.imageSrc ? { src: v.imageSrc, alt: v.imageAlt } : null,
     }),
     toForm: (item) => ({
-      title: item.title, filter: item.filter, projectType: item.projectType || "solo", cardText: item.cardText, summary: item.summary,
-      tags: item.tags, tools: item.tools, results: item.results, links: item.links,
+      title: item.title, placement: "corkboard", caseStudySlug: (item.href || "").split("/").filter(Boolean).pop() || "", meta: item.meta || "", filter: item.filter, projectType: item.projectType || "solo", status: item.status || "published", cardText: item.cardText, summary: item.summary,
+      tags: item.tags, tools: item.tools, results: item.results, links: item.links, href: item.href || "", imageSrc: item.image ? item.image.src : "", imageAlt: item.image ? item.image.alt : "",
     }),
   },
 
@@ -461,6 +476,7 @@ function injectFormModal() {
   const closeBtn = mkEl("button", { className: "modal__close", text: "✕", attrs: { type: "button", "data-close": "true", "aria-label": "Close" } });
   panel.appendChild(closeBtn);
   panel.appendChild(mkEl("h3", { text: "Edit entry", attrs: { id: "formModalTitle" } }));
+  panel.appendChild(mkEl("div", { className: "admin-form__errors", attrs: { id: "formErrors", role: "alert", hidden: "" } }));
   panel.appendChild(mkEl("div", { attrs: { id: "formModalBody" } }));
 
   const actions = mkEl("div", { className: "admin-form__actions" });
@@ -528,6 +544,41 @@ function readForm() {
   return values;
 }
 
+function validateProjectForm(entityKey, values, allProjects, currentId) {
+  if (!entityKey.startsWith("projects-")) return [];
+  const errors = [];
+  if (!values.title || !values.title.trim()) errors.push("Project title is required.");
+  if (!values.filter || !/^[a-z0-9-]+$/.test(values.filter)) errors.push("Category must use lowercase letters, numbers, or hyphens.");
+  if (!["solo", "personal", "group", "work"].includes(values.projectType)) errors.push("Choose a valid project type.");
+  if (!["published", "draft"].includes(values.status)) errors.push("Choose Published or Draft.");
+  const links = values.links || [];
+  links.forEach((link, i) => {
+    if (!link.label || !link.href || !(link.href.startsWith("/") || /^https:\/\//i.test(link.href))) errors.push(`Supporting link ${i + 1} needs a label and a relative or HTTPS URL.`);
+  });
+  if (values.href && !(values.href.startsWith("/projects/") || /^https:\/\//i.test(values.href))) errors.push("Case-study link must be a /projects/ route or HTTPS URL.");
+  if (values.caseStudySlug && slugify(values.caseStudySlug) !== values.caseStudySlug) errors.push("Case-study slug must contain only lowercase letters, numbers, and hyphens.");
+  if (values.imageSrc && !(values.imageSrc.startsWith("/") || /^https:\/\//i.test(values.imageSrc))) errors.push("Image path must be site-relative or HTTPS.");
+  if (values.imageSrc && !values.imageAlt) errors.push("Image alt text is required when an image is provided.");
+  const proposedId = slugify(values.title);
+  if (!currentId && allProjects.some((item) => item.id === proposedId)) errors.push("A project with this generated ID already exists. Adjust the title.");
+  if (values.href && allProjects.some((item) => item.id !== currentId && item.href === values.href)) errors.push("That case-study route is already in use.");
+  const requestedRoute = values.caseStudySlug ? `/projects/${values.caseStudySlug}/` : "";
+  if (requestedRoute && allProjects.some((item) => item.id !== currentId && item.href === requestedRoute)) errors.push("That case-study slug is already in use.");
+  return errors;
+}
+
+function showFormErrors(errors) {
+  const box = document.getElementById("formErrors");
+  if (!box) return;
+  box.hidden = !errors.length;
+  box.innerHTML = "";
+  if (errors.length) {
+    const ul = document.createElement("ul");
+    errors.forEach((error) => ul.appendChild(mkEl("li", { text: error })));
+    box.appendChild(ul);
+  }
+}
+
 async function openForm(entityKey, idx) {
   const entity = ENTITIES[entityKey];
   const isNew = idx === null || idx === undefined;
@@ -548,11 +599,19 @@ async function openForm(entityKey, idx) {
   }
 
   formCtx = { entityKey, idx: isNew ? null : idx };
+  showFormErrors([]);
   document.getElementById("formModalTitle").textContent = isNew ? "Add entry" : "Edit entry";
 
   const body = document.getElementById("formModalBody");
   body.innerHTML = "";
-  entity.fields.forEach((f) => body.appendChild(buildField(f, values[f.key])));
+  entity.fields.filter((f) => f.key !== "placement" || isNew).forEach((f) => body.appendChild(buildField(f, values[f.key])));
+  if (entityKey.startsWith("projects-")) {
+    const preview = mkEl("div", { className: "project-pin-preview", attrs: { "data-project-type": values.projectType || "solo" } });
+    preview.appendChild(mkEl("i", { className: "project-pin-preview__pin", attrs: { "aria-hidden": "true" } }));
+    preview.appendChild(mkEl("span", { text: "Live pin preview · retained if placement changes" }));
+    body.prepend(preview);
+    body.querySelector('[data-field-key="projectType"]')?.addEventListener("change", (event) => { preview.dataset.projectType = event.target.value; });
+  }
 
   document.getElementById("formDeleteBtn").hidden = isNew;
   const modal = document.getElementById("formModal");
@@ -580,37 +639,56 @@ async function handleFormSave() {
   }
   const list = entity.rootIsList ? file.data : entity.getList(file.data);
   const values = readForm();
+  const allProjects = entityKey.startsWith("projects-") ? [...(file.data.featured || []), ...(file.data.quickview || [])] : list;
+  const currentId = idx === null ? null : list[idx]?.id;
+  const errors = validateProjectForm(entityKey, values, allProjects, currentId);
+  showFormErrors(errors);
+  if (errors.length) return;
   const item = entity.fromForm(values);
 
   // A brand-new featured project gets its own case-study page scaffolded
   // (default blocks + a committed projects/<slug>/index.html) once its id
   // is known below — "quickview" post-it cards don't have pages, so this
   // only applies to projects-featured.
-  const isNewProject = idx === null && entityKey === "projects-featured";
+  const requestedEntityKey = idx === null && entityKey.startsWith("projects-")
+    ? (values.placement === "featured" ? "projects-featured" : "projects-quickview")
+    : entityKey;
+  const destinationEntity = ENTITIES[requestedEntityKey];
+  const destinationList = destinationEntity.rootIsList ? file.data : destinationEntity.getList(file.data);
+  const isNewProject = idx === null && requestedEntityKey === "projects-featured";
   let newSlug = null;
 
   if (idx === null) {
     let id = slugify(entity.labelOf(item));
     let n = 2;
     const base = id;
-    while (list.some((it) => it.id === id)) id = `${base}-${n++}`;
+    const allProjects = entityKey.startsWith("projects-") ? [...(file.data.featured || []), ...(file.data.quickview || [])] : list;
+    while (allProjects.some((it) => it.id === id)) id = `${base}-${n++}`;
     item.id = id;
-    newSlug = id;
-    if (isNewProject) item.href = `/projects/${id}/`;
-    list.push(item);
+    newSlug = slugify(values.caseStudySlug || id);
+    if (isNewProject) {
+      item.href = `/projects/${newSlug}/`;
+      item.blurbShort = item.blurbShort || item.cardText || item.summary || "";
+      item.blurbLong = item.blurbLong || item.summary || item.cardText || "";
+    } else if (requestedEntityKey === "projects-quickview") {
+      item.cardText = item.cardText || item.blurbShort || item.blurbLong || "";
+      item.summary = item.summary || item.blurbLong || item.blurbShort || "";
+    }
+    destinationList.push(item);
   } else {
     item.id = list[idx].id;
     list[idx] = item;
   }
 
-  if (!entity.rootIsList) entity.setList(file.data, list);
+  if (idx === null && requestedEntityKey !== entityKey) destinationEntity.setList(file.data, destinationList);
+  else if (!entity.rootIsList) entity.setList(file.data, list);
   else file.data = list;
 
   try {
     await saveFile(entity.file, `Update ${entity.file} via edit mode`);
     if (isNewProject) await scaffoldCaseStudyPage(newSlug, item);
     closeForm();
-    refreshMountsFor(entityKey);
+    refreshMountsFor(requestedEntityKey);
   } catch (_) {
     // status already shown by saveFile
   }
@@ -620,6 +698,7 @@ async function handleFormDelete() {
   if (!formCtx || formCtx.idx === null) return;
   const { entityKey, idx } = formCtx;
   const entity = ENTITIES[entityKey];
+  if (!confirm(`Delete this ${ADD_TILE_LABEL[entityKey] || "entry"}? This commits the removal, but Git history remains recoverable.`)) return;
   let file;
   try {
     file = await loadFile(entity.file);
@@ -663,6 +742,7 @@ function refreshMountsFor(entityKey) {
       renderQuickviewProjects(data.quickview || [], quickviewMount);
       if (typeof initProjectGrid === "function") initProjectGrid();
     }
+    if (typeof updateProjectHubMeta === "function") updateProjectHubMeta(data);
   } else if (entityKey === "skills-core" || entityKey === "skills-coursework") {
     if (typeof renderSkills === "function") {
       renderSkills(data, document.getElementById("skillsCoreMount"), document.getElementById("skillsCourseworkMount"));
@@ -1071,6 +1151,7 @@ const PHOTO_ASPECTS = {
 // experience.photo is a bare path string; everything else is {src, alt}.
 const PHOTO_FIELD = {
   "projects-featured": { key: "image", shape: "object" },
+  "projects-quickview": { key: "image", shape: "object" },
   experience: { key: "photo", shape: "string" },
   "home-hero": { key: "photo", shape: "object" },
   "home-origin": { key: "photo", shape: "object" },
@@ -1853,7 +1934,7 @@ function caseStudyBoilerplateHTML(title, description, ogUrl) {
     <link rel="stylesheet" href="../../styles.css" />
   </head>
 
-  <body class="editorial-theme fieldnotes-theme">
+  <body class="page-case-study editorial-theme fieldnotes-theme">
     <svg width="0" height="0" style="position:absolute" aria-hidden="true">
       <defs>
         <filter id="sketchy" x="-20%" y="-20%" width="140%" height="140%">
@@ -1921,6 +2002,7 @@ function caseStudyBoilerplateHTML(title, description, ogUrl) {
     <footer class="editorial-footer"><span>© <span id="year"></span> Paul Poleon Jr</span><span>Industrial engineer · problem solver · teammate</span><a href="#main">Back to top ↑</a></footer>
 
     <script src="../../script.js"></script>
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"c96cf00a431b47f5a1276c934b444591"}'></script>
   </body>
 </html>
 `;
@@ -1950,6 +2032,75 @@ async function scaffoldCaseStudyPage(slug, item) {
   } catch (err) {
     setToolbarStatus(`Project page setup failed: ${err.message}`, true);
   }
+}
+
+async function moveProject(entityKey, idx, direction) {
+  const entity = ENTITIES[entityKey];
+  const file = await loadFile(entity.file);
+  const list = entity.getList(file.data);
+  const next = idx + direction;
+  if (next < 0 || next >= list.length) return;
+  [list[idx], list[next]] = [list[next], list[idx]];
+  entity.setList(file.data, list);
+  await saveFile(entity.file, `Reorder projects via edit mode`);
+  refreshMountsFor(entityKey);
+}
+
+async function changeProjectPlacement(entityKey, idx) {
+  const promoting = entityKey === "projects-quickview";
+  const file = await loadFile("data/projects.json");
+  const source = promoting ? file.data.quickview : file.data.featured;
+  const target = promoting ? file.data.featured : file.data.quickview;
+  const original = source[idx];
+  if (!original) return;
+  const action = promoting ? "promote to Featured" : "demote to the Corkboard";
+  if (!confirm(`${action} “${original.title}”? All project data and attachments will be preserved.`)) return;
+
+  const item = { ...original };
+  if (promoting) {
+    const meta = prompt("Featured meta / year line:", item.meta || "Project case study");
+    if (meta === null) return;
+    const requestedSlug = prompt("Case-study slug:", (item.href || "").split("/").filter(Boolean).pop() || item.id);
+    if (requestedSlug === null) return;
+    const slug = slugify(requestedSlug);
+    const route = `/projects/${slug}/`;
+    if ([...(file.data.featured || []), ...(file.data.quickview || [])].some((project) => project.id !== item.id && project.href === route)) throw new Error("That case-study slug is already in use.");
+    item.blurbShort = item.blurbShort || item.cardText || item.summary || "";
+    item.blurbLong = item.blurbLong || item.summary || item.cardText || "";
+    item.meta = meta.trim() || "Project case study";
+    item.href = route;
+    item.image = item.image || null;
+    item.placeholderNote = item.placeholderNote || "Add a relevant project image with descriptive alt text.";
+  } else {
+    item.cardText = item.cardText || item.blurbShort || item.blurbLong || "";
+    item.summary = item.summary || item.blurbLong || item.blurbShort || "";
+    item.filter = item.filter || "other";
+  }
+  source.splice(idx, 1);
+  target.push(item);
+  await saveFile("data/projects.json", `${promoting ? "Promote" : "Demote"} ${item.title} via edit mode`);
+  if (promoting) {
+    const cs = await loadFile("data/case-studies.json");
+    const slug = item.href.split("/").filter(Boolean).pop();
+    if (!cs.data[slug]) await scaffoldCaseStudyPage(slug, item);
+  }
+  refreshMountsFor(promoting ? "projects-featured" : "projects-quickview");
+}
+
+function addProjectManagementControls(el, entityKey, idx) {
+  if (!entityKey.startsWith("projects-")) return;
+  const controls = mkEl("div", { className: "project-admin-controls", attrs: { "aria-label": "Project management" } });
+  const actions = [
+    ["↑", "Move up", () => moveProject(entityKey, idx, -1)],
+    ["↓", "Move down", () => moveProject(entityKey, idx, 1)],
+    [entityKey === "projects-quickview" ? "★" : "▾", entityKey === "projects-quickview" ? "Promote to Featured" : "Demote to Corkboard", () => changeProjectPlacement(entityKey, idx)],
+  ];
+  actions.forEach(([text, title, fn]) => {
+    const btn = mkEl("button", { className: "project-admin-controls__btn", text, attrs: { type: "button", title, "aria-label": title } });
+    btn.addEventListener("click", async (event) => { event.preventDefault(); event.stopPropagation(); try { await fn(); } catch (err) { setToolbarStatus(err.message, true); } });
+    controls.appendChild(btn);
+  });
+  el.appendChild(controls);
 }
 
 // ===== in-page overlay: toolbar, card decoration, add tiles =====
@@ -1996,6 +2147,7 @@ function decorateCards(root) {
       openForm(entityKey, idx);
     });
     el.appendChild(editBtn);
+    addProjectManagementControls(el, entityKey, idx);
 
     if (el.dataset.editPhotoField) {
       const photoBtn = mkEl("button", { className: "edit-affordance edit-affordance--photo", text: "📷 Photo", attrs: { type: "button" } });
