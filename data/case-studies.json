@@ -116,16 +116,18 @@
         "heading": "Technologies & tools",
         "items": [
           "Python",
-          "PDF data extraction",
-          "Structured / searchable database"
-        ],
-        "note": "[Placeholder: add the specific PDF-parsing library and database technology used.]"
+          "PDF parsing and data extraction",
+          "Batch record processing",
+          "Data validation",
+          "Data structuring and normalization",
+          "Searchable engineering database"
+        ]
       },
       {
         "id": "b11",
         "type": "text",
         "heading": "What I learned",
-        "body": "[Placeholder: your own engineering takeaway from this project: what you'd tell a recruiter about what building this taught you, e.g. about unlocking legacy data sources, or about building a tool that outlives its original one-off purpose.]"
+        "body": "I learned that a lot of useful data is not actually missing—it is just trapped in a format that makes it hard to use. The important part was not only extracting the records, but validating and structuring them well enough that other engineering work could depend on them. Building the Valve Decoder also showed me the value of designing past the immediate assignment: what started as a way to unblock the facility study became a tool people could continue using as an engineering reference."
       }
     ]
   },
@@ -255,15 +257,17 @@
           "AutoCAD",
           "Facility layout modeling",
           "Distance × frequency effort analysis",
-          "Two years of operational data"
-        ],
-        "note": "[Placeholder: add the specific data-analysis tools/software used to process the two years of operational data (e.g. Excel, a specific script/language).]"
+          "Origin-destination path modeling",
+          "Two years of operational data",
+          "Valve Decoder dataset",
+          "Scenario comparison and payback analysis"
+        ]
       },
       {
         "id": "b11",
         "type": "text",
         "heading": "What I learned",
-        "body": "[Placeholder: your own engineering takeaway from this project: what you'd tell a recruiter about what this analysis taught you, e.g. about quantifying a problem before proposing a solution, or about balancing a pure optimization model against real operational constraints.]"
+        "body": "I learned how much stronger a layout recommendation becomes when the current problem is measured before anything is moved. Using the same transportation-effort model for every option made the comparison clear, but the lowest number was not automatically the best real-world layout. I still had to account for how production, cleaning, testing, storage, and the people working in those areas actually interact."
       }
     ]
   },
@@ -393,18 +397,19 @@
         "items": [
           "Raspberry Pi",
           "Digital pressure gauge integration",
+          "Guided operator workflows",
           "Centralized test-record database",
+          "Time-series pressure trace capture",
           "Live manager dashboard",
           "Functional Test Report (FTR) support",
           "Read-only Epicor integration foundation"
-        ],
-        "note": "[Placeholder: add the specific programming language, framework, and database used.]"
+        ]
       },
       {
         "id": "b11",
         "type": "text",
         "heading": "What I learned",
-        "body": "[Placeholder: your own engineering takeaway from this project: what you'd tell a recruiter about what building this taught you, e.g. about designing for how operators actually work, or about connecting shop-floor data to management visibility.]"
+        "body": "I learned that a shop-floor system only works if it fits the way operators already do the job. Starting with the physical gauge and the testing sequence helped me build the digital workflow around the process instead of forcing the process around the software. I also learned to treat the hardware, operator experience, stored test data, reporting, and management visibility as one connected system rather than separate features."
       }
     ]
   },
@@ -426,7 +431,8 @@
       {"id":"sw5","type":"text","heading":"Safe staged implementation","body":"Production implementation was staged deliberately: historical data was reconciled first, matches were accepted only when validation rules were satisfied, and ambiguous records remained visible for review rather than being forced into a link. The platform centralizes workflow without treating automation as permission to guess."},
       {"id":"sw6","type":"list","heading":"Outcome","items":["One auditable place to track pre-Epicor sales work.","Clear continuity between provisional records and live Epicor customers, quotes, and sales orders.","Earlier visibility into missing sales orders and quote-conversion risk.","A controlled integration pattern that preserves production-system boundaries."]},
       {"id":"sw7","type":"tags","heading":"Technologies & methods","items":["FastAPI","PostgreSQL","Epicor read-only integration","Process automation","Reconciliation workers","Audit logging","Conservative record matching"],"note":"Implementation details are intentionally limited to protect internal systems and data."},
-      {"id":"sw8","type":"gallery","heading":"Visual evidence","caption":"A sanitized architecture or workflow diagram can be added without exposing customer or production information.","layout":"grid","images":[]}
+      {"id":"sw8","type":"gallery","heading":"Visual evidence","caption":"A sanitized architecture or workflow diagram can be added without exposing customer or production information.","layout":"grid","images":[]},
+      {"id":"sw9","type":"text","heading":"What I learned","body":"I learned that connecting systems is as much about deciding what should not happen automatically as it is about moving data between them. Keeping Epicor access read-only, making uncertain matches visible for review, and preserving an audit trail made the workflow safer and more useful. The project reinforced that good automation should remove repetitive work without hiding uncertainty or taking control away from the people responsible for the process."}
     ]
   },
   "valve-e-internal-assistant": {
@@ -446,7 +452,8 @@
       {"id":"ve4","type":"list","heading":"In Development","items":["Status: the capabilities below are developed or partially integrated—not represented as fully production-ready.","FTR and job lookup capabilities.","Test-stand availability and read-only pressure-test information lookup.","Valve Decoder access and Engineering Viewer navigation.","Controlled internal knowledge sources, role-aware behavior, allowlisted navigation, and audit logging.","Multiple audience and persona concepts for different internal users."]},
       {"id":"ve5","type":"text","heading":"Safe assistant direction","body":"The longer-term direction is a unified internal assistant for locating information and navigating manufacturing tools safely. Continued work focuses on controlled documentation retrieval, contextual guidance based on page, role, and task, and careful integration with the pressure-testing and engineering ecosystem."},
       {"id":"ve6","type":"list","heading":"Design principles","items":["Guide rather than overwhelm.","Use controlled, role-appropriate sources.","Keep navigation allowlisted and actions auditable.","Clearly distinguish available behavior from work in progress.","Never expose credentials, proprietary records, or sensitive internal screens."]},
-      {"id":"ve7","type":"tags","heading":"Technologies & disciplines","items":["Human–Computer Interaction","Tutorial Design","Internal Tools","Knowledge Systems","Manufacturing UX","Role-aware behavior","Audit logging"]}
+      {"id":"ve7","type":"tags","heading":"Technologies & tools","items":["Human–Computer Interaction","Page-specific tutorial design","Manufacturing UX","Role-aware behavior","Controlled knowledge sources","Allowlisted navigation","Audit logging"]},
+      {"id":"ve8","type":"text","heading":"What I learned","body":"I learned that guidance works best when it appears in the context of the task instead of asking users to remember one large walkthrough. Giving V.A.L.V.E.-E. a consistent personality makes the system feel more approachable, but the assistant still needs clear boundaries around its sources, navigation, and role-specific behavior. That balance between personality and control is what makes an internal assistant helpful without making it distracting or unsafe."}
     ]
   }
 }
