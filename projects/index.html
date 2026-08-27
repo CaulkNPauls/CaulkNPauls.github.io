@@ -95,6 +95,16 @@
               </label>
             </div>
 
+            <aside class="corkboard-legend" aria-label="How to use the project board">
+              <p class="corkboard-legend__instruction"><strong>Pull a card from the board</strong><span>Click any index card to see more details.</span></p>
+              <ul class="corkboard-legend__key">
+                <li><i class="pin-key pin-key--solo" aria-hidden="true"></i>Solo class</li>
+                <li><i class="pin-key pin-key--personal" aria-hidden="true"></i>Personal</li>
+                <li><i class="pin-key pin-key--group" aria-hidden="true"></i>Group</li>
+                <li><i class="pin-key pin-key--work" aria-hidden="true"></i>Work</li>
+              </ul>
+            </aside>
+
             <div class="chip-row" role="tablist" aria-label="Project filters">
               <button class="chip is-active" data-filter="all" type="button" role="tab" aria-selected="true">All</button>
               <button class="chip" data-filter="analytics" type="button" role="tab" aria-selected="false">Analytics</button>
@@ -107,7 +117,6 @@
             <p class="projects-empty" id="projectsEmpty" hidden>No matching notes found. Try another keyword or filter.</p>
           </section>
 
-          <p class="projects-board-note">Select “Quick view” for the problem, approach, tools, and results.</p>
         </div>
       </section>
     </main>

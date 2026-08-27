@@ -60,6 +60,7 @@
       "id": "portfolio-website",
       "title": "Portfolio Website using AI-Assisted Front-End Development",
       "filter": "cad",
+      "projectType": "personal",
       "cardText": "Structured and engineered a responsive portfolio website, utilizing an AI-assisted iteration to accelerate the front-end development of the site while maintaining full control over architecture and UX decisions.",
       "summary": "Designed and built a responsive multi-page portfolio website using an AI-assisted development workflow, focusing on UX structure, modular components, and scalable layout architecture.",
       "tags": [
@@ -97,6 +98,7 @@
       "id": "smartphone-prices",
       "title": "Predicting Smartphone Prices",
       "filter": "analytics",
+      "projectType": "solo",
       "cardText": "Regression model in R predicting prices from specs, rating, discount %, and brand.",
       "summary": "Built a regression model in R to predict smartphone prices using memory, storage, rating, discount %, and brand.",
       "tags": [
@@ -127,6 +129,7 @@
       "id": "dualsense-ergonomics",
       "title": "PS5 DualSense Ergonomic Evaluation",
       "filter": "humanfactors",
+      "projectType": "group",
       "cardText": "User study with performance + comfort/fatigue ratings to assess ergonomic mismatch.",
       "summary": "Human factors study evaluating controller fit across small/medium/large hand sizes using a standardized FPS task and surveys.",
       "tags": [
@@ -156,6 +159,7 @@
       "id": "ada-pool-lift",
       "title": "ADA Pool Lift Design",
       "filter": "cad",
+      "projectType": "solo",
       "cardText": "ADA-compliant lift design using engineering calculations and safety analysis.",
       "summary": "Designed an ADA-compliant pool lift with engineering calculations and safety considerations.",
       "tags": [
@@ -183,6 +187,7 @@
       "id": "solidworks-ps5-model",
       "title": "SolidWorks PS5 Controller Model",
       "filter": "cad",
+      "projectType": "solo",
       "cardText": "3D CAD model + engineering drawings with exploded views and projections.",
       "summary": "Created a detailed SolidWorks model and produced engineering drawings with exploded views and labeled components.",
       "tags": [
@@ -210,6 +215,7 @@
       "id": "wind-boat-prototype",
       "title": "Wind-Powered Boat Prototype",
       "filter": "prototype",
+      "projectType": "group",
       "cardText": "Prototype testing + optimization; built a wind-only propelled model.",
       "summary": "Team project testing design variables and hull concepts to improve performance and minimize time.",
       "tags": [
@@ -237,6 +243,7 @@
       "id": "ib-math-ia-sports-analytics",
       "title": "IB Math AA IA: Sports Analytics",
       "filter": "analytics",
+      "projectType": "solo",
       "cardText": "Statistical analysis comparing performance patterns across categorized weeks using fantasy football data.",
       "summary": "Analyzed Kyler Murray’s weekly fantasy football performance and compared weeks around Call of Duty releases/events vs typical weeks to explore whether the pattern showed a measurable change in performance.",
       "tags": [
@@ -270,6 +277,7 @@
       "id": "ib-physics-ee-self-driving-sensors",
       "title": "IB Physics EE: Self-Driving Sensors",
       "filter": "analytics",
+      "projectType": "solo",
       "cardText": "Technical research on wave-based sensing (LiDAR/radar) and object detection limits in autonomous vehicles.",
       "summary": "Researched how self-driving cars use wave-based sensors (LiDAR/radar/cameras) to detect objects and estimate distance, then discussed real-world limitations like weather interference and sensor uncertainty.",
       "tags": [
@@ -301,6 +309,7 @@
       "id": "toro-snowblower-reverse-engineering",
       "title": "Reverse Engineering of Toro Snowblower",
       "filter": "cad",
+      "projectType": "group",
       "cardText": "Team-based teardown and analysis of a Toro CCR Powerlite snowblower, evaluating subsystems and proposing design improvements.",
       "summary": "A team-based reverse engineering analysis of a Toro CCR Powerlite snowblower, focusing on subsystems, usability, and design improvements.",
       "tags": [

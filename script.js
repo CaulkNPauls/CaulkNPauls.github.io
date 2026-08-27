@@ -284,6 +284,7 @@ function renderQuickviewProjects(list, mount) {
         "data-title": p.title,
         "data-tags": (p.tags || []).join(", "),
         "data-filter": p.filter || "",
+        "data-project-type": p.projectType || "solo",
         "data-summary": p.summary || "",
         "data-tools": (p.tools || []).join(", "),
         "data-results": (p.results || []).join("; "),
@@ -303,10 +304,6 @@ function renderQuickviewProjects(list, mount) {
     const tagsUl = mkEl("ul", { className: "tags" });
     (p.tags || []).forEach((t) => tagsUl.appendChild(mkEl("li", { text: t })));
     article.appendChild(tagsUl);
-
-    const meta = mkEl("div", { className: "project__meta" });
-    meta.appendChild(mkEl("button", { className: "link link-btn", text: "Quick view →", attrs: { type: "button" } }));
-    article.appendChild(meta);
 
     mount.appendChild(article);
   });
@@ -924,6 +921,7 @@ function initProjectGrid() {
 
     if (closeTimer) window.clearTimeout(closeTimer);
     activeCard = card;
+    modal.dataset.projectType = card.dataset.projectType || "solo";
     const cardRect = card.getBoundingClientRect();
     modal.classList.remove("is-closing");
     modal.classList.add("is-preparing");

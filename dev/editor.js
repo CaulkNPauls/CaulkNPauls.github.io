@@ -156,10 +156,11 @@ const ENTITIES = {
     getList: (data) => data.quickview,
     setList: (data, list) => { data.quickview = list; },
     labelOf: (item) => item.title,
-    empty: () => ({ id: "", title: "", filter: "", cardText: "", summary: "", tags: [], tools: [], results: [], links: [] }),
+    empty: () => ({ id: "", title: "", filter: "", projectType: "solo", cardText: "", summary: "", tags: [], tools: [], results: [], links: [] }),
     fields: [
       { key: "title", label: "Title", type: "text" },
       { key: "filter", label: "Filter category (analytics / humanfactors / cad / prototype)", type: "text" },
+      { key: "projectType", label: "Pin color / project type", type: "select", options: ["solo", "personal", "group", "work"] },
       { key: "cardText", label: "Card text (short, shown on the card)", type: "textarea" },
       { key: "summary", label: "Summary (longer, shown in Quick View)", type: "textarea" },
       { key: "tags", label: "Tags (comma-separated)", type: "csv" },
@@ -168,11 +169,11 @@ const ENTITIES = {
       { key: "links", label: "Links (one per line: Label | https://url)", type: "links" },
     ],
     fromForm: (v) => ({
-      title: v.title, filter: v.filter, cardText: v.cardText, summary: v.summary,
+      title: v.title, filter: v.filter, projectType: v.projectType, cardText: v.cardText, summary: v.summary,
       tags: v.tags, tools: v.tools, results: v.results, links: v.links,
     }),
     toForm: (item) => ({
-      title: item.title, filter: item.filter, cardText: item.cardText, summary: item.summary,
+      title: item.title, filter: item.filter, projectType: item.projectType || "solo", cardText: item.cardText, summary: item.summary,
       tags: item.tags, tools: item.tools, results: item.results, links: item.links,
     }),
   },
