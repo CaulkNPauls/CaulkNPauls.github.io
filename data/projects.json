@@ -120,10 +120,6 @@
         {
           "label": "Final report (PDF)",
           "href": "/assets/ie322-smartphone-pricing.pdf"
-        },
-        {
-          "label": "View detail page",
-          "href": "/projects/smartphone-prices/"
         }
       ]
     },
@@ -153,10 +149,6 @@
         {
           "label": "Final report (PDF)",
           "href": "/assets/ie323-dualsense-ergonomics.pdf"
-        },
-        {
-          "label": "View detail page",
-          "href": "/projects/dualsense-ergonomics/"
         }
       ]
     },
@@ -184,10 +176,6 @@
         {
           "label": "Resume bullet(s) (PDF)",
           "href": "/assets/resume.pdf"
-        },
-        {
-          "label": "View detail page",
-          "href": "/projects/ada-pool-lift/"
         }
       ]
     },
@@ -215,10 +203,6 @@
         {
           "label": "Resume bullet(s) (PDF)",
           "href": "/assets/resume.pdf"
-        },
-        {
-          "label": "View detail page",
-          "href": "/projects/solidworks-ps5-model/"
         }
       ]
     },
@@ -246,10 +230,6 @@
         {
           "label": "Resume bullet(s) (PDF)",
           "href": "/assets/resume.pdf"
-        },
-        {
-          "label": "View detail page",
-          "href": "/projects/wind-boat-prototype/"
         }
       ]
     },

@@ -4655,3 +4655,55 @@ body.is-edit-mode [data-block-id]:hover{
 .modal__attachments{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:10px}.modal__attachment{display:flex;align-items:center;gap:11px;min-height:58px;padding:10px 12px;border:1px solid rgba(43,92,130,.28);background:#fffdf4;color:var(--pen-strong);text-decoration:none;font-size:.84rem;font-weight:600;transition:transform .18s ease,box-shadow .18s ease}.modal__attachment:hover{transform:translateY(-2px);box-shadow:3px 4px 0 rgba(43,92,130,.12)}.modal__attachment-icon{display:grid;place-items:center;flex:0 0 36px;height:36px;background:var(--pen-strong);color:#fffdf4;font:600 .63rem/1 var(--font-mono)}.modal__attachment--image{display:block;padding:7px}.modal__attachment--image img{display:block;width:100%;height:130px;object-fit:cover;margin-bottom:8px}.modal__attachment--image span{display:block;padding:3px 4px}
 @media(max-width:700px){.page-projects .modal__panel{width:calc(100% - 16px);max-height:calc(100dvh - 16px);margin:8px;padding:42px 17px 25px 34px}.page-projects .modal__cols{grid-template-columns:1fr}.modal__attachments{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.page-projects .cards--static .project--open.is-unpinning,.page-projects .cards--static .project--open.is-unpinning::after,.page-projects .modal.is-open .modal__panel,.page-projects .modal.is-closing .modal__panel,.page-projects .modal__panel::before,.page-projects .modal__backdrop{animation:none!important}}
+
+/* Supporting evidence: loose clipped notes, not legacy UI panels */
+.page-projects .modal__panel .modal__supporting{
+  position:relative;
+  margin-top:26px!important;
+  padding:25px 0 0;
+  border:0;
+  border-top:2px dashed rgba(43,92,130,.3);
+  border-radius:0;
+  background:transparent;
+}
+.page-projects .modal__supporting::before{
+  content:"";
+  position:absolute;
+  top:-13px;
+  left:26px;
+  width:38px;
+  height:14px;
+  border:2px solid rgba(75,82,83,.52);
+  border-bottom:0;
+  border-radius:12px 12px 0 0;
+  transform:rotate(-8deg);
+}
+.page-projects .modal__supporting h4{margin-left:78px!important;color:var(--pen)!important}
+.page-projects .modal__attachments{gap:16px;margin-top:16px}
+.page-projects .modal__attachment{
+  position:relative;
+  min-height:72px;
+  padding:15px 18px 14px 16px;
+  border:0;
+  border-bottom:2px solid rgba(43,92,130,.26);
+  background:#f5ecd7;
+  clip-path:polygon(0 4px,7% 1px,16% 4px,27% 0,39% 3px,51% 1px,64% 4px,77% 0,89% 3px,100% 1px,100% calc(100% - 3px),91% 100%,80% calc(100% - 2px),68% 100%,55% calc(100% - 3px),42% 100%,29% calc(100% - 2px),15% 100%,0 calc(100% - 3px));
+  box-shadow:none;
+  color:var(--pen-strong);
+  transform:rotate(-.45deg);
+}
+.page-projects .modal__attachment:nth-child(even){background:#e7efed;transform:rotate(.55deg)}
+.page-projects .modal__attachment::after{content:"open ↗";position:absolute;right:12px;bottom:7px;color:var(--pen);font:500 .56rem/1 var(--font-mono);text-transform:uppercase;letter-spacing:.08em;opacity:.72}
+.page-projects .modal__attachment:hover{transform:rotate(0) translateY(-3px);box-shadow:3px 5px 0 rgba(43,92,130,.12)}
+.page-projects .modal__attachment-icon{
+  flex-basis:42px;
+  width:42px;
+  height:32px;
+  border:2px solid var(--pen);
+  border-radius:50%;
+  background:transparent;
+  color:var(--pen);
+  font:700 .61rem/1 var(--font-mono);
+  transform:rotate(-7deg);
+}
+.page-projects .modal__attachment--image{padding:8px 8px 18px}.page-projects .modal__attachment--image img{border:6px solid #fffdf4;box-shadow:1px 2px 4px rgba(50,35,24,.15)}
