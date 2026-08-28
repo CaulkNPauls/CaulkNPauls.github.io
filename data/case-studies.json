@@ -210,6 +210,14 @@
         "heading": "Quantified result",
         "stats": [
           {
+            "value": "1,606,426.87",
+            "label": "Current-state modeled weekly transportation effort"
+          },
+          {
+            "value": "1,305,189.84",
+            "label": "Proposed future-state modeled weekly transportation effort"
+          },
+          {
             "value": "18.75%",
             "label": "Reduction in modeled transportation effort, current state vs. recommended future state"
           },
@@ -218,7 +226,7 @@
             "label": "Planning-level payback for the recommended changes"
           }
         ],
-        "note": "18.75% is a reduction in modeled transportation effort (distance × movement frequency): not a direct cost or dollar-value reduction. Payback is a planning-level estimate, not an audited figure."
+        "note": "These figures are outputs of the distance × movement-frequency transportation-effort model, not dollars, labor-hours, or guaranteed financial savings. The proposed future state is a recommendation: it reflects what the model predicts if the proposed changes were made, not a claim that every physical change has already been completed. Payback is a planning-level estimate, not an audited figure."
       },
       {
         "id": "b9",
@@ -345,6 +353,12 @@
         "body": "The result is a connected pressure-testing ecosystem: operators run guided tests at Raspberry Pi stations wired to the physical digital gauges, every test is captured with its full pressure trace and operator/job/valve identification, and that record is centralized rather than sitting on paper. Managers get live visibility into test-stand activity, the Functional Test Report draws from the same recorded data, and the system has a read-only foundation in place for a future Epicor connection."
       },
       {
+        "id": "b6a",
+        "type": "text",
+        "heading": "Current implementation & status",
+        "body": "The system is in active use on the shop floor. Raspberry Pi operator stations are installed at the test stands and connected to the physical digital pressure gauges for live pressure capture, the guided three-pop and bubble-test workflows are running in place of the paper checklist, and every test is centrally recorded with its full pressure trace and operator, job, and valve identification. The manager dashboard gives live visibility into test-stand status, and Functional Test Report (FTR) generation draws from that same central record instead of a separate transcription step.\n\nThe one piece that is a foundation rather than a finished integration is Epicor: the system currently has a read-only foundation in place so future work can read Epicor data safely, but a full, two-way Epicor integration has not been built and is not part of the current system."
+      },
+      {
         "id": "b8",
         "type": "stats",
         "heading": "Quantified result",
@@ -355,6 +369,24 @@
           }
         ],
         "note": "This is a planning-level estimate presented internally at FlowSafe, not an audited or realized figure. No internal dollar-value estimates are published here."
+      },
+      {
+        "id": "b8a",
+        "type": "list",
+        "heading": "Outcome",
+        "items": [
+          "One traceable digital record in place of disconnected live readings and paper documentation.",
+          "More consistent, guided testing across operators.",
+          "Stored pressure evidence for every test instead of a handwritten result.",
+          "Remote, live visibility into test-stand status for managers.",
+          "A foundation in place for Functional Test Report generation and a future, controlled Epicor link."
+        ]
+      },
+      {
+        "id": "b8b",
+        "type": "text",
+        "heading": "Next steps",
+        "body": "The clearest next step already scoped for this system is expanding its read-only Epicor integration foundation into a fuller, controlled connection, following the same read-only-first, audit-preserving approach used elsewhere in FlowSafe's systems. Beyond that, further next steps are internal planning items and are not detailed publicly here."
       },
       {
         "id": "b9",
