@@ -441,7 +441,20 @@ function renderGalleryImage(img) {
   return ph;
 }
 
+// A gallery with zero images that have a real src is pure placeholder
+// content (nothing to show a visitor yet). Public visitors get nothing
+// rendered for it at all: no heading, caption, or empty cards. Admins
+// editing the page (?edit=1) still get the placeholder UI so they can
+// add photos to it; the underlying block data is untouched either way.
+function isCaseStudyEditMode() {
+  return new URLSearchParams(location.search).get("edit") === "1";
+}
+
 function renderGalleryBlock(block, index) {
+  const images = block.images || [];
+  const hasRealImage = images.some((img) => img.src);
+  if (!hasRealImage && !isCaseStudyEditMode()) return null;
+
   const section = caseStudySectionShell(block, index);
   const container = mkEl("div", { className: "container" });
   if (block.heading) container.appendChild(mkEl("h2", { text: block.heading, attrs: { "data-block-field": "heading" } }));
@@ -456,7 +469,7 @@ function renderGalleryBlock(block, index) {
     className: "evidence-grid",
     attrs: { "data-block-field": "images", "data-layout": block.layout || "grid" },
   });
-  (block.images || []).forEach((img) => grid.appendChild(renderGalleryImage(img)));
+  images.forEach((img) => grid.appendChild(renderGalleryImage(img)));
   container.appendChild(grid);
   section.appendChild(container);
   return section;
@@ -500,7 +513,8 @@ function renderCaseStudy(caseStudy, slug, mount) {
   renderCaseStudyHero(caseStudy.hero);
   (caseStudy.blocks || []).forEach((block, i) => {
     const renderer = CASE_STUDY_BLOCK_RENDERERS[block.type];
-    if (renderer) mount.appendChild(renderer(block, i));
+    const el = renderer && renderer(block, i);
+    if (el) mount.appendChild(el);
   });
 }
 

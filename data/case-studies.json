@@ -90,7 +90,7 @@
         "id": "b9",
         "type": "gallery",
         "heading": "Visual evidence",
-        "caption": "Placeholders below: sanitized screenshots to be added.",
+        "caption": "Sanitized screenshots from the Valve Decoder application.",
         "layout": "grid",
         "images": [
           {
@@ -232,7 +232,7 @@
         "id": "b9",
         "type": "gallery",
         "heading": "Visual evidence",
-        "caption": "Placeholders below: sanitized AutoCAD exports and diagrams to be added.",
+        "caption": "Sanitized AutoCAD exports and diagrams from the analysis.",
         "layout": "row",
         "images": [
           {
@@ -356,7 +356,30 @@
         "id": "b6a",
         "type": "text",
         "heading": "Current implementation & status",
-        "body": "The system is in active use on the shop floor. Raspberry Pi operator stations are installed at the test stands and connected to the physical digital pressure gauges for live pressure capture, the guided three-pop and bubble-test workflows are running in place of the paper checklist, and every test is centrally recorded with its full pressure trace and operator, job, and valve identification. The manager dashboard gives live visibility into test-stand status, and Functional Test Report (FTR) generation draws from that same central record instead of a separate transcription step.\n\nThe one piece that is a foundation rather than a finished integration is Epicor: the system currently has a read-only foundation in place so future work can read Epicor data safely, but a full, two-way Epicor integration has not been built and is not part of the current system."
+        "body": "The system has been developed and tested around the real shop-floor process, with Raspberry Pi operator-station hardware, digital-gauge capture, guided testing workflows, centralized records, and manager visibility forming the implemented foundation."
+      },
+      {
+        "id": "b6b",
+        "type": "list",
+        "heading": "Implemented foundation",
+        "items": [
+          "Raspberry Pi operator-station hardware, connected to the physical digital pressure gauges for live pressure capture.",
+          "Guided three-pop and bubble-test workflows.",
+          "Centralized test records with stored pressure traces, in place of paper.",
+          "A manager dashboard with test-stand status visibility.",
+          "Functional Test Report (FTR) support, built on the same central record.",
+          "A read-only Epicor integration foundation."
+        ]
+      },
+      {
+        "id": "b6c",
+        "type": "list",
+        "heading": "Still developing or being expanded",
+        "items": [
+          "Broader production rollout across test stands, beyond the developed-and-tested state described above.",
+          "Completing the full Functional Test Report generation and upload workflow.",
+          "Expanding the Epicor connection to fuller traveler and job data. Epicor integration is deliberately read-only by design, and stays read-only as it expands."
+        ]
       },
       {
         "id": "b8",
@@ -375,24 +398,24 @@
         "type": "list",
         "heading": "Outcome",
         "items": [
-          "One traceable digital record in place of disconnected live readings and paper documentation.",
-          "More consistent, guided testing across operators.",
-          "Stored pressure evidence for every test instead of a handwritten result.",
-          "Remote, live visibility into test-stand status for managers.",
-          "A foundation in place for Functional Test Report generation and a future, controlled Epicor link."
+          "One traceable digital record model, in place of disconnected live readings and paper documentation.",
+          "A guided workflow designed for more consistent testing across operators.",
+          "Pressure trace and result storage built into the centralized test record.",
+          "Live test-stand status visibility for managers, through the dashboard.",
+          "A foundation in place for Functional Test Report support and a future, read-only Epicor connection."
         ]
       },
       {
         "id": "b8b",
         "type": "text",
         "heading": "Next steps",
-        "body": "The clearest next step already scoped for this system is expanding its read-only Epicor integration foundation into a fuller, controlled connection, following the same read-only-first, audit-preserving approach used elsewhere in FlowSafe's systems. Beyond that, further next steps are internal planning items and are not detailed publicly here."
+        "body": "The clearest next step already scoped for this system is expanding its Epicor connection to fuller traveler and job data. Epicor integration is deliberately read-only by design, and that stays true as it expands: the goal is a fuller read-only connection, following the same audit-preserving approach used elsewhere in FlowSafe's systems. Completing the full Functional Test Report generation and upload workflow, and continuing the system's rollout across test stands, are the other next steps already in progress. Beyond that, further next steps are internal planning items and are not detailed publicly here."
       },
       {
         "id": "b9",
         "type": "gallery",
         "heading": "Visual evidence",
-        "caption": "Placeholders below: sanitized screenshots and photos to be added.",
+        "caption": "Sanitized screenshots and photos from the system.",
         "layout": "dashboard",
         "images": [
           {
