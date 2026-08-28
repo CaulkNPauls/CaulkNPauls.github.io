@@ -515,7 +515,7 @@
         "id": "sw8",
         "type": "gallery",
         "heading": "Visual evidence",
-        "caption": "A sanitized architecture or workflow diagram can be added without exposing customer or production information.",
+        "caption": "Below screenshots from the functional application can be seen",
         "layout": "dashboard",
         "images": [
           {
