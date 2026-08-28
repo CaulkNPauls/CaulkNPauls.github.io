@@ -516,7 +516,7 @@
         "type": "gallery",
         "heading": "Visual evidence",
         "caption": "Below screenshots from the functional application can be seen",
-        "layout": "dashboard",
+        "layout": "grid",
         "images": [
           {
             "src": "/assets/photos/mtcz4wi9-c5vx-cs.jpg",
