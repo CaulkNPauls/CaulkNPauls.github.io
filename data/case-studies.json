@@ -517,7 +517,13 @@
         "heading": "Visual evidence",
         "caption": "A sanitized architecture or workflow diagram can be added without exposing customer or production information.",
         "layout": "grid",
-        "images": []
+        "images": [
+          {
+            "src": "/assets/photos/mtcz4wi9-c5vx-cs.jpg",
+            "alt": "",
+            "caption": ""
+          }
+        ]
       },
       {
         "id": "sw9",
